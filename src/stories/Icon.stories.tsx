@@ -96,45 +96,15 @@ export const CustomColor = {
   },
 };
 
-export const AllIcons = {
+export const NavigationIcons = {
   render: () => {
-    const iconNames: IconName[] = [
-      "search",
-      "eye",
-      "eye-off",
+    const navigationIcons: IconName[] = [
       "arrow-right",
       "arrow-left",
       "arrow-down",
       "arrow-up",
-      "close",
-      "check",
-      "plus",
-      "minus",
-      "edit",
-      "delete",
-      "calendar",
-      "clock",
-      "user",
-      "settings",
-      "menu",
       "home",
-      "mail",
-      "phone",
-      "lock",
-      "unlock",
-      "star",
-      "star-filled",
-      "heart",
-      "heart-filled",
-      "bookmark",
-      "share",
-      "download",
-      "upload",
-      "refresh",
-      "info",
-      "warning",
-      "error",
-      "success",
+      "menu",
     ];
 
     return (
@@ -145,7 +115,7 @@ export const AllIcons = {
           gap: "16px",
           maxWidth: "800px",
         }}>
-        {iconNames.map((name) => (
+        {navigationIcons.map((name) => (
           <div
             key={name}
             style={{
@@ -169,18 +139,276 @@ export const AllIcons = {
   parameters: {
     docs: {
       source: {
-        code: `// 사용 가능한 모든 아이콘들
-const iconNames = [
-  'search', 'eye', 'eye-off', 'arrow-right', 'arrow-left',
-  'arrow-down', 'arrow-up', 'close', 'check', 'plus', 'minus',
-  'edit', 'delete', 'calendar', 'clock', 'user', 'settings',
-  'menu', 'home', 'mail', 'phone', 'lock', 'unlock',
-  'star', 'star-filled', 'heart', 'heart-filled', 'bookmark',
-  'share', 'download', 'upload', 'refresh', 'info',
-  'warning', 'error', 'success'
-];
+        code: `// 네비게이션 관련 아이콘들
+<Icon name="arrow-right" />
+<Icon name="arrow-left" />
+<Icon name="home" />
+<Icon name="menu" />`,
+      },
+    },
+  },
+};
 
-<Icon name="search" />`,
+export const ActionIcons = {
+  render: () => {
+    const actionIcons: IconName[] = [
+      "search",
+      "close",
+      "check",
+      "plus",
+      "minus",
+      "edit",
+      "delete",
+      "refresh",
+    ];
+
+    return (
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
+          gap: "16px",
+          maxWidth: "800px",
+        }}>
+        {actionIcons.map((name) => (
+          <div
+            key={name}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "8px",
+              padding: "16px",
+              border: "1px solid #e5e7eb",
+              borderRadius: "8px",
+              fontSize: "12px",
+              textAlign: "center",
+            }}>
+            <Icon name={name} size={24} color="#047857" />
+            <span>{name}</span>
+          </div>
+        ))}
+      </div>
+    );
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `// 액션 관련 아이콘들
+<Icon name="search" />
+<Icon name="edit" />
+<Icon name="delete" />
+<Icon name="plus" />`,
+      },
+    },
+  },
+};
+
+export const UserIcons = {
+  render: () => {
+    const userIcons: IconName[] = [
+      "user",
+      "mail",
+      "phone",
+      "calendar",
+      "clock",
+      "settings",
+    ];
+
+    return (
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
+          gap: "16px",
+          maxWidth: "800px",
+        }}>
+        {userIcons.map((name) => (
+          <div
+            key={name}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "8px",
+              padding: "16px",
+              border: "1px solid #e5e7eb",
+              borderRadius: "8px",
+              fontSize: "12px",
+              textAlign: "center",
+            }}>
+            <Icon name={name} size={24} color="#047857" />
+            <span>{name}</span>
+          </div>
+        ))}
+      </div>
+    );
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `// 사용자 관련 아이콘들
+<Icon name="user" />
+<Icon name="mail" />
+<Icon name="calendar" />
+<Icon name="settings" />`,
+      },
+    },
+  },
+};
+
+export const SecurityIcons = {
+  render: () => {
+    const securityIcons: IconName[] = [
+      "eye",
+      "eye-off",
+      "lock",
+      "unlock",
+    ];
+
+    return (
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
+          gap: "16px",
+          maxWidth: "800px",
+        }}>
+        {securityIcons.map((name) => (
+          <div
+            key={name}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "8px",
+              padding: "16px",
+              border: "1px solid #e5e7eb",
+              borderRadius: "8px",
+              fontSize: "12px",
+              textAlign: "center",
+            }}>
+            <Icon name={name} size={24} color="#047857" />
+            <span>{name}</span>
+          </div>
+        ))}
+      </div>
+    );
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `// 보안 관련 아이콘들
+<Icon name="eye" />
+<Icon name="eye-off" />
+<Icon name="lock" />
+<Icon name="unlock" />`,
+      },
+    },
+  },
+};
+
+export const ContentIcons = {
+  render: () => {
+    const contentIcons: IconName[] = [
+      "star",
+      "star-filled",
+      "heart",
+      "heart-filled",
+      "bookmark",
+      "share",
+      "download",
+      "upload",
+    ];
+
+    return (
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
+          gap: "16px",
+          maxWidth: "800px",
+        }}>
+        {contentIcons.map((name) => (
+          <div
+            key={name}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "8px",
+              padding: "16px",
+              border: "1px solid #e5e7eb",
+              borderRadius: "8px",
+              fontSize: "12px",
+              textAlign: "center",
+            }}>
+            <Icon name={name} size={24} color="#047857" />
+            <span>{name}</span>
+          </div>
+        ))}
+      </div>
+    );
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `// 콘텐츠 관련 아이콘들
+<Icon name="star" />
+<Icon name="heart" />
+<Icon name="bookmark" />
+<Icon name="share" />`,
+      },
+    },
+  },
+};
+
+export const StatusIcons = {
+  render: () => {
+    const statusIcons: IconName[] = [
+      "info",
+      "warning",
+      "error",
+      "success",
+    ];
+
+    return (
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
+          gap: "16px",
+          maxWidth: "800px",
+        }}>
+        {statusIcons.map((name) => (
+          <div
+            key={name}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "8px",
+              padding: "16px",
+              border: "1px solid #e5e7eb",
+              borderRadius: "8px",
+              fontSize: "12px",
+              textAlign: "center",
+            }}>
+            <Icon name={name} size={24} color="#047857" />
+            <span>{name}</span>
+          </div>
+        ))}
+      </div>
+    );
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `// 상태 표시 아이콘들
+<Icon name="info" />
+<Icon name="warning" />
+<Icon name="error" />
+<Icon name="success" />`,
       },
     },
   },
@@ -219,38 +447,3 @@ export const Sizes = {
   },
 };
 
-export const CommonIcons = {
-  render: () => (
-    <div style={{ display: "flex", gap: "24px", flexWrap: "wrap" }}>
-      {[
-        { name: "search" as IconName, label: "검색" },
-        { name: "user" as IconName, label: "사용자" },
-        { name: "calendar" as IconName, label: "캘린더" },
-        { name: "clock" as IconName, label: "시간" },
-        { name: "settings" as IconName, label: "설정" },
-        { name: "menu" as IconName, label: "메뉴" },
-        { name: "home" as IconName, label: "홈" },
-        { name: "mail" as IconName, label: "메일" },
-      ].map(({ name, label }) => (
-        <div key={name} style={{ textAlign: "center", minWidth: "60px" }}>
-          <Icon name={name} size={32} color="#047857" />
-          <div style={{ fontSize: "12px", marginTop: "8px", color: "#6b7280" }}>
-            {label}
-          </div>
-        </div>
-      ))}
-    </div>
-  ),
-  parameters: {
-    docs: {
-      source: {
-        code: `// 자주 사용되는 아이콘들
-<Icon name="search" />
-<Icon name="user" />
-<Icon name="calendar" />
-<Icon name="clock" />
-<Icon name="settings" />`,
-      },
-    },
-  },
-};
