@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icon, IconName } from './Icon';
 
 export interface InputProps {
   type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search';
@@ -13,6 +14,8 @@ export interface InputProps {
   label?: string;
   helperText?: string;
   errorMessage?: string;
+  icon?: IconName;
+  iconPosition?: 'left' | 'right';
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
@@ -31,6 +34,8 @@ export const Input: React.FC<InputProps> = ({
   label,
   helperText,
   errorMessage,
+  icon,
+  iconPosition = 'left',
   onChange,
   onFocus,
   onBlur,
@@ -67,13 +72,37 @@ export const Input: React.FC<InputProps> = ({
   const getSizeStyles = (size: string) => {
     switch (size) {
       case 'small':
-        return { padding: '6px 12px', fontSize: '14px', height: '32px' };
+        return {
+          padding: '6px 12px',
+          fontSize: '14px',
+          height: '32px',
+          iconSize: 16,
+          iconPadding: '8px'
+        };
       case 'medium':
-        return { padding: '8px 16px', fontSize: '16px', height: '40px' };
+        return {
+          padding: '8px 16px',
+          fontSize: '16px',
+          height: '40px',
+          iconSize: 18,
+          iconPadding: '12px'
+        };
       case 'large':
-        return { padding: '12px 20px', fontSize: '18px', height: '48px' };
+        return {
+          padding: '12px 20px',
+          fontSize: '18px',
+          height: '48px',
+          iconSize: 20,
+          iconPadding: '16px'
+        };
       default:
-        return { padding: '8px 16px', fontSize: '16px', height: '40px' };
+        return {
+          padding: '8px 16px',
+          fontSize: '16px',
+          height: '40px',
+          iconSize: 18,
+          iconPadding: '12px'
+        };
     }
   };
 
@@ -97,41 +126,87 @@ export const Input: React.FC<InputProps> = ({
         </label>
       )}
 
-      <input
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        defaultValue={defaultValue}
-        disabled={disabled}
-        required={required}
-        readOnly={readOnly}
-        onChange={onChange}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        style={{
-          ...sizeStyles,
-          border: `2px solid ${variantStyles.borderColor}`,
-          borderRadius: '8px',
-          fontFamily: 'inherit',
-          backgroundColor: disabled ? '#f3f4f6' : 'white',
-          color: disabled ? '#9ca3af' : '#374151',
-          cursor: disabled ? 'not-allowed' : 'text',
-          transition: 'all 0.2s ease-in-out',
-          outline: 'none',
-          width: '100%',
-          boxSizing: 'border-box',
-        }}
-        onFocusCapture={(e) => {
-          if (!disabled) {
-            e.currentTarget.style.borderColor = variantStyles.focusBorderColor;
-            e.currentTarget.style.boxShadow = variantStyles.focusBoxShadow;
-          }
-        }}
-        onBlurCapture={(e) => {
-          e.currentTarget.style.borderColor = variantStyles.borderColor;
-          e.currentTarget.style.boxShadow = 'none';
-        }}
-      />
+      <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+        {icon && iconPosition === 'left' && (
+          <div
+            style={{
+              position: 'absolute',
+              left: sizeStyles.iconPadding,
+              zIndex: 1,
+              display: 'flex',
+              alignItems: 'center',
+              pointerEvents: 'none',
+            }}
+          >
+            <Icon
+              name={icon}
+              size={sizeStyles.iconSize}
+              color={disabled ? '#9ca3af' : '#6b7280'}
+            />
+          </div>
+        )}
+
+        <input
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          defaultValue={defaultValue}
+          disabled={disabled}
+          required={required}
+          readOnly={readOnly}
+          onChange={onChange}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          style={{
+            ...sizeStyles,
+            paddingLeft: icon && iconPosition === 'left'
+              ? `calc(${sizeStyles.iconPadding} + ${sizeStyles.iconSize}px + 8px)`
+              : sizeStyles.padding.split(' ')[1],
+            paddingRight: icon && iconPosition === 'right'
+              ? `calc(${sizeStyles.iconPadding} + ${sizeStyles.iconSize}px + 8px)`
+              : sizeStyles.padding.split(' ')[1],
+            border: `2px solid ${variantStyles.borderColor}`,
+            borderRadius: '8px',
+            fontFamily: 'inherit',
+            backgroundColor: disabled ? '#f3f4f6' : 'white',
+            color: disabled ? '#9ca3af' : '#374151',
+            cursor: disabled ? 'not-allowed' : 'text',
+            transition: 'all 0.2s ease-in-out',
+            outline: 'none',
+            width: '100%',
+            boxSizing: 'border-box',
+          }}
+          onFocusCapture={(e) => {
+            if (!disabled) {
+              e.currentTarget.style.borderColor = variantStyles.focusBorderColor;
+              e.currentTarget.style.boxShadow = variantStyles.focusBoxShadow;
+            }
+          }}
+          onBlurCapture={(e) => {
+            e.currentTarget.style.borderColor = variantStyles.borderColor;
+            e.currentTarget.style.boxShadow = 'none';
+          }}
+        />
+
+        {icon && iconPosition === 'right' && (
+          <div
+            style={{
+              position: 'absolute',
+              right: sizeStyles.iconPadding,
+              zIndex: 1,
+              display: 'flex',
+              alignItems: 'center',
+              pointerEvents: 'none',
+            }}
+          >
+            <Icon
+              name={icon}
+              size={sizeStyles.iconSize}
+              color={disabled ? '#9ca3af' : '#6b7280'}
+            />
+          </div>
+        )}
+      </div>
 
       {showError && (
         <span style={{

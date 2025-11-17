@@ -53,6 +53,16 @@ export default {
     errorMessage: {
       description: '오류 상태일 때 표시될 메시지',
     },
+    icon: {
+      control: 'select',
+      options: [undefined, 'search', 'user', 'mail', 'phone', 'lock', 'unlock', 'eye', 'eye-off'],
+      description: '입력 필드에 표시할 아이콘',
+    },
+    iconPosition: {
+      control: 'select',
+      options: ['left', 'right'],
+      description: '아이콘의 위치',
+    },
   },
 };
 
@@ -227,6 +237,60 @@ export const Types = {
 <Input type="password" placeholder="비밀번호" />
 <Input type="number" placeholder="숫자" />
 <Input type="search" placeholder="검색" />`,
+      },
+    },
+  },
+};
+
+export const WithIcon = {
+  args: {
+    label: '검색',
+    placeholder: '검색어를 입력하세요',
+    icon: 'search',
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `<Input icon="search" placeholder="검색어를 입력하세요" />`,
+      },
+    },
+  },
+};
+
+export const IconRight = {
+  args: {
+    label: '사용자',
+    placeholder: '사용자명을 입력하세요',
+    icon: 'user',
+    iconPosition: 'right',
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `<Input icon="user" iconPosition="right" placeholder="사용자명을 입력하세요" />`,
+      },
+    },
+  },
+};
+
+export const IconExamples = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '300px' }}>
+      <Input icon="search" placeholder="검색..." label="검색" />
+      <Input icon="mail" type="email" placeholder="이메일 주소" label="이메일" />
+      <Input icon="phone" type="tel" placeholder="전화번호" label="전화번호" />
+      <Input icon="lock" type="password" placeholder="비밀번호" label="비밀번호" />
+      <Input icon="user" iconPosition="right" placeholder="사용자명" label="사용자명" />
+    </div>
+  ),
+  parameters: {
+    docs: {
+      source: {
+        code: `<Input icon="search" placeholder="검색..." />
+<Input icon="mail" type="email" placeholder="이메일 주소" />
+<Input icon="phone" type="tel" placeholder="전화번호" />
+<Input icon="lock" type="password" placeholder="비밀번호" />
+<Input icon="user" iconPosition="right" placeholder="사용자명" />`,
       },
     },
   },
