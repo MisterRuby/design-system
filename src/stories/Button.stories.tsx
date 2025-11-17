@@ -31,6 +31,16 @@ export default {
     children: {
       description: "버튼 내부에 표시될 내용",
     },
+    icon: {
+      control: 'select',
+      options: [undefined, 'search', 'user', 'settings', 'plus', 'arrow-right', 'check', 'close'],
+      description: '버튼에 표시할 아이콘',
+    },
+    iconPosition: {
+      control: 'select',
+      options: ['left', 'right'],
+      description: '아이콘의 위치',
+    },
     onClick: {
       description: "버튼 클릭 시 실행될 함수",
     },
@@ -90,6 +100,35 @@ export const Sizes = {
   },
 };
 
+export const WithIcon = {
+  args: {
+    children: "검색",
+    icon: "search",
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `<Button icon="search">검색</Button>`,
+      },
+    },
+  },
+};
+
+export const IconRight = {
+  args: {
+    children: "다음",
+    icon: "arrow-right",
+    iconPosition: "right",
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `<Button icon="arrow-right" iconPosition="right">다음</Button>`,
+      },
+    },
+  },
+};
+
 export const Disabled = {
   args: {
     children: "Disabled Button",
@@ -99,6 +138,37 @@ export const Disabled = {
     docs: {
       source: {
         code: `<Button disabled>Disabled Button</Button>`,
+      },
+    },
+  },
+};
+
+export const IconExamples = {
+  render: () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+      <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+        <Button icon="plus">추가</Button>
+        <Button icon="search">검색</Button>
+        <Button icon="user">프로필</Button>
+        <Button icon="settings">설정</Button>
+      </div>
+      <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+        <Button icon="check" variant="secondary">완료</Button>
+        <Button icon="close" variant="danger">닫기</Button>
+        <Button icon="arrow-right" iconPosition="right" variant="outline">다음</Button>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      source: {
+        code: `<Button icon="plus">추가</Button>
+<Button icon="search">검색</Button>
+<Button icon="user">프로필</Button>
+<Button icon="settings">설정</Button>
+<Button icon="check" variant="secondary">완료</Button>
+<Button icon="close" variant="danger">닫기</Button>
+<Button icon="arrow-right" iconPosition="right" variant="outline">다음</Button>`,
       },
     },
   },
