@@ -259,12 +259,7 @@ export const UserIcons = {
 
 export const SecurityIcons = {
   render: () => {
-    const securityIcons: IconName[] = [
-      "eye",
-      "eye-off",
-      "lock",
-      "unlock",
-    ];
+    const securityIcons: IconName[] = ["eye", "eye-off", "lock", "unlock"];
 
     return (
       <div
@@ -365,12 +360,7 @@ export const ContentIcons = {
 
 export const StatusIcons = {
   render: () => {
-    const statusIcons: IconName[] = [
-      "info",
-      "warning",
-      "error",
-      "success",
-    ];
+    const statusIcons: IconName[] = ["info", "warning", "error", "success"];
 
     return (
       <div
@@ -446,4 +436,3 @@ export const Sizes = {
     },
   },
 };
-

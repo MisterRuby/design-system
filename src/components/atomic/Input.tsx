@@ -16,9 +16,12 @@ export interface InputProps {
   errorMessage?: string;
   icon?: IconName;
   iconPosition?: 'left' | 'right';
+  className?: string;
+  style?: React.CSSProperties;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -36,10 +39,15 @@ export const Input: React.FC<InputProps> = ({
   errorMessage,
   icon,
   iconPosition = 'left',
+  className = '',
+  style = {},
   onChange,
   onFocus,
   onBlur,
+  onKeyPress,
 }) => {
+  // 고유한 ID 생성
+  const inputId = React.useId();
   const getVariantStyles = (variant: string) => {
     switch (variant) {
       case 'default':
@@ -114,6 +122,7 @@ export const Input: React.FC<InputProps> = ({
     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
       {label && (
         <label
+          htmlFor={inputId}
           style={{
             fontSize: '14px',
             fontWeight: '500',
@@ -147,6 +156,7 @@ export const Input: React.FC<InputProps> = ({
         )}
 
         <input
+          id={inputId}
           type={type}
           placeholder={placeholder}
           value={value}
@@ -157,6 +167,8 @@ export const Input: React.FC<InputProps> = ({
           onChange={onChange}
           onFocus={onFocus}
           onBlur={onBlur}
+          onKeyPress={onKeyPress}
+          className={className}
           style={{
             ...sizeStyles,
             paddingLeft: icon && iconPosition === 'left'
@@ -175,6 +187,7 @@ export const Input: React.FC<InputProps> = ({
             outline: 'none',
             width: '100%',
             boxSizing: 'border-box',
+            ...style,
           }}
           onFocusCapture={(e) => {
             if (!disabled) {

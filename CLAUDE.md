@@ -3,12 +3,21 @@
 ## Storybook Story 작성 규칙
 
 ### 1. 단일 컴포넌트 스토리
-**단일 컴포넌트**를 다루는 스토리는 `args + parameters` 구조를 사용합니다.
+**단일 컴포넌트**를 다루는 스토리는 `args + play + parameters` 구조를 사용합니다.
 
 ```javascript
 export const StoryName = {
   args: {
     // 컴포넌트 props 정의
+    onClick: action('event-name'),
+  },
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    // 상호작용 테스트 로직
+    const element = canvasElement.querySelector('button');
+    if (element) {
+      element.focus();
+      // 추가 테스트 시나리오
+    }
   },
   parameters: {
     docs: {
@@ -22,7 +31,8 @@ export const StoryName = {
 
 **장점:**
 - Controls 패널에서 실시간 props 변경 가능
-- 사용자가 직접 테스트하며 학습 가능
+- 자동 상호작용 테스트로 QA 효율성 향상
+- Actions 패널에서 이벤트 로그 확인
 
 ### 2. 다중 컴포넌트 스토리
 **여러 컴포넌트**를 비교하거나 조합하는 스토리는 `render + parameters` 구조를 사용합니다.
@@ -54,16 +64,20 @@ export const StoryName = {
 
 ### 3. 적용 예시
 
-**단일 컴포넌트 (args + parameters):**
-- Default
-- Disabled
-- Loading
-- Error
+**단일 컴포넌트 (args + play + parameters):**
+- Default: 기본 동작 + 포커스 테스트
+- ErrorState: 에러 상태 + 복구 시나리오 테스트
+- WithIcon: 아이콘 버튼 + 클릭 테스트
 
 **다중 컴포넌트 (render + parameters):**
 - Variants (primary, secondary, danger 등)
 - Sizes (small, medium, large 등)
 - States (다양한 상태 조합)
+
+**복합 시나리오 (Integration.stories.tsx):**
+- LoginFormExample: 전체 폼 워크플로우 테스트
+- SearchBoxExample: 검색 + Enter 키 조합 테스트
+- CounterExample: 다중 버튼 상호작용 테스트
 
 ## 컴포넌트 구조 규칙
 

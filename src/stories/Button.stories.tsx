@@ -1,5 +1,8 @@
 import React from "react";
 import { Button } from "../components/atomic/Button";
+import { action } from "./actions";
+import { within, userEvent } from '@storybook/testing-library';
+import type { StepFunction } from "@storybook/types";
 
 export default {
   title: "Components/Button",
@@ -50,6 +53,15 @@ export default {
 export const Default = {
   args: {
     children: "Button",
+    onClick: action('button-click'),
+  },
+  play: async ({ canvasElement, step }: { canvasElement: HTMLElement; step: StepFunction }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole('button', { name: 'Button' });
+
+    await step("기본 버튼 클릭 테스트", async () => {
+      await userEvent.click(button);
+    });
   },
   parameters: {
     docs: {
@@ -100,34 +112,6 @@ export const Sizes = {
   },
 };
 
-export const WithIcon = {
-  args: {
-    children: "검색",
-    icon: "search",
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `<Button icon="search">검색</Button>`,
-      },
-    },
-  },
-};
-
-export const IconRight = {
-  args: {
-    children: "다음",
-    icon: "arrow-right",
-    iconPosition: "right",
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `<Button icon="arrow-right" iconPosition="right">다음</Button>`,
-      },
-    },
-  },
-};
 
 export const Disabled = {
   args: {
@@ -143,19 +127,19 @@ export const Disabled = {
   },
 };
 
-export const IconExamples = {
+export const Icons = {
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
       <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-        <Button icon="plus">추가</Button>
-        <Button icon="search">검색</Button>
-        <Button icon="user">프로필</Button>
-        <Button icon="settings">설정</Button>
+        <Button icon="plus" onClick={action('add-clicked')}>추가</Button>
+        <Button icon="search" onClick={action('search-clicked')}>검색</Button>
+        <Button icon="user" onClick={action('profile-clicked')}>프로필</Button>
+        <Button icon="settings" onClick={action('settings-clicked')}>설정</Button>
       </div>
       <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-        <Button icon="check" variant="secondary">완료</Button>
-        <Button icon="close" variant="danger">닫기</Button>
-        <Button icon="arrow-right" iconPosition="right" variant="outline">다음</Button>
+        <Button icon="check" variant="secondary" onClick={action('complete-clicked')}>완료</Button>
+        <Button icon="close" variant="danger" onClick={action('close-clicked')}>닫기</Button>
+        <Button icon="arrow-right" iconPosition="right" variant="outline" onClick={action('next-clicked')}>다음</Button>
       </div>
     </div>
   ),
@@ -173,3 +157,4 @@ export const IconExamples = {
     },
   },
 };
+
