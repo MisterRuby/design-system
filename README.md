@@ -1,46 +1,142 @@
-# Getting Started with Create React App
+# Schedule AI - UI Components
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+AI 스케줄 관리 애플리케이션을 위한 React 컴포넌트 라이브러리입니다.
 
-## Available Scripts
+## 🚀 시작하기
 
-In the project directory, you can run:
+### 개발 환경 실행
 
-### `npm start`
+```bash
+# 개발 서버 실행
+npm start
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Storybook 실행 (컴포넌트 개발/테스트)
+npm run storybook
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# 테스트 실행
+npm test
 
-### `npm test`
+# 빌드
+npm run build
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 📦 컴포넌트
 
-### `npm run build`
+### Calendar
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+월간 캘린더 뷰로 일정을 시각적으로 표시합니다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```tsx
+import { Calendar } from './components';
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<Calendar
+  events={events}
+  onEventClick={handleEventClick}
+  onDateSelect={handleDateSelect}
+  view="month"
+/>
+```
 
-### `npm run eject`
+### ScheduleCard
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+개별 일정을 카드 형태로 표시합니다.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```tsx
+import { ScheduleCard } from './components';
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<ScheduleCard
+  id="1"
+  title="프로젝트 회의"
+  startTime="2024-01-15T10:00:00Z"
+  endTime="2024-01-15T11:00:00Z"
+  priority="high"
+  onEdit={handleEdit}
+  onDelete={handleDelete}
+/>
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### ScheduleForm
 
-## Learn More
+일정을 생성/수정하는 모달 폼입니다.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```tsx
+import { ScheduleForm } from './components';
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<ScheduleForm
+  initialData={scheduleData}
+  onSubmit={handleSubmit}
+  onCancel={handleCancel}
+  isLoading={isSubmitting}
+/>
+```
+
+### AIScheduleInput
+
+자연어로 일정을 입력받는 AI 기반 컴포넌트입니다.
+
+```tsx
+import { AIScheduleInput } from './components';
+
+<AIScheduleInput
+  onSubmit={handleAISubmit}
+  isLoading={isProcessing}
+  suggestions={suggestions}
+/>
+```
+
+## 🎨 스타일링
+
+각 컴포넌트는 CSS 모듈을 사용하며, 다음과 같은 CSS 커스텀 속성을 통해 테마를 수정할 수 있습니다:
+
+```css
+:root {
+  --primary-color: #3b82f6;
+  --secondary-color: #64748b;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --danger-color: #ef4444;
+
+  --border-radius: 12px;
+  --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+```
+
+## 📱 반응형 디자인
+
+모든 컴포넌트는 모바일 및 데스크톱 환경에서 최적화되어 있습니다.
+
+- 데스크톱: 1200px+
+- 태블릿: 768px - 1199px
+- 모바일: 767px 이하
+
+## 🧪 Storybook
+
+컴포넌트의 다양한 상태와 사용 사례를 확인할 수 있습니다:
+
+```bash
+npm run storybook
+```
+
+브라우저에서 `http://localhost:6006`으로 접속하면 모든 컴포넌트의 스토리를 확인할 수 있습니다.
+
+## 🔧 개발
+
+### 새 컴포넌트 추가
+
+1. `src/components/ComponentName/` 디렉토리 생성
+2. `ComponentName.tsx`, `ComponentName.css`, `ComponentName.stories.ts` 파일 생성
+3. `src/components/index.ts`에 export 추가
+
+### 커밋 규칙
+
+```bash
+feat: 새로운 컴포넌트 추가
+fix: 기존 컴포넌트 버그 수정
+style: CSS 스타일 개선
+docs: 문서 업데이트
+test: 테스트 코드 추가/수정
+```
+
+## 📄 라이선스
+
+MIT License
