@@ -1,13 +1,13 @@
-import React from 'react';
-import { Icon, IconName } from './Icon';
+import React from "react";
+import { Icon, IconName } from "./Icon";
 
 export interface InputProps {
-  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search';
+  type?: "text" | "email" | "password" | "number" | "tel" | "url" | "search";
   placeholder?: string;
   value?: string;
   defaultValue?: string;
-  size?: 'small' | 'medium' | 'large';
-  variant?: 'default' | 'error' | 'success';
+  size?: "small" | "medium" | "large";
+  variant?: "default" | "error" | "success";
   disabled?: boolean;
   required?: boolean;
   readOnly?: boolean;
@@ -15,7 +15,7 @@ export interface InputProps {
   helperText?: string;
   errorMessage?: string;
   icon?: IconName;
-  iconPosition?: 'left' | 'right';
+  iconPosition?: "left" | "right";
   className?: string;
   style?: React.CSSProperties;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -25,12 +25,12 @@ export interface InputProps {
 }
 
 export const Input: React.FC<InputProps> = ({
-  type = 'text',
+  type = "text",
   placeholder,
   value,
   defaultValue,
-  size = 'medium',
-  variant = 'default',
+  size = "medium",
+  variant = "default",
   disabled = false,
   required = false,
   readOnly = false,
@@ -38,8 +38,8 @@ export const Input: React.FC<InputProps> = ({
   helperText,
   errorMessage,
   icon,
-  iconPosition = 'left',
-  className = '',
+  iconPosition = "left",
+  className = "",
   style = {},
   onChange,
   onFocus,
@@ -50,107 +50,108 @@ export const Input: React.FC<InputProps> = ({
   const inputId = React.useId();
   const getVariantStyles = (variant: string) => {
     switch (variant) {
-      case 'default':
+      case "default":
         return {
-          borderColor: '#d1d5db',
-          focusBorderColor: '#047857',
-          focusBoxShadow: '0 0 0 3px rgba(4, 120, 87, 0.1)'
+          borderColor: "#d1d5db",
+          focusBorderColor: "#d1d5db",
+          focusBoxShadow: "0 0 0 3px rgba(4, 120, 87, 0.1)",
         };
-      case 'error':
+      case "error":
         return {
-          borderColor: '#dc3545',
-          focusBorderColor: '#dc3545',
-          focusBoxShadow: '0 0 0 3px rgba(220, 53, 69, 0.1)'
+          borderColor: "#dc3545",
+          focusBorderColor: "#dc3545",
+          focusBoxShadow: "0 0 0 3px rgba(220, 53, 69, 0.1)",
         };
-      case 'success':
+      case "success":
         return {
-          borderColor: '#047857',
-          focusBorderColor: '#047857',
-          focusBoxShadow: '0 0 0 3px rgba(4, 120, 87, 0.1)'
+          borderColor: "#10b981",
+          focusBorderColor: "#10b981",
+          focusBoxShadow: "0 0 0 3px rgba(16, 185, 129, 0.1)",
         };
       default:
         return {
-          borderColor: '#d1d5db',
-          focusBorderColor: '#047857',
-          focusBoxShadow: '0 0 0 3px rgba(4, 120, 87, 0.1)'
+          borderColor: "#d1d5db",
+          focusBorderColor: "#d1d5db",
+          focusBoxShadow: "0 0 0 3px rgba(4, 120, 87, 0.1)",
         };
     }
   };
 
   const getSizeStyles = (size: string) => {
     switch (size) {
-      case 'small':
+      case "small":
         return {
-          padding: '6px 12px',
-          fontSize: '14px',
-          height: '32px',
+          padding: "6px 12px",
+          fontSize: "14px",
+          height: "32px",
           iconSize: 16,
-          iconPadding: '8px'
+          iconPadding: "8px",
         };
-      case 'medium':
+      case "medium":
         return {
-          padding: '8px 16px',
-          fontSize: '16px',
-          height: '40px',
+          padding: "8px 16px",
+          fontSize: "16px",
+          height: "40px",
           iconSize: 18,
-          iconPadding: '12px'
+          iconPadding: "12px",
         };
-      case 'large':
+      case "large":
         return {
-          padding: '12px 20px',
-          fontSize: '18px',
-          height: '48px',
+          padding: "12px 20px",
+          fontSize: "18px",
+          height: "48px",
           iconSize: 20,
-          iconPadding: '16px'
+          iconPadding: "16px",
         };
       default:
         return {
-          padding: '8px 16px',
-          fontSize: '16px',
-          height: '40px',
+          padding: "8px 16px",
+          fontSize: "16px",
+          height: "40px",
           iconSize: 18,
-          iconPadding: '12px'
+          iconPadding: "12px",
         };
     }
   };
 
   const variantStyles = getVariantStyles(variant);
   const sizeStyles = getSizeStyles(size);
-  const showError = variant === 'error' && errorMessage;
+  const showError = variant === "error" && errorMessage;
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
       {label && (
         <label
           htmlFor={inputId}
           style={{
-            fontSize: '14px',
-            fontWeight: '500',
-            color: '#374151',
-            marginBottom: '4px'
-          }}
-        >
+            fontSize: "14px",
+            fontWeight: "500",
+            color: "#374151",
+            marginBottom: "4px",
+          }}>
           {label}
-          {required && <span style={{ color: '#dc3545', marginLeft: '4px' }}>*</span>}
+          {required && (
+            <span style={{ color: "#dc3545", marginLeft: "4px" }}>*</span>
+          )}
         </label>
       )}
 
-      <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-        {icon && iconPosition === 'left' && (
+      <div
+        style={{ position: "relative", display: "flex", alignItems: "center" }}>
+        {icon && iconPosition === "left" && (
           <div
             style={{
-              position: 'absolute',
+              position: "absolute",
               left: sizeStyles.iconPadding,
               zIndex: 1,
-              display: 'flex',
-              alignItems: 'center',
-              pointerEvents: 'none',
-            }}
-          >
+              display: "flex",
+              alignItems: "center",
+              pointerEvents: "none",
+            }}>
             <Icon
               name={icon}
               size={sizeStyles.iconSize}
-              color={disabled ? '#9ca3af' : '#6b7280'}
+              color={disabled ? "#9ca3af" : "#6b7280"}
             />
           </div>
         )}
@@ -171,72 +172,76 @@ export const Input: React.FC<InputProps> = ({
           className={className}
           style={{
             ...sizeStyles,
-            paddingLeft: icon && iconPosition === 'left'
-              ? `calc(${sizeStyles.iconPadding} + ${sizeStyles.iconSize}px + 8px)`
-              : sizeStyles.padding.split(' ')[1],
-            paddingRight: icon && iconPosition === 'right'
-              ? `calc(${sizeStyles.iconPadding} + ${sizeStyles.iconSize}px + 8px)`
-              : sizeStyles.padding.split(' ')[1],
+            paddingLeft:
+              icon && iconPosition === "left"
+                ? `calc(${sizeStyles.iconPadding} + ${sizeStyles.iconSize}px + 8px)`
+                : sizeStyles.padding.split(" ")[1],
+            paddingRight:
+              icon && iconPosition === "right"
+                ? `calc(${sizeStyles.iconPadding} + ${sizeStyles.iconSize}px + 8px)`
+                : sizeStyles.padding.split(" ")[1],
             border: `2px solid ${variantStyles.borderColor}`,
-            borderRadius: '8px',
-            fontFamily: 'inherit',
-            backgroundColor: disabled ? '#f3f4f6' : 'white',
-            color: disabled ? '#9ca3af' : '#374151',
-            cursor: disabled ? 'not-allowed' : 'text',
-            transition: 'all 0.2s ease-in-out',
-            outline: 'none',
-            width: '100%',
-            boxSizing: 'border-box',
+            borderRadius: "8px",
+            fontFamily: "inherit",
+            backgroundColor: disabled ? "#f3f4f6" : "white",
+            color: disabled ? "#9ca3af" : "#374151",
+            cursor: disabled ? "not-allowed" : "text",
+            transition: "all 0.2s ease-in-out",
+            outline: "none",
+            width: "100%",
+            boxSizing: "border-box",
             ...style,
           }}
           onFocusCapture={(e) => {
             if (!disabled) {
-              e.currentTarget.style.borderColor = variantStyles.focusBorderColor;
+              e.currentTarget.style.borderColor =
+                variantStyles.focusBorderColor;
               e.currentTarget.style.boxShadow = variantStyles.focusBoxShadow;
             }
           }}
           onBlurCapture={(e) => {
             e.currentTarget.style.borderColor = variantStyles.borderColor;
-            e.currentTarget.style.boxShadow = 'none';
+            e.currentTarget.style.boxShadow = "none";
           }}
         />
 
-        {icon && iconPosition === 'right' && (
+        {icon && iconPosition === "right" && (
           <div
             style={{
-              position: 'absolute',
+              position: "absolute",
               right: sizeStyles.iconPadding,
               zIndex: 1,
-              display: 'flex',
-              alignItems: 'center',
-              pointerEvents: 'none',
-            }}
-          >
+              display: "flex",
+              alignItems: "center",
+              pointerEvents: "none",
+            }}>
             <Icon
               name={icon}
               size={sizeStyles.iconSize}
-              color={disabled ? '#9ca3af' : '#6b7280'}
+              color={disabled ? "#9ca3af" : "#6b7280"}
             />
           </div>
         )}
       </div>
 
       {showError && (
-        <span style={{
-          fontSize: '12px',
-          color: '#dc3545',
-          marginTop: '2px'
-        }}>
+        <span
+          style={{
+            fontSize: "12px",
+            color: "#dc3545",
+            marginTop: "2px",
+          }}>
           {errorMessage}
         </span>
       )}
 
       {helperText && !showError && (
-        <span style={{
-          fontSize: '12px',
-          color: '#6b7280',
-          marginTop: '2px'
-        }}>
+        <span
+          style={{
+            fontSize: "12px",
+            color: "#6b7280",
+            marginTop: "2px",
+          }}>
           {helperText}
         </span>
       )}
