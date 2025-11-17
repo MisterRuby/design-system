@@ -1,5 +1,6 @@
 import React from "react";
 import { Icon, IconName } from "./Icon";
+import { colors } from "../../theme";
 
 export interface InputProps {
   type?: "text" | "email" | "password" | "number" | "tel" | "url" | "search";
@@ -52,27 +53,27 @@ export const Input: React.FC<InputProps> = ({
     switch (variant) {
       case "default":
         return {
-          borderColor: "#d1d5db",
-          focusBorderColor: "#d1d5db",
-          focusBoxShadow: "0 0 0 3px rgba(4, 120, 87, 0.1)",
+          borderColor: colors.border.default,
+          focusBorderColor: colors.border.focus.primary,
+          focusBoxShadow: colors.focusRing.primary,
         };
       case "error":
         return {
-          borderColor: "#dc3545",
-          focusBorderColor: "#dc3545",
-          focusBoxShadow: "0 0 0 3px rgba(220, 53, 69, 0.1)",
+          borderColor: colors.border.error,
+          focusBorderColor: colors.border.focus.error,
+          focusBoxShadow: colors.focusRing.error,
         };
       case "success":
         return {
-          borderColor: "#10b981",
-          focusBorderColor: "#10b981",
-          focusBoxShadow: "0 0 0 3px rgba(16, 185, 129, 0.1)",
+          borderColor: colors.border.success,
+          focusBorderColor: colors.border.focus.success,
+          focusBoxShadow: colors.focusRing.success,
         };
       default:
         return {
-          borderColor: "#d1d5db",
-          focusBorderColor: "#d1d5db",
-          focusBoxShadow: "0 0 0 3px rgba(4, 120, 87, 0.1)",
+          borderColor: colors.border.default,
+          focusBorderColor: colors.border.focus.primary,
+          focusBoxShadow: colors.focusRing.primary,
         };
     }
   };
@@ -126,12 +127,12 @@ export const Input: React.FC<InputProps> = ({
           style={{
             fontSize: "14px",
             fontWeight: "500",
-            color: "#374151",
+            color: colors.semantic.text,
             marginBottom: "4px",
           }}>
           {label}
           {required && (
-            <span style={{ color: "#dc3545", marginLeft: "4px" }}>*</span>
+            <span style={{ color: colors.semantic.error, marginLeft: "4px" }}>*</span>
           )}
         </label>
       )}
@@ -151,7 +152,7 @@ export const Input: React.FC<InputProps> = ({
             <Icon
               name={icon}
               size={sizeStyles.iconSize}
-              color={disabled ? "#9ca3af" : "#6b7280"}
+              color={disabled ? colors.semantic.muted : colors.semantic.secondary}
             />
           </div>
         )}
@@ -183,8 +184,8 @@ export const Input: React.FC<InputProps> = ({
             border: `2px solid ${variantStyles.borderColor}`,
             borderRadius: "8px",
             fontFamily: "inherit",
-            backgroundColor: disabled ? "#f3f4f6" : "white",
-            color: disabled ? "#9ca3af" : "#374151",
+            backgroundColor: disabled ? colors.background.disabled : colors.background.white,
+            color: disabled ? colors.semantic.muted : colors.semantic.text,
             cursor: disabled ? "not-allowed" : "text",
             transition: "all 0.2s ease-in-out",
             outline: "none",
@@ -218,7 +219,7 @@ export const Input: React.FC<InputProps> = ({
             <Icon
               name={icon}
               size={sizeStyles.iconSize}
-              color={disabled ? "#9ca3af" : "#6b7280"}
+              color={disabled ? colors.semantic.muted : colors.semantic.secondary}
             />
           </div>
         )}
@@ -228,7 +229,7 @@ export const Input: React.FC<InputProps> = ({
         <span
           style={{
             fontSize: "12px",
-            color: "#dc3545",
+            color: colors.semantic.error,
             marginTop: "2px",
           }}>
           {errorMessage}
@@ -239,7 +240,7 @@ export const Input: React.FC<InputProps> = ({
         <span
           style={{
             fontSize: "12px",
-            color: "#6b7280",
+            color: colors.semantic.secondary,
             marginTop: "2px",
           }}>
           {helperText}

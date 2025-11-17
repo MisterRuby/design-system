@@ -1,5 +1,6 @@
 import React from 'react';
 import { Icon, IconName } from './Icon';
+import { colors } from '../../theme';
 
 export interface ButtonProps {
   children: React.ReactNode;
@@ -23,15 +24,15 @@ export const Button: React.FC<ButtonProps> = ({
   const getVariantStyles = (variant: string) => {
     switch (variant) {
       case 'primary':
-        return { backgroundColor: '#047857', color: 'white' };
+        return { backgroundColor: colors.semantic.primary, color: colors.background.white };
       case 'secondary':
-        return { backgroundColor: '#6c757d', color: 'white' };
+        return { backgroundColor: colors.semantic.secondary, color: colors.background.white };
       case 'danger':
-        return { backgroundColor: '#dc3545', color: 'white' };
+        return { backgroundColor: colors.semantic.error, color: colors.background.white };
       case 'outline':
-        return { backgroundColor: 'transparent', color: '#047857', border: '1px solid #047857' };
+        return { backgroundColor: 'transparent', color: colors.semantic.primary, border: `1px solid ${colors.semantic.primary}` };
       default:
-        return { backgroundColor: '#047857', color: 'white' };
+        return { backgroundColor: colors.semantic.primary, color: colors.background.white };
     }
   };
 
@@ -65,7 +66,7 @@ export const Button: React.FC<ButtonProps> = ({
         color: variantStyles.color,
         padding: sizeStyles.padding,
         fontSize: sizeStyles.fontSize,
-        border: variant === 'outline' ? '1px solid #047857' : 'none',
+        border: variant === 'outline' ? `1px solid ${colors.semantic.primary}` : 'none',
         borderRadius: '4px',
         cursor: disabled ? 'not-allowed' : 'pointer',
         opacity: disabled ? 0.6 : 1,

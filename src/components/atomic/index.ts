@@ -4,3 +4,5 @@ export { Input } from './Input';
 export type { InputProps } from './Input';
 export { Icon } from './Icon';
 export type { IconProps, IconName } from './Icon';
+export { Text } from './Text';
+export type { TextProps } from './Text';
