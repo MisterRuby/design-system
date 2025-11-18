@@ -6,3 +6,6 @@ export * from './atomic';
 
 // Organism Components
 // export * from './organisms';
+
+// Common Types
+export * from '../types';

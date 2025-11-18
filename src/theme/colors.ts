@@ -99,11 +99,15 @@ export const colors = {
     secondary: '#6b7280', // gray-500 - secondary와 동일
     success: '#15803d', // green-700 - success와 동일
     error: '#dc2626', // red-600 - error와 동일
+    warning: '#d97706', // amber-600 - warning과 동일
+    info: '#0891b2', // cyan-600 - info와 동일
     focus: {
       primary: '#2563eb', // blue-600 - primary와 동일
       secondary: '#6b7280', // gray-500 - secondary와 동일
       success: '#15803d', // green-700 - success와 동일
       error: '#dc2626', // red-600 - error와 동일
+      warning: '#d97706', // amber-600 - warning과 동일
+      info: '#0891b2', // cyan-600 - info와 동일
     }
   },
 

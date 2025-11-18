@@ -1,14 +1,15 @@
 import React from "react";
 import { Icon, IconName } from "./Icon";
 import { colors } from "../../theme";
+import { InputVariant, ComponentSize } from "../../types";
 
 export interface InputProps {
   type?: "text" | "email" | "password" | "number" | "tel" | "url" | "search";
   placeholder?: string;
   value?: string;
   defaultValue?: string;
-  size?: "small" | "medium" | "large";
-  variant?: "default" | "error" | "success";
+  size?: ComponentSize;
+  variant?: InputVariant;
   disabled?: boolean;
   required?: boolean;
   readOnly?: boolean;
@@ -57,17 +58,41 @@ export const Input: React.FC<InputProps> = ({
           focusBorderColor: colors.border.focus.primary,
           focusBoxShadow: colors.focusRing.primary,
         };
-      case "error":
+      case "primary":
         return {
-          borderColor: colors.border.error,
-          focusBorderColor: colors.border.focus.error,
-          focusBoxShadow: colors.focusRing.error,
+          borderColor: colors.border.primary,
+          focusBorderColor: colors.border.focus.primary,
+          focusBoxShadow: colors.focusRing.primary,
+        };
+      case "secondary":
+        return {
+          borderColor: colors.border.secondary,
+          focusBorderColor: colors.border.focus.secondary,
+          focusBoxShadow: colors.focusRing.secondary,
         };
       case "success":
         return {
           borderColor: colors.border.success,
           focusBorderColor: colors.border.focus.success,
           focusBoxShadow: colors.focusRing.success,
+        };
+      case "error":
+        return {
+          borderColor: colors.border.error,
+          focusBorderColor: colors.border.focus.error,
+          focusBoxShadow: colors.focusRing.error,
+        };
+      case "warning":
+        return {
+          borderColor: colors.border.warning || colors.semantic.warning,
+          focusBorderColor: colors.border.focus.warning || colors.semantic.warning,
+          focusBoxShadow: colors.focusRing.warning,
+        };
+      case "info":
+        return {
+          borderColor: colors.border.info || colors.semantic.info,
+          focusBorderColor: colors.border.focus.info || colors.semantic.info,
+          focusBoxShadow: colors.focusRing.info,
         };
       default:
         return {

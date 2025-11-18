@@ -29,7 +29,7 @@ export default {
     },
     variant: {
       control: "select",
-      options: ["default", "error", "success"],
+      options: ["default", "primary", "secondary", "success", "error", "warning", "info"],
       description: "입력 필드의 시각적 상태",
     },
     disabled: {
@@ -165,7 +165,7 @@ export const ErrorState = {
   render: () => {
     const [value, setValue] = React.useState("");
     const [variant, setVariant] = React.useState<
-      "default" | "error" | "success"
+      "default" | "primary" | "secondary" | "success" | "error" | "warning" | "info"
     >("default");
     const [errorMessage, setErrorMessage] = React.useState("");
 
@@ -292,7 +292,7 @@ export const SuccessState = {
   render: () => {
     const [value, setValue] = React.useState("");
     const [variant, setVariant] = React.useState<
-      "default" | "error" | "success"
+      "default" | "primary" | "secondary" | "success" | "error" | "warning" | "info"
     >("default");
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -447,6 +447,39 @@ export const Types = {
 <Input type="password" placeholder="비밀번호" />
 <Input type="number" placeholder="숫자" />
 <Input type="search" placeholder="검색" />`,
+      },
+    },
+  },
+};
+
+export const Variants = {
+  render: () => (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "16px",
+        width: "300px",
+      }}>
+      <Input variant="default" placeholder="Default variant" label="Default" />
+      <Input variant="primary" placeholder="Primary variant" label="Primary" />
+      <Input variant="secondary" placeholder="Secondary variant" label="Secondary" />
+      <Input variant="success" placeholder="Success variant" label="Success" />
+      <Input variant="error" placeholder="Error variant" label="Error" />
+      <Input variant="warning" placeholder="Warning variant" label="Warning" />
+      <Input variant="info" placeholder="Info variant" label="Info" />
+    </div>
+  ),
+  parameters: {
+    docs: {
+      source: {
+        code: `<Input variant="default" placeholder="Default variant" />
+<Input variant="primary" placeholder="Primary variant" />
+<Input variant="secondary" placeholder="Secondary variant" />
+<Input variant="success" placeholder="Success variant" />
+<Input variant="error" placeholder="Error variant" />
+<Input variant="warning" placeholder="Warning variant" />
+<Input variant="info" placeholder="Info variant" />`,
       },
     },
   },

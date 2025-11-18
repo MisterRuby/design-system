@@ -19,7 +19,7 @@ export default {
   argTypes: {
     variant: {
       control: "select",
-      options: ["primary", "secondary", "danger", "outline"],
+      options: ["primary", "secondary", "success", "error", "warning", "info", "outline"],
       description: "버튼의 시각적 스타일 유형",
     },
     size: {
@@ -77,7 +77,10 @@ export const Variants = {
     <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>
-      <Button variant="danger">Danger</Button>
+      <Button variant="success">Success</Button>
+      <Button variant="error">Error</Button>
+      <Button variant="warning">Warning</Button>
+      <Button variant="info">Info</Button>
       <Button variant="outline">Outline</Button>
     </div>
   ),
@@ -86,7 +89,10 @@ export const Variants = {
       source: {
         code: `<Button variant="primary">Primary</Button>
 <Button variant="secondary">Secondary</Button>
-<Button variant="danger">Danger</Button>
+<Button variant="success">Success</Button>
+<Button variant="error">Error</Button>
+<Button variant="warning">Warning</Button>
+<Button variant="info">Info</Button>
 <Button variant="outline">Outline</Button>`,
       },
     },
@@ -138,7 +144,7 @@ export const Icons = {
       </div>
       <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
         <Button icon="check" variant="secondary" onClick={action('complete-clicked')}>완료</Button>
-        <Button icon="close" variant="danger" onClick={action('close-clicked')}>닫기</Button>
+        <Button icon="close" variant="error" onClick={action('close-clicked')}>닫기</Button>
         <Button icon="arrow-right" iconPosition="right" variant="outline" onClick={action('next-clicked')}>다음</Button>
       </div>
     </div>
@@ -151,7 +157,7 @@ export const Icons = {
 <Button icon="user">프로필</Button>
 <Button icon="settings">설정</Button>
 <Button icon="check" variant="secondary">완료</Button>
-<Button icon="close" variant="danger">닫기</Button>
+<Button icon="close" variant="error">닫기</Button>
 <Button icon="arrow-right" iconPosition="right" variant="outline">다음</Button>`,
       },
     },
