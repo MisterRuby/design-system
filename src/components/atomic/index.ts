@@ -8,3 +8,5 @@ export { Text } from './Text';
 export type { TextProps } from './Text';
 export { Checkbox } from './Checkbox';
 export type { CheckboxProps } from './Checkbox';
+export { Select } from './Select';
+export type { SelectProps, SelectOption } from './Select';
