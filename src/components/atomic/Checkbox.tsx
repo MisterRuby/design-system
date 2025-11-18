@@ -89,6 +89,8 @@ export const Checkbox: React.FC<CheckboxProps> = ({
     height: sizeStyles.checkbox,
     cursor: disabled ? "not-allowed" : "pointer",
     accentColor: disabled ? colors.semantic.muted : accentColor,
+    marginTop: description ? "0.125em" : "0", // description이 있을 때만 marginTop 적용
+    flexShrink: 0, // 체크박스 크기 고정
   };
 
   const labelStyles: React.CSSProperties = {
@@ -96,11 +98,12 @@ export const Checkbox: React.FC<CheckboxProps> = ({
     color: disabled ? colors.semantic.muted : colors.semantic.text,
     cursor: disabled ? "not-allowed" : "pointer",
     userSelect: "none",
+    lineHeight: "1.2", // 라인 높이를 명시적으로 설정
   };
 
   const containerStyles: React.CSSProperties = {
     display: "inline-flex",
-    alignItems: "flex-start",
+    alignItems: description ? "flex-start" : "center",
     gap: sizeStyles.gap,
     ...style,
   };
