@@ -10,7 +10,6 @@ export interface TextProps {
   align?: "left" | "center" | "right" | "justify";
   transform?: "none" | "capitalize" | "uppercase" | "lowercase";
   decoration?: "none" | "underline" | "line-through";
-  as?: React.ElementType;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -24,7 +23,6 @@ export const Text: React.FC<TextProps> = ({
   align = "left",
   transform = "none",
   decoration = "none",
-  as,
   className = "",
   style = {},
 }) => {
@@ -180,7 +178,7 @@ export const Text: React.FC<TextProps> = ({
   const weightStyles = weight ? getWeightStyles(weight) : {};
   const colorStyles = getColorStyles(color);
 
-  const Element = as || (variantStyles.element as React.ElementType);
+  const Element = variantStyles.element as React.ElementType;
 
   const combinedStyle = {
     fontSize: variantStyles.fontSize,

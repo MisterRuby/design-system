@@ -44,10 +44,6 @@ export default {
       control: { type: "select" },
       options: ["none", "underline", "line-through"],
     },
-    as: {
-      description: "렌더링할 HTML 요소",
-      control: { type: "text" },
-    },
     children: {
       description: "텍스트 내용",
       control: { type: "text" },
@@ -262,20 +258,3 @@ export const Decoration = {
   },
 };
 
-export const CustomElement = {
-  args: {
-    children: "링크로 렌더링된 텍스트",
-    as: "a",
-    color: "info",
-    decoration: "underline",
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `<Text as="a" color="info" decoration="underline">
-  링크로 렌더링된 텍스트
-</Text>`,
-      },
-    },
-  },
-};
