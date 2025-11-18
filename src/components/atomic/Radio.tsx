@@ -96,8 +96,11 @@ export const Radio: React.FC<RadioProps> = ({
     height: sizeStyles.radio,
     cursor: disabled ? "not-allowed" : "pointer",
     accentColor: disabled ? colors.semantic.muted : accentColor,
-    marginTop: "2px", // 텍스트와 정렬을 위한 미세 조정
     flexShrink: 0,
+    margin: 0,
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
   };
 
   const labelStyles: React.CSSProperties = {
@@ -105,12 +108,15 @@ export const Radio: React.FC<RadioProps> = ({
     color: disabled ? colors.semantic.muted : colors.semantic.text,
     cursor: disabled ? "not-allowed" : "pointer",
     userSelect: "none",
-    lineHeight: "1.2",
+    lineHeight: "1.4",
+    display: "flex",
+    alignItems: "center",
+    minHeight: sizeStyles.radio,
   };
 
   const optionContainerStyles: React.CSSProperties = {
     display: "flex",
-    alignItems: "flex-start",
+    alignItems: "center",
     gap: sizeStyles.gap,
   };
 
@@ -157,6 +163,13 @@ export const Radio: React.FC<RadioProps> = ({
         {options.map((option, index) => {
           const optionId = `${radioGroupId}-${index}`;
           const isDisabled = disabled || option.disabled;
+          const isControlled = value !== undefined;
+          const hasDefaultValue = defaultValue !== undefined;
+          const defaultCheckedValue = !isControlled
+            ? hasDefaultValue
+              ? defaultValue === option.value
+              : index === 0
+            : undefined;
 
           return (
             <div key={option.value} style={optionContainerStyles}>
@@ -165,8 +178,8 @@ export const Radio: React.FC<RadioProps> = ({
                 id={optionId}
                 name={name}
                 value={option.value}
-                checked={value !== undefined ? value === option.value : undefined}
-                defaultChecked={defaultValue !== undefined ? defaultValue === option.value : undefined}
+                checked={isControlled ? value === option.value : undefined}
+                defaultChecked={defaultCheckedValue}
                 disabled={isDisabled}
                 required={required}
                 style={radioStyles}

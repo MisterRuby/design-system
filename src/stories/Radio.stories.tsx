@@ -330,7 +330,6 @@ export const Colors = {
         label="Primary"
         color="primary"
         options={defaultOptions}
-        defaultValue="option1"
         onChange={action("primary-change")}
       />
       <Radio
@@ -338,7 +337,6 @@ export const Colors = {
         label="Secondary"
         color="secondary"
         options={defaultOptions}
-        defaultValue="option1"
         onChange={action("secondary-change")}
       />
       <Radio
@@ -346,7 +344,6 @@ export const Colors = {
         label="Success"
         color="success"
         options={defaultOptions}
-        defaultValue="option1"
         onChange={action("success-change")}
       />
       <Radio
@@ -354,7 +351,6 @@ export const Colors = {
         label="Error"
         color="error"
         options={defaultOptions}
-        defaultValue="option1"
         onChange={action("error-change")}
       />
       <Radio
@@ -362,7 +358,6 @@ export const Colors = {
         label="Warning"
         color="warning"
         options={defaultOptions}
-        defaultValue="option1"
         onChange={action("warning-change")}
       />
       <Radio
@@ -370,7 +365,6 @@ export const Colors = {
         label="Info"
         color="info"
         options={defaultOptions}
-        defaultValue="option1"
         onChange={action("info-change")}
       />
     </div>
@@ -378,12 +372,12 @@ export const Colors = {
   parameters: {
     docs: {
       source: {
-        code: `<Radio color="primary" name="primary" options={options} defaultValue="option1" />
-<Radio color="secondary" name="secondary" options={options} defaultValue="option1" />
-<Radio color="success" name="success" options={options} defaultValue="option1" />
-<Radio color="error" name="error" options={options} defaultValue="option1" />
-<Radio color="warning" name="warning" options={options} defaultValue="option1" />
-<Radio color="info" name="info" options={options} defaultValue="option1" />`,
+        code: `<Radio color="primary" name="primary" options={options} />
+<Radio color="secondary" name="secondary" options={options} />
+<Radio color="success" name="success" options={options} />
+<Radio color="error" name="error" options={options} />
+<Radio color="warning" name="warning" options={options} />
+<Radio color="info" name="info" options={options} />`,
       },
     },
   },
@@ -458,7 +452,7 @@ export const WithDisabledOptions = {
 
 export const ControlledExample = {
   render: () => {
-    const [value, setValue] = React.useState("");
+    const [value, setValue] = React.useState("react");
 
     const options = [
       { value: "react", label: "React" },
