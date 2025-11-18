@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon, IconName } from "../components/atomic/Icon";
+import { Icon, IconName } from "../components";
 
 export default {
   title: "Components/Icon",

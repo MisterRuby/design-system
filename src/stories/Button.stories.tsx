@@ -1,7 +1,8 @@
 import React from "react";
-import { Button } from "../components/atomic/Button";
+import { Button } from '../components';
 import { action } from "./actions";
 import { within, userEvent } from '@storybook/testing-library';
+import { Step } from './types';
 
 export default {
   title: "Components/Button",
@@ -54,7 +55,7 @@ export const Default = {
     children: "Button",
     onClick: action('button-click'),
   },
-  play: async ({ canvasElement, step }: { canvasElement: HTMLElement; step: any }) => {
+  play: async ({ canvasElement, step }: { canvasElement: HTMLElement; step: Step }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button', { name: 'Button' });
 

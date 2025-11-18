@@ -1,5 +1,5 @@
 import React from "react";
-import { Text } from "../components/atomic/Text";
+import { Text } from "../components";
 
 export default {
   title: "Components/Text",
@@ -257,4 +257,3 @@ export const Decoration = {
     },
   },
 };
-

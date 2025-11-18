@@ -1,5 +1,5 @@
 import React from "react";
-import { Radio } from "../components/atomic/Radio";
+import { Radio } from "../components";
 import { action } from "./actions";
 import { within, userEvent } from "@storybook/testing-library";
 

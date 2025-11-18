@@ -1,5 +1,5 @@
 import React from "react";
-import { Select } from "../components/atomic/Select";
+import { Select } from "../components";
 import { action } from "./actions";
 import { within, userEvent } from "@storybook/testing-library";
 

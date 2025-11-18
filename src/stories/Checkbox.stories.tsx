@@ -1,5 +1,5 @@
 import React from "react";
-import { Checkbox } from "../components/atomic/Checkbox";
+import { Checkbox } from "../components";
 import { action } from "./actions";
 import { within, userEvent } from "@storybook/testing-library";
 

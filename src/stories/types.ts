@@ -1,0 +1,1 @@
+export type Step = (label: string, fn: () => Promise<void>) => Promise<void>;
