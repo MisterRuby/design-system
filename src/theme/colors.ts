@@ -1,16 +1,16 @@
 export const colors = {
   // Primary colors
   primary: {
-    50: '#f0fdf4',
-    100: '#dcfce7',
-    200: '#bbf7d0',
-    300: '#86efac',
-    400: '#4ade80',
-    500: '#22c55e',
-    600: '#16a34a',
-    700: '#047857',
-    800: '#065f46',
-    900: '#064e3b',
+    50: '#eff6ff',
+    100: '#dbeafe',
+    200: '#bfdbfe',
+    300: '#93c5fd',
+    400: '#60a5fa',
+    500: '#3b82f6',
+    600: '#2563eb',
+    700: '#1d4ed8',
+    800: '#1e40af',
+    900: '#1e3a8a',
   },
 
   // Gray colors
@@ -82,12 +82,12 @@ export const colors = {
 
   // Semantic colors - 모든 컴포넌트에서 공통 사용
   semantic: {
-    primary: '#047857', // green-700 - 브랜드 주색상
+    primary: '#2563eb', // blue-600 - 브랜드 주색상
     secondary: '#6b7280', // gray-500 - 보조색상
-    success: '#047857', // green-700 - 성공
+    success: '#15803d', // green-700 - 성공
     error: '#dc2626', // red-600 - 오류
     warning: '#d97706', // amber-600 - 경고
-    info: '#2563eb', // blue-600 - 정보
+    info: '#0891b2', // cyan-600 - 정보
     muted: '#9ca3af', // gray-400 - 비활성
     // Text specific
     text: '#374151', // gray-700 - 기본 텍스트 (가독성)
@@ -95,14 +95,14 @@ export const colors = {
 
   border: {
     default: '#d1d5db', // gray-300
-    primary: '#047857', // green-700 - primary와 동일
+    primary: '#2563eb', // blue-600 - primary와 동일
     secondary: '#6b7280', // gray-500 - secondary와 동일
-    success: '#047857', // green-700 - success와 동일
+    success: '#15803d', // green-700 - success와 동일
     error: '#dc2626', // red-600 - error와 동일
     focus: {
-      primary: '#047857', // green-700 - primary와 동일
+      primary: '#2563eb', // blue-600 - primary와 동일
       secondary: '#6b7280', // gray-500 - secondary와 동일
-      success: '#047857', // green-700 - success와 동일
+      success: '#15803d', // green-700 - success와 동일
       error: '#dc2626', // red-600 - error와 동일
     }
   },
@@ -115,11 +115,11 @@ export const colors = {
 
   // Focus ring colors with opacity
   focusRing: {
-    primary: 'rgba(4, 120, 87, 0.1)', // green-700 with 10% opacity
+    primary: 'rgba(37, 99, 235, 0.1)', // blue-600 with 10% opacity
     secondary: 'rgba(107, 114, 128, 0.1)', // gray-500 with 10% opacity
-    success: 'rgba(4, 120, 87, 0.1)', // green-700 with 10% opacity (success와 동일)
+    success: 'rgba(21, 128, 61, 0.1)', // green-700 with 10% opacity
     error: 'rgba(220, 38, 38, 0.1)', // red-600 with 10% opacity
     warning: 'rgba(217, 119, 6, 0.1)', // amber-600 with 10% opacity
-    info: 'rgba(37, 99, 235, 0.1)', // blue-600 with 10% opacity
+    info: 'rgba(8, 145, 178, 0.1)', // cyan-600 with 10% opacity
   },
 } as const;
