@@ -67,9 +67,13 @@ export const Default = {
     const canvas = within(canvasElement);
     const checkbox = canvas.getByRole("checkbox");
 
+    await new Promise(resolve => setTimeout(resolve, 500));
+
     await step("체크박스 클릭 테스트", async () => {
       await userEvent.click(checkbox);
     });
+
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     await step("체크박스 언체크 테스트", async () => {
       await userEvent.click(checkbox);
@@ -88,20 +92,6 @@ export const WithoutLabel = {
   args: {
     onChange: action("checkbox-change"),
   },
-  play: async ({
-    canvasElement,
-    step,
-  }: {
-    canvasElement: HTMLElement;
-    step: StepFunction;
-  }) => {
-    const canvas = within(canvasElement);
-    const checkbox = canvas.getByRole("checkbox");
-
-    await step("라벨 없는 체크박스 클릭 테스트", async () => {
-      await userEvent.click(checkbox);
-    });
-  },
   parameters: {
     docs: {
       source: {
@@ -117,20 +107,6 @@ export const WithDescription = {
     description: "서비스 이용을 위해 약관에 동의해주세요.",
     required: true,
     onChange: action("checkbox-change"),
-  },
-  play: async ({
-    canvasElement,
-    step,
-  }: {
-    canvasElement: HTMLElement;
-    step: StepFunction;
-  }) => {
-    const canvas = within(canvasElement);
-    const checkbox = canvas.getByRole("checkbox");
-
-    await step("설명이 있는 체크박스 클릭 테스트", async () => {
-      await userEvent.click(checkbox);
-    });
   },
   parameters: {
     docs: {
@@ -329,6 +305,35 @@ export const ControlledExample = {
         </button>
       </div>
     );
+  },
+  play: async ({
+    canvasElement,
+    step,
+  }: {
+    canvasElement: HTMLElement;
+    step: StepFunction;
+  }) => {
+    const canvas = within(canvasElement);
+    const checkbox = canvas.getByRole("checkbox");
+    const toggleButton = canvas.getByRole("button", { name: "상태 토글" });
+
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    await step("체크박스 직접 클릭", async () => {
+      await userEvent.click(checkbox);
+    });
+
+    await new Promise(resolve => setTimeout(resolve, 1200));
+
+    await step("버튼으로 상태 토글", async () => {
+      await userEvent.click(toggleButton);
+    });
+
+    await new Promise(resolve => setTimeout(resolve, 1200));
+
+    await step("다시 버튼으로 토글", async () => {
+      await userEvent.click(toggleButton);
+    });
   },
   parameters: {
     docs: {
