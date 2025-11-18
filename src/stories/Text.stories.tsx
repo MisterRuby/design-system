@@ -1,8 +1,5 @@
 import React from "react";
 import { Text } from "../components/atomic/Text";
-import { action } from "./actions";
-import { within, userEvent } from "@storybook/testing-library";
-import type { StepFunction } from "@storybook/types";
 
 export default {
   title: "Components/Text",
@@ -61,12 +58,6 @@ export default {
 export const Default = {
   args: {
     children: "기본 텍스트입니다.",
-  },
-  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
-    const text = canvasElement.querySelector("p");
-    if (text) {
-      text.focus();
-    }
   },
   parameters: {
     docs: {
@@ -277,12 +268,6 @@ export const CustomElement = {
     as: "a",
     color: "info",
     decoration: "underline",
-  },
-  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
-    const link = canvasElement.querySelector("a");
-    if (link) {
-      link.focus();
-    }
   },
   parameters: {
     docs: {
