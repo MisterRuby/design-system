@@ -1,7 +1,7 @@
 import React from "react";
 import { Input } from "../components/atomic/Input";
 import { action } from "./actions";
-import { within, userEvent, type StepRunner } from "@storybook/testing-library";
+import { within, userEvent } from "@storybook/testing-library";
 
 export default {
   title: "Components/Input",
@@ -221,7 +221,7 @@ export const ErrorState = {
     step,
   }: {
     canvasElement: HTMLElement;
-    step: StepRunner;
+    step: any;
   }) => {
     const canvas = within(canvasElement);
     const input = canvas.getByLabelText("이메일");
@@ -335,7 +335,7 @@ export const SuccessState = {
     step,
   }: {
     canvasElement: HTMLElement;
-    step: StepRunner;
+    step: any;
   }) => {
     const canvas = within(canvasElement);
     const input = canvas.getByLabelText("이메일");

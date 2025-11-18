@@ -1,7 +1,7 @@
 import React from "react";
 import { Checkbox } from "../components/atomic/Checkbox";
 import { action } from "./actions";
-import { within, userEvent, type StepRunner } from "@storybook/testing-library";
+import { within, userEvent } from "@storybook/testing-library";
 
 export default {
   title: "Components/Checkbox",
@@ -61,7 +61,7 @@ export const Default = {
     step,
   }: {
     canvasElement: HTMLElement;
-    step: StepRunner;
+    step: any;
   }) => {
     const canvas = within(canvasElement);
     const checkbox = canvas.getByRole("checkbox");
@@ -310,7 +310,7 @@ export const ControlledExample = {
     step,
   }: {
     canvasElement: HTMLElement;
-    step: StepRunner;
+    step: any;
   }) => {
     const canvas = within(canvasElement);
     const checkbox = canvas.getByRole("checkbox");

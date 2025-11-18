@@ -1,7 +1,7 @@
 import React from "react";
 import { Select } from "../components/atomic/Select";
 import { action } from "./actions";
-import { within, userEvent, type StepRunner } from "@storybook/testing-library";
+import { within, userEvent } from "@storybook/testing-library";
 
 export default {
   title: "Components/Select",
@@ -87,7 +87,7 @@ export const Default = {
     step,
   }: {
     canvasElement: HTMLElement;
-    step: StepRunner;
+    step: any;
   }) => {
     const canvas = within(canvasElement);
     const select = canvas.getByRole("combobox");
@@ -470,7 +470,7 @@ export const ControlledExample = {
     step,
   }: {
     canvasElement: HTMLElement;
-    step: StepRunner;
+    step: any;
   }) => {
     const canvas = within(canvasElement);
     const select = canvas.getByRole("combobox");
