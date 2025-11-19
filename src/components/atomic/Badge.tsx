@@ -157,12 +157,6 @@ export const Badge: React.FC<BadgeProps> = ({
     marginLeft: '2px'
   };
 
-  const removeButtonHoverStyles: React.CSSProperties = {
-    ...removeButtonStyles,
-    ':hover': !disabled ? {
-      backgroundColor: 'rgba(0, 0, 0, 0.2)'
-    } : {}
-  };
 
   return (
     <span style={badgeStyles}>
