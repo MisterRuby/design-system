@@ -171,6 +171,18 @@ export const Radio: React.FC<RadioProps> = ({
               : index === 0
             : undefined;
 
+          // 디버깅용 로그
+          if (index === 0) {
+            console.log('Radio debug:', {
+              option: option.value,
+              isControlled,
+              hasDefaultValue,
+              defaultValue,
+              defaultCheckedValue,
+              index
+            });
+          }
+
           return (
             <div key={option.value} style={optionContainerStyles}>
               <input

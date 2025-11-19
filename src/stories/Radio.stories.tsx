@@ -10,7 +10,11 @@ export default {
     layout: "centered",
     docs: {
       description: {
-        component: "여러 옵션 중 하나를 선택할 수 있는 라디오 버튼 그룹 컴포넌트입니다.",
+        component:
+          "여러 옵션 중 하나를 선택할 수 있는 라디오 버튼 그룹 컴포넌트입니다.",
+      },
+      story: {
+        inline: true,
       },
     },
   },
@@ -287,7 +291,13 @@ export const Disabled = {
 
 export const Sizes = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "24px", width: "400px" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "24px",
+        width: "400px",
+      }}>
       <Radio
         name="size-sm"
         label="Small"
@@ -324,7 +334,13 @@ export const Sizes = {
 
 export const Colors = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px", width: "400px" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "16px",
+        width: "400px",
+      }}>
       <Radio
         name="color-primary"
         label="Primary"
@@ -385,7 +401,13 @@ export const Colors = {
 
 export const Directions = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "32px", width: "500px" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "32px",
+        width: "500px",
+      }}>
       <Radio
         name="direction-vertical"
         label="세로 배치 (기본)"
@@ -452,16 +474,22 @@ export const WithDisabledOptions = {
 
 export const ControlledExample = {
   render: () => {
-    const [value, setValue] = React.useState("react");
-
     const options = [
       { value: "react", label: "React" },
       { value: "vue", label: "Vue" },
       { value: "angular", label: "Angular" },
     ];
 
+    const [value, setValue] = React.useState(options[0].value);
+
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: "16px", width: "300px" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "16px",
+          width: "300px",
+        }}>
         <Radio
           name="controlled-radio"
           label="프레임워크"
@@ -473,7 +501,7 @@ export const ControlledExample = {
           선택된 값: {value || "없음"}
         </div>
         <button
-          onClick={() => setValue("")}
+          onClick={() => setValue(options[0].value)}
           style={{
             padding: "8px 16px",
             border: "1px solid #d1d5db",
