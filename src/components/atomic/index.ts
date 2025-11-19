@@ -14,3 +14,5 @@ export { Radio } from './Radio';
 export type { RadioProps, RadioOption } from './Radio';
 export { Toggle } from './Toggle';
 export type { ToggleProps } from './Toggle';
+export { Badge } from './Badge';
+export type { BadgeProps } from './Badge';
