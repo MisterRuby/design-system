@@ -2,7 +2,7 @@
 export * from './atomic';
 
 // Molecular Components
-// export * from './molecules';
+export * from './molecules';
 
 // Organism Components
 // export * from './organisms';
