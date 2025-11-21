@@ -20,3 +20,5 @@ export { Spinner } from './Spinner';
 export type { SpinnerProps } from './Spinner';
 export { Tooltip } from './Tooltip';
 export type { TooltipProps } from './Tooltip';
+export { Progress } from './Progress';
+export type { ProgressProps } from './Progress';
