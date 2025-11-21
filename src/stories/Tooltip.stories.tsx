@@ -1,7 +1,7 @@
 import React from "react";
 import { Tooltip, Button, Icon } from "../components";
 import { action } from "./actions";
-import { within, userEvent } from "@storybook/testing-library";
+import { within, userEvent, waitFor } from "@storybook/testing-library";
 
 export default {
   title: "Components/Tooltip",
@@ -55,10 +55,12 @@ export const Default = {
 
     await step("마우스 호버로 툴팁 표시", async () => {
       await userEvent.hover(button);
+      await new Promise(resolve => setTimeout(resolve, 1500));
     });
 
     await step("마우스 아웃으로 툴팁 숨김", async () => {
       await userEvent.unhover(button);
+      await new Promise(resolve => setTimeout(resolve, 800));
     });
   },
   parameters: {
@@ -75,16 +77,20 @@ export const Default = {
 export const WithIcon = {
   args: {
     content: "도움말 아이콘을 클릭하면 추가 정보를 볼 수 있습니다",
-    children: <Icon name="info" size={20} />,
+    children: <Icon name="info" size={20} data-testid="tooltip-icon" />,
   },
   play: async ({ canvasElement, step }: { canvasElement: HTMLElement; step: any }) => {
     const canvas = within(canvasElement);
-    const icon = canvasElement.querySelector('[data-testid="icon"]');
+    const icon = canvas.getByTestId('tooltip-icon');
 
     await step("아이콘 호버로 툴팁 표시", async () => {
-      if (icon) {
-        await userEvent.hover(icon);
-      }
+      await userEvent.hover(icon);
+      await new Promise(resolve => setTimeout(resolve, 1500));
+    });
+
+    await step("아이콘 언호버로 툴팁 숨김", async () => {
+      await userEvent.unhover(icon);
+      await new Promise(resolve => setTimeout(resolve, 800));
     });
   },
   parameters: {
@@ -102,6 +108,20 @@ export const LongContent = {
   args: {
     content: "이것은 매우 긴 툴팁 텍스트입니다. 긴 내용도 적절히 줄바꿈되어 표시되며, 최대 너비를 초과하지 않도록 자동으로 조정됩니다.",
     children: <Button>긴 내용 툴팁</Button>,
+  },
+  play: async ({ canvasElement, step }: { canvasElement: HTMLElement; step: any }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole('button', { name: '긴 내용 툴팁' });
+
+    await step("긴 텍스트 툴팁 표시 테스트", async () => {
+      await userEvent.hover(button);
+      await new Promise(resolve => setTimeout(resolve, 2000));
+    });
+
+    await step("툴팁 숨김 테스트", async () => {
+      await userEvent.unhover(button);
+      await new Promise(resolve => setTimeout(resolve, 800));
+    });
   },
   parameters: {
     docs: {
@@ -126,6 +146,12 @@ export const FastTooltip = {
 
     await step("빠른 툴팁 표시 테스트", async () => {
       await userEvent.hover(button);
+      await new Promise(resolve => setTimeout(resolve, 1200));
+    });
+
+    await step("빠른 툴팁 숨김 테스트", async () => {
+      await userEvent.unhover(button);
+      await new Promise(resolve => setTimeout(resolve, 600));
     });
   },
   parameters: {
@@ -144,6 +170,20 @@ export const Disabled = {
     content: "이 툴팁은 표시되지 않습니다",
     disabled: true,
     children: <Button>비활성화된 툴팁</Button>,
+  },
+  play: async ({ canvasElement, step }: { canvasElement: HTMLElement; step: any }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole('button', { name: '비활성화된 툴팁' });
+
+    await step("비활성화된 툴팁 호버 테스트", async () => {
+      await userEvent.hover(button);
+      await new Promise(resolve => setTimeout(resolve, 1500));
+    });
+
+    await step("툴팁이 표시되지 않음을 확인", async () => {
+      await userEvent.unhover(button);
+      await new Promise(resolve => setTimeout(resolve, 800));
+    });
   },
   parameters: {
     docs: {
@@ -182,6 +222,41 @@ export const Positions = {
       </Tooltip>
     </div>
   ),
+  play: async ({ canvasElement, step }: { canvasElement: HTMLElement; step: any }) => {
+    const canvas = within(canvasElement);
+    const topButton = canvas.getByRole('button', { name: 'Top' });
+    const bottomButton = canvas.getByRole('button', { name: 'Bottom' });
+    const leftButton = canvas.getByRole('button', { name: 'Left' });
+    const rightButton = canvas.getByRole('button', { name: 'Right' });
+
+    await step("상단 위치 툴팁 테스트", async () => {
+      await userEvent.hover(topButton);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      await userEvent.unhover(topButton);
+      await new Promise(resolve => setTimeout(resolve, 500));
+    });
+
+    await step("하단 위치 툴팁 테스트", async () => {
+      await userEvent.hover(bottomButton);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      await userEvent.unhover(bottomButton);
+      await new Promise(resolve => setTimeout(resolve, 500));
+    });
+
+    await step("좌측 위치 툴팁 테스트", async () => {
+      await userEvent.hover(leftButton);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      await userEvent.unhover(leftButton);
+      await new Promise(resolve => setTimeout(resolve, 500));
+    });
+
+    await step("우측 위치 툴팁 테스트", async () => {
+      await userEvent.hover(rightButton);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      await userEvent.unhover(rightButton);
+      await new Promise(resolve => setTimeout(resolve, 500));
+    });
+  },
   parameters: {
     docs: {
       source: {
@@ -225,6 +300,33 @@ export const Sizes = {
       </Tooltip>
     </div>
   ),
+  play: async ({ canvasElement, step }: { canvasElement: HTMLElement; step: any }) => {
+    const canvas = within(canvasElement);
+    const smallButton = canvas.getByRole('button', { name: 'Small' });
+    const mediumButton = canvas.getByRole('button', { name: 'Medium' });
+    const largeButton = canvas.getByRole('button', { name: 'Large' });
+
+    await step("Small 크기 툴팁 테스트", async () => {
+      await userEvent.hover(smallButton);
+      await new Promise(resolve => setTimeout(resolve, 1200));
+      await userEvent.unhover(smallButton);
+      await new Promise(resolve => setTimeout(resolve, 500));
+    });
+
+    await step("Medium 크기 툴팁 테스트", async () => {
+      await userEvent.hover(mediumButton);
+      await new Promise(resolve => setTimeout(resolve, 1200));
+      await userEvent.unhover(mediumButton);
+      await new Promise(resolve => setTimeout(resolve, 500));
+    });
+
+    await step("Large 크기 툴팁 테스트", async () => {
+      await userEvent.hover(largeButton);
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      await userEvent.unhover(largeButton);
+      await new Promise(resolve => setTimeout(resolve, 500));
+    });
+  },
   parameters: {
     docs: {
       source: {
@@ -266,6 +368,41 @@ export const DelayVariations = {
       </Tooltip>
     </div>
   ),
+  play: async ({ canvasElement, step }: { canvasElement: HTMLElement; step: any }) => {
+    const canvas = within(canvasElement);
+    const instantButton = canvas.getByRole('button', { name: '즉시 (0ms)' });
+    const fastButton = canvas.getByRole('button', { name: '빠름 (200ms)' });
+    const defaultButton = canvas.getByRole('button', { name: '기본 (500ms)' });
+    const slowButton = canvas.getByRole('button', { name: '느림 (1000ms)' });
+
+    await step("즉시 표시 (0ms) 툴팁 테스트", async () => {
+      await userEvent.hover(instantButton);
+      await new Promise(resolve => setTimeout(resolve, 800));
+      await userEvent.unhover(instantButton);
+      await new Promise(resolve => setTimeout(resolve, 400));
+    });
+
+    await step("빠른 표시 (200ms) 툴팁 테스트", async () => {
+      await userEvent.hover(fastButton);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      await userEvent.unhover(fastButton);
+      await new Promise(resolve => setTimeout(resolve, 400));
+    });
+
+    await step("기본 표시 (500ms) 툴팁 테스트", async () => {
+      await userEvent.hover(defaultButton);
+      await new Promise(resolve => setTimeout(resolve, 1200));
+      await userEvent.unhover(defaultButton);
+      await new Promise(resolve => setTimeout(resolve, 400));
+    });
+
+    await step("느린 표시 (1000ms) 툴팁 테스트", async () => {
+      await userEvent.hover(slowButton);
+      await new Promise(resolve => setTimeout(resolve, 1800));
+      await userEvent.unhover(slowButton);
+      await new Promise(resolve => setTimeout(resolve, 400));
+    });
+  },
   parameters: {
     docs: {
       source: {
@@ -312,6 +449,41 @@ export const CustomMaxWidth = {
       </Tooltip>
     </div>
   ),
+  play: async ({ canvasElement, step }: { canvasElement: HTMLElement; step: any }) => {
+    const canvas = within(canvasElement);
+    const shortButton = canvas.getByRole('button', { name: '짧은 텍스트 (최대 100px)' });
+    const mediumButton = canvas.getByRole('button', { name: '긴 텍스트 (최대 150px)' });
+    const longButton = canvas.getByRole('button', { name: '더 긴 텍스트 (최대 250px)' });
+    const defaultButton = canvas.getByRole('button', { name: '기본 최대 너비' });
+
+    await step("짧은 텍스트 (100px 너비) 툴팁 테스트", async () => {
+      await userEvent.hover(shortButton);
+      await new Promise(resolve => setTimeout(resolve, 1200));
+      await userEvent.unhover(shortButton);
+      await new Promise(resolve => setTimeout(resolve, 500));
+    });
+
+    await step("긴 텍스트 (150px 너비) 툴팁 테스트", async () => {
+      await userEvent.hover(mediumButton);
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      await userEvent.unhover(mediumButton);
+      await new Promise(resolve => setTimeout(resolve, 500));
+    });
+
+    await step("더 긴 텍스트 (250px 너비) 툴팁 테스트", async () => {
+      await userEvent.hover(longButton);
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      await userEvent.unhover(longButton);
+      await new Promise(resolve => setTimeout(resolve, 500));
+    });
+
+    await step("기본 최대 너비 툴팁 테스트", async () => {
+      await userEvent.hover(defaultButton);
+      await new Promise(resolve => setTimeout(resolve, 1200));
+      await userEvent.unhover(defaultButton);
+      await new Promise(resolve => setTimeout(resolve, 500));
+    });
+  },
   parameters: {
     docs: {
       source: {

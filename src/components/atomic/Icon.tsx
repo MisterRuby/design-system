@@ -44,6 +44,7 @@ export interface IconProps {
   color?: string;
   className?: string;
   style?: React.CSSProperties;
+  'data-testid'?: string;
 }
 
 const iconPaths: Record<IconName, string> = {
@@ -91,6 +92,7 @@ export const Icon: React.FC<IconProps> = ({
   color = 'currentColor',
   className = '',
   style = {},
+  'data-testid': testId,
 }) => {
   const path = iconPaths[name];
 
@@ -116,6 +118,7 @@ export const Icon: React.FC<IconProps> = ({
       style={style}
       role="img"
       aria-hidden="true"
+      data-testid={testId}
     >
       <path d={path} fill={isFilled ? color : undefined} />
     </svg>
