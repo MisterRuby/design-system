@@ -13,6 +13,7 @@ export interface CheckboxFieldProps {
   color?: "primary" | "secondary" | "success" | "error" | "warning" | "info";
   label?: string;
   description?: string;
+  errorMessage?: string;
   className?: string;
   style?: React.CSSProperties;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -32,6 +33,7 @@ export const CheckboxField: React.FC<CheckboxFieldProps> = ({
   color = "primary",
   label,
   description,
+  errorMessage,
   className = "",
   style = {},
   onChange,
@@ -39,6 +41,8 @@ export const CheckboxField: React.FC<CheckboxFieldProps> = ({
   onBlur,
 }) => {
   const checkboxRef = React.useRef<HTMLInputElement>(null);
+  const generatedId = React.useId();
+  const checkboxId = id || generatedId;
 
   React.useEffect(() => {
     if (checkboxRef.current) {
@@ -139,7 +143,7 @@ export const CheckboxField: React.FC<CheckboxFieldProps> = ({
       <input
         ref={checkboxRef}
         type="checkbox"
-        id={id}
+        id={checkboxId}
         name={name}
         checked={checked}
         defaultChecked={defaultChecked}
@@ -151,11 +155,20 @@ export const CheckboxField: React.FC<CheckboxFieldProps> = ({
         onBlur={onBlur}
       />
       <div>
-        <label htmlFor={id} style={labelStyles}>
+        <label htmlFor={checkboxId} style={labelStyles}>
           {label}
           {required && <span style={{ color: colors.semantic.error, marginLeft: "2px" }}>*</span>}
         </label>
         {description && <div style={descriptionStyles}>{description}</div>}
+        {errorMessage && (
+          <div style={{
+            fontSize: "12px",
+            color: colors.semantic.error,
+            marginTop: "4px",
+          }}>
+            {errorMessage}
+          </div>
+        )}
       </div>
     </div>
   );

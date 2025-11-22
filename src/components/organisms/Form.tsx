@@ -1,0 +1,314 @@
+import React, { useState } from 'react';
+import { Button, ButtonProps } from '../atomic/Button';
+import { InputField, InputFieldProps } from '../molecules/InputField';
+import { CheckboxField, CheckboxFieldProps } from '../molecules/CheckboxField';
+import { SelectField, SelectFieldProps } from '../molecules/SelectField';
+import { RadioGroup, RadioGroupProps } from '../molecules/RadioGroup';
+import { colors } from '../../theme';
+
+export interface FormField {
+  id: string;
+  type: 'input' | 'checkbox' | 'select' | 'radio';
+  label?: string;
+  required?: boolean;
+  props: InputFieldProps | CheckboxFieldProps | SelectFieldProps | RadioGroupProps;
+}
+
+export interface FormProps {
+  title?: string;
+  description?: string;
+  fields: FormField[];
+  submitButton?: {
+    text?: string;
+    variant?: ButtonProps['variant'];
+    size?: ButtonProps['size'];
+    disabled?: boolean;
+    loading?: boolean;
+  };
+  resetButton?: {
+    text?: string;
+    variant?: ButtonProps['variant'];
+    size?: ButtonProps['size'];
+    disabled?: boolean;
+  };
+  onSubmit?: (formData: Record<string, any>) => void;
+  onReset?: () => void;
+  className?: string;
+  style?: React.CSSProperties;
+  layout?: 'vertical' | 'horizontal';
+  fieldSpacing?: 'small' | 'medium' | 'large';
+  showRequiredIndicator?: boolean;
+}
+
+export const Form: React.FC<FormProps> = ({
+  title,
+  description,
+  fields,
+  submitButton = { text: '제출', variant: 'primary' },
+  resetButton,
+  onSubmit,
+  onReset,
+  className = '',
+  style = {},
+  layout = 'vertical',
+  fieldSpacing = 'medium',
+  showRequiredIndicator = true,
+}) => {
+  const [formData, setFormData] = useState<Record<string, any>>({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const getFieldSpacing = () => {
+    switch (fieldSpacing) {
+      case 'small':
+        return '12px';
+      case 'medium':
+        return '16px';
+      case 'large':
+        return '24px';
+      default:
+        return '16px';
+    }
+  };
+
+  const validateField = (field: FormField, value: any): string => {
+    if (field.required && (!value || (typeof value === 'string' && value.trim() === ''))) {
+      return `${field.label || field.id}는 필수 항목입니다.`;
+    }
+
+    if (field.type === 'input') {
+      const inputProps = field.props as InputFieldProps;
+      if (inputProps.type === 'email' && value) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+          return '올바른 이메일 형식을 입력해주세요.';
+        }
+      }
+      if (inputProps.type === 'password' && value && value.length < 6) {
+        return '비밀번호는 최소 6자 이상이어야 합니다.';
+      }
+    }
+
+    return '';
+  };
+
+  const validateForm = (): boolean => {
+    const newErrors: Record<string, string> = {};
+    let isValid = true;
+
+    fields.forEach((field) => {
+      const error = validateField(field, formData[field.id]);
+      if (error) {
+        newErrors[field.id] = error;
+        isValid = false;
+      }
+    });
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  const handleFieldChange = (fieldId: string, value: any) => {
+    setFormData((prev) => ({
+      ...prev,
+      [fieldId]: value,
+    }));
+
+    if (errors[fieldId]) {
+      setErrors((prev) => ({
+        ...prev,
+        [fieldId]: '',
+      }));
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (validateForm()) {
+      onSubmit?.(formData);
+    }
+  };
+
+  const handleReset = () => {
+    setFormData({});
+    setErrors({});
+    onReset?.();
+  };
+
+  const renderField = (field: FormField) => {
+    const error = errors[field.id];
+    const value = formData[field.id];
+
+    switch (field.type) {
+      case 'input':
+        const inputProps = field.props as InputFieldProps;
+        return (
+          <InputField
+            {...inputProps}
+            key={field.id}
+            label={field.label}
+            required={field.required}
+            value={value || ''}
+            variant={error ? 'error' : inputProps.variant}
+            errorMessage={error}
+            onChange={(e) => handleFieldChange(field.id, e.target.value)}
+          />
+        );
+
+      case 'checkbox':
+        const checkboxProps = field.props as CheckboxFieldProps;
+        return (
+          <CheckboxField
+            {...checkboxProps}
+            key={field.id}
+            label={field.label || checkboxProps.label}
+            required={field.required}
+            checked={value || false}
+            color={error ? 'error' : checkboxProps.color}
+            errorMessage={error}
+            onChange={(e) => handleFieldChange(field.id, e.target.checked)}
+          />
+        );
+
+      case 'select':
+        const selectProps = field.props as SelectFieldProps;
+        return (
+          <SelectField
+            {...selectProps}
+            key={field.id}
+            label={field.label}
+            required={field.required}
+            value={value || ''}
+            variant={error ? 'error' : selectProps.variant}
+            errorMessage={error}
+            onChange={(selectedValue) => handleFieldChange(field.id, selectedValue)}
+          />
+        );
+
+      case 'radio':
+        const radioProps = field.props as RadioGroupProps;
+        return (
+          <RadioGroup
+            {...radioProps}
+            key={field.id}
+            label={field.label}
+            required={field.required}
+            value={value || ''}
+            color={error ? 'error' : radioProps.color}
+            errorMessage={error}
+            onChange={(e) => handleFieldChange(field.id, e.target.value)}
+          />
+        );
+
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className={className}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: getFieldSpacing(),
+        padding: '24px',
+        backgroundColor: colors.background.white,
+        borderRadius: '8px',
+        border: `1px solid ${colors.border.default}`,
+        ...style,
+      }}
+    >
+      {(title || description) && (
+        <div style={{ marginBottom: '8px' }}>
+          {title && (
+            <h2
+              style={{
+                margin: '0 0 8px 0',
+                fontSize: '24px',
+                fontWeight: '600',
+                color: colors.semantic.text,
+              }}
+            >
+              {title}
+            </h2>
+          )}
+          {description && (
+            <p
+              style={{
+                margin: 0,
+                fontSize: '14px',
+                color: colors.semantic.secondary,
+                lineHeight: '1.5',
+              }}
+            >
+              {description}
+            </p>
+          )}
+        </div>
+      )}
+
+      {showRequiredIndicator && fields.some((field) => field.required) && (
+        <p
+          style={{
+            margin: '0 0 8px 0',
+            fontSize: '12px',
+            color: colors.semantic.secondary,
+          }}
+        >
+          <span style={{ color: colors.semantic.error }}>*</span> 표시는 필수 항목입니다.
+        </p>
+      )}
+
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: layout === 'vertical' ? 'column' : 'row',
+          gap: getFieldSpacing(),
+          flexWrap: layout === 'horizontal' ? 'wrap' : 'nowrap',
+        }}
+      >
+        {fields.map((field) => (
+          <div
+            key={field.id}
+            style={{
+              flex: layout === 'horizontal' ? '1' : 'none',
+              minWidth: layout === 'horizontal' ? '250px' : 'auto',
+            }}
+          >
+            {renderField(field)}
+          </div>
+        ))}
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          gap: '12px',
+          marginTop: '8px',
+          justifyContent: 'flex-end',
+        }}
+      >
+        {resetButton && (
+          <Button
+            variant={resetButton.variant || 'outline'}
+            size={resetButton.size || 'medium'}
+            disabled={resetButton.disabled}
+            onClick={handleReset}
+          >
+            {resetButton.text || '초기화'}
+          </Button>
+        )}
+        <Button
+          variant={submitButton.variant || 'primary'}
+          size={submitButton.size || 'medium'}
+          disabled={submitButton.disabled || submitButton.loading}
+          onClick={() => {}}
+        >
+          {submitButton.loading ? '처리 중...' : submitButton.text || '제출'}
+        </Button>
+      </div>
+    </form>
+  );
+};
