@@ -2,14 +2,14 @@ import React from "react";
 import { colors } from "../../theme";
 import { InputVariant, ComponentSize } from "../../types";
 
-export interface SelectOption {
+export interface SelectFieldOption {
   value: string;
   label: string;
   disabled?: boolean;
 }
 
-export interface SelectProps {
-  options: SelectOption[];
+export interface SelectFieldProps {
+  options: SelectFieldOption[];
   value?: string;
   defaultValue?: string;
   placeholder?: string;
@@ -29,7 +29,7 @@ export interface SelectProps {
   onBlur?: (event: React.FocusEvent<HTMLSelectElement>) => void;
 }
 
-export const Select: React.FC<SelectProps> = ({
+export const SelectField: React.FC<SelectFieldProps> = ({
   options,
   value,
   defaultValue,

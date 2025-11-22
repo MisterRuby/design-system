@@ -4,7 +4,7 @@ import { action } from "./actions";
 import { within, userEvent, waitFor } from "@storybook/testing-library";
 
 export default {
-  title: "Components/Tooltip",
+  title: "Components/Molecules/Tooltip",
   component: Tooltip,
   parameters: {
     layout: "centered",

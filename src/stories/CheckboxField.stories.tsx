@@ -1,11 +1,11 @@
 import React from "react";
-import { Checkbox } from "../components";
+import { CheckboxField } from "../components";
 import { action } from "./actions";
 import { within, userEvent } from "@storybook/testing-library";
 
 export default {
-  title: "Components/Checkbox",
-  component: Checkbox,
+  title: "Components/Molecules/CheckboxField",
+  component: CheckboxField,
   parameters: {
     layout: "centered",
   },
@@ -81,7 +81,7 @@ export const Default = {
   parameters: {
     docs: {
       source: {
-        code: `<Checkbox label="체크박스 라벨" onChange={handleChange} />`,
+        code: `<CheckboxField label="체크박스 라벨" onChange={handleChange} />`,
       },
     },
   },
@@ -94,7 +94,7 @@ export const WithoutLabel = {
   parameters: {
     docs: {
       source: {
-        code: `<Checkbox onChange={handleChange} />`,
+        code: `<CheckboxField onChange={handleChange} />`,
       },
     },
   },
@@ -110,7 +110,7 @@ export const WithDescription = {
   parameters: {
     docs: {
       source: {
-        code: `<Checkbox
+        code: `<CheckboxField
   label="이용약관 동의"
   description="서비스 이용을 위해 약관에 동의해주세요."
   required
@@ -130,17 +130,17 @@ export const Sizes = {
         gap: "16px",
         alignItems: "flex-start",
       }}>
-      <Checkbox
+      <CheckboxField
         size="sm"
         label="Small 체크박스"
         onChange={action("small-change")}
       />
-      <Checkbox
+      <CheckboxField
         size="md"
         label="Medium 체크박스"
         onChange={action("medium-change")}
       />
-      <Checkbox
+      <CheckboxField
         size="lg"
         label="Large 체크박스"
         onChange={action("large-change")}
@@ -150,9 +150,9 @@ export const Sizes = {
   parameters: {
     docs: {
       source: {
-        code: `<Checkbox size="sm" label="Small 체크박스" />
-<Checkbox size="md" label="Medium 체크박스" />
-<Checkbox size="lg" label="Large 체크박스" />`,
+        code: `<CheckboxField size="sm" label="Small 체크박스" />
+<CheckboxField size="md" label="Medium 체크박스" />
+<CheckboxField size="lg" label="Large 체크박스" />`,
       },
     },
   },
@@ -167,37 +167,37 @@ export const Colors = {
         gap: "12px",
         alignItems: "flex-start",
       }}>
-      <Checkbox
+      <CheckboxField
         color="primary"
         label="Primary"
         defaultChecked
         onChange={action("primary-change")}
       />
-      <Checkbox
+      <CheckboxField
         color="secondary"
         label="Secondary"
         defaultChecked
         onChange={action("secondary-change")}
       />
-      <Checkbox
+      <CheckboxField
         color="success"
         label="Success"
         defaultChecked
         onChange={action("success-change")}
       />
-      <Checkbox
+      <CheckboxField
         color="error"
         label="Error"
         defaultChecked
         onChange={action("error-change")}
       />
-      <Checkbox
+      <CheckboxField
         color="warning"
         label="Warning"
         defaultChecked
         onChange={action("warning-change")}
       />
-      <Checkbox
+      <CheckboxField
         color="info"
         label="Info"
         defaultChecked
@@ -208,12 +208,12 @@ export const Colors = {
   parameters: {
     docs: {
       source: {
-        code: `<Checkbox color="primary" label="Primary" defaultChecked />
-<Checkbox color="secondary" label="Secondary" defaultChecked />
-<Checkbox color="success" label="Success" defaultChecked />
-<Checkbox color="error" label="Error" defaultChecked />
-<Checkbox color="warning" label="Warning" defaultChecked />
-<Checkbox color="info" label="Info" defaultChecked />`,
+        code: `<CheckboxField color="primary" label="Primary" defaultChecked />
+<CheckboxField color="secondary" label="Secondary" defaultChecked />
+<CheckboxField color="success" label="Success" defaultChecked />
+<CheckboxField color="error" label="Error" defaultChecked />
+<CheckboxField color="warning" label="Warning" defaultChecked />
+<CheckboxField color="info" label="Info" defaultChecked />`,
       },
     },
   },
@@ -228,29 +228,29 @@ export const States = {
         gap: "12px",
         alignItems: "flex-start",
       }}>
-      <Checkbox label="기본 상태" onChange={action("normal-change")} />
-      <Checkbox
+      <CheckboxField label="기본 상태" onChange={action("normal-change")} />
+      <CheckboxField
         label="체크됨"
         defaultChecked
         onChange={action("checked-change")}
       />
-      <Checkbox
+      <CheckboxField
         label="비활성화"
         disabled
         onChange={action("disabled-change")}
       />
-      <Checkbox
+      <CheckboxField
         label="비활성화 + 체크됨"
         disabled
         defaultChecked
         onChange={action("disabled-checked-change")}
       />
-      <Checkbox
+      <CheckboxField
         label="중간 상태"
         indeterminate
         onChange={action("indeterminate-change")}
       />
-      <Checkbox
+      <CheckboxField
         label="필수 항목"
         required
         onChange={action("required-change")}
@@ -260,12 +260,12 @@ export const States = {
   parameters: {
     docs: {
       source: {
-        code: `<Checkbox label="기본 상태" />
-<Checkbox label="체크됨" defaultChecked />
-<Checkbox label="비활성화" disabled />
-<Checkbox label="비활성화 + 체크됨" disabled defaultChecked />
-<Checkbox label="중간 상태" indeterminate />
-<Checkbox label="필수 항목" required />`,
+        code: `<CheckboxField label="기본 상태" />
+<CheckboxField label="체크됨" defaultChecked />
+<CheckboxField label="비활성화" disabled />
+<CheckboxField label="비활성화 + 체크됨" disabled defaultChecked />
+<CheckboxField label="중간 상태" indeterminate />
+<CheckboxField label="필수 항목" required />`,
       },
     },
   },
@@ -283,7 +283,7 @@ export const ControlledExample = {
           gap: "12px",
           alignItems: "flex-start",
         }}>
-        <Checkbox
+        <CheckboxField
           label="제어되는 체크박스"
           checked={checked}
           onChange={(e) => setChecked(e.target.checked)}
@@ -339,7 +339,7 @@ export const ControlledExample = {
       source: {
         code: `const [checked, setChecked] = useState(false);
 
-<Checkbox
+<CheckboxField
   label="제어되는 체크박스"
   checked={checked}
   onChange={(e) => setChecked(e.target.checked)}

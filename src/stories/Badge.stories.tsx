@@ -4,7 +4,7 @@ import { action } from "./actions";
 import { within, userEvent } from "@storybook/testing-library";
 
 export default {
-  title: "Components/Badge",
+  title: "Components/Atomic/Badge",
   component: Badge,
   parameters: {
     layout: "centered",

@@ -4,7 +4,7 @@ import { action } from "./actions";
 import { within, userEvent } from "@storybook/testing-library";
 
 export default {
-  title: "Components/Toggle",
+  title: "Components/Atomic/Toggle",
   component: Toggle,
   parameters: {
     layout: "centered",

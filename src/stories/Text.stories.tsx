@@ -2,7 +2,7 @@ import React from "react";
 import { Text } from "../components";
 
 export default {
-  title: "Components/Text",
+  title: "Components/Atomic/Text",
   component: Text,
   parameters: {
     layout: "centered",

@@ -4,7 +4,7 @@ import { action } from "./actions";
 import { within, userEvent, waitFor } from "@storybook/testing-library";
 
 export default {
-  title: "Components/Progress",
+  title: "Components/Atomic/Progress",
   component: Progress,
   parameters: {
     layout: "centered",
@@ -50,7 +50,7 @@ export const Default = {
     value: 45,
   },
   decorators: [
-    (Story) => (
+    (Story: any) => (
       <div style={{ width: '300px' }}>
         <Story />
       </div>
@@ -83,7 +83,7 @@ export const WithLabel = {
     showLabel: true,
   },
   decorators: [
-    (Story) => (
+    (Story: any) => (
       <div style={{ width: '300px' }}>
         <Story />
       </div>
@@ -119,7 +119,7 @@ export const CustomLabel = {
     showLabel: true,
   },
   decorators: [
-    (Story) => (
+    (Story: any) => (
       <div style={{ width: '300px' }}>
         <Story />
       </div>
@@ -150,7 +150,7 @@ export const Complete = {
     label: "완료!",
   },
   decorators: [
-    (Story) => (
+    (Story: any) => (
       <div style={{ width: '300px' }}>
         <Story />
       </div>
@@ -182,7 +182,7 @@ export const Error = {
     label: "오류 발생",
   },
   decorators: [
-    (Story) => (
+    (Story: any) => (
       <div style={{ width: '300px' }}>
         <Story />
       </div>

@@ -4,7 +4,7 @@ import { action } from "./actions";
 import { within, userEvent } from "@storybook/testing-library";
 
 export default {
-  title: "Components/Spinner",
+  title: "Components/Atomic/Spinner",
   component: Spinner,
   parameters: {
     layout: "centered",

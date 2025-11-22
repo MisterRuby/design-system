@@ -1,7 +1,7 @@
 import React from "react";
 import { colors } from "../../theme";
 
-export interface CheckboxProps {
+export interface CheckboxFieldProps {
   id?: string;
   name?: string;
   checked?: boolean;
@@ -20,7 +20,7 @@ export interface CheckboxProps {
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-export const Checkbox: React.FC<CheckboxProps> = ({
+export const CheckboxField: React.FC<CheckboxFieldProps> = ({
   id,
   name,
   checked,

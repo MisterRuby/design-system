@@ -1,11 +1,11 @@
 import React from "react";
-import { Input } from "../components";
+import { InputField } from "../components";
 import { action } from "./actions";
 import { within, userEvent } from "@storybook/testing-library";
 
 export default {
-  title: "Components/Input",
-  component: Input,
+  title: "Components/Molecules/InputField",
+  component: InputField,
   parameters: {
     layout: "centered",
     docs: {
@@ -98,7 +98,7 @@ export const Default = {
   parameters: {
     docs: {
       source: {
-        code: `<Input placeholder="텍스트를 입력하세요" />`,
+        code: `<InputField placeholder="텍스트를 입력하세요" />`,
       },
     },
   },
@@ -112,7 +112,7 @@ export const WithLabel = {
   parameters: {
     docs: {
       source: {
-        code: `<Input label="이름" placeholder="이름을 입력하세요" />`,
+        code: `<InputField label="이름" placeholder="이름을 입력하세요" />`,
       },
     },
   },
@@ -128,7 +128,7 @@ export const Required = {
   parameters: {
     docs: {
       source: {
-        code: `<Input
+        code: `<InputField
   label="이메일"
   type="email"
   placeholder="example@email.com"
@@ -149,7 +149,7 @@ export const WithHelperText = {
   parameters: {
     docs: {
       source: {
-        code: `<Input
+        code: `<InputField
   label="비밀번호"
   type="password"
   placeholder="비밀번호를 입력하세요"
@@ -203,7 +203,7 @@ export const ErrorState = {
     };
 
     return (
-      <Input
+      <InputField
         label="이메일"
         type="email"
         placeholder="example@email.com"
@@ -273,7 +273,7 @@ const handleBlur = (e) => {
   }
 };
 
-<Input
+<InputField
   label="이메일"
   type="email"
   variant={variant}
@@ -318,7 +318,7 @@ export const SuccessState = {
     };
 
     return (
-      <Input
+      <InputField
         label="이메일"
         type="email"
         placeholder="example@email.com"
@@ -365,7 +365,7 @@ const handleBlur = (e) => {
   }
 };
 
-<Input
+<InputField
   label="이메일"
   type="email"
   variant={variant}
@@ -387,7 +387,7 @@ export const Disabled = {
   parameters: {
     docs: {
       source: {
-        code: `<Input
+        code: `<InputField
   label="비활성화된 입력 필드"
   placeholder="입력할 수 없습니다"
   disabled
@@ -406,17 +406,17 @@ export const Sizes = {
         gap: "16px",
         width: "300px",
       }}>
-      <Input size="small" placeholder="Small 크기" label="Small" />
-      <Input size="medium" placeholder="Medium 크기" label="Medium" />
-      <Input size="large" placeholder="Large 크기" label="Large" />
+      <InputField size="small" placeholder="Small 크기" label="Small" />
+      <InputField size="medium" placeholder="Medium 크기" label="Medium" />
+      <InputField size="large" placeholder="Large 크기" label="Large" />
     </div>
   ),
   parameters: {
     docs: {
       source: {
-        code: `<Input size="small" placeholder="Small 크기" />
-<Input size="medium" placeholder="Medium 크기" />
-<Input size="large" placeholder="Large 크기" />`,
+        code: `<InputField size="small" placeholder="Small 크기" />
+<InputField size="medium" placeholder="Medium 크기" />
+<InputField size="large" placeholder="Large 크기" />`,
       },
     },
   },
@@ -431,21 +431,21 @@ export const Types = {
         gap: "16px",
         width: "300px",
       }}>
-      <Input type="text" placeholder="텍스트" label="Text" />
-      <Input type="email" placeholder="이메일" label="Email" />
-      <Input type="password" placeholder="비밀번호" label="Password" />
-      <Input type="number" placeholder="숫자" label="Number" />
-      <Input type="search" placeholder="검색" label="Search" />
+      <InputField type="text" placeholder="텍스트" label="Text" />
+      <InputField type="email" placeholder="이메일" label="Email" />
+      <InputField type="password" placeholder="비밀번호" label="Password" />
+      <InputField type="number" placeholder="숫자" label="Number" />
+      <InputField type="search" placeholder="검색" label="Search" />
     </div>
   ),
   parameters: {
     docs: {
       source: {
-        code: `<Input type="text" placeholder="텍스트" />
-<Input type="email" placeholder="이메일" />
-<Input type="password" placeholder="비밀번호" />
-<Input type="number" placeholder="숫자" />
-<Input type="search" placeholder="검색" />`,
+        code: `<InputField type="text" placeholder="텍스트" />
+<InputField type="email" placeholder="이메일" />
+<InputField type="password" placeholder="비밀번호" />
+<InputField type="number" placeholder="숫자" />
+<InputField type="search" placeholder="검색" />`,
       },
     },
   },
@@ -460,25 +460,25 @@ export const Variants = {
         gap: "16px",
         width: "300px",
       }}>
-      <Input variant="default" placeholder="Default variant" label="Default" />
-      <Input variant="primary" placeholder="Primary variant" label="Primary" />
-      <Input variant="secondary" placeholder="Secondary variant" label="Secondary" />
-      <Input variant="success" placeholder="Success variant" label="Success" />
-      <Input variant="error" placeholder="Error variant" label="Error" />
-      <Input variant="warning" placeholder="Warning variant" label="Warning" />
-      <Input variant="info" placeholder="Info variant" label="Info" />
+      <InputField variant="default" placeholder="Default variant" label="Default" />
+      <InputField variant="primary" placeholder="Primary variant" label="Primary" />
+      <InputField variant="secondary" placeholder="Secondary variant" label="Secondary" />
+      <InputField variant="success" placeholder="Success variant" label="Success" />
+      <InputField variant="error" placeholder="Error variant" label="Error" />
+      <InputField variant="warning" placeholder="Warning variant" label="Warning" />
+      <InputField variant="info" placeholder="Info variant" label="Info" />
     </div>
   ),
   parameters: {
     docs: {
       source: {
-        code: `<Input variant="default" placeholder="Default variant" />
-<Input variant="primary" placeholder="Primary variant" />
-<Input variant="secondary" placeholder="Secondary variant" />
-<Input variant="success" placeholder="Success variant" />
-<Input variant="error" placeholder="Error variant" />
-<Input variant="warning" placeholder="Warning variant" />
-<Input variant="info" placeholder="Info variant" />`,
+        code: `<InputField variant="default" placeholder="Default variant" />
+<InputField variant="primary" placeholder="Primary variant" />
+<InputField variant="secondary" placeholder="Secondary variant" />
+<InputField variant="success" placeholder="Success variant" />
+<InputField variant="error" placeholder="Error variant" />
+<InputField variant="warning" placeholder="Warning variant" />
+<InputField variant="info" placeholder="Info variant" />`,
       },
     },
   },
@@ -493,34 +493,34 @@ export const Icons = {
         gap: "16px",
         width: "300px",
       }}>
-      <Input
+      <InputField
         icon="search"
         placeholder="검색..."
         label="검색"
         onChange={action("search-change")}
       />
-      <Input
+      <InputField
         icon="mail"
         type="email"
         placeholder="이메일 주소"
         label="이메일"
         onChange={action("email-change")}
       />
-      <Input
+      <InputField
         icon="phone"
         type="tel"
         placeholder="전화번호"
         label="전화번호"
         onChange={action("phone-change")}
       />
-      <Input
+      <InputField
         icon="lock"
         type="password"
         placeholder="비밀번호"
         label="비밀번호"
         onChange={action("password-change")}
       />
-      <Input
+      <InputField
         icon="user"
         iconPosition="right"
         placeholder="사용자명"
@@ -532,11 +532,11 @@ export const Icons = {
   parameters: {
     docs: {
       source: {
-        code: `<Input icon="search" placeholder="검색..." />
-<Input icon="mail" type="email" placeholder="이메일 주소" />
-<Input icon="phone" type="tel" placeholder="전화번호" />
-<Input icon="lock" type="password" placeholder="비밀번호" />
-<Input icon="user" iconPosition="right" placeholder="사용자명" />`,
+        code: `<InputField icon="search" placeholder="검색..." />
+<InputField icon="mail" type="email" placeholder="이메일 주소" />
+<InputField icon="phone" type="tel" placeholder="전화번호" />
+<InputField icon="lock" type="password" placeholder="비밀번호" />
+<InputField icon="user" iconPosition="right" placeholder="사용자명" />`,
       },
     },
   },

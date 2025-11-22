@@ -2,7 +2,7 @@ import React from "react";
 import { Icon, IconName } from "../components";
 
 export default {
-  title: "Components/Icon",
+  title: "Components/Atomic/Icon",
   component: Icon,
   parameters: {
     layout: "centered",

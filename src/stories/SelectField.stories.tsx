@@ -1,11 +1,11 @@
 import React from "react";
-import { Select } from "../components";
+import { SelectField } from "../components";
 import { action } from "./actions";
 import { within, userEvent } from "@storybook/testing-library";
 
 export default {
-  title: "Components/Select",
-  component: Select,
+  title: "Components/Molecules/SelectField",
+  component: SelectField,
   parameters: {
     layout: "centered",
     docs: {
@@ -107,7 +107,7 @@ export const Default = {
   parameters: {
     docs: {
       source: {
-        code: `<Select
+        code: `<SelectField
   options={options}
   placeholder="옵션을 선택하세요"
   onChange={handleChange}
@@ -131,7 +131,7 @@ export const WithLabel = {
   parameters: {
     docs: {
       source: {
-        code: `<Select
+        code: `<SelectField
   label="카테고리"
   options={options}
   placeholder="카테고리를 선택하세요"
@@ -156,7 +156,7 @@ export const Required = {
   parameters: {
     docs: {
       source: {
-        code: `<Select
+        code: `<SelectField
   label="우선순위"
   options={options}
   placeholder="우선순위를 선택하세요"
@@ -182,7 +182,7 @@ export const WithHelperText = {
   parameters: {
     docs: {
       source: {
-        code: `<Select
+        code: `<SelectField
   label="언어"
   options={options}
   placeholder="언어를 선택하세요"
@@ -211,7 +211,7 @@ export const ErrorState = {
   parameters: {
     docs: {
       source: {
-        code: `<Select
+        code: `<SelectField
   label="지역"
   options={options}
   placeholder="지역을 선택하세요"
@@ -237,7 +237,7 @@ export const Disabled = {
   parameters: {
     docs: {
       source: {
-        code: `<Select
+        code: `<SelectField
   label="비활성화된 선택 필드"
   options={options}
   placeholder="선택할 수 없습니다"
@@ -257,21 +257,21 @@ export const Sizes = {
         gap: "16px",
         width: "300px",
       }}>
-      <Select
+      <SelectField
         size="small"
         label="Small"
         options={defaultOptions}
         placeholder="Small 크기"
         onChange={action("small-change")}
       />
-      <Select
+      <SelectField
         size="medium"
         label="Medium"
         options={defaultOptions}
         placeholder="Medium 크기"
         onChange={action("medium-change")}
       />
-      <Select
+      <SelectField
         size="large"
         label="Large"
         options={defaultOptions}
@@ -283,9 +283,9 @@ export const Sizes = {
   parameters: {
     docs: {
       source: {
-        code: `<Select size="small" options={options} placeholder="Small 크기" />
-<Select size="medium" options={options} placeholder="Medium 크기" />
-<Select size="large" options={options} placeholder="Large 크기" />`,
+        code: `<SelectField size="small" options={options} placeholder="Small 크기" />
+<SelectField size="medium" options={options} placeholder="Medium 크기" />
+<SelectField size="large" options={options} placeholder="Large 크기" />`,
       },
     },
   },
@@ -300,49 +300,49 @@ export const Variants = {
         gap: "16px",
         width: "300px",
       }}>
-      <Select
+      <SelectField
         variant="default"
         label="Default"
         options={defaultOptions}
         placeholder="Default variant"
         onChange={action("default-change")}
       />
-      <Select
+      <SelectField
         variant="primary"
         label="Primary"
         options={defaultOptions}
         placeholder="Primary variant"
         onChange={action("primary-change")}
       />
-      <Select
+      <SelectField
         variant="secondary"
         label="Secondary"
         options={defaultOptions}
         placeholder="Secondary variant"
         onChange={action("secondary-change")}
       />
-      <Select
+      <SelectField
         variant="success"
         label="Success"
         options={defaultOptions}
         placeholder="Success variant"
         onChange={action("success-change")}
       />
-      <Select
+      <SelectField
         variant="error"
         label="Error"
         options={defaultOptions}
         placeholder="Error variant"
         onChange={action("error-change")}
       />
-      <Select
+      <SelectField
         variant="warning"
         label="Warning"
         options={defaultOptions}
         placeholder="Warning variant"
         onChange={action("warning-change")}
       />
-      <Select
+      <SelectField
         variant="info"
         label="Info"
         options={defaultOptions}
@@ -354,13 +354,13 @@ export const Variants = {
   parameters: {
     docs: {
       source: {
-        code: `<Select variant="default" options={options} placeholder="Default variant" />
-<Select variant="primary" options={options} placeholder="Primary variant" />
-<Select variant="secondary" options={options} placeholder="Secondary variant" />
-<Select variant="success" options={options} placeholder="Success variant" />
-<Select variant="error" options={options} placeholder="Error variant" />
-<Select variant="warning" options={options} placeholder="Warning variant" />
-<Select variant="info" options={options} placeholder="Info variant" />`,
+        code: `<SelectField variant="default" options={options} placeholder="Default variant" />
+<SelectField variant="primary" options={options} placeholder="Primary variant" />
+<SelectField variant="secondary" options={options} placeholder="Secondary variant" />
+<SelectField variant="success" options={options} placeholder="Success variant" />
+<SelectField variant="error" options={options} placeholder="Error variant" />
+<SelectField variant="warning" options={options} placeholder="Warning variant" />
+<SelectField variant="info" options={options} placeholder="Info variant" />`,
       },
     },
   },
@@ -381,7 +381,7 @@ export const WithDisabledOptions = {
   parameters: {
     docs: {
       source: {
-        code: `<Select
+        code: `<SelectField
   label="상태"
   options={[
     { value: "active", label: "활성" },
@@ -411,7 +411,7 @@ export const AllowClear = {
   parameters: {
     docs: {
       source: {
-        code: `<Select
+        code: `<SelectField
   label="테마"
   options={options}
   placeholder="테마를 선택하세요"
@@ -441,7 +441,7 @@ export const ControlledExample = {
           gap: "12px",
           width: "300px",
         }}>
-        <Select
+        <SelectField
           label="프레임워크"
           options={options}
           value={value}
@@ -499,7 +499,7 @@ export const ControlledExample = {
       source: {
         code: `const [value, setValue] = useState("");
 
-<Select
+<SelectField
   label="프레임워크"
   options={options}
   value={value}

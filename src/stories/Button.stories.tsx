@@ -5,7 +5,7 @@ import { within, userEvent } from '@storybook/testing-library';
 import { Step } from './types';
 
 export default {
-  title: "Components/Button",
+  title: "Components/Atomic/Button",
   component: Button,
   parameters: {
     layout: "centered",

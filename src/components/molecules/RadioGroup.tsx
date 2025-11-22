@@ -2,16 +2,16 @@ import React from "react";
 import { colors } from "../../theme";
 import { CheckboxSize } from "../../types";
 
-export interface RadioOption {
+export interface RadioGroupOption {
   value: string;
   label: string;
   disabled?: boolean;
   description?: string;
 }
 
-export interface RadioProps {
+export interface RadioGroupProps {
   name: string;
-  options: RadioOption[];
+  options: RadioGroupOption[];
   value?: string;
   defaultValue?: string;
   disabled?: boolean;
@@ -29,7 +29,7 @@ export interface RadioProps {
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-export const Radio: React.FC<RadioProps> = ({
+export const RadioGroup: React.FC<RadioGroupProps> = ({
   name,
   options,
   value,

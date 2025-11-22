@@ -3,7 +3,7 @@ import { Icon, IconName } from "../atomic/Icon";
 import { colors } from "../../theme";
 import { InputVariant, ComponentSize } from "../../types";
 
-export interface InputProps {
+export interface InputFieldProps {
   type?: "text" | "email" | "password" | "number" | "tel" | "url" | "search";
   placeholder?: string;
   value?: string;
@@ -26,7 +26,7 @@ export interface InputProps {
   onKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
-export const Input: React.FC<InputProps> = ({
+export const InputField: React.FC<InputFieldProps> = ({
   type = "text",
   placeholder,
   value,

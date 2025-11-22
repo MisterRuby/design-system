@@ -1,11 +1,11 @@
 import React from "react";
-import { Radio } from "../components";
+import { RadioGroup } from "../components";
 import { action } from "./actions";
 import { within, userEvent } from "@storybook/testing-library";
 
 export default {
-  title: "Components/Radio",
-  component: Radio,
+  title: "Components/Molecules/RadioGroup",
+  component: RadioGroup,
   parameters: {
     layout: "centered",
     docs: {
@@ -100,7 +100,7 @@ export const Default = {
   parameters: {
     docs: {
       source: {
-        code: `<Radio
+        code: `<RadioGroup
   name="example"
   options={options}
   onChange={handleChange}
@@ -124,7 +124,7 @@ export const WithLabel = {
   parameters: {
     docs: {
       source: {
-        code: `<Radio
+        code: `<RadioGroup
   name="theme"
   label="테마 선택"
   options={options}
@@ -161,7 +161,7 @@ export const WithDescriptions = {
   parameters: {
     docs: {
       source: {
-        code: `<Radio
+        code: `<RadioGroup
   name="plan"
   label="요금제 선택"
   options={[
@@ -198,7 +198,7 @@ export const Required = {
   parameters: {
     docs: {
       source: {
-        code: `<Radio
+        code: `<RadioGroup
   name="gender"
   label="성별"
   options={options}
@@ -225,7 +225,7 @@ export const WithHelperText = {
   parameters: {
     docs: {
       source: {
-        code: `<Radio
+        code: `<RadioGroup
   name="notification"
   label="알림 설정"
   options={options}
@@ -253,7 +253,7 @@ export const ErrorState = {
   parameters: {
     docs: {
       source: {
-        code: `<Radio
+        code: `<RadioGroup
   name="payment"
   label="결제 방법"
   options={options}
@@ -277,7 +277,7 @@ export const Disabled = {
   parameters: {
     docs: {
       source: {
-        code: `<Radio
+        code: `<RadioGroup
   name="disabled"
   label="비활성화된 라디오 그룹"
   options={options}
@@ -298,21 +298,21 @@ export const Sizes = {
         gap: "24px",
         width: "400px",
       }}>
-      <Radio
+      <RadioGroup
         name="size-sm"
         label="Small"
         size="sm"
         options={defaultOptions}
         onChange={action("small-change")}
       />
-      <Radio
+      <RadioGroup
         name="size-md"
         label="Medium"
         size="md"
         options={defaultOptions}
         onChange={action("medium-change")}
       />
-      <Radio
+      <RadioGroup
         name="size-lg"
         label="Large"
         size="lg"
@@ -324,9 +324,9 @@ export const Sizes = {
   parameters: {
     docs: {
       source: {
-        code: `<Radio name="example-sm" size="sm" options={options} />
-<Radio name="example-md" size="md" options={options} />
-<Radio name="example-lg" size="lg" options={options} />`,
+        code: `<RadioGroup name="example-sm" size="sm" options={options} />
+<RadioGroup name="example-md" size="md" options={options} />
+<RadioGroup name="example-lg" size="lg" options={options} />`,
       },
     },
   },
@@ -341,42 +341,42 @@ export const Colors = {
         gap: "16px",
         width: "400px",
       }}>
-      <Radio
+      <RadioGroup
         name="color-primary"
         label="Primary"
         color="primary"
         options={defaultOptions}
         onChange={action("primary-change")}
       />
-      <Radio
+      <RadioGroup
         name="color-secondary"
         label="Secondary"
         color="secondary"
         options={defaultOptions}
         onChange={action("secondary-change")}
       />
-      <Radio
+      <RadioGroup
         name="color-success"
         label="Success"
         color="success"
         options={defaultOptions}
         onChange={action("success-change")}
       />
-      <Radio
+      <RadioGroup
         name="color-error"
         label="Error"
         color="error"
         options={defaultOptions}
         onChange={action("error-change")}
       />
-      <Radio
+      <RadioGroup
         name="color-warning"
         label="Warning"
         color="warning"
         options={defaultOptions}
         onChange={action("warning-change")}
       />
-      <Radio
+      <RadioGroup
         name="color-info"
         label="Info"
         color="info"
@@ -388,12 +388,12 @@ export const Colors = {
   parameters: {
     docs: {
       source: {
-        code: `<Radio color="primary" name="primary" options={options} />
-<Radio color="secondary" name="secondary" options={options} />
-<Radio color="success" name="success" options={options} />
-<Radio color="error" name="error" options={options} />
-<Radio color="warning" name="warning" options={options} />
-<Radio color="info" name="info" options={options} />`,
+        code: `<RadioGroup color="primary" name="primary" options={options} />
+<RadioGroup color="secondary" name="secondary" options={options} />
+<RadioGroup color="success" name="success" options={options} />
+<RadioGroup color="error" name="error" options={options} />
+<RadioGroup color="warning" name="warning" options={options} />
+<RadioGroup color="info" name="info" options={options} />`,
       },
     },
   },
@@ -408,14 +408,14 @@ export const Directions = {
         gap: "32px",
         width: "500px",
       }}>
-      <Radio
+      <RadioGroup
         name="direction-vertical"
         label="세로 배치 (기본)"
         direction="vertical"
         options={defaultOptions}
         onChange={action("vertical-change")}
       />
-      <Radio
+      <RadioGroup
         name="direction-horizontal"
         label="가로 배치"
         direction="horizontal"
@@ -427,13 +427,13 @@ export const Directions = {
   parameters: {
     docs: {
       source: {
-        code: `<Radio
+        code: `<RadioGroup
   name="vertical"
   direction="vertical"
   options={options}
 />
 
-<Radio
+<RadioGroup
   name="horizontal"
   direction="horizontal"
   options={options}
@@ -457,7 +457,7 @@ export const WithDisabledOptions = {
   parameters: {
     docs: {
       source: {
-        code: `<Radio
+        code: `<RadioGroup
   name="shipping"
   label="배송 방법"
   options={[
@@ -490,7 +490,7 @@ export const ControlledExample = {
           gap: "16px",
           width: "300px",
         }}>
-        <Radio
+        <RadioGroup
           name="controlled-radio"
           label="프레임워크"
           options={options}
@@ -548,7 +548,7 @@ export const ControlledExample = {
       source: {
         code: `const [value, setValue] = useState("");
 
-<Radio
+<RadioGroup
   name="controlled"
   label="프레임워크"
   options={options}
