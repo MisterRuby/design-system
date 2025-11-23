@@ -6,6 +6,8 @@ export { SelectField } from './SelectField';
 export type { SelectFieldProps, SelectFieldOption } from './SelectField';
 export { RadioGroup } from './RadioGroup';
 export type { RadioGroupProps, RadioGroupOption } from './RadioGroup';
+export { Header } from './Header';
+export type { HeaderProps, NavigationItem } from './Header';
 
 // Legacy exports for backward compatibility
 export { InputField as Input } from './InputField';
