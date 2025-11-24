@@ -86,6 +86,7 @@ export const Header: React.FC<HeaderProps> = ({
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
+    boxSizing: 'border-box',
     position: sticky ? 'sticky' : 'static',
     top: sticky ? 0 : 'auto',
     zIndex: sticky ? 1000 : 'auto',
