@@ -1,5 +1,6 @@
 import React from "react";
 import { ErrorMessage, BaseInput, Label } from "../components";
+import { colors } from "../theme";
 
 export default {
   title: "Components/Atomic/ErrorMessage",
@@ -186,9 +187,9 @@ export const ConditionalDisplay = {
           onClick={() => setShowError(!showError)}
           style={{
             padding: "8px 16px",
-            border: "1px solid #d1d5db",
+            border: `1px solid ${colors.border.default}`,
             borderRadius: "4px",
-            backgroundColor: "#ffffff",
+            backgroundColor: colors.background.white,
             cursor: "pointer",
           }}>
           {showError ? "에러 숨기기" : "에러 표시"}
@@ -199,7 +200,9 @@ export const ConditionalDisplay = {
   parameters: {
     docs: {
       source: {
-        code: `const [showError, setShowError] = useState(false);
+        code: `import { colors } from "../theme";
+
+const [showError, setShowError] = useState(false);
 
 <div>
   <Label>사용자 입력 필드</Label>
@@ -212,7 +215,16 @@ export const ConditionalDisplay = {
   </ErrorMessage>
 </div>
 
-<button onClick={() => setShowError(!showError)}>
+<button
+  onClick={() => setShowError(!showError)}
+  style={{
+    padding: "8px 16px",
+    border: \`1px solid \${colors.border.default}\`,
+    borderRadius: "4px",
+    backgroundColor: colors.background.white,
+    cursor: "pointer"
+  }}
+>
   {showError ? "에러 숨기기" : "에러 표시"}
 </button>`,
       },

@@ -1,7 +1,8 @@
 import React from "react";
-import { CheckboxField } from "../components";
-import { action } from "./actions";
 import { within, userEvent } from "@storybook/testing-library";
+import { CheckboxField } from "../components";
+import { colors } from "../theme";
+import { action } from "./actions";
 
 export default {
   title: "Components/Molecules/CheckboxField",
@@ -288,16 +289,16 @@ export const ControlledExample = {
           checked={checked}
           onChange={(e) => setChecked(e.target.checked)}
         />
-        <div style={{ fontSize: "14px", color: "#6b7280" }}>
+        <div style={{ fontSize: "14px", color: colors.gray[500] }}>
           현재 상태: {checked ? "체크됨" : "체크 안됨"}
         </div>
         <button
           onClick={() => setChecked(!checked)}
           style={{
             padding: "8px 16px",
-            border: "1px solid #d1d5db",
+            border: `1px solid ${colors.border.default}`,
             borderRadius: "4px",
-            backgroundColor: "#ffffff",
+            backgroundColor: colors.background.white,
             cursor: "pointer",
           }}>
           상태 토글
@@ -337,7 +338,9 @@ export const ControlledExample = {
   parameters: {
     docs: {
       source: {
-        code: `const [checked, setChecked] = useState(false);
+        code: `import { colors } from "../theme";
+
+const [checked, setChecked] = useState(false);
 
 <CheckboxField
   label="제어되는 체크박스"
@@ -345,16 +348,16 @@ export const ControlledExample = {
   onChange={(e) => setChecked(e.target.checked)}
 />
 
-<div style={{ fontSize: "14px", color: "#6b7280" }}>
+<div style={{ fontSize: "14px", color: colors.gray[500] }}>
   현재 상태: {checked ? "체크됨" : "체크 안됨"}
 </div>
 <button
   onClick={() => setChecked(!checked)}
   style={{
     padding: "8px 16px",
-    border: "1px solid #d1d5db",
+    border: \`1px solid \${colors.border.default}\`,
     borderRadius: "4px",
-    backgroundColor: "#ffffff",
+    backgroundColor: colors.background.white,
     cursor: "pointer"
   }}
 >

@@ -1,7 +1,8 @@
 import React from "react";
-import { Toggle } from "../components";
-import { action } from "./actions";
 import { within, userEvent } from "@storybook/testing-library";
+import { Toggle } from "../components";
+import { colors } from "../theme";
+import { action } from "./actions";
 
 export default {
   title: "Components/Atomic/Toggle",
@@ -330,16 +331,16 @@ export const ControlledExample = {
           checked={isEnabled}
           onChange={(e) => setIsEnabled(e.target.checked)}
         />
-        <div style={{ fontSize: "14px", color: "#6b7280" }}>
+        <div style={{ fontSize: "14px", color: colors.gray[500] }}>
           상태: {isEnabled ? "켜짐" : "꺼짐"}
         </div>
         <button
           onClick={() => setIsEnabled(!isEnabled)}
           style={{
             padding: "8px 16px",
-            border: "1px solid #d1d5db",
+            border: `1px solid ${colors.border.default}`,
             borderRadius: "4px",
-            backgroundColor: "#ffffff",
+            backgroundColor: colors.background.white,
             cursor: "pointer",
           }}>
           토글 전환
@@ -377,7 +378,9 @@ export const ControlledExample = {
   parameters: {
     docs: {
       source: {
-        code: `const [isEnabled, setIsEnabled] = useState(false);
+        code: `import { colors } from "../theme";
+
+const [isEnabled, setIsEnabled] = useState(false);
 
 <Toggle
   label="알림 설정"
@@ -385,8 +388,19 @@ export const ControlledExample = {
   onChange={(e) => setIsEnabled(e.target.checked)}
 />
 
-<div>상태: {isEnabled ? "켜짐" : "꺼짐"}</div>
-<button onClick={() => setIsEnabled(!isEnabled)}>
+<div style={{ fontSize: "14px", color: colors.gray[500] }}>
+  상태: {isEnabled ? "켜짐" : "꺼짐"}
+</div>
+<button
+  onClick={() => setIsEnabled(!isEnabled)}
+  style={{
+    padding: "8px 16px",
+    border: \`1px solid \${colors.border.default}\`,
+    borderRadius: "4px",
+    backgroundColor: colors.background.white,
+    cursor: "pointer"
+  }}
+>
   토글 전환
 </button>`,
       },

@@ -1,7 +1,8 @@
 import React from "react";
-import { Badge } from "../components";
-import { action } from "./actions";
 import { within, userEvent } from "@storybook/testing-library";
+import { Badge } from "../components";
+import { colors } from "../theme";
+import { action } from "./actions";
 
 export default {
   title: "Components/Atomic/Badge",
@@ -316,7 +317,7 @@ export const TagExample = {
         </div>
         {tags.length === 0 && (
           <div style={{
-            color: "#6b7280",
+            color: colors.gray[500],
             fontSize: "12px",
             fontStyle: "italic"
           }}>
@@ -327,9 +328,9 @@ export const TagExample = {
           onClick={() => setTags(["React", "TypeScript", "JavaScript", "CSS", "HTML"])}
           style={{
             padding: "8px 16px",
-            border: "1px solid #d1d5db",
+            border: `1px solid ${colors.border.default}`,
             borderRadius: "4px",
-            backgroundColor: "#ffffff",
+            backgroundColor: colors.background.white,
             cursor: "pointer",
             fontSize: "12px"
           }}>

@@ -1,8 +1,9 @@
-import { Header } from '../components/molecules/Header';
+import { within, userEvent } from '@storybook/testing-library';
 import { Button } from '../components/atomic/Button';
 import { Text } from '../components/atomic/Text';
+import { Header } from '../components/molecules/Header';
+import { colors } from '../theme';
 import { action } from './actions';
-import { within, userEvent } from '@storybook/testing-library';
 import { Step } from './types';
 
 export default {
@@ -124,13 +125,13 @@ export const CompleteHeader = {
       <div style={{
         width: '32px',
         height: '32px',
-        backgroundColor: '#2563eb',
+        backgroundColor: colors.semantic.primary,
         borderRadius: '6px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
       }}>
-        <Text variant="body1" style={{ color: 'white', fontWeight: 'bold', margin: 0 }}>
+        <Text variant="body1" style={{ color: colors.background.white, fontWeight: 'bold', margin: 0 }}>
           L
         </Text>
       </div>

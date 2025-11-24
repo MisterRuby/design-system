@@ -1,7 +1,8 @@
 import React from "react";
-import { Spinner } from "../components";
-import { action } from "./actions";
 import { within, userEvent } from "@storybook/testing-library";
+import { Spinner } from "../components";
+import { colors } from "../theme";
+import { action } from "./actions";
 
 export default {
   title: "Components/Atomic/Spinner",
@@ -109,19 +110,19 @@ export const Sizes = {
       }}>
       <div style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
         <Spinner size="sm" />
-        <div style={{ fontSize: "12px", color: "#6b7280", fontWeight: "500" }}>
+        <div style={{ fontSize: "12px", color: colors.gray[500], fontWeight: "500" }}>
           Small (16px)
         </div>
       </div>
       <div style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
         <Spinner size="md" />
-        <div style={{ fontSize: "12px", color: "#6b7280", fontWeight: "500" }}>
+        <div style={{ fontSize: "12px", color: colors.gray[500], fontWeight: "500" }}>
           Medium (24px)
         </div>
       </div>
       <div style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
         <Spinner size="lg" />
-        <div style={{ fontSize: "12px", color: "#6b7280", fontWeight: "500" }}>
+        <div style={{ fontSize: "12px", color: colors.gray[500], fontWeight: "500" }}>
           Large (32px)
         </div>
       </div>
@@ -158,31 +159,31 @@ export const Colors = {
       }}>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
           <Spinner color="primary" />
-          <span style={{ fontSize: "11px", color: "#6b7280" }}>Primary</span>
+          <span style={{ fontSize: "11px", color: colors.gray[500] }}>Primary</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
           <Spinner color="secondary" />
-          <span style={{ fontSize: "11px", color: "#6b7280" }}>Secondary</span>
+          <span style={{ fontSize: "11px", color: colors.gray[500] }}>Secondary</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
           <Spinner color="success" />
-          <span style={{ fontSize: "11px", color: "#6b7280" }}>Success</span>
+          <span style={{ fontSize: "11px", color: colors.gray[500] }}>Success</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
           <Spinner color="error" />
-          <span style={{ fontSize: "11px", color: "#6b7280" }}>Error</span>
+          <span style={{ fontSize: "11px", color: colors.gray[500] }}>Error</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
           <Spinner color="warning" />
-          <span style={{ fontSize: "11px", color: "#6b7280" }}>Warning</span>
+          <span style={{ fontSize: "11px", color: colors.gray[500] }}>Warning</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
           <Spinner color="info" />
-          <span style={{ fontSize: "11px", color: "#6b7280" }}>Info</span>
+          <span style={{ fontSize: "11px", color: colors.gray[500] }}>Info</span>
         </div>
       </div>
       <div style={{
-        backgroundColor: "#1f2937",
+        backgroundColor: colors.gray[800],
         padding: "20px",
         borderRadius: "8px",
         display: "flex",
@@ -192,7 +193,7 @@ export const Colors = {
         minWidth: "120px"
       }}>
         <Spinner color="white" />
-        <span style={{ fontSize: "11px", color: "#9ca3af" }}>White</span>
+        <span style={{ fontSize: "11px", color: colors.semantic.muted }}>White</span>
       </div>
     </div>
   ),
@@ -223,19 +224,19 @@ export const Speeds = {
       }}>
       <div style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
         <Spinner speed="slow" color="warning" />
-        <div style={{ fontSize: "12px", color: "#6b7280", fontWeight: "500" }}>
+        <div style={{ fontSize: "12px", color: colors.gray[500], fontWeight: "500" }}>
           Slow (1.2s)
         </div>
       </div>
       <div style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
         <Spinner speed="normal" color="primary" />
-        <div style={{ fontSize: "12px", color: "#6b7280", fontWeight: "500" }}>
+        <div style={{ fontSize: "12px", color: colors.gray[500], fontWeight: "500" }}>
           Normal (0.8s)
         </div>
       </div>
       <div style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
         <Spinner speed="fast" color="success" />
-        <div style={{ fontSize: "12px", color: "#6b7280", fontWeight: "500" }}>
+        <div style={{ fontSize: "12px", color: colors.gray[500], fontWeight: "500" }}>
           Fast (0.5s)
         </div>
       </div>
@@ -285,9 +286,9 @@ export const LoadingStates = {
           disabled={isLoading}
           style={{
             padding: "12px 24px",
-            border: "1px solid #d1d5db",
+            border: `1px solid ${colors.border.default}`,
             borderRadius: "6px",
-            backgroundColor: isLoading ? "#f3f4f6" : "#ffffff",
+            backgroundColor: isLoading ? colors.background.disabled : colors.background.white,
             cursor: isLoading ? "not-allowed" : "pointer",
             fontSize: "14px",
             fontWeight: "500",
@@ -305,9 +306,9 @@ export const LoadingStates = {
           <div style={{
             textAlign: "center",
             padding: "20px",
-            backgroundColor: "#f9fafb",
+            backgroundColor: colors.gray[50],
             borderRadius: "8px",
-            border: "1px solid #e5e7eb",
+            border: `1px solid ${colors.gray[200]}`,
             width: "100%"
           }}>
             <Spinner label="데이터를 불러오는 중입니다..." color="primary" />
@@ -374,8 +375,8 @@ export const OverlayExample = {
             position: "relative",
             width: "100%",
             height: "100%",
-            backgroundColor: "#f9fafb",
-            border: "1px solid #e5e7eb",
+            backgroundColor: colors.gray[50],
+            border: `1px solid ${colors.gray[200]}`,
             borderRadius: "8px",
             padding: "20px",
             display: "flex",
@@ -386,7 +387,7 @@ export const OverlayExample = {
           <h3 style={{ margin: 0, fontSize: "16px", fontWeight: "600" }}>
             콘텐츠 영역
           </h3>
-          <p style={{ margin: 0, fontSize: "14px", color: "#6b7280" }}>
+          <p style={{ margin: 0, fontSize: "14px", color: colors.gray[500] }}>
             여기에 실제 콘텐츠가 표시됩니다.
           </p>
           <button
@@ -394,9 +395,9 @@ export const OverlayExample = {
             disabled={showOverlay}
             style={{
               padding: "8px 16px",
-              border: "1px solid #d1d5db",
+              border: `1px solid ${colors.border.default}`,
               borderRadius: "4px",
-              backgroundColor: "#ffffff",
+              backgroundColor: colors.background.white,
               cursor: showOverlay ? "not-allowed" : "pointer",
               fontSize: "12px",
               alignSelf: "flex-start",

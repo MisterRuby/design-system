@@ -1,5 +1,6 @@
 import React from "react";
 import { HelperText, BaseInput, Label } from "../components";
+import { colors } from "../theme";
 
 export default {
   title: "Components/Atomic/HelperText",
@@ -210,9 +211,9 @@ export const ConditionalDisplay = {
           onClick={() => setShowHelper(!showHelper)}
           style={{
             padding: "8px 16px",
-            border: "1px solid #d1d5db",
+            border: `1px solid ${colors.border.default}`,
             borderRadius: "4px",
-            backgroundColor: "#ffffff",
+            backgroundColor: colors.background.white,
             cursor: "pointer",
           }}>
           {showHelper ? "도움말 숨기기" : "도움말 표시"}
@@ -223,7 +224,9 @@ export const ConditionalDisplay = {
   parameters: {
     docs: {
       source: {
-        code: `const [showHelper, setShowHelper] = useState(true);
+        code: `import { colors } from "../theme";
+
+const [showHelper, setShowHelper] = useState(true);
 
 <div>
   <Label>설정 옵션</Label>
@@ -233,7 +236,16 @@ export const ConditionalDisplay = {
   </HelperText>
 </div>
 
-<button onClick={() => setShowHelper(!showHelper)}>
+<button
+  onClick={() => setShowHelper(!showHelper)}
+  style={{
+    padding: "8px 16px",
+    border: \`1px solid \${colors.border.default}\`,
+    borderRadius: "4px",
+    backgroundColor: colors.background.white,
+    cursor: "pointer"
+  }}
+>
   {showHelper ? "도움말 숨기기" : "도움말 표시"}
 </button>`,
       },

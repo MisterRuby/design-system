@@ -1,7 +1,8 @@
 import React from "react";
-import { RadioGroup } from "../components";
-import { action } from "./actions";
 import { within, userEvent } from "@storybook/testing-library";
+import { RadioGroup } from "../components";
+import { colors } from "../theme";
+import { action } from "./actions";
 
 export default {
   title: "Components/Molecules/RadioGroup",
@@ -497,16 +498,16 @@ export const ControlledExample = {
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-        <div style={{ fontSize: "14px", color: "#6b7280" }}>
+        <div style={{ fontSize: "14px", color: colors.gray[500] }}>
           선택된 값: {value || "없음"}
         </div>
         <button
           onClick={() => setValue(options[0].value)}
           style={{
             padding: "8px 16px",
-            border: "1px solid #d1d5db",
+            border: `1px solid ${colors.border.default}`,
             borderRadius: "4px",
-            backgroundColor: "#ffffff",
+            backgroundColor: colors.background.white,
             cursor: "pointer",
           }}>
           선택 초기화
@@ -546,7 +547,9 @@ export const ControlledExample = {
   parameters: {
     docs: {
       source: {
-        code: `const [value, setValue] = useState("");
+        code: `import { colors } from "../theme";
+
+const [value, setValue] = useState("");
 
 <RadioGroup
   name="controlled"
@@ -556,7 +559,7 @@ export const ControlledExample = {
   onChange={(e) => setValue(e.target.value)}
 />
 
-<div style={{ fontSize: "14px", color: "#6b7280" }}>
+<div style={{ fontSize: "14px", color: colors.gray[500] }}>
   선택된 값: {value || "없음"}
 </div>
 <button onClick={() => setValue("")}>

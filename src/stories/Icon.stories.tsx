@@ -1,5 +1,6 @@
 import React from "react";
 import { Icon, IconName } from "../components";
+import { colors } from "../theme";
 
 export default {
   title: "Components/Atomic/Icon",
@@ -67,6 +68,9 @@ export default {
   },
 };
 
+const accentColor = colors.semantic.success;
+const cardBorderColor = colors.gray[200];
+
 export const Default = {
   args: {
     name: "search" as IconName,
@@ -85,12 +89,14 @@ export const CustomColor = {
   args: {
     name: "heart" as IconName,
     size: 32,
-    color: "#047857",
+    color: accentColor,
   },
   parameters: {
     docs: {
       source: {
-        code: `<Icon name="heart" size={32} color="#047857" />`,
+        code: `import { colors } from "../theme";
+
+<Icon name="heart" size={32} color={colors.semantic.success} />`,
       },
     },
   },
@@ -124,12 +130,12 @@ export const NavigationIcons = {
               alignItems: "center",
               gap: "8px",
               padding: "16px",
-              border: "1px solid #e5e7eb",
+              border: `1px solid ${cardBorderColor}`,
               borderRadius: "8px",
               fontSize: "12px",
               textAlign: "center",
             }}>
-            <Icon name={name} size={24} color="#047857" />
+            <Icon name={name} size={24} color={accentColor} />
             <span>{name}</span>
           </div>
         ))}
@@ -179,12 +185,12 @@ export const ActionIcons = {
               alignItems: "center",
               gap: "8px",
               padding: "16px",
-              border: "1px solid #e5e7eb",
+              border: `1px solid ${cardBorderColor}`,
               borderRadius: "8px",
               fontSize: "12px",
               textAlign: "center",
             }}>
-            <Icon name={name} size={24} color="#047857" />
+            <Icon name={name} size={24} color={accentColor} />
             <span>{name}</span>
           </div>
         ))}
@@ -232,12 +238,12 @@ export const UserIcons = {
               alignItems: "center",
               gap: "8px",
               padding: "16px",
-              border: "1px solid #e5e7eb",
+              border: `1px solid ${cardBorderColor}`,
               borderRadius: "8px",
               fontSize: "12px",
               textAlign: "center",
             }}>
-            <Icon name={name} size={24} color="#047857" />
+            <Icon name={name} size={24} color={accentColor} />
             <span>{name}</span>
           </div>
         ))}
@@ -278,12 +284,12 @@ export const SecurityIcons = {
               alignItems: "center",
               gap: "8px",
               padding: "16px",
-              border: "1px solid #e5e7eb",
+              border: `1px solid ${cardBorderColor}`,
               borderRadius: "8px",
               fontSize: "12px",
               textAlign: "center",
             }}>
-            <Icon name={name} size={24} color="#047857" />
+            <Icon name={name} size={24} color={accentColor} />
             <span>{name}</span>
           </div>
         ))}
@@ -333,12 +339,12 @@ export const ContentIcons = {
               alignItems: "center",
               gap: "8px",
               padding: "16px",
-              border: "1px solid #e5e7eb",
+              border: `1px solid ${cardBorderColor}`,
               borderRadius: "8px",
               fontSize: "12px",
               textAlign: "center",
             }}>
-            <Icon name={name} size={24} color="#047857" />
+            <Icon name={name} size={24} color={accentColor} />
             <span>{name}</span>
           </div>
         ))}
@@ -379,12 +385,12 @@ export const StatusIcons = {
               alignItems: "center",
               gap: "8px",
               padding: "16px",
-              border: "1px solid #e5e7eb",
+              border: `1px solid ${cardBorderColor}`,
               borderRadius: "8px",
               fontSize: "12px",
               textAlign: "center",
             }}>
-            <Icon name={name} size={24} color="#047857" />
+            <Icon name={name} size={24} color={accentColor} />
             <span>{name}</span>
           </div>
         ))}
@@ -408,19 +414,19 @@ export const Sizes = {
   render: () => (
     <div style={{ display: "flex", alignItems: "end", gap: "24px" }}>
       <div style={{ textAlign: "center" }}>
-        <Icon name="star" size={16} color="#047857" />
+        <Icon name="star" size={16} color={accentColor} />
         <div style={{ fontSize: "12px", marginTop: "8px" }}>16px</div>
       </div>
       <div style={{ textAlign: "center" }}>
-        <Icon name="star" size={24} color="#047857" />
+        <Icon name="star" size={24} color={accentColor} />
         <div style={{ fontSize: "12px", marginTop: "8px" }}>24px</div>
       </div>
       <div style={{ textAlign: "center" }}>
-        <Icon name="star" size={32} color="#047857" />
+        <Icon name="star" size={32} color={accentColor} />
         <div style={{ fontSize: "12px", marginTop: "8px" }}>32px</div>
       </div>
       <div style={{ textAlign: "center" }}>
-        <Icon name="star" size={48} color="#047857" />
+        <Icon name="star" size={48} color={accentColor} />
         <div style={{ fontSize: "12px", marginTop: "8px" }}>48px</div>
       </div>
     </div>
