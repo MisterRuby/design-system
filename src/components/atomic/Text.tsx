@@ -1,15 +1,24 @@
 import React from "react";
-import { colors } from "../../theme";
+import { colors, typography, fontSize, fontWeight } from "../../theme";
+import type {
+  TextVariant,
+  TextSize,
+  TextWeight,
+  TextColor,
+  TextAlign,
+  TextTransform,
+  TextDecoration
+} from "../../types/common";
 
 export interface TextProps {
   children: React.ReactNode;
-  variant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "body1" | "body2" | "caption" | "overline";
-  size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
-  weight?: "light" | "normal" | "medium" | "semibold" | "bold";
-  color?: "primary" | "secondary" | "success" | "error" | "warning" | "info" | "muted" | "text";
-  align?: "left" | "center" | "right" | "justify";
-  transform?: "none" | "capitalize" | "uppercase" | "lowercase";
-  decoration?: "none" | "underline" | "line-through";
+  variant?: TextVariant;
+  size?: TextSize;
+  weight?: TextWeight;
+  color?: TextColor;
+  align?: TextAlign;
+  transform?: TextTransform;
+  decoration?: TextDecoration;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -26,131 +35,31 @@ export const Text: React.FC<TextProps> = ({
   className = "",
   style = {},
 }) => {
-  const getVariantStyles = (variant: string) => {
+  const getElementForVariant = (variant: TextVariant): React.ElementType => {
     switch (variant) {
-      case "h1":
-        return {
-          fontSize: "2.25rem",
-          fontWeight: "700",
-          lineHeight: "1.2",
-          element: "h1"
-        };
-      case "h2":
-        return {
-          fontSize: "1.875rem",
-          fontWeight: "600",
-          lineHeight: "1.3",
-          element: "h2"
-        };
-      case "h3":
-        return {
-          fontSize: "1.5rem",
-          fontWeight: "600",
-          lineHeight: "1.4",
-          element: "h3"
-        };
-      case "h4":
-        return {
-          fontSize: "1.25rem",
-          fontWeight: "600",
-          lineHeight: "1.5",
-          element: "h4"
-        };
-      case "h5":
-        return {
-          fontSize: "1.125rem",
-          fontWeight: "600",
-          lineHeight: "1.5",
-          element: "h5"
-        };
-      case "h6":
-        return {
-          fontSize: "1rem",
-          fontWeight: "600",
-          lineHeight: "1.5",
-          element: "h6"
-        };
+      case "h1": return "h1";
+      case "h2": return "h2";
+      case "h3": return "h3";
+      case "h4": return "h4";
+      case "h5": return "h5";
+      case "h6": return "h6";
       case "body1":
-        return {
-          fontSize: "1rem",
-          fontWeight: "400",
-          lineHeight: "1.6",
-          element: "p"
-        };
-      case "body2":
-        return {
-          fontSize: "0.875rem",
-          fontWeight: "400",
-          lineHeight: "1.6",
-          element: "p"
-        };
+      case "body2": return "p";
       case "caption":
-        return {
-          fontSize: "0.75rem",
-          fontWeight: "400",
-          lineHeight: "1.4",
-          element: "span"
-        };
-      case "overline":
-        return {
-          fontSize: "0.75rem",
-          fontWeight: "600",
-          lineHeight: "1.4",
-          textTransform: "uppercase",
-          letterSpacing: "0.1em",
-          element: "span"
-        };
-      default:
-        return {
-          fontSize: "1rem",
-          fontWeight: "400",
-          lineHeight: "1.6",
-          element: "p"
-        };
+      case "overline": return "span";
+      default: return "p";
     }
   };
 
-  const getSizeStyles = (size: string) => {
-    switch (size) {
-      case "xs":
-        return { fontSize: "0.75rem" };
-      case "sm":
-        return { fontSize: "0.875rem" };
-      case "md":
-        return { fontSize: "1rem" };
-      case "lg":
-        return { fontSize: "1.125rem" };
-      case "xl":
-        return { fontSize: "1.25rem" };
-      case "2xl":
-        return { fontSize: "1.5rem" };
-      case "3xl":
-        return { fontSize: "1.875rem" };
-      case "4xl":
-        return { fontSize: "2.25rem" };
-      default:
-        return {};
-    }
+  const getSizeStyles = (size: TextSize) => {
+    return { fontSize: fontSize[size] };
   };
 
-  const getWeightStyles = (weight: string) => {
-    switch (weight) {
-      case "light":
-        return { fontWeight: "300" };
-      case "normal":
-        return { fontWeight: "400" };
-      case "medium":
-        return { fontWeight: "500" };
-      case "semibold":
-        return { fontWeight: "600" };
-      case "bold":
-        return { fontWeight: "700" };
-      default:
-        return {};
-    }
+  const getWeightStyles = (weight: TextWeight) => {
+    return { fontWeight: fontWeight[weight] };
   };
 
-  const getColorStyles = (color: string) => {
+  const getColorStyles = (color: TextColor) => {
     switch (color) {
       case "primary":
         return { color: colors.semantic.primary };
@@ -173,17 +82,16 @@ export const Text: React.FC<TextProps> = ({
     }
   };
 
-  const variantStyles = getVariantStyles(variant);
+  // Typography variant 스타일 가져오기
+  const variantStyles = typography[variant];
   const sizeStyles = size ? getSizeStyles(size) : {};
   const weightStyles = weight ? getWeightStyles(weight) : {};
   const colorStyles = getColorStyles(color);
 
-  const Element = variantStyles.element as React.ElementType;
+  const Element = getElementForVariant(variant);
 
   const combinedStyle = {
-    fontSize: variantStyles.fontSize,
-    fontWeight: variantStyles.fontWeight,
-    lineHeight: variantStyles.lineHeight,
+    ...variantStyles,
     textAlign: align,
     textTransform: transform,
     textDecoration: decoration,

@@ -1,5 +1,5 @@
 import React from "react";
-import { colors } from "../../theme";
+import { colors, fontSize, fontWeight } from "../../theme";
 import { InputVariant, ComponentSize } from "../../types";
 
 export interface SelectFieldOption {
@@ -109,19 +109,19 @@ export const SelectField: React.FC<SelectFieldProps> = ({
       case "small":
         return {
           padding: "6px 12px",
-          fontSize: "14px",
+          fontSize: fontSize.sm,
           height: "32px",
         };
       case "large":
         return {
           padding: "12px 16px",
-          fontSize: "16px",
+          fontSize: fontSize.md,
           height: "48px",
         };
       default: // medium
         return {
           padding: "8px 12px",
-          fontSize: "14px",
+          fontSize: fontSize.sm,
           height: "40px",
         };
     }
@@ -157,8 +157,8 @@ export const SelectField: React.FC<SelectFieldProps> = ({
         <label
           htmlFor={selectId}
           style={{
-            fontSize: "14px",
-            fontWeight: "500",
+            fontSize: fontSize.sm,
+            fontWeight: fontWeight.medium,
             color: colors.semantic.text,
             marginBottom: "4px",
           }}>
@@ -206,7 +206,7 @@ export const SelectField: React.FC<SelectFieldProps> = ({
       {showError && errorMessage && (
         <span
           style={{
-            fontSize: "12px",
+            fontSize: fontSize.xs,
             color: colors.semantic.error,
             marginTop: "4px",
           }}>
@@ -216,7 +216,7 @@ export const SelectField: React.FC<SelectFieldProps> = ({
       {!showError && helperText && (
         <span
           style={{
-            fontSize: "12px",
+            fontSize: fontSize.xs,
             color: colors.semantic.secondary,
             marginTop: "4px",
           }}>

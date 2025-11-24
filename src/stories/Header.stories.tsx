@@ -2,7 +2,7 @@ import { within, userEvent } from '@storybook/testing-library';
 import { Button } from '../components/atomic/Button';
 import { Text } from '../components/atomic/Text';
 import { Header } from '../components/molecules/Header';
-import { colors } from '../theme';
+import { colors, fontWeight } from '../theme';
 import { action } from './actions';
 import { Step } from './types';
 
@@ -131,7 +131,7 @@ export const CompleteHeader = {
         alignItems: 'center',
         justifyContent: 'center'
       }}>
-        <Text variant="body1" style={{ color: colors.background.white, fontWeight: 'bold', margin: 0 }}>
+        <Text variant="body1" style={{ color: colors.background.white, fontWeight: fontWeight.bold, margin: 0 }}>
           L
         </Text>
       </div>

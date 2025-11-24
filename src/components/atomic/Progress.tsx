@@ -1,5 +1,5 @@
 import React from 'react';
-import { colors } from '../../theme';
+import { colors, fontSize } from '../../theme';
 import { SemanticVariant, ComponentSize } from '../../types/common';
 
 export interface ProgressProps {
@@ -49,13 +49,13 @@ export const Progress: React.FC<ProgressProps> = ({
   const getSizeStyles = (size: ComponentSize) => {
     switch (size) {
       case 'small':
-        return { height: '4px', fontSize: '12px' };
+        return { height: '4px', fontSize: fontSize.xs };
       case 'medium':
-        return { height: '8px', fontSize: '14px' };
+        return { height: '8px', fontSize: fontSize.sm };
       case 'large':
-        return { height: '12px', fontSize: '16px' };
+        return { height: '12px', fontSize: fontSize.md };
       default:
-        return { height: '8px', fontSize: '14px' };
+        return { height: '8px', fontSize: fontSize.sm };
     }
   };
 

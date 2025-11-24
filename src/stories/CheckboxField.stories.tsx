@@ -1,7 +1,7 @@
 import React from "react";
 import { within, userEvent } from "@storybook/testing-library";
 import { CheckboxField } from "../components";
-import { colors } from "../theme";
+import { colors, fontSize } from "../theme";
 import { action } from "./actions";
 
 export default {
@@ -289,7 +289,7 @@ export const ControlledExample = {
           checked={checked}
           onChange={(e) => setChecked(e.target.checked)}
         />
-        <div style={{ fontSize: "14px", color: colors.gray[500] }}>
+        <div style={{ fontSize: fontSize.sm, color: colors.gray[500] }}>
           현재 상태: {checked ? "체크됨" : "체크 안됨"}
         </div>
         <button

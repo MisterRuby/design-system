@@ -1,5 +1,5 @@
 import React from "react";
-import { colors } from "../../theme";
+import { colors, fontSize } from "../../theme";
 
 export interface HelperTextProps {
   children: React.ReactNode;
@@ -22,7 +22,7 @@ export const HelperText: React.FC<HelperTextProps> = ({
       className={className}
       data-testid={testId}
       style={{
-        fontSize: "12px",
+        fontSize: fontSize.xs,
         color: colors.semantic.secondary,
         marginTop: "2px",
         display: "block",

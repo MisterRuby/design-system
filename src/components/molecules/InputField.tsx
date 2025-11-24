@@ -1,6 +1,6 @@
 import React from "react";
 import { Icon, IconName } from "../atomic/Icon";
-import { colors } from "../../theme";
+import { colors, fontSize, fontWeight } from "../../theme";
 import { InputVariant, ComponentSize } from "../../types";
 
 export interface InputFieldProps {
@@ -108,7 +108,7 @@ export const InputField: React.FC<InputFieldProps> = ({
       case "small":
         return {
           padding: "6px 12px",
-          fontSize: "14px",
+          fontSize: fontSize.sm,
           height: "32px",
           iconSize: 16,
           iconPadding: "8px",
@@ -116,7 +116,7 @@ export const InputField: React.FC<InputFieldProps> = ({
       case "medium":
         return {
           padding: "8px 16px",
-          fontSize: "16px",
+          fontSize: fontSize.md,
           height: "40px",
           iconSize: 18,
           iconPadding: "12px",
@@ -124,7 +124,7 @@ export const InputField: React.FC<InputFieldProps> = ({
       case "large":
         return {
           padding: "12px 20px",
-          fontSize: "18px",
+          fontSize: fontSize.lg,
           height: "48px",
           iconSize: 20,
           iconPadding: "16px",
@@ -132,7 +132,7 @@ export const InputField: React.FC<InputFieldProps> = ({
       default:
         return {
           padding: "8px 16px",
-          fontSize: "16px",
+          fontSize: fontSize.md,
           height: "40px",
           iconSize: 18,
           iconPadding: "12px",
@@ -150,8 +150,8 @@ export const InputField: React.FC<InputFieldProps> = ({
         <label
           htmlFor={inputId}
           style={{
-            fontSize: "14px",
-            fontWeight: "500",
+            fontSize: fontSize.sm,
+            fontWeight: fontWeight.medium,
             color: colors.semantic.text,
             marginBottom: "4px",
           }}>
@@ -253,7 +253,7 @@ export const InputField: React.FC<InputFieldProps> = ({
       {showError && (
         <span
           style={{
-            fontSize: "12px",
+            fontSize: fontSize.xs,
             color: colors.semantic.error,
             marginTop: "2px",
           }}>
@@ -264,7 +264,7 @@ export const InputField: React.FC<InputFieldProps> = ({
       {helperText && !showError && (
         <span
           style={{
-            fontSize: "12px",
+            fontSize: fontSize.xs,
             color: colors.semantic.secondary,
             marginTop: "2px",
           }}>

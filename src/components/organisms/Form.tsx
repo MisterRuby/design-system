@@ -4,7 +4,7 @@ import { InputField, InputFieldProps } from '../molecules/InputField';
 import { CheckboxField, CheckboxFieldProps } from '../molecules/CheckboxField';
 import { SelectField, SelectFieldProps } from '../molecules/SelectField';
 import { RadioGroup, RadioGroupProps } from '../molecules/RadioGroup';
-import { colors } from '../../theme';
+import { colors, fontSize, fontWeight } from '../../theme';
 
 export interface FormField {
   id: string;
@@ -226,8 +226,8 @@ export const Form: React.FC<FormProps> = ({
             <h2
               style={{
                 margin: '0 0 8px 0',
-                fontSize: '24px',
-                fontWeight: '600',
+                fontSize: fontSize['2xl'],
+                fontWeight: fontWeight.semibold,
                 color: colors.semantic.text,
               }}
             >
@@ -238,7 +238,7 @@ export const Form: React.FC<FormProps> = ({
             <p
               style={{
                 margin: 0,
-                fontSize: '14px',
+                fontSize: fontSize.sm,
                 color: colors.semantic.secondary,
                 lineHeight: '1.5',
               }}
@@ -253,7 +253,7 @@ export const Form: React.FC<FormProps> = ({
         <p
           style={{
             margin: '0 0 8px 0',
-            fontSize: '12px',
+            fontSize: fontSize.xs,
             color: colors.semantic.secondary,
           }}
         >

@@ -1,5 +1,5 @@
 import React from 'react';
-import { colors } from '../../theme';
+import { colors, fontSize, fontWeight } from '../../theme';
 import { CheckboxSize } from '../../types';
 
 export interface ToggleProps {
@@ -51,7 +51,7 @@ export const Toggle: React.FC<ToggleProps> = ({
           height: '18px',
           thumbSize: '14px',
           thumbOffset: '2px',
-          fontSize: '12px',
+          fontSize: fontSize.xs,
           gap: '6px'
         };
       case 'md':
@@ -60,7 +60,7 @@ export const Toggle: React.FC<ToggleProps> = ({
           height: '24px',
           thumbSize: '20px',
           thumbOffset: '2px',
-          fontSize: '14px',
+          fontSize: fontSize.sm,
           gap: '8px'
         };
       case 'lg':
@@ -69,7 +69,7 @@ export const Toggle: React.FC<ToggleProps> = ({
           height: '30px',
           thumbSize: '26px',
           thumbOffset: '2px',
-          fontSize: '16px',
+          fontSize: fontSize.md,
           gap: '10px'
         };
       default:
@@ -78,7 +78,7 @@ export const Toggle: React.FC<ToggleProps> = ({
           height: '24px',
           thumbSize: '20px',
           thumbOffset: '2px',
-          fontSize: '14px',
+          fontSize: fontSize.sm,
           gap: '8px'
         };
     }
@@ -165,17 +165,17 @@ export const Toggle: React.FC<ToggleProps> = ({
   const labelTextStyles: React.CSSProperties = {
     fontSize: sizeStyles.fontSize,
     color: hasError ? colors.semantic.error : colors.semantic.text,
-    fontWeight: '500',
+    fontWeight: fontWeight.medium,
   };
 
   const helperTextStyles: React.CSSProperties = {
-    fontSize: '12px',
+    fontSize: fontSize.xs,
     color: colors.semantic.muted,
     marginTop: '2px',
   };
 
   const errorTextStyles: React.CSSProperties = {
-    fontSize: '12px',
+    fontSize: fontSize.xs,
     color: colors.semantic.error,
     marginTop: '2px',
   };

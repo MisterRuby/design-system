@@ -1,5 +1,5 @@
 import React from "react";
-import { colors } from "../../theme";
+import { colors, fontSize } from "../../theme";
 
 export interface ErrorMessageProps {
   children: React.ReactNode;
@@ -22,7 +22,7 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
       className={className}
       data-testid={testId}
       style={{
-        fontSize: "12px",
+        fontSize: fontSize.xs,
         color: colors.semantic.error,
         marginTop: "2px",
         display: "block",

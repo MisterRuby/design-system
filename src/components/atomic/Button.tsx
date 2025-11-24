@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon, IconName } from './Icon';
-import { colors } from '../../theme';
+import { colors, fontSize } from '../../theme';
 import { ButtonVariant, ComponentSize } from '../../types';
 
 export interface ButtonProps {
@@ -46,13 +46,13 @@ export const Button: React.FC<ButtonProps> = ({
   const getSizeStyles = (size: string) => {
     switch (size) {
       case 'small':
-        return { padding: '4px 8px', fontSize: '12px', iconSize: 14, gap: '4px' };
+        return { padding: '4px 8px', fontSize: fontSize.xs, iconSize: 14, gap: '4px' };
       case 'medium':
-        return { padding: '8px 16px', fontSize: '14px', iconSize: 16, gap: '6px' };
+        return { padding: '8px 16px', fontSize: fontSize.sm, iconSize: 16, gap: '6px' };
       case 'large':
-        return { padding: '12px 24px', fontSize: '16px', iconSize: 20, gap: '8px' };
+        return { padding: '12px 24px', fontSize: fontSize.md, iconSize: 20, gap: '8px' };
       default:
-        return { padding: '8px 16px', fontSize: '14px', iconSize: 16, gap: '6px' };
+        return { padding: '8px 16px', fontSize: fontSize.sm, iconSize: 16, gap: '6px' };
     }
   };
 

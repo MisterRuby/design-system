@@ -1,7 +1,7 @@
 import React from "react";
 import { within, userEvent } from "@storybook/testing-library";
 import { SelectField } from "../components";
-import { colors } from "../theme";
+import { colors, fontSize } from "../theme";
 import { action } from "./actions";
 
 export default {
@@ -449,7 +449,7 @@ export const ControlledExample = {
           placeholder="프레임워크를 선택하세요"
           onChange={(e) => setValue(e.target.value)}
         />
-        <div style={{ fontSize: "14px", color: colors.gray[500] }}>
+        <div style={{ fontSize: fontSize.sm, color: colors.gray[500] }}>
           선택된 값: {value || "없음"}
         </div>
         <button

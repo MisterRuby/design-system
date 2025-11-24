@@ -1,7 +1,7 @@
 import React from "react";
 import { within, userEvent } from "@storybook/testing-library";
 import { Badge } from "../components";
-import { colors } from "../theme";
+import { colors, fontSize, fontWeight } from "../theme";
 import { action } from "./actions";
 
 export default {
@@ -299,7 +299,7 @@ export const TagExample = {
           gap: "16px",
           width: "400px",
         }}>
-        <div style={{ fontSize: "14px", fontWeight: "500" }}>
+        <div style={{ fontSize: fontSize.sm, fontWeight: fontWeight.medium }}>
           기술 스택 ({tags.length}개)
         </div>
         <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
@@ -318,7 +318,7 @@ export const TagExample = {
         {tags.length === 0 && (
           <div style={{
             color: colors.gray[500],
-            fontSize: "12px",
+            fontSize: fontSize.xs,
             fontStyle: "italic"
           }}>
             모든 태그가 제거되었습니다.
@@ -442,25 +442,25 @@ export const StatusExample = {
         width: "300px",
       }}>
       <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-        <span style={{ fontSize: "14px", width: "80px" }}>서버:</span>
+        <span style={{ fontSize: fontSize.sm, width: "80px" }}>서버:</span>
         <Badge color="success" rounded icon="check">
           Online
         </Badge>
       </div>
       <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-        <span style={{ fontSize: "14px", width: "80px" }}>배포:</span>
+        <span style={{ fontSize: fontSize.sm, width: "80px" }}>배포:</span>
         <Badge color="warning" rounded icon="clock">
           Pending
         </Badge>
       </div>
       <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-        <span style={{ fontSize: "14px", width: "80px" }}>빌드:</span>
+        <span style={{ fontSize: fontSize.sm, width: "80px" }}>빌드:</span>
         <Badge color="error" rounded icon="close">
           Failed
         </Badge>
       </div>
       <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-        <span style={{ fontSize: "14px", width: "80px" }}>테스트:</span>
+        <span style={{ fontSize: fontSize.sm, width: "80px" }}>테스트:</span>
         <Badge color="info" rounded icon="settings">
           Running
         </Badge>

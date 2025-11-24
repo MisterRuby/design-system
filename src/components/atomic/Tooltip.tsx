@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { colors } from '../../theme';
+import { colors, fontSize } from '../../theme';
 import { ComponentSize } from '../../types';
 
 export interface TooltipProps {
@@ -28,25 +28,25 @@ export const Tooltip: React.FC<TooltipProps> = ({
     switch (size) {
       case 'small':
         return {
-          fontSize: '12px',
+          fontSize: fontSize.xs,
           padding: '4px 8px',
           maxWidth: '250px'
         };
       case 'medium':
         return {
-          fontSize: '14px',
+          fontSize: fontSize.sm,
           padding: '6px 12px',
           maxWidth: '320px'
         };
       case 'large':
         return {
-          fontSize: '16px',
+          fontSize: fontSize.md,
           padding: '8px 16px',
           maxWidth: '500px'
         };
       default:
         return {
-          fontSize: '14px',
+          fontSize: fontSize.sm,
           padding: '6px 12px',
           maxWidth: '320px'
         };

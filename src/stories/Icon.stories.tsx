@@ -1,6 +1,6 @@
 import React from "react";
 import { Icon, IconName } from "../components";
-import { colors } from "../theme";
+import { colors, fontSize } from "../theme";
 
 export default {
   title: "Components/Atomic/Icon",
@@ -132,7 +132,7 @@ export const NavigationIcons = {
               padding: "16px",
               border: `1px solid ${cardBorderColor}`,
               borderRadius: "8px",
-              fontSize: "12px",
+              fontSize: fontSize.xs,
               textAlign: "center",
             }}>
             <Icon name={name} size={24} color={accentColor} />
@@ -187,7 +187,7 @@ export const ActionIcons = {
               padding: "16px",
               border: `1px solid ${cardBorderColor}`,
               borderRadius: "8px",
-              fontSize: "12px",
+              fontSize: fontSize.xs,
               textAlign: "center",
             }}>
             <Icon name={name} size={24} color={accentColor} />
@@ -240,7 +240,7 @@ export const UserIcons = {
               padding: "16px",
               border: `1px solid ${cardBorderColor}`,
               borderRadius: "8px",
-              fontSize: "12px",
+              fontSize: fontSize.xs,
               textAlign: "center",
             }}>
             <Icon name={name} size={24} color={accentColor} />
@@ -286,7 +286,7 @@ export const SecurityIcons = {
               padding: "16px",
               border: `1px solid ${cardBorderColor}`,
               borderRadius: "8px",
-              fontSize: "12px",
+              fontSize: fontSize.xs,
               textAlign: "center",
             }}>
             <Icon name={name} size={24} color={accentColor} />
@@ -341,7 +341,7 @@ export const ContentIcons = {
               padding: "16px",
               border: `1px solid ${cardBorderColor}`,
               borderRadius: "8px",
-              fontSize: "12px",
+              fontSize: fontSize.xs,
               textAlign: "center",
             }}>
             <Icon name={name} size={24} color={accentColor} />
@@ -387,7 +387,7 @@ export const StatusIcons = {
               padding: "16px",
               border: `1px solid ${cardBorderColor}`,
               borderRadius: "8px",
-              fontSize: "12px",
+              fontSize: fontSize.xs,
               textAlign: "center",
             }}>
             <Icon name={name} size={24} color={accentColor} />

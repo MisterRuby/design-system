@@ -1,5 +1,5 @@
 import React from 'react';
-import { colors } from '../../theme';
+import { colors, fontSize, fontWeight } from '../../theme';
 import { CheckboxSize } from '../../types';
 
 export interface SpinnerProps {
@@ -98,9 +98,9 @@ export const Spinner: React.FC<SpinnerProps> = ({
   };
 
   const labelStyles: React.CSSProperties = {
-    fontSize: '12px',
+    fontSize: fontSize.xs,
     color: colors.semantic.text,
-    fontWeight: '500',
+    fontWeight: fontWeight.medium,
   };
 
   // CSS keyframes for spin animation

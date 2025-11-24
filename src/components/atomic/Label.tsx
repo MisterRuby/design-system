@@ -1,5 +1,5 @@
 import React from "react";
-import { colors } from "../../theme";
+import { colors, fontSize, fontWeight } from "../../theme";
 
 export interface LabelProps {
   htmlFor?: string;
@@ -24,8 +24,8 @@ export const Label: React.FC<LabelProps> = ({
       className={className}
       data-testid={testId}
       style={{
-        fontSize: "14px",
-        fontWeight: "500",
+        fontSize: fontSize.sm,
+        fontWeight: fontWeight.medium,
         color: colors.semantic.text,
         marginBottom: "4px",
         display: "block",

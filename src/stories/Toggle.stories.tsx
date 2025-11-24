@@ -1,7 +1,7 @@
 import React from "react";
 import { within, userEvent } from "@storybook/testing-library";
 import { Toggle } from "../components";
-import { colors } from "../theme";
+import { colors, fontSize } from "../theme";
 import { action } from "./actions";
 
 export default {
@@ -331,7 +331,7 @@ export const ControlledExample = {
           checked={isEnabled}
           onChange={(e) => setIsEnabled(e.target.checked)}
         />
-        <div style={{ fontSize: "14px", color: colors.gray[500] }}>
+        <div style={{ fontSize: fontSize.sm, color: colors.gray[500] }}>
           상태: {isEnabled ? "켜짐" : "꺼짐"}
         </div>
         <button

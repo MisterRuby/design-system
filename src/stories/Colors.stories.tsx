@@ -1,8 +1,8 @@
 import React from "react";
-import { colors } from "../theme";
+import { colors, fontSize, fontWeight } from "../theme";
 
 export default {
-  title: "Design System/Colors",
+  title: "Style Guide/Colors",
   parameters: {
     layout: "padded",
     docs: {
@@ -28,10 +28,10 @@ const ColorSwatch = ({ color, name, description }: { color: string; name: string
       }}
     />
     <div>
-      <div style={{ fontWeight: "600", fontSize: "14px", color: colors.semantic.text }}>{name}</div>
-      <div style={{ fontSize: "12px", color: colors.gray[500], fontFamily: "monospace" }}>{color}</div>
+      <div style={{ fontWeight: fontWeight.semibold, fontSize: fontSize.sm, color: colors.semantic.text }}>{name}</div>
+      <div style={{ fontSize: fontSize.xs, color: colors.gray[500], fontFamily: "monospace" }}>{color}</div>
       {description && (
-        <div style={{ fontSize: "12px", color: colors.semantic.muted, marginTop: "2px" }}>{description}</div>
+        <div style={{ fontSize: fontSize.xs, color: colors.semantic.muted, marginTop: "2px" }}>{description}</div>
       )}
     </div>
   </div>
@@ -43,7 +43,7 @@ const ColorPalette = ({ title, colors: colorSet, descriptions }: {
   descriptions?: Record<string, string>;
 }) => (
   <div style={{ marginBottom: "32px" }}>
-    <h3 style={{ fontSize: "18px", fontWeight: "600", marginBottom: "16px", color: colors.gray[900] }}>
+    <h3 style={{ fontSize: fontSize.lg, fontWeight: fontWeight.semibold, marginBottom: "16px", color: colors.gray[900] }}>
       {title}
     </h3>
     <div>
@@ -109,8 +109,8 @@ export const GrayScale = {
               border: `1px solid ${colors.gray[200]}`,
             }}
           />
-          <div style={{ fontSize: "12px", fontWeight: "600", color: colors.semantic.text }}>gray-{shade}</div>
-          <div style={{ fontSize: "11px", color: colors.gray[500], fontFamily: "monospace" }}>{color}</div>
+          <div style={{ fontSize: fontSize.xs, fontWeight: fontWeight.semibold, color: colors.semantic.text }}>gray-{shade}</div>
+          <div style={{ fontSize: fontSize.xs, color: colors.gray[500], fontFamily: "monospace" }}>{color}</div>
         </div>
       ))}
     </div>
@@ -238,7 +238,7 @@ export const FocusRingColors = {
         }}
       />
       <div style={{ marginTop: "24px", padding: "16px", backgroundColor: colors.gray[50], borderRadius: "8px" }}>
-        <h4 style={{ fontSize: "14px", fontWeight: "600", marginBottom: "12px", color: colors.semantic.text }}>
+        <h4 style={{ fontSize: fontSize.sm, fontWeight: fontWeight.semibold, marginBottom: "12px", color: colors.semantic.text }}>
           Focus Ring 사용 예시
         </h4>
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
@@ -251,7 +251,7 @@ export const FocusRingColors = {
                 borderRadius: "6px",
                 backgroundColor: colors.background.white,
                 color: colors.semantic[type as keyof typeof colors.semantic] || colors.semantic.text,
-                fontSize: "14px",
+                fontSize: fontSize.sm,
                 cursor: "pointer",
                 outline: "none",
                 boxShadow: `0 0 0 3px ${color}`,

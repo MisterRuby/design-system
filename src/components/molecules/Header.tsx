@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from '../atomic/Text';
-import { colors } from '../../theme';
+import { colors, fontWeight } from '../../theme';
 
 export interface HeaderProps {
   logo?: React.ReactNode;
@@ -120,7 +120,7 @@ export const Header: React.FC<HeaderProps> = ({
   const navigationItemStyles = (item: NavigationItem): React.CSSProperties => ({
     color: item.active ? colors.semantic.primary : colors.semantic.text,
     textDecoration: 'none',
-    fontWeight: item.active ? '600' : '400',
+    fontWeight: item.active ? fontWeight.semibold : fontWeight.normal,
     cursor: item.disabled ? 'not-allowed' : 'pointer',
     opacity: item.disabled ? 0.5 : 1,
     padding: '6px 10px',

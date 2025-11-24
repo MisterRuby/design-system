@@ -1,5 +1,5 @@
 import React from 'react';
-import { colors } from '../../theme';
+import { colors, fontSize, fontWeight } from '../../theme';
 import { CheckboxSize } from '../../types';
 import { Icon, IconName } from './Icon';
 
@@ -31,7 +31,7 @@ export const Badge: React.FC<BadgeProps> = ({
       case 'sm':
         return {
           padding: '2px 6px',
-          fontSize: '10px',
+          fontSize: fontSize.xxs,
           lineHeight: '12px',
           iconSize: '12px',
           gap: '4px'
@@ -39,7 +39,7 @@ export const Badge: React.FC<BadgeProps> = ({
       case 'md':
         return {
           padding: '4px 8px',
-          fontSize: '12px',
+          fontSize: fontSize.xs,
           lineHeight: '16px',
           iconSize: '14px',
           gap: '4px'
@@ -47,7 +47,7 @@ export const Badge: React.FC<BadgeProps> = ({
       case 'lg':
         return {
           padding: '6px 12px',
-          fontSize: '14px',
+          fontSize: fontSize.sm,
           lineHeight: '20px',
           iconSize: '16px',
           gap: '6px'
@@ -55,7 +55,7 @@ export const Badge: React.FC<BadgeProps> = ({
       default:
         return {
           padding: '4px 8px',
-          fontSize: '12px',
+          fontSize: fontSize.xs,
           lineHeight: '16px',
           iconSize: '14px',
           gap: '4px'
@@ -129,7 +129,7 @@ export const Badge: React.FC<BadgeProps> = ({
     padding: sizeStyles.padding,
     fontSize: sizeStyles.fontSize,
     lineHeight: sizeStyles.lineHeight,
-    fontWeight: '500',
+    fontWeight: fontWeight.medium,
     backgroundColor: colorStyles.backgroundColor,
     color: colorStyles.color,
     border: `1px solid ${colorStyles.borderColor}`,
@@ -151,7 +151,7 @@ export const Badge: React.FC<BadgeProps> = ({
     backgroundColor: 'rgba(0, 0, 0, 0.1)',
     border: 'none',
     cursor: disabled ? 'not-allowed' : 'pointer',
-    fontSize: '10px',
+    fontSize: fontSize.xxs,
     color: 'currentColor',
     transition: 'background-color 0.2s ease',
     marginLeft: '2px'

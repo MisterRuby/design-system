@@ -1,5 +1,5 @@
 import React from "react";
-import { colors } from "../../theme";
+import { colors, fontSize, fontWeight } from "../../theme";
 import { CheckboxSize } from "../../types";
 
 export interface RadioGroupOption {
@@ -55,21 +55,21 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
       case "sm":
         return {
           radio: "16px",
-          text: "14px",
+          text: fontSize.sm,
           gap: "8px",
           itemGap: "8px",
         };
       case "lg":
         return {
           radio: "24px",
-          text: "18px",
+          text: fontSize.lg,
           gap: "12px",
           itemGap: "16px",
         };
       default: // md
         return {
           radio: "20px",
-          text: "16px",
+          text: fontSize.md,
           gap: "10px",
           itemGap: "12px",
         };
@@ -128,7 +128,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
   };
 
   const descriptionStyles: React.CSSProperties = {
-    fontSize: size === "sm" ? "12px" : size === "lg" ? "16px" : "14px",
+    fontSize: size === "sm" ? fontSize.xs : size === "lg" ? fontSize.md : fontSize.sm,
     color: disabled ? colors.semantic.muted : colors.semantic.secondary,
     marginTop: "2px",
   };
@@ -147,8 +147,8 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
       {label && (
         <legend
           style={{
-            fontSize: "14px",
-            fontWeight: "500",
+            fontSize: fontSize.sm,
+            fontWeight: fontWeight.medium,
             color: colors.semantic.text,
             marginBottom: "4px",
             padding: 0,
@@ -227,7 +227,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
       {showError && (
         <span
           style={{
-            fontSize: "12px",
+            fontSize: fontSize.xs,
             color: colors.semantic.error,
             marginTop: "4px",
           }}>
@@ -237,7 +237,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
       {!showError && helperText && (
         <span
           style={{
-            fontSize: "12px",
+            fontSize: fontSize.xs,
             color: colors.semantic.secondary,
             marginTop: "4px",
           }}>

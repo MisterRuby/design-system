@@ -1,5 +1,5 @@
 import React from "react";
-import { colors } from "../../theme";
+import { colors, fontSize } from "../../theme";
 
 export interface CheckboxFieldProps {
   id?: string;
@@ -55,19 +55,19 @@ export const CheckboxField: React.FC<CheckboxFieldProps> = ({
       case "sm":
         return {
           checkbox: "16px",
-          text: "14px",
+          text: fontSize.sm,
           gap: "8px",
         };
       case "lg":
         return {
           checkbox: "24px",
-          text: "18px",
+          text: fontSize.lg,
           gap: "12px",
         };
       default: // md
         return {
           checkbox: "20px",
-          text: "16px",
+          text: fontSize.md,
           gap: "10px",
         };
     }
@@ -113,7 +113,7 @@ export const CheckboxField: React.FC<CheckboxFieldProps> = ({
   };
 
   const descriptionStyles: React.CSSProperties = {
-    fontSize: size === "sm" ? "12px" : size === "lg" ? "16px" : "14px",
+    fontSize: size === "sm" ? fontSize.xs : size === "lg" ? fontSize.md : fontSize.sm,
     color: disabled ? colors.semantic.muted : colors.semantic.secondary,
     marginTop: "4px",
   };
@@ -162,7 +162,7 @@ export const CheckboxField: React.FC<CheckboxFieldProps> = ({
         {description && <div style={descriptionStyles}>{description}</div>}
         {errorMessage && (
           <div style={{
-            fontSize: "12px",
+            fontSize: fontSize.xs,
             color: colors.semantic.error,
             marginTop: "4px",
           }}>

@@ -1,5 +1,5 @@
 import React from "react";
-import { colors } from "../../theme";
+import { colors, fontSize } from "../../theme";
 import { InputVariant, ComponentSize } from "../../types";
 
 export interface BaseInputProps {
@@ -99,25 +99,25 @@ export const BaseInput: React.FC<BaseInputProps> = ({
       case "small":
         return {
           padding: "6px 12px",
-          fontSize: "14px",
+          fontSize: fontSize.sm,
           height: "32px",
         };
       case "medium":
         return {
           padding: "8px 16px",
-          fontSize: "16px",
+          fontSize: fontSize.md,
           height: "40px",
         };
       case "large":
         return {
           padding: "12px 20px",
-          fontSize: "18px",
+          fontSize: fontSize.lg,
           height: "48px",
         };
       default:
         return {
           padding: "8px 16px",
-          fontSize: "16px",
+          fontSize: fontSize.md,
           height: "40px",
         };
     }
