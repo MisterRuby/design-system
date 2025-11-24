@@ -10,6 +10,7 @@ export interface ButtonProps {
   disabled?: boolean;
   icon?: IconName;
   iconPosition?: 'left' | 'right';
+  type?: 'button' | 'submit' | 'reset';
   onClick?: () => void;
 }
 
@@ -20,6 +21,7 @@ export const Button: React.FC<ButtonProps> = ({
   disabled = false,
   icon,
   iconPosition = 'left',
+  type = 'button',
   onClick
 }) => {
   const getVariantStyles = (variant: string) => {
@@ -61,6 +63,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
+      type={type}
       onClick={onClick}
       disabled={disabled}
       style={{

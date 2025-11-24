@@ -4,6 +4,7 @@ import { colors, typography, fontSize, fontWeight } from "../theme";
 
 export default {
   title: "Style Guide/Typography",
+  tags: ["autodocs"],
   parameters: {
     layout: "padded",
     docs: {
@@ -12,7 +13,6 @@ export default {
       },
     },
   },
-  tags: ["autodocs"],
 };
 
 const TypographyShowcase = ({ title, items }: {
@@ -118,12 +118,57 @@ export const HeadingVariants = {
   parameters: {
     docs: {
       source: {
-        code: `<Text variant="h1">Heading 1</Text>
-<Text variant="h2">Heading 2</Text>
-<Text variant="h3">Heading 3</Text>
-<Text variant="h4">Heading 4</Text>
-<Text variant="h5">Heading 5</Text>
-<Text variant="h6">Heading 6</Text>`,
+        code: `import { Text } from "../components";
+import { typography } from "../theme";
+
+// 1. 기본 제목 계층 구조
+<Text variant="h1">메인 페이지 제목</Text>
+<Text variant="h2">주요 섹션</Text>
+<Text variant="h3">하위 섹션</Text>
+<Text variant="h4">소제목</Text>
+
+// 2. 커스텀 제목 컴포넌트
+const PageHeader = ({ title, subtitle }) => (
+  <div style={{ marginBottom: '32px' }}>
+    <Text variant="h1" color="primary" style={{ marginBottom: '8px' }}>
+      {title}
+    </Text>
+    {subtitle && (
+      <Text variant="body1" color="muted">
+        {subtitle}
+      </Text>
+    )}
+  </div>
+);
+
+// 3. 카드 헤더 컴포넌트
+const CardHeader = ({ title, action }) => (
+  <div style={{
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '16px'
+  }}>
+    <Text variant="h3">{title}</Text>
+    {action && action}
+  </div>
+);
+
+// 4. CSS-in-JS에서 직접 사용
+const customTitleStyle = {
+  ...typography.h2,
+  color: colors.semantic.primary,
+  textAlign: 'center',
+  marginBottom: '24px',
+  borderBottom: \`2px solid \${colors.border.primary}\`,
+  paddingBottom: '16px'
+};
+
+// 사용 예시
+<PageHeader
+  title="대시보드"
+  subtitle="프로젝트 현황을 한눈에 확인하세요"
+/>`,
       },
     },
   },
@@ -160,10 +205,46 @@ export const BodyVariants = {
   parameters: {
     docs: {
       source: {
-        code: `<Text variant="body1">Body 1 텍스트</Text>
-<Text variant="body2">Body 2 텍스트</Text>
-<Text variant="caption">Caption 텍스트</Text>
-<Text variant="overline">Overline 텍스트</Text>`,
+        code: `// 1. 기본 본문 텍스트
+<Text variant="body1">기본 본문 텍스트입니다. 대부분의 콘텐츠에 사용합니다.</Text>
+<Text variant="body2">작은 본문 텍스트로 부가 설명이나 섹컨데리 콘텐츠에 사용합니다.</Text>
+
+// 2. 설명과 메타데이터
+<Text variant="caption" color="muted">이미지 설명, 날짜, 메타데이터 등에 사용</Text>
+<Text variant="overline" color="primary">SECTION LABEL</Text>
+
+// 3. 단락 컴포넌트
+const Paragraph = ({ children, size = "body1" }) => (
+  <Text variant={size} style={{
+    lineHeight: 1.6,
+    marginBottom: '16px'
+  }}>
+    {children}
+  </Text>
+);
+
+// 4. 인용문 컴포넌트
+const Quote = ({ children, author }) => (
+  <blockquote style={{
+    borderLeft: \`4px solid \${colors.border.primary}\`,
+    paddingLeft: '16px',
+    margin: '24px 0'
+  }}>
+    <Text variant="body1" style={{ fontStyle: 'italic', marginBottom: '8px' }}>
+      "{children}"
+    </Text>
+    {author && (
+      <Text variant="caption" color="muted">
+        — {author}
+      </Text>
+    )}
+  </blockquote>
+);
+
+// 사용 예시
+<Quote author="사용자 A">
+  이 프로덕트는 정말 훌륭합니다!
+</Quote>`,
       },
     },
   },
@@ -594,6 +675,139 @@ const customStyles = {
   fontSize: fontSize.lg,
   fontWeight: fontWeight.semibold,
   ...typography.h3
+};`,
+      },
+    },
+  },
+};
+
+export const RealWorldExamples = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
+      {/* 블로그 포스트 예시 */}
+      <div style={{
+        maxWidth: '600px',
+        padding: '24px',
+        backgroundColor: colors.background.white,
+        border: `1px solid ${colors.gray[200]}`,
+        borderRadius: '12px'
+      }}>
+        <Text variant="overline" color="primary" style={{ marginBottom: '8px' }}>TUTORIAL</Text>
+        <Text variant="h1" style={{ marginBottom: '16px' }}>React 컴포넌트 설계 가이드</Text>
+        <Text variant="body2" color="muted" style={{ marginBottom: '24px' }}>2024년 11월 25일 · 5분 읽기</Text>
+        <Text variant="body1" style={{ marginBottom: '16px', lineHeight: 1.6 }}>
+          재사용 가능한 React 컴포넌트를 설계하는 것은 현대 웹 개발에서 매우 중요한 스킬입니다.
+          이 가이드에서는 효과적인 컴포넌트 설계 원칙과 실제 적용 방법을 알아보겠습니다.
+        </Text>
+        <Text variant="h3" style={{ marginBottom: '12px', marginTop: '32px' }}>주요 설계 원칙</Text>
+        <Text variant="body1" style={{ marginBottom: '16px', lineHeight: 1.6 }}>
+          컴포넌트는 단일 책임 원칙을 따라야 하며, 명확한 인터페이스를 가져야 합니다.
+        </Text>
+      </div>
+
+      {/* 카드 UI 예시 */}
+      <div style={{
+        maxWidth: '400px',
+        padding: '20px',
+        backgroundColor: colors.background.white,
+        border: `1px solid ${colors.gray[200]}`,
+        borderRadius: '8px'
+      }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+          <div>
+            <Text variant="h4" style={{ marginBottom: '4px' }}>프로젝트 알파</Text>
+            <Text variant="caption" color="muted">2024.11.25 업데이트</Text>
+          </div>
+          <Text variant="overline" color="success" style={{
+            backgroundColor: colors.success[50],
+            padding: '4px 8px',
+            borderRadius: '4px',
+            border: `1px solid ${colors.success[200]}`
+          }}>완료</Text>
+        </div>
+        <Text variant="body2" style={{ marginBottom: '16px', lineHeight: 1.5 }}>
+          새로운 사용자 인터페이스 디자인 시스템을 구축하고 전체 애플리케이션에 적용했습니다.
+        </Text>
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <Text variant="caption" color="muted">담당자:</Text>
+          <Text variant="caption" weight="medium">김개발</Text>
+        </div>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      source: {
+        code: `// 실제 애플리케이션에서 Typography 활용 예시
+
+// 1. 블로그 포스트 컴포넌트
+const BlogPost = ({ category, title, publishedAt, readTime, content }) => (
+  <article style={{
+    maxWidth: '600px',
+    padding: '24px',
+    backgroundColor: colors.background.white,
+    border: \`1px solid \${colors.gray[200]}\`,
+    borderRadius: '12px'
+  }}>
+    <Text variant="overline" color="primary">{category.toUpperCase()}</Text>
+    <Text variant="h1" style={{ marginBottom: '16px' }}>{title}</Text>
+    <Text variant="body2" color="muted" style={{ marginBottom: '24px' }}>
+      {publishedAt} · {readTime}
+    </Text>
+    <Text variant="body1" style={{ lineHeight: 1.6 }}>
+      {content}
+    </Text>
+  </article>
+);
+
+// 2. 프로젝트 카드 컴포넌트
+const ProjectCard = ({ title, lastUpdated, description, status, assignee }) => (
+  <div style={{
+    padding: '20px',
+    backgroundColor: colors.background.white,
+    border: \`1px solid \${colors.gray[200]}\`,
+    borderRadius: '8px'
+  }}>
+    <div style={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      marginBottom: '16px'
+    }}>
+      <div>
+        <Text variant="h4">{title}</Text>
+        <Text variant="caption" color="muted">{lastUpdated}</Text>
+      </div>
+      <StatusBadge status={status} />
+    </div>
+    <Text variant="body2" style={{ lineHeight: 1.5 }}>
+      {description}
+    </Text>
+    <Text variant="caption" color="muted">
+      담당자: <Text variant="caption" weight="medium">{assignee}</Text>
+    </Text>
+  </div>
+);
+
+// 3. 상태 배지 컴포넌트
+const StatusBadge = ({ status }) => {
+  const statusColors = {
+    완료: { bg: colors.success[50], border: colors.success[200], text: 'success' },
+    진행중: { bg: colors.info[50], border: colors.info[200], text: 'info' },
+    대기: { bg: colors.warning[50], border: colors.warning[200], text: 'warning' }
+  };
+
+  const style = statusColors[status];
+
+  return (
+    <Text variant="overline" color={style.text} style={{
+      backgroundColor: style.bg,
+      border: \`1px solid \${style.border}\`,
+      padding: '4px 8px',
+      borderRadius: '4px'
+    }}>
+      {status}
+    </Text>
+  );
 };`,
       },
     },

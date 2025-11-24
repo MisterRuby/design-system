@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from '../atomic/Text';
-import { colors, fontWeight } from '../../theme';
+import { colors, fontWeight, spacing, semanticSpacing } from '../../theme';
 
 export interface HeaderProps {
   logo?: React.ReactNode;
@@ -61,18 +61,18 @@ export const Header: React.FC<HeaderProps> = ({
     switch (height) {
       case 'small':
         return {
-          padding: '8px 16px',
+          padding: `${spacing.xs} ${spacing.md}`,
           minHeight: '40px',
         };
       case 'large':
         return {
-          padding: '16px 24px',
+          padding: `${spacing.md} ${spacing.xl}`,
           minHeight: '64px',
         };
       case 'medium':
       default:
         return {
-          padding: '12px 20px',
+          padding: `${spacing.sm} ${spacing.lg}`,
           minHeight: '52px',
         };
     }
@@ -98,14 +98,14 @@ export const Header: React.FC<HeaderProps> = ({
   const logoSectionStyles: React.CSSProperties = {
     display: 'flex',
     alignItems: 'center',
-    gap: '16px',
+    gap: spacing.md,
     flex: '0 0 auto',
   };
 
   const navigationStyles: React.CSSProperties = {
     display: 'flex',
     alignItems: 'center',
-    gap: '16px',
+    gap: spacing.md,
     flex: '1',
     justifyContent: 'center',
   };
@@ -113,7 +113,7 @@ export const Header: React.FC<HeaderProps> = ({
   const actionsStyles: React.CSSProperties = {
     display: 'flex',
     alignItems: 'center',
-    gap: '12px',
+    gap: spacing.sm,
     flex: '0 0 auto',
   };
 
@@ -123,8 +123,8 @@ export const Header: React.FC<HeaderProps> = ({
     fontWeight: item.active ? fontWeight.semibold : fontWeight.normal,
     cursor: item.disabled ? 'not-allowed' : 'pointer',
     opacity: item.disabled ? 0.5 : 1,
-    padding: '6px 10px',
-    borderRadius: '4px',
+    padding: `${spacing.xxs} ${spacing.xs}`,
+    borderRadius: spacing.xxs,
     transition: 'all 0.2s ease-in-out',
   });
 

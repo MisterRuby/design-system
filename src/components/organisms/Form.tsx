@@ -4,7 +4,7 @@ import { InputField, InputFieldProps } from '../molecules/InputField';
 import { CheckboxField, CheckboxFieldProps } from '../molecules/CheckboxField';
 import { SelectField, SelectFieldProps } from '../molecules/SelectField';
 import { RadioGroup, RadioGroupProps } from '../molecules/RadioGroup';
-import { colors, fontSize, fontWeight } from '../../theme';
+import { colors, fontSize, fontWeight, spacing, semanticSpacing } from '../../theme';
 
 export interface FormField {
   id: string;
@@ -44,7 +44,7 @@ export const Form: React.FC<FormProps> = ({
   title,
   description,
   fields,
-  submitButton = { text: '제출', variant: 'primary' },
+  submitButton = { text: '제출', variant: 'primary', size: 'medium', disabled: false, loading: false },
   resetButton,
   onSubmit,
   onReset,
@@ -60,13 +60,13 @@ export const Form: React.FC<FormProps> = ({
   const getFieldSpacing = () => {
     switch (fieldSpacing) {
       case 'small':
-        return '12px';
+        return spacing.sm;
       case 'medium':
-        return '16px';
+        return spacing.md;
       case 'large':
-        return '24px';
+        return spacing.xl;
       default:
-        return '16px';
+        return spacing.md;
     }
   };
 
@@ -181,7 +181,7 @@ export const Form: React.FC<FormProps> = ({
             value={value || ''}
             variant={error ? 'error' : selectProps.variant}
             errorMessage={error}
-            onChange={(selectedValue) => handleFieldChange(field.id, selectedValue)}
+            onChange={(e) => handleFieldChange(field.id, e.target.value)}
           />
         );
 
@@ -213,19 +213,19 @@ export const Form: React.FC<FormProps> = ({
         display: 'flex',
         flexDirection: 'column',
         gap: getFieldSpacing(),
-        padding: '24px',
+        padding: semanticSpacing.componentPaddingLarge,
         backgroundColor: colors.background.white,
-        borderRadius: '8px',
+        borderRadius: spacing.xs,
         border: `1px solid ${colors.border.default}`,
         ...style,
       }}
     >
       {(title || description) && (
-        <div style={{ marginBottom: '8px' }}>
+        <div style={{ marginBottom: spacing.xs }}>
           {title && (
             <h2
               style={{
-                margin: '0 0 8px 0',
+                margin: `0 0 ${spacing.xs} 0`,
                 fontSize: fontSize['2xl'],
                 fontWeight: fontWeight.semibold,
                 color: colors.semantic.text,
@@ -252,7 +252,7 @@ export const Form: React.FC<FormProps> = ({
       {showRequiredIndicator && fields.some((field) => field.required) && (
         <p
           style={{
-            margin: '0 0 8px 0',
+            margin: `0 0 ${spacing.xs} 0`,
             fontSize: fontSize.xs,
             color: colors.semantic.secondary,
           }}
@@ -285,13 +285,14 @@ export const Form: React.FC<FormProps> = ({
       <div
         style={{
           display: 'flex',
-          gap: '12px',
-          marginTop: '8px',
+          gap: spacing.sm,
+          marginTop: spacing.xs,
           justifyContent: 'flex-end',
         }}
       >
         {resetButton && (
           <Button
+            type="button"
             variant={resetButton.variant || 'outline'}
             size={resetButton.size || 'medium'}
             disabled={resetButton.disabled}
@@ -301,10 +302,10 @@ export const Form: React.FC<FormProps> = ({
           </Button>
         )}
         <Button
+          type="submit"
           variant={submitButton.variant || 'primary'}
           size={submitButton.size || 'medium'}
           disabled={submitButton.disabled || submitButton.loading}
-          onClick={() => {}}
         >
           {submitButton.loading ? '처리 중...' : submitButton.text || '제출'}
         </Button>

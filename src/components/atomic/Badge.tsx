@@ -1,5 +1,5 @@
 import React from 'react';
-import { colors, fontSize, fontWeight } from '../../theme';
+import { colors, fontSize, fontWeight, spacing, semanticSpacing } from '../../theme';
 import { CheckboxSize } from '../../types';
 import { Icon, IconName } from './Icon';
 
@@ -30,23 +30,23 @@ export const Badge: React.FC<BadgeProps> = ({
     switch (size) {
       case 'sm':
         return {
-          padding: '2px 6px',
+          padding: `2px ${spacing.xxs}`,
           fontSize: fontSize.xxs,
           lineHeight: '12px',
           iconSize: '12px',
-          gap: '4px'
+          gap: spacing.xxs
         };
       case 'md':
         return {
-          padding: '4px 8px',
+          padding: `${spacing.xxs} ${spacing.xs}`,
           fontSize: fontSize.xs,
           lineHeight: '16px',
           iconSize: '14px',
-          gap: '4px'
+          gap: spacing.xxs
         };
       case 'lg':
         return {
-          padding: '6px 12px',
+          padding: `${spacing.xxs} ${spacing.sm}`,
           fontSize: fontSize.sm,
           lineHeight: '20px',
           iconSize: '16px',
@@ -54,11 +54,11 @@ export const Badge: React.FC<BadgeProps> = ({
         };
       default:
         return {
-          padding: '4px 8px',
+          padding: `${spacing.xxs} ${spacing.xs}`,
           fontSize: fontSize.xs,
           lineHeight: '16px',
           iconSize: '14px',
-          gap: '4px'
+          gap: spacing.xxs
         };
     }
   };
@@ -133,7 +133,7 @@ export const Badge: React.FC<BadgeProps> = ({
     backgroundColor: colorStyles.backgroundColor,
     color: colorStyles.color,
     border: `1px solid ${colorStyles.borderColor}`,
-    borderRadius: rounded ? '50px' : '6px',
+    borderRadius: rounded ? '50px' : spacing.xxs,
     whiteSpace: 'nowrap',
     opacity: disabled ? 0.6 : 1,
     cursor: disabled ? 'not-allowed' : 'default',

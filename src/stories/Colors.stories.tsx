@@ -3,6 +3,7 @@ import { colors, fontSize, fontWeight } from "../theme";
 
 export default {
   title: "Style Guide/Colors",
+  tags: ["autodocs"],
   parameters: {
     layout: "padded",
     docs: {
@@ -11,7 +12,6 @@ export default {
       },
     },
   },
-  tags: ["autodocs"],
 };
 
 const ColorSwatch = ({ color, name, description }: { color: string; name: string; description?: string }) => (
@@ -85,10 +85,58 @@ export const SemanticColors = {
       source: {
         code: `import { colors } from "../theme";
 
-// 사용 예시
-<Text color="primary">Primary 색상</Text>
-<Text color="success">Success 색상</Text>
-<Button variant="error">Error 버튼</Button>`,
+// 1. 기본 버튼 스타일링
+const primaryButton = {
+  backgroundColor: colors.semantic.primary,
+  color: colors.background.white,
+  border: \`1px solid \${colors.semantic.primary}\`,
+  padding: "12px 24px",
+  borderRadius: "6px",
+  cursor: "pointer",
+};
+
+// 2. 상태별 알림 메시지
+const alertStyles = {
+  success: {
+    backgroundColor: colors.success[50],
+    borderLeft: \`4px solid \${colors.semantic.success}\`,
+    color: colors.success[800],
+    padding: "12px 16px",
+  },
+  error: {
+    backgroundColor: colors.error[50],
+    borderLeft: \`4px solid \${colors.semantic.error}\`,
+    color: colors.error[800],
+    padding: "12px 16px",
+  },
+  warning: {
+    backgroundColor: colors.warning[50],
+    borderLeft: \`4px solid \${colors.semantic.warning}\`,
+    color: colors.warning[800],
+    padding: "12px 16px",
+  },
+};
+
+// 3. 텍스트 계층 구조
+const textHierarchy = {
+  title: { color: colors.semantic.text, fontWeight: 600 },
+  body: { color: colors.gray[700] },
+  caption: { color: colors.semantic.muted },
+  link: { color: colors.semantic.primary },
+};
+
+// 4. 실제 컴포넌트 사용 예시
+function AlertMessage({ type, children }) {
+  return (
+    <div style={alertStyles[type]}>
+      {children}
+    </div>
+  );
+}
+
+// 사용법
+<AlertMessage type="success">성공적으로 저장되었습니다!</AlertMessage>
+<AlertMessage type="error">오류가 발생했습니다.</AlertMessage>`,
       },
     },
   },
@@ -120,9 +168,37 @@ export const GrayScale = {
       source: {
         code: `import { colors } from "../theme";
 
-// 사용 예시
-backgroundColor: colors.gray[100]
-border: \`1px solid \${colors.gray[300]}\``,
+// 그레이 스케일 사용 예시
+const cardStyle = {
+  backgroundColor: colors.gray[50],    // 매우 밝은 배경
+  border: \`1px solid \${colors.gray[200]}\`, // 연한 경계선
+  borderRadius: "8px",
+  padding: "16px",
+};
+
+const textStyles = {
+  title: { color: colors.gray[900] },      // 진한 텍스트 (제목)
+  body: { color: colors.gray[700] },       // 보통 텍스트 (본문)
+  muted: { color: colors.gray[500] },      // 흐린 텍스트 (부가정보)
+  disabled: { color: colors.gray[400] },   // 비활성 텍스트
+};
+
+// 구분선 및 경계선
+const dividerStyle = {
+  height: "1px",
+  backgroundColor: colors.gray[300],  // 구분선
+  margin: "16px 0",
+};
+
+// 입력 필드 스타일링
+const inputStyle = {
+  border: \`1px solid \${colors.gray[300]}\`,
+  backgroundColor: colors.gray[50],
+  ':focus': {
+    borderColor: colors.gray[500],
+    backgroundColor: colors.background.white,
+  },
+};`,
       },
     },
   },
@@ -131,10 +207,117 @@ border: \`1px solid \${colors.gray[300]}\``,
 export const StatusColors = {
   render: () => (
     <div>
-      <ColorPalette title="Success Colors" colors={colors.success} />
-      <ColorPalette title="Error Colors" colors={colors.error} />
-      <ColorPalette title="Warning Colors" colors={colors.warning} />
-      <ColorPalette title="Info Colors" colors={colors.info} />
+      <h3 style={{ fontSize: fontSize.lg, fontWeight: fontWeight.semibold, marginBottom: "24px", color: colors.gray[900] }}>
+        Status Colors
+      </h3>
+
+      {/* Success Colors Row */}
+      <div style={{ marginBottom: "32px" }}>
+        <h4 style={{ fontSize: fontSize.md, fontWeight: fontWeight.semibold, marginBottom: "16px", color: colors.gray[800] }}>
+          Success Colors
+        </h4>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))", gap: "12px" }}>
+          {Object.entries(colors.success).map(([shade, color]) => (
+            <div key={shade} style={{ textAlign: "center" }}>
+              <div style={{
+                width: "100%",
+                height: "60px",
+                backgroundColor: color,
+                borderRadius: "6px",
+                marginBottom: "8px",
+                border: `1px solid ${colors.gray[200]}`,
+              }} />
+              <div style={{ fontSize: fontSize.xs, fontWeight: fontWeight.semibold, color: colors.gray[700] }}>
+                {shade}
+              </div>
+              <div style={{ fontSize: fontSize.xs, color: colors.gray[500], fontFamily: "monospace" }}>
+                {color}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Error Colors Row */}
+      <div style={{ marginBottom: "32px" }}>
+        <h4 style={{ fontSize: fontSize.md, fontWeight: fontWeight.semibold, marginBottom: "16px", color: colors.gray[800] }}>
+          Error Colors
+        </h4>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))", gap: "12px" }}>
+          {Object.entries(colors.error).map(([shade, color]) => (
+            <div key={shade} style={{ textAlign: "center" }}>
+              <div style={{
+                width: "100%",
+                height: "60px",
+                backgroundColor: color,
+                borderRadius: "6px",
+                marginBottom: "8px",
+                border: `1px solid ${colors.gray[200]}`,
+              }} />
+              <div style={{ fontSize: fontSize.xs, fontWeight: fontWeight.semibold, color: colors.gray[700] }}>
+                {shade}
+              </div>
+              <div style={{ fontSize: fontSize.xs, color: colors.gray[500], fontFamily: "monospace" }}>
+                {color}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Warning Colors Row */}
+      <div style={{ marginBottom: "32px" }}>
+        <h4 style={{ fontSize: fontSize.md, fontWeight: fontWeight.semibold, marginBottom: "16px", color: colors.gray[800] }}>
+          Warning Colors
+        </h4>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))", gap: "12px" }}>
+          {Object.entries(colors.warning).map(([shade, color]) => (
+            <div key={shade} style={{ textAlign: "center" }}>
+              <div style={{
+                width: "100%",
+                height: "60px",
+                backgroundColor: color,
+                borderRadius: "6px",
+                marginBottom: "8px",
+                border: `1px solid ${colors.gray[200]}`,
+              }} />
+              <div style={{ fontSize: fontSize.xs, fontWeight: fontWeight.semibold, color: colors.gray[700] }}>
+                {shade}
+              </div>
+              <div style={{ fontSize: fontSize.xs, color: colors.gray[500], fontFamily: "monospace" }}>
+                {color}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Info Colors Row */}
+      <div style={{ marginBottom: "32px" }}>
+        <h4 style={{ fontSize: fontSize.md, fontWeight: fontWeight.semibold, marginBottom: "16px", color: colors.gray[800] }}>
+          Info Colors
+        </h4>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))", gap: "12px" }}>
+          {Object.entries(colors.info).map(([shade, color]) => (
+            <div key={shade} style={{ textAlign: "center" }}>
+              <div style={{
+                width: "100%",
+                height: "60px",
+                backgroundColor: color,
+                borderRadius: "6px",
+                marginBottom: "8px",
+                border: `1px solid ${colors.gray[200]}`,
+              }} />
+              <div style={{ fontSize: fontSize.xs, fontWeight: fontWeight.semibold, color: colors.gray[700] }}>
+                {shade}
+              </div>
+              <div style={{ fontSize: fontSize.xs, color: colors.gray[500], fontFamily: "monospace" }}>
+                {color}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   ),
   parameters: {
@@ -154,33 +337,168 @@ border: \`1px solid \${colors.error[300]}\``,
 export const BorderColors = {
   render: () => (
     <div>
-      <ColorPalette
-        title="Border Colors"
-        colors={{
-          default: colors.border.default,
-          primary: colors.border.primary,
-          secondary: colors.border.secondary,
-          success: colors.border.success,
-          error: colors.border.error,
-        }}
-        descriptions={{
-          default: "기본 테두리 색상",
-          primary: "Primary 상태 테두리",
-          secondary: "Secondary 상태 테두리",
-          success: "Success 상태 테두리",
-          error: "Error 상태 테두리",
-        }}
-      />
-      <ColorPalette
-        title="Focus Border Colors"
-        colors={colors.border.focus}
-        descriptions={{
-          primary: "Primary 포커스 테두리",
-          secondary: "Secondary 포커스 테두리",
-          success: "Success 포커스 테두리",
-          error: "Error 포커스 테두리",
-        }}
-      />
+      <h3 style={{ fontSize: fontSize.lg, fontWeight: fontWeight.semibold, marginBottom: "24px", color: colors.gray[900] }}>
+        Border Colors
+      </h3>
+
+      {/* Basic Border Colors */}
+      <div style={{ marginBottom: "48px" }}>
+        <h4 style={{ fontSize: fontSize.md, fontWeight: fontWeight.semibold, marginBottom: "16px", color: colors.gray[800] }}>
+          Basic Border Colors
+        </h4>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "16px", marginBottom: "24px" }}>
+          {[
+            { name: 'default', color: colors.border.default, label: 'Default Border' },
+            { name: 'primary', color: colors.border.primary, label: 'Primary Border' },
+            { name: 'secondary', color: colors.border.secondary, label: 'Secondary Border' },
+            { name: 'success', color: colors.border.success, label: 'Success Border' },
+            { name: 'error', color: colors.border.error, label: 'Error Border' }
+          ].map(({ name, color, label }) => (
+            <div key={name} style={{ textAlign: "center" }}>
+              <div style={{
+                padding: "16px",
+                border: `2px solid ${color}`,
+                borderRadius: "8px",
+                backgroundColor: colors.background.white,
+                marginBottom: "8px",
+                minHeight: "60px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }}>
+                <span style={{ fontSize: fontSize.sm, color: colors.gray[600] }}>
+                  {label}
+                </span>
+              </div>
+              <div style={{ fontSize: fontSize.xs, fontWeight: fontWeight.semibold, color: colors.gray[700] }}>
+                {name}
+              </div>
+              <div style={{ fontSize: fontSize.xs, color: colors.gray[500], fontFamily: "monospace" }}>
+                {color}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Border Usage Examples */}
+        <div style={{
+          padding: "24px",
+          backgroundColor: colors.gray[50],
+          borderRadius: "8px",
+          border: `1px solid ${colors.gray[200]}`
+        }}>
+          <h5 style={{ fontSize: fontSize.sm, fontWeight: fontWeight.semibold, marginBottom: "16px", color: colors.gray[800] }}>
+            실제 사용 예시
+          </h5>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "16px" }}>
+
+            {/* Input Examples */}
+            <div>
+              <label style={{ fontSize: fontSize.xs, color: colors.gray[600], marginBottom: "4px", display: "block" }}>
+                기본 입력 필드
+              </label>
+              <input
+                placeholder="기본 테두리"
+                style={{
+                  width: "100%",
+                  padding: "8px 12px",
+                  border: `1px solid ${colors.border.default}`,
+                  borderRadius: "4px",
+                  fontSize: fontSize.sm,
+                  boxSizing: "border-box"
+                }}
+              />
+            </div>
+
+            <div>
+              <label style={{ fontSize: fontSize.xs, color: colors.gray[600], marginBottom: "4px", display: "block" }}>
+                포커스 상태
+              </label>
+              <input
+                placeholder="포커스된 상태"
+                style={{
+                  width: "100%",
+                  padding: "8px 12px",
+                  border: `2px solid ${colors.border.focus.primary}`,
+                  borderRadius: "4px",
+                  fontSize: fontSize.sm,
+                  outline: "none",
+                  boxSizing: "border-box"
+                }}
+              />
+            </div>
+
+            <div>
+              <label style={{ fontSize: fontSize.xs, color: colors.gray[600], marginBottom: "4px", display: "block" }}>
+                성공 상태
+              </label>
+              <input
+                placeholder="유효한 입력"
+                style={{
+                  width: "100%",
+                  padding: "8px 12px",
+                  border: `1px solid ${colors.border.success}`,
+                  borderRadius: "4px",
+                  fontSize: fontSize.sm,
+                  boxSizing: "border-box"
+                }}
+              />
+            </div>
+
+            <div>
+              <label style={{ fontSize: fontSize.xs, color: colors.gray[600], marginBottom: "4px", display: "block" }}>
+                오류 상태
+              </label>
+              <input
+                placeholder="잘못된 입력"
+                style={{
+                  width: "100%",
+                  padding: "8px 12px",
+                  border: `1px solid ${colors.border.error}`,
+                  borderRadius: "4px",
+                  fontSize: fontSize.sm,
+                  boxSizing: "border-box"
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Focus Border Colors */}
+      <div style={{ marginBottom: "32px" }}>
+        <h4 style={{ fontSize: fontSize.md, fontWeight: fontWeight.semibold, marginBottom: "16px", color: colors.gray[800] }}>
+          Focus Border Colors
+        </h4>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: "12px" }}>
+          {Object.entries(colors.border.focus).map(([variant, color]) => (
+            <div key={variant} style={{ textAlign: "center" }}>
+              <div style={{
+                padding: "12px",
+                border: `2px solid ${color}`,
+                borderRadius: "6px",
+                backgroundColor: colors.background.white,
+                marginBottom: "8px",
+                minHeight: "40px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: `0 0 0 2px ${color}33` // 투명도 추가
+              }}>
+                <span style={{ fontSize: fontSize.xs, color: colors.gray[600] }}>
+                  Focus
+                </span>
+              </div>
+              <div style={{ fontSize: fontSize.xs, fontWeight: fontWeight.semibold, color: colors.gray[700] }}>
+                {variant}
+              </div>
+              <div style={{ fontSize: fontSize.xs, color: colors.gray[500], fontFamily: "monospace" }}>
+                {color}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   ),
   parameters: {

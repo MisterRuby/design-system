@@ -14,3 +14,15 @@ export type {
   LetterSpacing,
   TypographyVariant
 } from './typography';
+export {
+  spacing,
+  semanticSpacing,
+  layout,
+  grid
+} from './spacing';
+export type {
+  SpacingKey,
+  SemanticSpacingKey,
+  LayoutKey,
+  GridKey
+} from './spacing';
