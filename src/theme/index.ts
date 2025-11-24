@@ -26,3 +26,11 @@ export type {
   LayoutKey,
   GridKey
 } from './spacing';
+export {
+  shadows,
+  semanticShadows
+} from './shadows';
+export type {
+  ShadowKey,
+  SemanticShadowKey
+} from './shadows';
