@@ -13,7 +13,7 @@ import {
 } from "../theme";
 
 export default {
-  title: "Style Guide/Spacing",
+  title: "Styles/Spacing",
   tags: ["autodocs"],
   parameters: {
     layout: "padded",

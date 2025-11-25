@@ -2,7 +2,7 @@ import React from "react";
 import { shadows, semanticShadows, colors, fontSize, fontWeight } from "../theme";
 
 export default {
-  title: "Style Guide/Shadows",
+  title: "Styles/Shadows",
   tags: ["autodocs"],
   parameters: {
     layout: "padded",

@@ -11,7 +11,7 @@ import {
 } from "../theme";
 
 export default {
-  title: "Style Guide/Borders",
+  title: "Styles/Borders",
   tags: ["autodocs"],
   parameters: {
     layout: "padded",

@@ -4,7 +4,7 @@ import { colors, componentBorders, fontSize, fontWeight, semanticBorders, border
 const subtleBorder = semanticBorders.default;
 
 export default {
-  title: "Style Guide/Colors",
+  title: "Styles/Colors",
   tags: ["autodocs"],
   parameters: {
     layout: "padded",

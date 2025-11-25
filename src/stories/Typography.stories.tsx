@@ -3,7 +3,7 @@ import { Text } from "../components";
 import { colors, typography, fontSize, fontWeight } from "../theme";
 
 export default {
-  title: "Style Guide/Typography",
+  title: "Styles/Typography",
   tags: ["autodocs"],
   parameters: {
     layout: "padded",
