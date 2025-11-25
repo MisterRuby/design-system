@@ -59,7 +59,7 @@ export default {
         "settings",
         "mail",
         "calendar",
-        "clock"
+        "clock",
       ],
       description: "왼쪽에 표시할 아이콘",
     },
@@ -181,9 +181,15 @@ export const Variants = {
         <Badge variant="soft">Soft</Badge>
       </div>
       <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-        <Badge variant="solid" color="success">Success</Badge>
-        <Badge variant="outline" color="error">Error</Badge>
-        <Badge variant="soft" color="warning">Warning</Badge>
+        <Badge variant="solid" color="success">
+          Success
+        </Badge>
+        <Badge variant="outline" color="error">
+          Error
+        </Badge>
+        <Badge variant="soft" color="warning">
+          Warning
+        </Badge>
       </div>
     </div>
   ),
@@ -213,9 +219,15 @@ export const Sizes = {
         <Badge size="lg">Large</Badge>
       </div>
       <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-        <Badge size="sm" removable onRemove={action("sm-remove")}>Small</Badge>
-        <Badge size="md" removable onRemove={action("md-remove")}>Medium</Badge>
-        <Badge size="lg" removable onRemove={action("lg-remove")}>Large</Badge>
+        <Badge size="sm" removable onRemove={action("sm-remove")}>
+          Small
+        </Badge>
+        <Badge size="md" removable onRemove={action("md-remove")}>
+          Medium
+        </Badge>
+        <Badge size="lg" removable onRemove={action("lg-remove")}>
+          Large
+        </Badge>
       </div>
     </div>
   ),
@@ -239,7 +251,13 @@ export const Colors = {
         gap: "16px",
         width: "400px",
       }}>
-      <div style={{ display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap" }}>
+      <div
+        style={{
+          display: "flex",
+          gap: "8px",
+          alignItems: "center",
+          flexWrap: "wrap",
+        }}>
         <Badge color="primary">Primary</Badge>
         <Badge color="secondary">Secondary</Badge>
         <Badge color="success">Success</Badge>
@@ -247,21 +265,57 @@ export const Colors = {
         <Badge color="warning">Warning</Badge>
         <Badge color="info">Info</Badge>
       </div>
-      <div style={{ display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap" }}>
-        <Badge variant="outline" color="primary">Primary</Badge>
-        <Badge variant="outline" color="secondary">Secondary</Badge>
-        <Badge variant="outline" color="success">Success</Badge>
-        <Badge variant="outline" color="error">Error</Badge>
-        <Badge variant="outline" color="warning">Warning</Badge>
-        <Badge variant="outline" color="info">Info</Badge>
+      <div
+        style={{
+          display: "flex",
+          gap: "8px",
+          alignItems: "center",
+          flexWrap: "wrap",
+        }}>
+        <Badge variant="outline" color="primary">
+          Primary
+        </Badge>
+        <Badge variant="outline" color="secondary">
+          Secondary
+        </Badge>
+        <Badge variant="outline" color="success">
+          Success
+        </Badge>
+        <Badge variant="outline" color="error">
+          Error
+        </Badge>
+        <Badge variant="outline" color="warning">
+          Warning
+        </Badge>
+        <Badge variant="outline" color="info">
+          Info
+        </Badge>
       </div>
-      <div style={{ display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap" }}>
-        <Badge variant="soft" color="primary">Primary</Badge>
-        <Badge variant="soft" color="secondary">Secondary</Badge>
-        <Badge variant="soft" color="success">Success</Badge>
-        <Badge variant="soft" color="error">Error</Badge>
-        <Badge variant="soft" color="warning">Warning</Badge>
-        <Badge variant="soft" color="info">Info</Badge>
+      <div
+        style={{
+          display: "flex",
+          gap: "8px",
+          alignItems: "center",
+          flexWrap: "wrap",
+        }}>
+        <Badge variant="soft" color="primary">
+          Primary
+        </Badge>
+        <Badge variant="soft" color="secondary">
+          Secondary
+        </Badge>
+        <Badge variant="soft" color="success">
+          Success
+        </Badge>
+        <Badge variant="soft" color="error">
+          Error
+        </Badge>
+        <Badge variant="soft" color="warning">
+          Warning
+        </Badge>
+        <Badge variant="soft" color="info">
+          Info
+        </Badge>
       </div>
     </div>
   ),
@@ -284,7 +338,7 @@ export const TagExample = {
       "TypeScript",
       "JavaScript",
       "CSS",
-      "HTML"
+      "HTML",
     ]);
 
     const removeTag = (index: number) => {
@@ -309,30 +363,32 @@ export const TagExample = {
               variant="soft"
               color="primary"
               removable
-              onRemove={() => removeTag(index)}
-            >
+              onRemove={() => removeTag(index)}>
               {tag}
             </Badge>
           ))}
         </div>
         {tags.length === 0 && (
-          <div style={{
-            color: colors.gray[500],
-            fontSize: fontSize.xs,
-            fontStyle: "italic"
-          }}>
+          <div
+            style={{
+              color: colors.gray[500],
+              fontSize: fontSize.xs,
+              fontStyle: "italic",
+            }}>
             모든 태그가 제거되었습니다.
           </div>
         )}
         <button
-          onClick={() => setTags(["React", "TypeScript", "JavaScript", "CSS", "HTML"])}
+          onClick={() =>
+            setTags(["React", "TypeScript", "JavaScript", "CSS", "HTML"])
+          }
           style={{
             padding: "8px 16px",
             border: componentBorders.button.outline,
             borderRadius: "4px",
             backgroundColor: colors.background.white,
             cursor: "pointer",
-            fontSize: "12px"
+            fontSize: "12px",
           }}>
           태그 초기화
         </button>
@@ -406,17 +462,45 @@ export const WithIcons = {
         gap: "16px",
         width: "400px",
       }}>
-      <div style={{ display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap" }}>
-        <Badge icon="check" color="success">Completed</Badge>
-        <Badge icon="clock" color="warning">Pending</Badge>
-        <Badge icon="close" color="error">Failed</Badge>
-        <Badge icon="user" color="info">Admin</Badge>
+      <div
+        style={{
+          display: "flex",
+          gap: "8px",
+          alignItems: "center",
+          flexWrap: "wrap",
+        }}>
+        <Badge icon="check" color="success">
+          Completed
+        </Badge>
+        <Badge icon="clock" color="warning">
+          Pending
+        </Badge>
+        <Badge icon="close" color="error">
+          Failed
+        </Badge>
+        <Badge icon="user" color="info">
+          Admin
+        </Badge>
       </div>
-      <div style={{ display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap" }}>
-        <Badge variant="outline" icon="star" color="warning">Premium</Badge>
-        <Badge variant="soft" icon="heart" color="error">Favorite</Badge>
-        <Badge variant="soft" icon="mail" color="primary">Messages</Badge>
-        <Badge variant="outline" icon="calendar" color="info">Scheduled</Badge>
+      <div
+        style={{
+          display: "flex",
+          gap: "8px",
+          alignItems: "center",
+          flexWrap: "wrap",
+        }}>
+        <Badge variant="outline" icon="star" color="warning">
+          Premium
+        </Badge>
+        <Badge variant="soft" icon="heart" color="error">
+          Favorite
+        </Badge>
+        <Badge variant="soft" icon="mail" color="primary">
+          Messages
+        </Badge>
+        <Badge variant="outline" icon="calendar" color="info">
+          Scheduled
+        </Badge>
       </div>
     </div>
   ),
