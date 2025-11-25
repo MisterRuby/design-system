@@ -1,19 +1,25 @@
 import React from "react";
 import styled from "styled-components";
-import { grid, breakpoints } from "../../theme";
+import {
+  gridSystem as grid,
+  colors,
+  semanticBorders,
+  borderRadius,
+  fontWeight,
+} from "../../theme";
 
 const DemoBox = styled.div<{ $height?: string; $color?: string }>`
-  background-color: ${({ $color }) => $color || "#e3f2fd"};
-  border: 1px solid #1976d2;
+  background-color: ${({ $color }) => $color || colors.info[50]};
+  border: ${semanticBorders.info};
   padding: 4px 8px;
   text-align: center;
-  font-weight: 500;
-  color: #1976d2;
+  font-weight: ${fontWeight.medium};
+  color: ${colors.info[700]};
   height: ${({ $height }) => $height || "32px"};
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: ${borderRadius.sm};
   font-size: 12px;
 `;
 

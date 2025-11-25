@@ -15,12 +15,8 @@ export type {
   TypographyVariant,
 } from "./typography";
 export { spacing, semanticSpacing, layout } from "./spacing";
-export type {
-  SpacingKey,
-  SemanticSpacingKey,
-  LayoutKey,
-} from "./spacing";
-export { breakpoints, grid as gridSystem, gridHelpers } from "./grid";
+export type { SpacingKey, SemanticSpacingKey, LayoutKey } from "./spacing";
+export { breakpoints, grid, gridHelpers } from "./grid";
 export type {
   Breakpoint,
   GridColumns,
