@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon, IconName } from './Icon';
-import { colors, fontSize } from '../../theme';
+import { borderRadius, borderWidth, colors, fontSize } from '../../theme';
 import { ButtonVariant, ComponentSize } from '../../types';
 
 export interface ButtonProps {
@@ -76,8 +76,8 @@ export const Button: React.FC<ButtonProps> = ({
         color: variantStyles.color,
         padding: sizeStyles.padding,
         fontSize: sizeStyles.fontSize,
-        border: variant === 'outline' ? `1px solid ${variantStyles.borderColor}` : 'none',
-        borderRadius: '4px',
+        border: variant === 'outline' ? `${borderWidth[1]} solid ${variantStyles.borderColor}` : 'none',
+        borderRadius: borderRadius.sm,
         cursor: disabled ? 'not-allowed' : 'pointer',
         opacity: disabled ? 0.6 : 1,
         fontFamily: 'inherit',

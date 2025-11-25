@@ -1,5 +1,5 @@
 import React from 'react';
-import { colors, fontSize, fontWeight, spacing, semanticSpacing } from '../../theme';
+import { borderRadius, borderWidth, colors, fontSize, fontWeight, spacing, semanticSpacing } from '../../theme';
 import { CheckboxSize } from '../../types';
 import { Icon, IconName } from './Icon';
 
@@ -132,8 +132,8 @@ export const Badge: React.FC<BadgeProps> = ({
     fontWeight: fontWeight.medium,
     backgroundColor: colorStyles.backgroundColor,
     color: colorStyles.color,
-    border: `1px solid ${colorStyles.borderColor}`,
-    borderRadius: rounded ? '50px' : spacing.xxs,
+    border: `${borderWidth[1]} solid ${colorStyles.borderColor}`,
+    borderRadius: rounded ? borderRadius.full : borderRadius.sm,
     whiteSpace: 'nowrap',
     opacity: disabled ? 0.6 : 1,
     cursor: disabled ? 'not-allowed' : 'default',

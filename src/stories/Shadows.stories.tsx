@@ -15,26 +15,13 @@ export default {
 };
 
 const ShadowDemo = ({
-  title,
   shadowValues,
   type = "basic"
 }: {
-  title: string;
   shadowValues: Record<string, string>;
   type?: "basic" | "semantic";
 }) => (
   <div style={{ marginBottom: "48px" }}>
-    <h3
-      style={{
-        fontSize: fontSize.lg,
-        fontWeight: fontWeight.semibold,
-        marginBottom: "24px",
-        color: colors.gray[900],
-        borderBottom: `1px solid ${colors.gray[200]}`,
-        paddingBottom: "8px",
-      }}>
-      {title}
-    </h3>
     <div style={{
       display: "grid",
       gridTemplateColumns: type === "basic" ? "repeat(auto-fit, minmax(200px, 1fr))" : "repeat(auto-fit, minmax(250px, 1fr))",
@@ -82,7 +69,6 @@ export const ElevationLevels = {
   render: () => (
     <div>
       <ShadowDemo
-        title="Elevation Levels (기본 그림자)"
         shadowValues={{
           none: shadows.none,
           xs: shadows.xs,
@@ -197,17 +183,6 @@ const Modal = ({ children, isOpen }: { children: React.ReactNode; isOpen: boolea
 export const ColoredShadows = {
   render: () => (
     <div>
-      <h3
-        style={{
-          fontSize: fontSize.lg,
-          fontWeight: fontWeight.semibold,
-          marginBottom: "24px",
-          color: colors.gray[900],
-          borderBottom: `1px solid ${colors.gray[200]}`,
-          paddingBottom: "8px",
-        }}>
-        Colored Shadows (브랜드 그림자)
-      </h3>
       <div style={{
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
@@ -680,17 +655,6 @@ export const SemanticShadows = {
 
     return (
       <div>
-        <h3
-          style={{
-            fontSize: fontSize.lg,
-            fontWeight: fontWeight.semibold,
-            marginBottom: "24px",
-            color: colors.gray[900],
-            borderBottom: `1px solid ${colors.gray[200]}`,
-            paddingBottom: "8px",
-          }}>
-          Semantic Shadows with Examples
-        </h3>
         <div
           style={{
             display: "flex",
@@ -873,18 +837,6 @@ export const ShadowInteractions = {
 
     return (
       <div>
-        <h3
-          style={{
-            fontSize: fontSize.lg,
-            fontWeight: fontWeight.semibold,
-            marginBottom: "24px",
-            color: colors.gray[900],
-            borderBottom: `1px solid ${colors.gray[200]}`,
-            paddingBottom: "8px",
-          }}>
-          Interactive Shadow Examples
-        </h3>
-
         {/* Interactive Cards */}
         <div style={{ marginBottom: '32px' }}>
           <h4 style={{ fontSize: fontSize.md, fontWeight: fontWeight.semibold, marginBottom: '16px', color: colors.gray[800] }}>

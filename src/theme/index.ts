@@ -34,3 +34,17 @@ export type {
   ShadowKey,
   SemanticShadowKey
 } from './shadows';
+export {
+  borderRadius,
+  borderWidth,
+  semanticBorders,
+  borderStyles,
+  componentBorders
+} from './borders';
+export type {
+  BorderRadiusKey,
+  BorderWidthKey,
+  SemanticBorderKey,
+  BorderStyleKey,
+  ComponentBorderKey
+} from './borders';

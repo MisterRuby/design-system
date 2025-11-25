@@ -1,6 +1,6 @@
 import React from "react";
 import { Icon, IconName } from "../components";
-import { colors, fontSize } from "../theme";
+import { colors, componentBorders, fontSize, borderRadius } from "../theme";
 
 export default {
   title: "Components/Atomic/Icon",
@@ -69,7 +69,7 @@ export default {
 };
 
 const accentColor = colors.semantic.success;
-const cardBorderColor = colors.gray[200];
+const cardBorderStyle = componentBorders.card.default;
 
 export const Default = {
   args: {
@@ -130,8 +130,8 @@ export const NavigationIcons = {
               alignItems: "center",
               gap: "8px",
               padding: "16px",
-              border: `1px solid ${cardBorderColor}`,
-              borderRadius: "8px",
+              border: cardBorderStyle,
+              borderRadius: borderRadius.md,
               fontSize: fontSize.xs,
               textAlign: "center",
             }}>
@@ -185,8 +185,8 @@ export const ActionIcons = {
               alignItems: "center",
               gap: "8px",
               padding: "16px",
-              border: `1px solid ${cardBorderColor}`,
-              borderRadius: "8px",
+              border: cardBorderStyle,
+              borderRadius: borderRadius.md,
               fontSize: fontSize.xs,
               textAlign: "center",
             }}>
@@ -238,8 +238,8 @@ export const UserIcons = {
               alignItems: "center",
               gap: "8px",
               padding: "16px",
-              border: `1px solid ${cardBorderColor}`,
-              borderRadius: "8px",
+              border: cardBorderStyle,
+              borderRadius: borderRadius.md,
               fontSize: fontSize.xs,
               textAlign: "center",
             }}>
@@ -284,8 +284,8 @@ export const SecurityIcons = {
               alignItems: "center",
               gap: "8px",
               padding: "16px",
-              border: `1px solid ${cardBorderColor}`,
-              borderRadius: "8px",
+              border: cardBorderStyle,
+              borderRadius: borderRadius.md,
               fontSize: fontSize.xs,
               textAlign: "center",
             }}>
@@ -339,8 +339,8 @@ export const ContentIcons = {
               alignItems: "center",
               gap: "8px",
               padding: "16px",
-              border: `1px solid ${cardBorderColor}`,
-              borderRadius: "8px",
+              border: cardBorderStyle,
+              borderRadius: borderRadius.md,
               fontSize: fontSize.xs,
               textAlign: "center",
             }}>
@@ -385,8 +385,8 @@ export const StatusIcons = {
               alignItems: "center",
               gap: "8px",
               padding: "16px",
-              border: `1px solid ${cardBorderColor}`,
-              borderRadius: "8px",
+              border: cardBorderStyle,
+              borderRadius: borderRadius.md,
               fontSize: fontSize.xs,
               textAlign: "center",
             }}>

@@ -1,7 +1,7 @@
 import React from "react";
 import { within, userEvent } from "@storybook/testing-library";
 import { Toggle } from "../components";
-import { colors, fontSize } from "../theme";
+import { colors, componentBorders, fontSize } from "../theme";
 import { action } from "./actions";
 
 export default {
@@ -338,7 +338,7 @@ export const ControlledExample = {
           onClick={() => setIsEnabled(!isEnabled)}
           style={{
             padding: "8px 16px",
-            border: `1px solid ${colors.border.default}`,
+            border: componentBorders.button.outline,
             borderRadius: "4px",
             backgroundColor: colors.background.white,
             cursor: "pointer",
@@ -378,7 +378,7 @@ export const ControlledExample = {
   parameters: {
     docs: {
       source: {
-        code: `import { colors } from "../theme";
+        code: `import { colors, componentBorders } from "../theme";
 
 const [isEnabled, setIsEnabled] = useState(false);
 
@@ -395,7 +395,7 @@ const [isEnabled, setIsEnabled] = useState(false);
   onClick={() => setIsEnabled(!isEnabled)}
   style={{
     padding: "8px 16px",
-    border: \`1px solid \${colors.border.default}\`,
+    border: componentBorders.button.outline,
     borderRadius: "4px",
     backgroundColor: colors.background.white,
     cursor: "pointer"

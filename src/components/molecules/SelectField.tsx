@@ -1,6 +1,7 @@
 import React from "react";
-import { colors, fontSize, fontWeight } from "../../theme";
+import { borderRadius, colors, componentBorders, fontSize, fontWeight } from "../../theme";
 import { InputVariant, ComponentSize } from "../../types";
+import { getInputBorderStyles } from "../shared/inputBorders";
 
 export interface SelectFieldOption {
   value: string;
@@ -51,59 +52,6 @@ export const SelectField: React.FC<SelectFieldProps> = ({
 }) => {
   const selectId = React.useId();
 
-  const getVariantStyles = (variant: string) => {
-    switch (variant) {
-      case "default":
-        return {
-          borderColor: colors.border.default,
-          focusBorderColor: colors.border.focus.primary,
-          focusBoxShadow: colors.focusRing.primary,
-        };
-      case "primary":
-        return {
-          borderColor: colors.border.primary,
-          focusBorderColor: colors.border.focus.primary,
-          focusBoxShadow: colors.focusRing.primary,
-        };
-      case "secondary":
-        return {
-          borderColor: colors.border.secondary,
-          focusBorderColor: colors.border.focus.secondary,
-          focusBoxShadow: colors.focusRing.secondary,
-        };
-      case "success":
-        return {
-          borderColor: colors.border.success,
-          focusBorderColor: colors.border.focus.success,
-          focusBoxShadow: colors.focusRing.success,
-        };
-      case "error":
-        return {
-          borderColor: colors.border.error,
-          focusBorderColor: colors.border.focus.error,
-          focusBoxShadow: colors.focusRing.error,
-        };
-      case "warning":
-        return {
-          borderColor: colors.border.warning,
-          focusBorderColor: colors.border.focus.warning,
-          focusBoxShadow: colors.focusRing.warning,
-        };
-      case "info":
-        return {
-          borderColor: colors.border.info,
-          focusBorderColor: colors.border.focus.info,
-          focusBoxShadow: colors.focusRing.info,
-        };
-      default:
-        return {
-          borderColor: colors.border.default,
-          focusBorderColor: colors.border.focus.primary,
-          focusBoxShadow: colors.focusRing.primary,
-        };
-    }
-  };
-
   const getSizeStyles = (size: string) => {
     switch (size) {
       case "small":
@@ -127,14 +75,15 @@ export const SelectField: React.FC<SelectFieldProps> = ({
     }
   };
 
-  const variantStyles = getVariantStyles(variant);
+  const variantStyles = getInputBorderStyles(variant);
   const sizeStyles = getSizeStyles(size);
   const showError = variant === "error" && errorMessage;
+  const baseBorder = disabled ? componentBorders.input.disabled : variantStyles.border;
 
   const selectStyles: React.CSSProperties = {
     width: "100%",
-    border: `1px solid ${variantStyles.borderColor}`,
-    borderRadius: "6px",
+    border: baseBorder,
+    borderRadius: borderRadius.sm,
     backgroundColor: disabled ? colors.background.disabled : colors.background.white,
     color: disabled ? colors.semantic.muted : colors.semantic.text,
     fontSize: sizeStyles.fontSize,
@@ -182,11 +131,11 @@ export const SelectField: React.FC<SelectFieldProps> = ({
         onFocus={onFocus}
         onBlur={onBlur}
         onFocusCapture={(e) => {
-          e.currentTarget.style.borderColor = variantStyles.focusBorderColor;
+          e.currentTarget.style.border = variantStyles.focusBorder;
           e.currentTarget.style.boxShadow = `0 0 0 3px ${variantStyles.focusBoxShadow}`;
         }}
         onBlurCapture={(e) => {
-          e.currentTarget.style.borderColor = variantStyles.borderColor;
+          e.currentTarget.style.border = baseBorder;
           e.currentTarget.style.boxShadow = "none";
         }}>
         {placeholder && (

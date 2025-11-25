@@ -1,7 +1,7 @@
 import React from "react";
 import { within, userEvent } from "@storybook/testing-library";
 import { Spinner } from "../components";
-import { colors, fontSize, fontWeight } from "../theme";
+import { colors, componentBorders, fontSize, fontWeight } from "../theme";
 import { action } from "./actions";
 
 export default {
@@ -286,7 +286,7 @@ export const LoadingStates = {
           disabled={isLoading}
           style={{
             padding: "12px 24px",
-            border: `1px solid ${colors.border.default}`,
+            border: componentBorders.button.outline,
             borderRadius: "6px",
             backgroundColor: isLoading ? colors.background.disabled : colors.background.white,
             cursor: isLoading ? "not-allowed" : "pointer",
@@ -395,7 +395,7 @@ export const OverlayExample = {
             disabled={showOverlay}
             style={{
               padding: "8px 16px",
-              border: `1px solid ${colors.border.default}`,
+              border: componentBorders.button.outline,
               borderRadius: "4px",
               backgroundColor: colors.background.white,
               cursor: showOverlay ? "not-allowed" : "pointer",

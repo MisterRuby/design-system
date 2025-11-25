@@ -15,8 +15,7 @@ export default {
   },
 };
 
-const TypographyShowcase = ({ title, items }: {
-  title: string;
+const TypographyShowcase = ({ items }: {
   items: Array<{
     name: string;
     props: any;
@@ -24,16 +23,6 @@ const TypographyShowcase = ({ title, items }: {
   }>
 }) => (
   <div style={{ marginBottom: "48px" }}>
-    <h3 style={{
-      fontSize: fontSize.lg,
-      fontWeight: fontWeight.semibold,
-      marginBottom: "24px",
-      color: colors.gray[900],
-      borderBottom: `1px solid ${colors.gray[200]}`,
-      paddingBottom: "8px"
-    }}>
-      {title}
-    </h3>
     <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       {items.map(({ name, props, description }) => (
         <div key={name} style={{
@@ -80,7 +69,6 @@ const TypographyShowcase = ({ title, items }: {
 export const HeadingVariants = {
   render: () => (
     <TypographyShowcase
-      title="Heading Variants"
       items={[
         {
           name: "Heading 1",
@@ -177,7 +165,6 @@ const customTitleStyle = {
 export const BodyVariants = {
   render: () => (
     <TypographyShowcase
-      title="Body Text Variants"
       items={[
         {
           name: "Body 1",
@@ -253,7 +240,6 @@ const Quote = ({ children, author }) => (
 export const FontSizes = {
   render: () => (
     <TypographyShowcase
-      title="Font Sizes"
       items={[
         {
           name: "Extra Extra Small",
@@ -323,7 +309,6 @@ export const FontSizes = {
 export const FontWeights = {
   render: () => (
     <TypographyShowcase
-      title="Font Weights"
       items={[
         {
           name: "Light",
@@ -369,7 +354,6 @@ export const FontWeights = {
 export const TextColors = {
   render: () => (
     <TypographyShowcase
-      title="Text Colors"
       items={[
         {
           name: "Default Text",
@@ -433,16 +417,6 @@ export const TextColors = {
 export const TextAlignment = {
   render: () => (
     <div style={{ marginBottom: "32px" }}>
-      <h3 style={{
-        fontSize: fontSize.lg,
-        fontWeight: fontWeight.semibold,
-        marginBottom: "24px",
-        color: colors.gray[900],
-        borderBottom: `1px solid ${colors.gray[200]}`,
-        paddingBottom: "8px"
-      }}>
-        Text Alignment
-      </h3>
       <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
         {[
           { align: "left", label: "Left Aligned" },
@@ -487,7 +461,6 @@ export const TextAlignment = {
 export const TextTransformations = {
   render: () => (
     <TypographyShowcase
-      title="Text Transformations"
       items={[
         {
           name: "Normal",
@@ -527,7 +500,6 @@ export const TextTransformations = {
 export const TextDecorations = {
   render: () => (
     <TypographyShowcase
-      title="Text Decorations"
       items={[
         {
           name: "None",

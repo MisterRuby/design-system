@@ -1,5 +1,5 @@
 import React from "react";
-import { colors } from "../../theme";
+import { borderRadius, colors, componentBorders } from "../../theme";
 
 export interface BaseCheckboxProps {
   id?: string;
@@ -99,6 +99,11 @@ export const BaseCheckbox: React.FC<BaseCheckboxProps> = ({
 
   const sizeStyles = getSizeStyles();
   const colorStyles = getColorStyles();
+  const borderStyle = disabled
+    ? componentBorders.input.disabled
+    : color === "error"
+      ? componentBorders.input.error
+      : componentBorders.input.default;
 
   return (
     <input
@@ -120,8 +125,8 @@ export const BaseCheckbox: React.FC<BaseCheckboxProps> = ({
         accentColor: colorStyles.accentColor,
         cursor: disabled ? "not-allowed" : "pointer",
         opacity: disabled ? 0.6 : 1,
-        borderRadius: "4px",
-        border: `2px solid ${colors.border.default}`,
+        borderRadius: borderRadius.sm,
+        border: borderStyle,
         ...style,
       }}
     />

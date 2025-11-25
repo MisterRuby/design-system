@@ -1,5 +1,7 @@
 import React from "react";
-import { colors, fontSize, fontWeight } from "../theme";
+import { colors, componentBorders, fontSize, fontWeight, semanticBorders, borderRadius } from "../theme";
+
+const subtleBorder = semanticBorders.default;
 
 export default {
   title: "Style Guide/Colors",
@@ -23,7 +25,7 @@ const ColorSwatch = ({ color, name, description }: { color: string; name: string
         backgroundColor: color,
         borderRadius: "8px",
         marginRight: "16px",
-        border: `1px solid ${colors.gray[200]}`,
+        border: subtleBorder,
         boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
       }}
     />
@@ -37,15 +39,11 @@ const ColorSwatch = ({ color, name, description }: { color: string; name: string
   </div>
 );
 
-const ColorPalette = ({ title, colors: colorSet, descriptions }: {
-  title: string;
+const ColorPalette = ({ colors: colorSet, descriptions }: {
   colors: Record<string, string>;
   descriptions?: Record<string, string>;
 }) => (
   <div style={{ marginBottom: "32px" }}>
-    <h3 style={{ fontSize: fontSize.lg, fontWeight: fontWeight.semibold, marginBottom: "16px", color: colors.gray[900] }}>
-      {title}
-    </h3>
     <div>
       {Object.entries(colorSet).map(([key, value]) => {
         // 중첩된 객체는 건너뛰기
@@ -66,7 +64,6 @@ const ColorPalette = ({ title, colors: colorSet, descriptions }: {
 export const SemanticColors = {
   render: () => (
     <ColorPalette
-      title="Semantic Colors"
       colors={colors.semantic}
       descriptions={{
         primary: "브랜드 주색상 - 주요 액션, 링크",
@@ -154,7 +151,7 @@ export const GrayScale = {
               backgroundColor: color,
               borderRadius: "8px",
               marginBottom: "8px",
-              border: `1px solid ${colors.gray[200]}`,
+              border: subtleBorder,
             }}
           />
           <div style={{ fontSize: fontSize.xs, fontWeight: fontWeight.semibold, color: colors.semantic.text }}>gray-{shade}</div>
@@ -166,12 +163,12 @@ export const GrayScale = {
   parameters: {
     docs: {
       source: {
-        code: `import { colors } from "../theme";
+        code: `import { colors, semanticBorders } from "../theme";
 
 // 그레이 스케일 사용 예시
 const cardStyle = {
   backgroundColor: colors.gray[50],    // 매우 밝은 배경
-  border: \`1px solid \${colors.gray[200]}\`, // 연한 경계선
+  border: semanticBorders.default, // 연한 경계선
   borderRadius: "8px",
   padding: "16px",
 };
@@ -192,7 +189,7 @@ const dividerStyle = {
 
 // 입력 필드 스타일링
 const inputStyle = {
-  border: \`1px solid \${colors.gray[300]}\`,
+  border: semanticBorders.default,
   backgroundColor: colors.gray[50],
   ':focus': {
     borderColor: colors.gray[500],
@@ -225,7 +222,7 @@ export const StatusColors = {
                 backgroundColor: color,
                 borderRadius: "6px",
                 marginBottom: "8px",
-                border: `1px solid ${colors.gray[200]}`,
+                border: subtleBorder,
               }} />
               <div style={{ fontSize: fontSize.xs, fontWeight: fontWeight.semibold, color: colors.gray[700] }}>
                 {shade}
@@ -252,7 +249,7 @@ export const StatusColors = {
                 backgroundColor: color,
                 borderRadius: "6px",
                 marginBottom: "8px",
-                border: `1px solid ${colors.gray[200]}`,
+                border: subtleBorder,
               }} />
               <div style={{ fontSize: fontSize.xs, fontWeight: fontWeight.semibold, color: colors.gray[700] }}>
                 {shade}
@@ -279,7 +276,7 @@ export const StatusColors = {
                 backgroundColor: color,
                 borderRadius: "6px",
                 marginBottom: "8px",
-                border: `1px solid ${colors.gray[200]}`,
+                border: subtleBorder,
               }} />
               <div style={{ fontSize: fontSize.xs, fontWeight: fontWeight.semibold, color: colors.gray[700] }}>
                 {shade}
@@ -306,7 +303,7 @@ export const StatusColors = {
                 backgroundColor: color,
                 borderRadius: "6px",
                 marginBottom: "8px",
-                border: `1px solid ${colors.gray[200]}`,
+                border: subtleBorder,
               }} />
               <div style={{ fontSize: fontSize.xs, fontWeight: fontWeight.semibold, color: colors.gray[700] }}>
                 {shade}
@@ -385,7 +382,7 @@ export const BorderColors = {
           padding: "24px",
           backgroundColor: colors.gray[50],
           borderRadius: "8px",
-          border: `1px solid ${colors.gray[200]}`
+          border: subtleBorder
         }}>
           <h5 style={{ fontSize: fontSize.sm, fontWeight: fontWeight.semibold, marginBottom: "16px", color: colors.gray[800] }}>
             실제 사용 예시
@@ -402,8 +399,8 @@ export const BorderColors = {
                 style={{
                   width: "100%",
                   padding: "8px 12px",
-                  border: `1px solid ${colors.border.default}`,
-                  borderRadius: "4px",
+                  border: componentBorders.input.default,
+                  borderRadius: borderRadius.sm,
                   fontSize: fontSize.sm,
                   boxSizing: "border-box"
                 }}
@@ -518,8 +515,7 @@ border: \`2px solid \${colors.border.focus.primary}\` // 포커스 상태`,
 export const BackgroundColors = {
   render: () => (
     <ColorPalette
-      title="Background Colors"
-      colors={colors.background}
+            colors={colors.background}
       descriptions={{
         white: "기본 배경색",
         gray: "중성 배경색",
@@ -544,8 +540,7 @@ export const FocusRingColors = {
   render: () => (
     <div>
       <ColorPalette
-        title="Focus Ring Colors"
-        colors={colors.focusRing}
+                colors={colors.focusRing}
         descriptions={{
           primary: "Primary 요소 포커스 링",
           secondary: "Secondary 요소 포커스 링",

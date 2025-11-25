@@ -4,7 +4,7 @@ import { InputField, InputFieldProps } from '../molecules/InputField';
 import { CheckboxField, CheckboxFieldProps } from '../molecules/CheckboxField';
 import { SelectField, SelectFieldProps } from '../molecules/SelectField';
 import { RadioGroup, RadioGroupProps } from '../molecules/RadioGroup';
-import { colors, fontSize, fontWeight, spacing, semanticSpacing } from '../../theme';
+import { borderRadius, colors, componentBorders, fontSize, fontWeight, spacing, semanticSpacing } from '../../theme';
 
 export interface FormField {
   id: string;
@@ -215,8 +215,8 @@ export const Form: React.FC<FormProps> = ({
         gap: getFieldSpacing(),
         padding: semanticSpacing.componentPaddingLarge,
         backgroundColor: colors.background.white,
-        borderRadius: spacing.xs,
-        border: `1px solid ${colors.border.default}`,
+        borderRadius: borderRadius.md,
+        border: componentBorders.card.default,
         ...style,
       }}
     >

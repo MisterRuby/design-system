@@ -1,7 +1,7 @@
 import React from "react";
 import { within, userEvent } from "@storybook/testing-library";
 import { Badge } from "../components";
-import { colors, fontSize, fontWeight } from "../theme";
+import { colors, componentBorders, fontSize, fontWeight } from "../theme";
 import { action } from "./actions";
 
 export default {
@@ -328,7 +328,7 @@ export const TagExample = {
           onClick={() => setTags(["React", "TypeScript", "JavaScript", "CSS", "HTML"])}
           style={{
             padding: "8px 16px",
-            border: `1px solid ${colors.border.default}`,
+            border: componentBorders.button.outline,
             borderRadius: "4px",
             backgroundColor: colors.background.white,
             cursor: "pointer",

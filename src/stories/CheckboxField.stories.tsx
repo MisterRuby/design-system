@@ -1,7 +1,7 @@
 import React from "react";
 import { within, userEvent } from "@storybook/testing-library";
 import { CheckboxField } from "../components";
-import { colors, fontSize } from "../theme";
+import { colors, componentBorders, fontSize } from "../theme";
 import { action } from "./actions";
 
 export default {
@@ -296,7 +296,7 @@ export const ControlledExample = {
           onClick={() => setChecked(!checked)}
           style={{
             padding: "8px 16px",
-            border: `1px solid ${colors.border.default}`,
+            border: componentBorders.button.outline,
             borderRadius: "4px",
             backgroundColor: colors.background.white,
             cursor: "pointer",

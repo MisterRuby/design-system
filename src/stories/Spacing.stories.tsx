@@ -5,6 +5,9 @@ import {
   layout,
   grid,
   colors,
+  semanticBorders,
+  componentBorders,
+  borderRadius,
   fontSize,
   fontWeight,
 } from "../theme";
@@ -24,26 +27,13 @@ export default {
 };
 
 const SpacingDemo = ({
-  title,
   spacingValues,
   type = "square",
 }: {
-  title: string;
   spacingValues: Record<string, string>;
   type?: "square" | "horizontal" | "vertical";
 }) => (
   <div style={{ marginBottom: "48px" }}>
-    <h3
-      style={{
-        fontSize: fontSize.lg,
-        fontWeight: fontWeight.semibold,
-        marginBottom: "24px",
-        color: colors.gray[900],
-        borderBottom: `1px solid ${colors.gray[200]}`,
-        paddingBottom: "8px",
-      }}>
-      {title}
-    </h3>
     <div
       style={{
         display: "flex",
@@ -64,7 +54,7 @@ const SpacingDemo = ({
               padding: "16px",
               backgroundColor: colors.gray[50],
               borderRadius: "8px",
-              border: `1px solid ${colors.gray[200]}`,
+              border: semanticBorders.default,
               minHeight: "60px",
             }}>
             <div
@@ -104,7 +94,7 @@ const SpacingDemo = ({
                     height: isLarge ? "64px" : value,
                     backgroundColor: colors.semantic.primary,
                     borderRadius: "4px",
-                    border: `1px solid ${colors.border.primary}`,
+                    border: componentBorders.card.hover,
                     position: "relative",
                   }}>
                   {isLarge && (
@@ -204,7 +194,6 @@ const SpacingDemo = ({
 export const BasicSpacing = {
   render: () => (
     <SpacingDemo
-      title="Basic Spacing Scale"
       spacingValues={spacing}
       type="square"
     />
@@ -301,7 +290,7 @@ export const SemanticSpacing = {
           <div style={{
             padding: semanticSpacing.componentPaddingMedium,
             backgroundColor: colors.gray[50],
-            border: `1px solid ${colors.gray[200]}`,
+            border: semanticBorders.default,
             borderRadius: '8px',
             fontSize: fontSize.sm
           }}>
@@ -315,7 +304,7 @@ export const SemanticSpacing = {
           <div style={{
             padding: semanticSpacing.componentPaddingLarge,
             backgroundColor: colors.gray[50],
-            border: `1px solid ${colors.gray[200]}`,
+            border: semanticBorders.default,
             borderRadius: '12px',
             fontSize: fontSize.sm,
             maxWidth: '300px'
@@ -447,8 +436,8 @@ export const SemanticSpacing = {
         description: "폼 필드 간 간격",
         example: (
           <div style={{ display: 'flex', flexDirection: 'column', gap: semanticSpacing.formFieldGap, maxWidth: '200px' }}>
-            <input placeholder="이름" style={{ padding: '8px', border: `1px solid ${colors.gray[300]}`, borderRadius: '4px' }} />
-            <input placeholder="이메일" style={{ padding: '8px', border: `1px solid ${colors.gray[300]}`, borderRadius: '4px' }} />
+            <input placeholder="이름" style={{ padding: '8px', border: semanticBorders.strong, borderRadius: '4px' }} />
+            <input placeholder="이메일" style={{ padding: '8px', border: semanticBorders.strong, borderRadius: '4px' }} />
           </div>
         )
       },
@@ -458,11 +447,11 @@ export const SemanticSpacing = {
           <div style={{ maxWidth: '200px' }}>
             <div style={{ marginBottom: semanticSpacing.formSectionGap }}>
               <h4 style={{ margin: '0 0 8px', fontSize: fontSize.sm }}>개인 정보</h4>
-              <input placeholder="이름" style={{ width: '100%', padding: '6px', border: `1px solid ${colors.gray[300]}`, borderRadius: '4px', boxSizing: 'border-box' }} />
+              <input placeholder="이름" style={{ width: '100%', padding: '6px', border: semanticBorders.strong, borderRadius: '4px', boxSizing: 'border-box' }} />
             </div>
             <div>
               <h4 style={{ margin: '0 0 8px', fontSize: fontSize.sm }}>연락처</h4>
-              <input placeholder="이메일" style={{ width: '100%', padding: '6px', border: `1px solid ${colors.gray[300]}`, borderRadius: '4px', boxSizing: 'border-box' }} />
+              <input placeholder="이메일" style={{ width: '100%', padding: '6px', border: semanticBorders.strong, borderRadius: '4px', boxSizing: 'border-box' }} />
             </div>
           </div>
         )
@@ -473,7 +462,7 @@ export const SemanticSpacing = {
           <div style={{
             padding: semanticSpacing.cardPadding,
             backgroundColor: colors.background.white,
-            border: `1px solid ${colors.gray[200]}`,
+            border: semanticBorders.default,
             borderRadius: '8px',
             fontSize: fontSize.sm,
             maxWidth: '200px'
@@ -488,7 +477,7 @@ export const SemanticSpacing = {
           <div style={{
             padding: '12px',
             backgroundColor: colors.background.white,
-            border: `1px solid ${colors.gray[200]}`,
+            border: semanticBorders.default,
             borderRadius: '8px',
             maxWidth: '180px'
           }}>
@@ -552,21 +541,10 @@ export const SemanticSpacing = {
 
     return (
       <div>
-        <h3
-          style={{
-            fontSize: fontSize.lg,
-            fontWeight: fontWeight.semibold,
-            marginBottom: "24px",
-            color: colors.gray[900],
-            borderBottom: `1px solid ${colors.gray[200]}`,
-            paddingBottom: "8px",
-          }}>
-          Semantic Spacing with Examples
-        </h3>
         <div style={{
           padding: '16px',
           backgroundColor: colors.info[50],
-          border: `1px solid ${colors.info[200]}`,
+          border: semanticBorders.info,
           borderRadius: '8px',
           marginBottom: '24px'
         }}>
@@ -593,7 +571,7 @@ export const SemanticSpacing = {
                   padding: "16px",
                   backgroundColor: colors.gray[50],
                   borderRadius: "8px",
-                  border: `1px solid ${colors.gray[200]}`,
+                  border: semanticBorders.default,
                 }}>
                 <div style={{
                   display: "flex",
@@ -640,7 +618,7 @@ export const SemanticSpacing = {
                     padding: "12px",
                     backgroundColor: colors.background.white,
                     borderRadius: "6px",
-                    border: `1px solid ${colors.gray[200]}`
+                    border: semanticBorders.default
                   }}>
                     {example.example}
                   </div>
@@ -817,7 +795,7 @@ export const LayoutConstants = {
               padding: '16px',
               borderRadius: '8px',
               fontSize: fontSize.sm,
-              border: `1px solid ${colors.gray[200]}`
+              border: semanticBorders.default
             }}>
               메인 콘텐츠 영역
             </div>
@@ -866,7 +844,7 @@ export const LayoutConstants = {
           <div style={{
             height: layout.navigationHeight,
             backgroundColor: colors.gray[100],
-            border: `1px solid ${colors.gray[300]}`,
+            border: semanticBorders.strong,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -904,17 +882,6 @@ export const LayoutConstants = {
 
     return (
       <div>
-        <h3
-          style={{
-            fontSize: fontSize.lg,
-            fontWeight: fontWeight.semibold,
-            marginBottom: "24px",
-            color: colors.gray[900],
-            borderBottom: `1px solid ${colors.gray[200]}`,
-            paddingBottom: "8px",
-          }}>
-          Layout Constants with Examples
-        </h3>
         <div
           style={{
             display: "flex",
@@ -930,7 +897,7 @@ export const LayoutConstants = {
                   padding: "16px",
                   backgroundColor: colors.gray[50],
                   borderRadius: "8px",
-                  border: `1px solid ${colors.gray[200]}`,
+                  border: semanticBorders.default,
                 }}>
                 <div style={{
                   display: "flex",
@@ -975,7 +942,7 @@ export const LayoutConstants = {
                     padding: "12px",
                     backgroundColor: colors.background.white,
                     borderRadius: "6px",
-                    border: `1px solid ${colors.gray[200]}`
+                    border: semanticBorders.default
                   }}>
                     {example.example}
                   </div>
@@ -1007,18 +974,6 @@ export const GridSystem = {
   render: () => {
     return (
       <div>
-        <h3
-          style={{
-            fontSize: fontSize.lg,
-            fontWeight: fontWeight.semibold,
-            marginBottom: "24px",
-            color: colors.gray[900],
-            borderBottom: `1px solid ${colors.gray[200]}`,
-            paddingBottom: "8px",
-          }}>
-          Grid System with Examples
-        </h3>
-
         {/* Grid Values */}
         <div style={{ marginBottom: "32px" }}>
           <h4 style={{ fontSize: fontSize.md, fontWeight: fontWeight.semibold, marginBottom: "16px", color: colors.gray[800] }}>
@@ -1058,7 +1013,7 @@ export const GridSystem = {
               gap: grid.gutterWidth,
               padding: grid.marginWidth,
               backgroundColor: colors.gray[50],
-              border: `1px solid ${colors.gray[200]}`,
+              border: semanticBorders.default,
               borderRadius: "8px",
               marginBottom: "16px",
             }}>
@@ -1103,7 +1058,7 @@ export const GridSystem = {
                 gap: grid.gutterWidth,
                 padding: grid.marginWidth,
                 backgroundColor: colors.gray[50],
-                border: `1px solid ${colors.gray[200]}`,
+                border: semanticBorders.default,
                 borderRadius: "6px",
               }}>
               <div style={{
@@ -1141,7 +1096,7 @@ export const GridSystem = {
                 gap: grid.gutterWidth,
                 padding: grid.marginWidth,
                 backgroundColor: colors.gray[50],
-                border: `1px solid ${colors.gray[200]}`,
+                border: semanticBorders.default,
                 borderRadius: "6px",
               }}>
               {[
@@ -1175,7 +1130,7 @@ export const GridSystem = {
                 gap: grid.gutterWidth,
                 padding: grid.marginWidth,
                 backgroundColor: colors.gray[50],
-                border: `1px solid ${colors.gray[200]}`,
+                border: semanticBorders.default,
                 borderRadius: "6px",
               }}>
               <div style={{
@@ -1194,7 +1149,7 @@ export const GridSystem = {
               <div style={{
                 padding: "16px",
                 backgroundColor: colors.background.white,
-                border: `1px solid ${colors.gray[300]}`,
+                border: semanticBorders.strong,
                 borderRadius: "4px",
                 fontSize: fontSize.sm,
                 minHeight: "80px",
@@ -1221,7 +1176,7 @@ export const GridSystem = {
                 <div key={i} style={{
                   padding: "12px",
                   backgroundColor: colors.gray[50],
-                  border: `1px solid ${colors.gray[200]}`,
+                  border: semanticBorders.default,
                   borderRadius: "6px"
                 }}>
                   <div style={{
@@ -1289,7 +1244,7 @@ export const SpacingInAction = {
           <div
             style={{
               backgroundColor: colors.background.white,
-              border: `1px solid ${colors.border.default}`,
+              border: componentBorders.card.default,
               borderRadius: "8px",
               padding: semanticSpacing.cardPadding,
               maxWidth: "400px",
@@ -1328,7 +1283,7 @@ export const SpacingInAction = {
                 <button
                   style={{
                     padding: semanticSpacing.buttonPaddingSmall,
-                    border: `1px solid ${colors.border.primary}`,
+                    border: componentBorders.card.hover,
                     backgroundColor: colors.semantic.primary,
                     color: colors.background.white,
                     borderRadius: "4px",
@@ -1340,7 +1295,7 @@ export const SpacingInAction = {
                 <button
                   style={{
                     padding: semanticSpacing.buttonPaddingSmall,
-                    border: `1px solid ${colors.border.default}`,
+                    border: componentBorders.card.default,
                     backgroundColor: colors.background.white,
                     color: colors.semantic.text,
                     borderRadius: "4px",
@@ -1360,7 +1315,7 @@ export const SpacingInAction = {
           <div
             style={{
               backgroundColor: colors.background.white,
-              border: `1px solid ${colors.border.default}`,
+              border: componentBorders.card.default,
               borderRadius: "8px",
               padding: semanticSpacing.componentPaddingLarge,
               maxWidth: "400px",
@@ -1397,7 +1352,7 @@ export const SpacingInAction = {
                   style={{
                     width: "100%",
                     padding: semanticSpacing.componentPaddingSmall,
-                    border: `1px solid ${colors.border.default}`,
+                    border: componentBorders.card.default,
                     borderRadius: "4px",
                     fontSize: fontSize.sm,
                     boxSizing: "border-box",
@@ -1420,7 +1375,7 @@ export const SpacingInAction = {
                   style={{
                     width: "100%",
                     padding: semanticSpacing.componentPaddingSmall,
-                    border: `1px solid ${colors.border.default}`,
+                    border: componentBorders.card.default,
                     borderRadius: "4px",
                     fontSize: fontSize.sm,
                     boxSizing: "border-box",
@@ -1452,7 +1407,7 @@ export const SpacingInAction = {
           <div
             style={{
               backgroundColor: colors.background.white,
-              border: `1px solid ${colors.border.default}`,
+              border: componentBorders.card.default,
               borderRadius: "8px",
               padding: semanticSpacing.componentPaddingMedium,
               maxWidth: "400px",
@@ -1496,18 +1451,6 @@ export const SpacingInAction = {
 
     return (
       <div>
-        <h3
-          style={{
-            fontSize: fontSize.lg,
-            fontWeight: fontWeight.semibold,
-            marginBottom: "24px",
-            color: colors.gray[900],
-            borderBottom: `1px solid ${colors.gray[200]}`,
-            paddingBottom: "8px",
-          }}>
-          Spacing in Action
-        </h3>
-
         <div
           style={{
             display: "flex",
@@ -1520,11 +1463,10 @@ export const SpacingInAction = {
               onClick={() => setActiveDemo(key)}
               style={{
                 padding: semanticSpacing.buttonPaddingSmall,
-                border: `1px solid ${
+                border:
                   activeDemo === key
-                    ? colors.border.primary
-                    : colors.border.default
-                }`,
+                    ? semanticBorders.focus
+                    : componentBorders.button.outline,
                 backgroundColor:
                   activeDemo === key
                     ? colors.semantic.primary
@@ -1533,7 +1475,7 @@ export const SpacingInAction = {
                   activeDemo === key
                     ? colors.background.white
                     : colors.semantic.text,
-                borderRadius: "4px",
+                borderRadius: borderRadius.sm,
                 fontSize: fontSize.sm,
                 cursor: "pointer",
                 transition: "all 0.2s",

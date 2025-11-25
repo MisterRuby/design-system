@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from '../atomic/Text';
-import { colors, fontWeight, spacing, semanticSpacing } from '../../theme';
+import { colors, componentBorders, fontWeight, spacing } from '../../theme';
 
 export interface HeaderProps {
   logo?: React.ReactNode;
@@ -44,14 +44,14 @@ export const Header: React.FC<HeaderProps> = ({
       case 'elevated':
         return {
           backgroundColor: colors.background.white,
-          border: `1px solid ${colors.border.default}`,
+          border: componentBorders.card.hover,
           boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
         };
       case 'default':
       default:
         return {
           backgroundColor: colors.background.white,
-          border: `1px solid ${colors.border.default}`,
+          border: componentBorders.card.default,
           boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
         };
     }

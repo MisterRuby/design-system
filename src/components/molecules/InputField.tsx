@@ -1,7 +1,8 @@
 import React from "react";
 import { Icon, IconName } from "../atomic/Icon";
-import { colors, fontSize, fontWeight } from "../../theme";
+import { borderRadius, colors, componentBorders, fontSize, fontWeight } from "../../theme";
 import { InputVariant, ComponentSize } from "../../types";
+import { getInputBorderStyles } from "../shared/inputBorders";
 
 export interface InputFieldProps {
   type?: "text" | "email" | "password" | "number" | "tel" | "url" | "search";
@@ -50,59 +51,6 @@ export const InputField: React.FC<InputFieldProps> = ({
 }) => {
   // 고유한 ID 생성
   const inputId = React.useId();
-  const getVariantStyles = (variant: string) => {
-    switch (variant) {
-      case "default":
-        return {
-          borderColor: colors.border.default,
-          focusBorderColor: colors.border.focus.primary,
-          focusBoxShadow: colors.focusRing.primary,
-        };
-      case "primary":
-        return {
-          borderColor: colors.border.primary,
-          focusBorderColor: colors.border.focus.primary,
-          focusBoxShadow: colors.focusRing.primary,
-        };
-      case "secondary":
-        return {
-          borderColor: colors.border.secondary,
-          focusBorderColor: colors.border.focus.secondary,
-          focusBoxShadow: colors.focusRing.secondary,
-        };
-      case "success":
-        return {
-          borderColor: colors.border.success,
-          focusBorderColor: colors.border.focus.success,
-          focusBoxShadow: colors.focusRing.success,
-        };
-      case "error":
-        return {
-          borderColor: colors.border.error,
-          focusBorderColor: colors.border.focus.error,
-          focusBoxShadow: colors.focusRing.error,
-        };
-      case "warning":
-        return {
-          borderColor: colors.border.warning || colors.semantic.warning,
-          focusBorderColor: colors.border.focus.warning || colors.semantic.warning,
-          focusBoxShadow: colors.focusRing.warning,
-        };
-      case "info":
-        return {
-          borderColor: colors.border.info || colors.semantic.info,
-          focusBorderColor: colors.border.focus.info || colors.semantic.info,
-          focusBoxShadow: colors.focusRing.info,
-        };
-      default:
-        return {
-          borderColor: colors.border.default,
-          focusBorderColor: colors.border.focus.primary,
-          focusBoxShadow: colors.focusRing.primary,
-        };
-    }
-  };
-
   const getSizeStyles = (size: string) => {
     switch (size) {
       case "small":
@@ -140,9 +88,10 @@ export const InputField: React.FC<InputFieldProps> = ({
     }
   };
 
-  const variantStyles = getVariantStyles(variant);
+  const variantStyles = getInputBorderStyles(variant);
   const sizeStyles = getSizeStyles(size);
   const showError = variant === "error" && errorMessage;
+  const baseBorder = disabled ? componentBorders.input.disabled : variantStyles.border;
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
@@ -206,8 +155,8 @@ export const InputField: React.FC<InputFieldProps> = ({
               icon && iconPosition === "right"
                 ? `calc(${sizeStyles.iconPadding} + ${sizeStyles.iconSize}px + 8px)`
                 : sizeStyles.padding.split(" ")[1],
-            border: `2px solid ${variantStyles.borderColor}`,
-            borderRadius: "8px",
+            border: baseBorder,
+            borderRadius: borderRadius.md,
             fontFamily: "inherit",
             backgroundColor: disabled ? colors.background.disabled : colors.background.white,
             color: disabled ? colors.semantic.muted : colors.semantic.text,
@@ -220,13 +169,12 @@ export const InputField: React.FC<InputFieldProps> = ({
           }}
           onFocusCapture={(e) => {
             if (!disabled) {
-              e.currentTarget.style.borderColor =
-                variantStyles.focusBorderColor;
+              e.currentTarget.style.border = variantStyles.focusBorder;
               e.currentTarget.style.boxShadow = variantStyles.focusBoxShadow;
             }
           }}
           onBlurCapture={(e) => {
-            e.currentTarget.style.borderColor = variantStyles.borderColor;
+            e.currentTarget.style.border = baseBorder;
             e.currentTarget.style.boxShadow = "none";
           }}
         />

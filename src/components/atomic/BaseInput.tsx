@@ -1,6 +1,7 @@
 import React from "react";
-import { colors, fontSize } from "../../theme";
+import { colors, fontSize, borderRadius, componentBorders } from "../../theme";
 import { InputVariant, ComponentSize } from "../../types";
+import { getInputBorderStyles } from "../shared/inputBorders";
 
 export interface BaseInputProps {
   id?: string;
@@ -41,59 +42,6 @@ export const BaseInput: React.FC<BaseInputProps> = ({
   onKeyPress,
   'data-testid': testId,
 }) => {
-  const getVariantStyles = (variant: string) => {
-    switch (variant) {
-      case "default":
-        return {
-          borderColor: colors.border.default,
-          focusBorderColor: colors.border.focus.primary,
-          focusBoxShadow: colors.focusRing.primary,
-        };
-      case "primary":
-        return {
-          borderColor: colors.border.primary,
-          focusBorderColor: colors.border.focus.primary,
-          focusBoxShadow: colors.focusRing.primary,
-        };
-      case "secondary":
-        return {
-          borderColor: colors.border.secondary,
-          focusBorderColor: colors.border.focus.secondary,
-          focusBoxShadow: colors.focusRing.secondary,
-        };
-      case "success":
-        return {
-          borderColor: colors.border.success,
-          focusBorderColor: colors.border.focus.success,
-          focusBoxShadow: colors.focusRing.success,
-        };
-      case "error":
-        return {
-          borderColor: colors.border.error,
-          focusBorderColor: colors.border.focus.error,
-          focusBoxShadow: colors.focusRing.error,
-        };
-      case "warning":
-        return {
-          borderColor: colors.border.warning || colors.semantic.warning,
-          focusBorderColor: colors.border.focus.warning || colors.semantic.warning,
-          focusBoxShadow: colors.focusRing.warning,
-        };
-      case "info":
-        return {
-          borderColor: colors.border.info || colors.semantic.info,
-          focusBorderColor: colors.border.focus.info || colors.semantic.info,
-          focusBoxShadow: colors.focusRing.info,
-        };
-      default:
-        return {
-          borderColor: colors.border.default,
-          focusBorderColor: colors.border.focus.primary,
-          focusBoxShadow: colors.focusRing.primary,
-        };
-    }
-  };
-
   const getSizeStyles = (size: string) => {
     switch (size) {
       case "small":
@@ -123,8 +71,9 @@ export const BaseInput: React.FC<BaseInputProps> = ({
     }
   };
 
-  const variantStyles = getVariantStyles(variant);
+  const variantStyles = getInputBorderStyles(variant);
   const sizeStyles = getSizeStyles(size);
+  const baseBorder = disabled ? componentBorders.input.disabled : variantStyles.border;
 
   return (
     <input
@@ -144,8 +93,8 @@ export const BaseInput: React.FC<BaseInputProps> = ({
       data-testid={testId}
       style={{
         ...sizeStyles,
-        border: `2px solid ${variantStyles.borderColor}`,
-        borderRadius: "8px",
+        border: baseBorder,
+        borderRadius: borderRadius.md,
         fontFamily: "inherit",
         backgroundColor: disabled ? colors.background.disabled : colors.background.white,
         color: disabled ? colors.semantic.muted : colors.semantic.text,
@@ -158,12 +107,12 @@ export const BaseInput: React.FC<BaseInputProps> = ({
       }}
       onFocusCapture={(e) => {
         if (!disabled) {
-          e.currentTarget.style.borderColor = variantStyles.focusBorderColor;
+          e.currentTarget.style.border = variantStyles.focusBorder;
           e.currentTarget.style.boxShadow = variantStyles.focusBoxShadow;
         }
       }}
       onBlurCapture={(e) => {
-        e.currentTarget.style.borderColor = variantStyles.borderColor;
+        e.currentTarget.style.border = baseBorder;
         e.currentTarget.style.boxShadow = "none";
       }}
     />
