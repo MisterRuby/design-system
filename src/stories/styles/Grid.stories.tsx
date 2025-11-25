@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import {
   grid,
+  gridHelpers,
+  gridTemplates,
   colors,
   semanticBorders,
   borderRadius,
@@ -50,23 +52,30 @@ export default {
 };
 
 export const BasicGrid = {
-  render: () => (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(2, 1fr)",
-        gap: grid.gutter.md,
-      }}>
-      <DemoBox>Grid Item 1</DemoBox>
-      <DemoBox>Grid Item 2</DemoBox>
-      <DemoBox>Grid Item 3</DemoBox>
-      <DemoBox>Grid Item 4</DemoBox>
-    </div>
-  ),
+  render: () => {
+    const twoColumns = Math.max(1, Math.floor(grid.columns / 6));
+    return (
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: gridTemplates.twoColumn,
+          gap: grid.gutter.md,
+        }}>
+        <DemoBox>Grid Item 1</DemoBox>
+        <DemoBox>Grid Item 2</DemoBox>
+        <DemoBox>Grid Item 3</DemoBox>
+        <DemoBox>Grid Item 4</DemoBox>
+      </div>
+    );
+  },
   parameters: {
     docs: {
       source: {
-        code: `<div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
+        code: `import { grid } from "../../theme";
+
+const twoColumns = Math.max(1, Math.floor(grid.columns / 6));
+
+<div style={{ display: 'grid', gridTemplateColumns: gridTemplates.twoColumn, gap: grid.gutter.md }}>
   <div>Grid Item 1</div>
   <div>Grid Item 2</div>
   <div>Grid Item 3</div>
@@ -78,25 +87,29 @@ export const BasicGrid = {
 };
 
 export const ResponsiveGrid = {
-  render: () => (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-        gap: grid.gutter.md,
-      }}>
-      <DemoBox>반응형 Item 1</DemoBox>
-      <DemoBox>반응형 Item 2</DemoBox>
-      <DemoBox>반응형 Item 3</DemoBox>
-    </div>
-  ),
+  render: () => {
+    return (
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: gridTemplates.autoFitQuarter,
+          gap: grid.gutter.md,
+        }}>
+        <DemoBox>반응형 Item 1</DemoBox>
+        <DemoBox>반응형 Item 2</DemoBox>
+        <DemoBox>반응형 Item 3</DemoBox>
+      </div>
+    );
+  },
   parameters: {
     docs: {
       source: {
-        code: `<div style={{
+        code: `import { grid, gridHelpers } from "../../theme";
+
+<div style={{
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-  gap: '16px'
+  gridTemplateColumns: gridTemplates.autoFitQuarter,
+  gap: grid.gutter.md
 }}>
   <div>반응형 Item 1</div>
   <div>반응형 Item 2</div>
@@ -108,27 +121,31 @@ export const ResponsiveGrid = {
 };
 
 export const GridAlignment = {
-  render: () => (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(3, 1fr)",
-        gap: grid.gutter.md,
-        justifyItems: "center",
-        alignItems: "center",
-        minHeight: "200px",
-      }}>
-      <DemoBox>중앙 정렬 1</DemoBox>
-      <DemoBox>중앙 정렬 2</DemoBox>
-      <DemoBox>중앙 정렬 3</DemoBox>
-    </div>
-  ),
+  render: () => {
+    return (
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: gridTemplates.threeColumn,
+          gap: grid.gutter.md,
+          justifyItems: "center",
+          alignItems: "center",
+          minHeight: "200px",
+        }}>
+        <DemoBox>중앙 정렬 1</DemoBox>
+        <DemoBox>중앙 정렬 2</DemoBox>
+        <DemoBox>중앙 정렬 3</DemoBox>
+      </div>
+    );
+  },
   parameters: {
     docs: {
       source: {
-        code: `<div style={{
+        code: `import { grid } from "../../theme";
+
+<div style={{
   display: 'grid',
-  gridTemplateColumns: 'repeat(3, 1fr)',
+  gridTemplateColumns: gridTemplates.threeColumn,
   gap: grid.gutter.md,
   justifyItems: 'center',
   alignItems: 'center'
@@ -137,6 +154,78 @@ export const GridAlignment = {
   <div>중앙 정렬 2</div>
   <div>중앙 정렬 3</div>
 </div>`,
+      },
+    },
+  },
+};
+
+export const MixedSpans = {
+  render: () => {
+    const totalColumns = grid.columns;
+    const headerSpan = totalColumns;
+    const sidebarSpan = Math.max(2, Math.floor(totalColumns / 4));
+    const contentSpan = Math.max(totalColumns - sidebarSpan, sidebarSpan + 2);
+    const cardSpan = Math.max(2, Math.floor(totalColumns / 3));
+
+    return (
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: gridTemplates.twelveColumns,
+          gap: grid.gutter.md,
+        }}
+      >
+        <DemoBox $height="48px" $color={colors.info[50]} style={{ gridColumn: `span ${headerSpan}` }}>
+          헤더 ({headerSpan} cols)
+        </DemoBox>
+
+        <DemoBox $height="120px" $color={colors.gray[100]} style={{ gridColumn: `span ${sidebarSpan}` }}>
+          사이드바 ({sidebarSpan} cols)
+        </DemoBox>
+        <DemoBox
+          $height="120px"
+          $color={colors.success[50]}
+          style={{ gridColumn: `span ${contentSpan}` }}
+        >
+          메인 콘텐츠 ({contentSpan} cols)
+        </DemoBox>
+
+        {[1, 2, 3].map((idx) => (
+          <DemoBox
+            key={idx}
+            $height="80px"
+            $color={colors.warning[50]}
+            style={{ gridColumn: `span ${cardSpan}` }}
+          >
+            카드 {idx} ({cardSpan} cols)
+          </DemoBox>
+        ))}
+      </div>
+    );
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `import { grid } from "../../theme";
+
+const totalColumns = grid.columns;
+const headerSpan = totalColumns;
+const sidebarSpan = Math.max(2, Math.floor(totalColumns / 4));
+const contentSpan = Math.max(totalColumns - sidebarSpan, sidebarSpan + 2);
+const cardSpan = Math.max(2, Math.floor(totalColumns / 3));
+
+<div style={{
+  display: "grid",
+  gridTemplateColumns: gridTemplates.twelveColumns,
+  gap: grid.gutter.md,
+}}>
+  <div style={{ gridColumn: \`span \${headerSpan}\` }}>헤더</div>
+  <div style={{ gridColumn: \`span \${sidebarSpan}\` }}>사이드바</div>
+  <div style={{ gridColumn: \`span \${contentSpan}\` }}>메인</div>
+  {[1,2,3].map(i => (
+    <div key={i} style={{ gridColumn: \`span \${cardSpan}\` }}>카드 {i}</div>
+  ))}
+</div>;`,
       },
     },
   },

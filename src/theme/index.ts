@@ -16,12 +16,13 @@ export type {
 } from "./typography";
 export { spacing, semanticSpacing, layout } from "./spacing";
 export type { SpacingKey, SemanticSpacingKey, LayoutKey } from "./spacing";
-export { breakpoints, grid, gridHelpers } from "./grid";
+export { breakpoints, grid, gridHelpers, gridTemplates } from "./grid";
 export type {
   Breakpoint,
   GridColumns,
   ResponsiveValue,
   GridConfig,
+  GridTemplateKey,
 } from "./grid";
 export { shadows, semanticShadows } from "./shadows";
 export type { ShadowKey, SemanticShadowKey } from "./shadows";
