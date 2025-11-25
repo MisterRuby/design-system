@@ -1,5 +1,5 @@
 import React from "react";
-import { Label, BaseInput } from "../components";
+import { Label, BaseInput } from "../../components";
 
 export default {
   title: "Components/Atomic/Label",

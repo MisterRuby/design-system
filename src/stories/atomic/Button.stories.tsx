@@ -1,8 +1,8 @@
 import React from "react";
-import { Button } from '../components';
-import { action } from "./actions";
+import { Button } from '../../components';
+import { action } from "../actions";
 import { within, userEvent } from '@storybook/testing-library';
-import { Step } from './types';
+import { Step } from '../types';
 
 export default {
   title: "Components/Atomic/Button",

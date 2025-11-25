@@ -1,6 +1,6 @@
 import React from "react";
-import { BaseCheckbox } from "../components";
-import { action } from "./actions";
+import { BaseCheckbox } from "../../components";
+import { action } from "../actions";
 import { within, userEvent } from "@storybook/testing-library";
 
 export default {

@@ -1,13 +1,13 @@
 import { within, userEvent } from '@storybook/testing-library';
-import { Button } from '../components/atomic/Button';
-import { Text } from '../components/atomic/Text';
-import { Header } from '../components/molecules/Header';
-import { colors, fontWeight } from '../theme';
-import { action } from './actions';
-import { Step } from './types';
+import { Button } from '../../components/atomic/Button';
+import { Text } from '../../components/atomic/Text';
+import { Header } from '../../components/molecules/Header';
+import { colors, fontWeight } from '../../theme';
+import { action } from '../actions';
+import { Step } from '../types';
 
 export default {
-  title: "Components/Layout/Header",
+  title: "Layout/Header",
   component: Header,
   parameters: {
     layout: 'fullscreen',

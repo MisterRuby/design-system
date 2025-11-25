@@ -1,5 +1,5 @@
 import React from "react";
-import { shadows, semanticShadows, colors, fontSize, fontWeight } from "../theme";
+import { shadows, semanticShadows, colors, fontSize, fontWeight } from "../../theme";
 
 export default {
   title: "Styles/Shadows",
@@ -106,7 +106,7 @@ export const ElevationLevels = {
   parameters: {
     docs: {
       source: {
-        code: `import { shadows } from "../theme";
+        code: `import { shadows } from "../../theme";
 
 // 1. 기본 카드 스타일링
 const Card = ({ children, elevated = false }: { children: React.ReactNode; elevated?: boolean }) => (
@@ -737,7 +737,7 @@ export const SemanticShadows = {
   parameters: {
     docs: {
       source: {
-        code: `import { semanticShadows } from "../theme";
+        code: `import { semanticShadows } from "../../theme";
 
 // 1. 인터랙티브 카드 컴포넌트
 const InteractiveCard = ({ children, onClick }: { children: React.ReactNode; onClick?: () => void }) => {

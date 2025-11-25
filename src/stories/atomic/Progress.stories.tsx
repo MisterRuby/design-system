@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Progress, Button } from "../components";
-import { action } from "./actions";
+import { Progress, Button } from "../../components";
+import { action } from "../actions";
 import { within, userEvent, waitFor } from "@storybook/testing-library";
 
 export default {

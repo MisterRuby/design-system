@@ -1,8 +1,8 @@
 import React from "react";
 import { within, userEvent } from "@storybook/testing-library";
-import { Spinner } from "../components";
-import { colors, componentBorders, fontSize, fontWeight } from "../theme";
-import { action } from "./actions";
+import { Spinner } from "../../components";
+import { colors, componentBorders, fontSize, fontWeight } from "../../theme";
+import { action } from "../actions";
 
 export default {
   title: "Components/Atomic/Spinner",

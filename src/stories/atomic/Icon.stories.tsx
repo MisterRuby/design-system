@@ -1,6 +1,6 @@
 import React from "react";
-import { Icon, IconName } from "../components";
-import { colors, componentBorders, fontSize, borderRadius } from "../theme";
+import { Icon, IconName } from "../../components";
+import { colors, componentBorders, fontSize, borderRadius } from "../../theme";
 
 export default {
   title: "Components/Atomic/Icon",
@@ -94,7 +94,7 @@ export const CustomColor = {
   parameters: {
     docs: {
       source: {
-        code: `import { colors } from "../theme";
+        code: `import { colors } from "../../theme";
 
 <Icon name="heart" size={32} color={colors.semantic.success} />`,
       },

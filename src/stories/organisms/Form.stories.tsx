@@ -1,7 +1,7 @@
-import { Form, FormField } from '../components/organisms/Form';
-import { action } from './actions';
+import { Form, FormField } from '../../components/organisms/Form';
+import { action } from '../actions';
 import { within, userEvent } from '@storybook/testing-library';
-import { Step } from './types';
+import { Step } from '../types';
 
 export default {
   title: "Components/Organisms/Form",

@@ -8,6 +8,8 @@ export { RadioGroup } from './RadioGroup';
 export type { RadioGroupProps, RadioGroupOption } from './RadioGroup';
 export { Header } from './Header';
 export type { HeaderProps, NavigationItem } from './Header';
+export { SlideBar } from './SlideBar';
+export type { SlideBarProps, SlideBarItem } from './SlideBar';
 
 // Legacy exports for backward compatibility
 export { InputField as Input } from './InputField';

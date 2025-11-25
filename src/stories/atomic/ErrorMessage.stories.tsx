@@ -1,6 +1,6 @@
 import React from "react";
-import { ErrorMessage, BaseInput, Label } from "../components";
-import { colors } from "../theme";
+import { ErrorMessage, BaseInput, Label } from "../../components";
+import { colors } from "../../theme";
 
 export default {
   title: "Components/Atomic/ErrorMessage",
@@ -200,7 +200,7 @@ export const ConditionalDisplay = {
   parameters: {
     docs: {
       source: {
-        code: `import { colors } from "../theme";
+        code: `import { colors } from "../../theme";
 
 const [showError, setShowError] = useState(false);
 

@@ -1,6 +1,6 @@
 import React from "react";
-import { HelperText, BaseInput, Label } from "../components";
-import { colors } from "../theme";
+import { HelperText, BaseInput, Label } from "../../components";
+import { colors } from "../../theme";
 
 export default {
   title: "Components/Atomic/HelperText",
@@ -224,7 +224,7 @@ export const ConditionalDisplay = {
   parameters: {
     docs: {
       source: {
-        code: `import { colors } from "../theme";
+        code: `import { colors } from "../../theme";
 
 const [showHelper, setShowHelper] = useState(true);
 

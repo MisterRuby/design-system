@@ -1,8 +1,8 @@
 import React from "react";
 import { within, userEvent } from "@storybook/testing-library";
-import { Toggle } from "../components";
-import { colors, componentBorders, fontSize } from "../theme";
-import { action } from "./actions";
+import { Toggle } from "../../components";
+import { colors, componentBorders, fontSize } from "../../theme";
+import { action } from "../actions";
 
 export default {
   title: "Components/Atomic/Toggle",
@@ -378,7 +378,7 @@ export const ControlledExample = {
   parameters: {
     docs: {
       source: {
-        code: `import { colors, componentBorders } from "../theme";
+        code: `import { colors, componentBorders } from "../../theme";
 
 const [isEnabled, setIsEnabled] = useState(false);
 

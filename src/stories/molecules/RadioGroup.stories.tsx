@@ -1,8 +1,8 @@
 import React from "react";
 import { within, userEvent } from "@storybook/testing-library";
-import { RadioGroup } from "../components";
-import { colors, componentBorders, fontSize } from "../theme";
-import { action } from "./actions";
+import { RadioGroup } from "../../components";
+import { colors, componentBorders, fontSize } from "../../theme";
+import { action } from "../actions";
 
 export default {
   title: "Components/Molecules/RadioGroup",
@@ -547,7 +547,7 @@ export const ControlledExample = {
   parameters: {
     docs: {
       source: {
-        code: `import { colors } from "../theme";
+        code: `import { colors } from "../../theme";
 
 const [value, setValue] = useState("");
 

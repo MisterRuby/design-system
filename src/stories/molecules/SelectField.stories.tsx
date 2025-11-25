@@ -1,8 +1,8 @@
 import React from "react";
 import { within, userEvent } from "@storybook/testing-library";
-import { SelectField } from "../components";
-import { colors, fontSize } from "../theme";
-import { action } from "./actions";
+import { SelectField } from "../../components";
+import { colors, fontSize } from "../../theme";
+import { action } from "../actions";
 
 export default {
   title: "Components/Molecules/SelectField",
@@ -498,7 +498,7 @@ export const ControlledExample = {
   parameters: {
     docs: {
       source: {
-        code: `import { colors } from "../theme";
+        code: `import { colors } from "../../theme";
 
 const [value, setValue] = useState("");
 

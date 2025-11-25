@@ -1,6 +1,6 @@
 import React from "react";
-import { Text } from "../components";
-import { colors, typography, fontSize, fontWeight } from "../theme";
+import { Text } from "../../components";
+import { colors, typography, fontSize, fontWeight } from "../../theme";
 
 export default {
   title: "Styles/Typography",
@@ -106,8 +106,8 @@ export const HeadingVariants = {
   parameters: {
     docs: {
       source: {
-        code: `import { Text } from "../components";
-import { typography } from "../theme";
+        code: `import { Text } from "../../components";
+import { typography } from "../../theme";
 
 // 1. 기본 제목 계층 구조
 <Text variant="h1">메인 페이지 제목</Text>
@@ -640,7 +640,7 @@ export const ThemeValues = {
   parameters: {
     docs: {
       source: {
-        code: `import { typography, fontSize, fontWeight } from "../theme";
+        code: `import { typography, fontSize, fontWeight } from "../../theme";
 
 // Typography theme 값들을 직접 사용 가능
 const customStyles = {
