@@ -1,5 +1,5 @@
 import React from "react";
-import { shadows, semanticShadows, colors, fontSize, fontWeight } from "../../theme";
+import { shadows, semanticShadows, colors, fontSize, fontWeight, semanticBorders, borderWidth } from "../../theme";
 
 export default {
   title: "Styles/Shadows",
@@ -41,7 +41,7 @@ const ShadowDemo = ({
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              border: value === 'none' ? `1px solid ${colors.gray[200]}` : 'none',
+              border: value === 'none' ? semanticBorders.default : 'none',
               fontSize: fontSize.sm,
               color: colors.gray[600]
             }}>
@@ -84,7 +84,7 @@ export const ElevationLevels = {
       <div style={{
         padding: '16px',
         backgroundColor: colors.info[50],
-        border: `1px solid ${colors.info[200]}`,
+        border: semanticBorders.info,
         borderRadius: '8px',
         marginBottom: '24px'
       }}>
@@ -475,7 +475,7 @@ export const SemanticShadows = {
           <div style={{
             padding: '8px 0',
             backgroundColor: colors.background.white,
-            border: `1px solid ${colors.gray[200]}`,
+            border: semanticBorders.default,
             borderRadius: '6px',
             boxShadow: semanticShadows.dropdown,
             fontSize: fontSize.sm,
@@ -493,7 +493,7 @@ export const SemanticShadows = {
           <div style={{
             padding: '12px 16px',
             backgroundColor: colors.background.white,
-            border: `1px solid ${colors.gray[200]}`,
+            border: semanticBorders.default,
             borderRadius: '8px',
             boxShadow: semanticShadows.popover,
             fontSize: fontSize.sm,
@@ -528,7 +528,7 @@ export const SemanticShadows = {
             placeholder="포커스된 입력 필드"
             style={{
               padding: '8px 12px',
-              border: `1px solid ${colors.semantic.primary}`,
+              border: `${borderWidth[1]} solid ${colors.semantic.primary}`,
               borderRadius: '4px',
               boxShadow: semanticShadows.inputFocus,
               fontSize: fontSize.sm,
@@ -545,7 +545,7 @@ export const SemanticShadows = {
             placeholder="에러 상태 입력 필드"
             style={{
               padding: '8px 12px',
-              border: `1px solid ${colors.semantic.error}`,
+              border: `${borderWidth[1]} solid ${colors.semantic.error}`,
               borderRadius: '4px',
               boxShadow: semanticShadows.inputError,
               fontSize: fontSize.sm,
@@ -562,7 +562,7 @@ export const SemanticShadows = {
             placeholder="성공 상태 입력 필드"
             style={{
               padding: '8px 12px',
-              border: `1px solid ${colors.semantic.success}`,
+              border: `${borderWidth[1]} solid ${colors.semantic.success}`,
               borderRadius: '4px',
               boxShadow: semanticShadows.inputSuccess,
               fontSize: fontSize.sm,
@@ -670,7 +670,7 @@ export const SemanticShadows = {
                   padding: "16px",
                   backgroundColor: colors.gray[50],
                   borderRadius: "8px",
-                  border: `1px solid ${colors.gray[200]}`,
+                  border: semanticBorders.default,
                 }}>
                 <div style={{
                   display: "flex",
@@ -778,7 +778,7 @@ const FormInput = ({ label, error, ...props }: { label: string; error?: boolean;
       style={{
         width: '100%',
         padding: '8px 12px',
-        border: error ? '1px solid #dc2626' : '1px solid #d1d5db',
+        border: error ? semanticBorders.error : semanticBorders.default,
         borderRadius: '4px',
         boxShadow: error
           ? semanticShadows.inputError
@@ -931,7 +931,7 @@ export const ShadowInteractions = {
                     backgroundColor: bg,
                     borderRadius: '8px',
                     boxShadow: shadow,
-                    border: shadow === shadows.none ? `1px solid ${colors.gray[300]}` : 'none',
+                    border: shadow === shadows.none ? semanticBorders.strong : 'none',
                     marginBottom: '8px',
                     display: 'flex',
                     alignItems: 'center',

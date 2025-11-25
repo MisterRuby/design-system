@@ -7,6 +7,8 @@ import {
   colors,
   semanticBorders,
   componentBorders,
+  borderStyles,
+  borderWidth,
   borderRadius,
   fontSize,
   fontWeight,
@@ -393,7 +395,7 @@ export const SemanticSpacing = {
           <div style={{
             padding: semanticSpacing.containerPaddingMobile,
             backgroundColor: colors.gray[50],
-            border: `2px dashed ${colors.gray[300]}`,
+            border: `${borderWidth[2]} ${borderStyles.dashed} ${colors.border.default}`,
             borderRadius: '4px',
             maxWidth: '200px',
             fontSize: fontSize.xs
@@ -408,7 +410,7 @@ export const SemanticSpacing = {
           <div style={{
             padding: semanticSpacing.containerPaddingTablet,
             backgroundColor: colors.gray[50],
-            border: `2px dashed ${colors.gray[300]}`,
+            border: `${borderWidth[2]} ${borderStyles.dashed} ${colors.border.default}`,
             borderRadius: '6px',
             maxWidth: '240px',
             fontSize: fontSize.sm
@@ -423,7 +425,7 @@ export const SemanticSpacing = {
           <div style={{
             padding: semanticSpacing.containerPaddingDesktop,
             backgroundColor: colors.gray[50],
-            border: `2px dashed ${colors.gray[300]}`,
+            border: `${borderWidth[2]} ${borderStyles.dashed} ${colors.border.default}`,
             borderRadius: '8px',
             maxWidth: '280px',
             fontSize: fontSize.sm
@@ -743,7 +745,7 @@ export const LayoutConstants = {
             maxWidth: layout.containerMaxWidth,
             margin: '0 auto',
             backgroundColor: colors.gray[50],
-            border: `2px dashed ${colors.gray[300]}`,
+            border: `${borderWidth[2]} ${borderStyles.dashed} ${colors.border.default}`,
             padding: '16px',
             borderRadius: '8px',
             textAlign: 'center',
@@ -760,7 +762,7 @@ export const LayoutConstants = {
             maxWidth: layout.contentMaxWidth,
             margin: '0 auto',
             backgroundColor: colors.gray[50],
-            border: `2px dashed ${colors.semantic.primary}`,
+            border: `${borderWidth[2]} ${borderStyles.dashed} ${colors.semantic.primary}`,
             padding: '16px',
             borderRadius: '8px',
             fontSize: fontSize.sm

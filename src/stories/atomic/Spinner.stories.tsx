@@ -1,7 +1,7 @@
 import React from "react";
 import { within, userEvent } from "@storybook/testing-library";
 import { Spinner } from "../../components";
-import { colors, componentBorders, fontSize, fontWeight } from "../../theme";
+import { colors, componentBorders, fontSize, fontWeight, borderRadius, semanticBorders } from "../../theme";
 import { action } from "../actions";
 
 export default {
@@ -307,8 +307,8 @@ export const LoadingStates = {
             textAlign: "center",
             padding: "20px",
             backgroundColor: colors.gray[50],
-            borderRadius: "8px",
-            border: `1px solid ${colors.gray[200]}`,
+            borderRadius: borderRadius.md,
+            border: semanticBorders.default,
             width: "100%"
           }}>
             <Spinner label="데이터를 불러오는 중입니다..." color="primary" />

@@ -1,6 +1,6 @@
 import React from "react";
 import { Text } from "../../components";
-import { colors, typography, fontSize, fontWeight } from "../../theme";
+import { colors, typography, fontSize, fontWeight, semanticBorders, borderRadius } from "../../theme";
 
 export default {
   title: "Styles/Typography",
@@ -31,8 +31,8 @@ const TypographyShowcase = ({ items }: {
           gap: "24px",
           padding: "16px",
           backgroundColor: colors.background.white,
-          border: `1px solid ${colors.gray[200]}`,
-          borderRadius: "8px"
+          border: semanticBorders.default,
+          borderRadius: borderRadius.md
         }}>
           <div style={{
             flex: "1",
@@ -427,7 +427,7 @@ export const TextAlignment = {
           <div key={align} style={{
             padding: "16px",
             backgroundColor: colors.background.white,
-            border: `1px solid ${colors.gray[200]}`,
+            border: semanticBorders.default,
             borderRadius: "8px"
           }}>
             <div style={{
@@ -539,7 +539,7 @@ export const ThemeValues = {
           fontWeight: fontWeight.semibold,
           marginBottom: "16px",
           color: colors.gray[900],
-          borderBottom: `1px solid ${colors.gray[200]}`,
+          borderBottom: semanticBorders.default,
           paddingBottom: "8px"
         }}>
           Font Sizes
@@ -568,7 +568,7 @@ export const ThemeValues = {
           fontWeight: fontWeight.semibold,
           marginBottom: "16px",
           color: colors.gray[900],
-          borderBottom: `1px solid ${colors.gray[200]}`,
+          borderBottom: semanticBorders.default,
           paddingBottom: "8px"
         }}>
           Font Weights
@@ -597,7 +597,7 @@ export const ThemeValues = {
           fontWeight: fontWeight.semibold,
           marginBottom: "16px",
           color: colors.gray[900],
-          borderBottom: `1px solid ${colors.gray[200]}`,
+          borderBottom: semanticBorders.default,
           paddingBottom: "8px"
         }}>
           Typography Variants
@@ -608,7 +608,7 @@ export const ThemeValues = {
               padding: "16px",
               backgroundColor: colors.gray[50],
               borderRadius: "8px",
-              border: `1px solid ${colors.gray[200]}`
+              border: semanticBorders.default
             }}>
               <div style={{
                 display: "flex",
@@ -661,7 +661,7 @@ export const RealWorldExamples = {
         maxWidth: '600px',
         padding: '24px',
         backgroundColor: colors.background.white,
-        border: `1px solid ${colors.gray[200]}`,
+        border: semanticBorders.default,
         borderRadius: '12px'
       }}>
         <Text variant="overline" color="primary" style={{ marginBottom: '8px' }}>TUTORIAL</Text>
@@ -682,7 +682,7 @@ export const RealWorldExamples = {
         maxWidth: '400px',
         padding: '20px',
         backgroundColor: colors.background.white,
-        border: `1px solid ${colors.gray[200]}`,
+        border: semanticBorders.default,
         borderRadius: '8px'
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
