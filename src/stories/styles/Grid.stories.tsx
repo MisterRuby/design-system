@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { gridSystem as grid, breakpoints } from "../../theme";
+import { grid, breakpoints } from "../../theme";
 
 const DemoBox = styled.div<{ $height?: string; $color?: string }>`
   background-color: ${({ $color }) => $color || "#e3f2fd"};
