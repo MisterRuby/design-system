@@ -26,7 +26,7 @@ const DemoBox = styled.div<{ $height?: string; $color?: string }>`
 `;
 
 export default {
-  title: "Styles/Grid System",
+  title: "Styles/Grid",
   tags: ["autodocs"],
   parameters: {
     layout: "padded",
@@ -173,20 +173,24 @@ export const MixedSpans = {
           display: "grid",
           gridTemplateColumns: gridTemplates.twelveColumns,
           gap: grid.gutter.md,
-        }}
-      >
-        <DemoBox $height="48px" $color={colors.info[50]} style={{ gridColumn: `span ${headerSpan}` }}>
+        }}>
+        <DemoBox
+          $height="48px"
+          $color={colors.info[50]}
+          style={{ gridColumn: `span ${headerSpan}` }}>
           헤더 ({headerSpan} cols)
         </DemoBox>
 
-        <DemoBox $height="120px" $color={colors.gray[100]} style={{ gridColumn: `span ${sidebarSpan}` }}>
+        <DemoBox
+          $height="120px"
+          $color={colors.gray[100]}
+          style={{ gridColumn: `span ${sidebarSpan}` }}>
           사이드바 ({sidebarSpan} cols)
         </DemoBox>
         <DemoBox
           $height="120px"
           $color={colors.success[50]}
-          style={{ gridColumn: `span ${contentSpan}` }}
-        >
+          style={{ gridColumn: `span ${contentSpan}` }}>
           메인 콘텐츠 ({contentSpan} cols)
         </DemoBox>
 
@@ -195,8 +199,7 @@ export const MixedSpans = {
             key={idx}
             $height="80px"
             $color={colors.warning[50]}
-            style={{ gridColumn: `span ${cardSpan}` }}
-          >
+            style={{ gridColumn: `span ${cardSpan}` }}>
             카드 {idx} ({cardSpan} cols)
           </DemoBox>
         ))}
