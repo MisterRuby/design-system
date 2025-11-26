@@ -1,142 +1,53 @@
-# Schedule AI - UI Components
+# Design System UI Components
 
-AI 스케줄 관리 애플리케이션을 위한 React 컴포넌트 라이브러리입니다.
+여러 제품에서 공유하는 React 기반 디자인 시스템입니다. 일관된 UI, 접근성, 반복 가능한 개발 경험을 제공하기 위해 Storybook 중심으로 구축했습니다.
 
-## 🚀 시작하기
+## 목적
+- 제품 전반에서 재사용 가능한 토큰, 기본 컴포넌트(Atomic), 레이아웃, 복합 컴포넌트를 제공
+- Storybook 문서로 상태·상호작용을 명확히 기록하고 시각적으로 검증
+- CRA 기반 빌드로 애플리케이션/문서 번들 모두 쉽게 배포
 
-### 개발 환경 실행
-
+## 빠른 시작
 ```bash
-# 개발 서버 실행
+# 의존성 설치
+npm install
+
+# 로컬 개발 서버 (CRA)
 npm start
 
-# Storybook 실행 (컴포넌트 개발/테스트)
+# Storybook 문서
 npm run storybook
 
-# 테스트 실행
+# 테스트 (Jest + RTL)
 npm test
 
-# 빌드
+# 프로덕션 빌드 / Storybook 정적 문서
 npm run build
+npm run build-storybook
 ```
 
-## 📦 컴포넌트
+## 폴더 개요
+- `src/components/` : Atomic → Molecule → Organism → Layout 컴포넌트. 새 컴포넌트는 `ComponentName/` 아래에 만들고 `src/components/index.ts`에 export 등록.
+- `src/stories/` : Storybook 스토리. 모든 prop에 Controls를 제공하여 시각적 회귀 검증에 활용.
+- `src/theme/` : 공통 토큰과 스타일 유틸.
+- `storybook-static/` : `npm run build-storybook` 결과물. GitHub Pages 등 정적 호스팅에 바로 사용.
 
-### Calendar
+## Storybook 배포 힌트
+1. `npm run build-storybook`으로 정적 사이트를 생성하면 `storybook-static/`이 만들어집니다.
+2. GitHub Pages나 S3 같은 정적 호스팅에 `storybook-static` 폴더를 업로드하면 문서 사이트가 열립니다.
+3. GitHub Actions 예시: checkout → `npm ci` → `npm run build-storybook` → `actions/upload-pages-artifact` → `actions/deploy-pages`.
 
-월간 캘린더 뷰로 일정을 시각적으로 표시합니다.
+## 개발 가이드
+- 함수형 컴포넌트와 Hooks 사용, TypeScript로 타입 명시.
+- CSS Modules를 기본으로 하며 모듈 키를 통해 변형(`styles.variant`)을 노출.
+- 접근성: ARIA 속성과 키보드 인터랙션을 스토리/테스트에서 검증.
+- 테스트는 사용자 행동 중심(React Testing Library)으로 작성하고, 주요 시나리오는 Storybook Play 함수로도 확인.
 
-```tsx
-import { Calendar } from './components';
+## 커밋 메시지 예시
+- `feat(button): 로딩 상태 추가`
+- `fix(tooltip): 포커스 트랩 이탈 방지`
+- `docs: storybook 배포 가이드 업데이트`
+- `test(grid): 접근성 회귀 테스트 추가`
 
-<Calendar
-  events={events}
-  onEventClick={handleEventClick}
-  onDateSelect={handleDateSelect}
-  view="month"
-/>
-```
-
-### ScheduleCard
-
-개별 일정을 카드 형태로 표시합니다.
-
-```tsx
-import { ScheduleCard } from './components';
-
-<ScheduleCard
-  id="1"
-  title="프로젝트 회의"
-  startTime="2024-01-15T10:00:00Z"
-  endTime="2024-01-15T11:00:00Z"
-  priority="high"
-  onEdit={handleEdit}
-  onDelete={handleDelete}
-/>
-```
-
-### ScheduleForm
-
-일정을 생성/수정하는 모달 폼입니다.
-
-```tsx
-import { ScheduleForm } from './components';
-
-<ScheduleForm
-  initialData={scheduleData}
-  onSubmit={handleSubmit}
-  onCancel={handleCancel}
-  isLoading={isSubmitting}
-/>
-```
-
-### AIScheduleInput
-
-자연어로 일정을 입력받는 AI 기반 컴포넌트입니다.
-
-```tsx
-import { AIScheduleInput } from './components';
-
-<AIScheduleInput
-  onSubmit={handleAISubmit}
-  isLoading={isProcessing}
-  suggestions={suggestions}
-/>
-```
-
-## 🎨 스타일링
-
-각 컴포넌트는 CSS 모듈을 사용하며, 다음과 같은 CSS 커스텀 속성을 통해 테마를 수정할 수 있습니다:
-
-```css
-:root {
-  --primary-color: #3b82f6;
-  --secondary-color: #64748b;
-  --success-color: #10b981;
-  --warning-color: #f59e0b;
-  --danger-color: #ef4444;
-
-  --border-radius: 12px;
-  --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-}
-```
-
-## 📱 반응형 디자인
-
-모든 컴포넌트는 모바일 및 데스크톱 환경에서 최적화되어 있습니다.
-
-- 데스크톱: 1200px+
-- 태블릿: 768px - 1199px
-- 모바일: 767px 이하
-
-## 🧪 Storybook
-
-컴포넌트의 다양한 상태와 사용 사례를 확인할 수 있습니다:
-
-```bash
-npm run storybook
-```
-
-브라우저에서 `http://localhost:6006`으로 접속하면 모든 컴포넌트의 스토리를 확인할 수 있습니다.
-
-## 🔧 개발
-
-### 새 컴포넌트 추가
-
-1. `src/components/ComponentName/` 디렉토리 생성
-2. `ComponentName.tsx`, `ComponentName.css`, `ComponentName.stories.ts` 파일 생성
-3. `src/components/index.ts`에 export 추가
-
-### 커밋 규칙
-
-```bash
-feat: 새로운 컴포넌트 추가
-fix: 기존 컴포넌트 버그 수정
-style: CSS 스타일 개선
-docs: 문서 업데이트
-test: 테스트 코드 추가/수정
-```
-
-## 📄 라이선스
-
+## 라이선스
 MIT License
