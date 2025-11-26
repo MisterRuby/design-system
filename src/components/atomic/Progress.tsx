@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Progress.module.css';
 import { colors, fontSize } from '../../theme';
 import { SemanticVariant, ComponentSize } from '../../types/common';
 
@@ -27,81 +28,58 @@ export const Progress: React.FC<ProgressProps> = ({
 }) => {
   const percentage = Math.min(Math.max((value / max) * 100, 0), 100);
 
-  const getVariantColor = (variant: SemanticVariant) => {
-    switch (variant) {
-      case 'primary':
-        return colors.semantic.primary;
-      case 'secondary':
-        return colors.semantic.secondary;
-      case 'success':
-        return colors.semantic.success;
-      case 'error':
-        return colors.semantic.error;
-      case 'warning':
-        return colors.semantic.warning;
-      case 'info':
-        return colors.semantic.info;
-      default:
-        return colors.semantic.primary;
-    }
+  const variantColors: Record<SemanticVariant, string> = {
+    primary: colors.semantic.primary,
+    secondary: colors.semantic.secondary,
+    success: colors.semantic.success,
+    error: colors.semantic.error,
+    warning: colors.semantic.warning,
+    info: colors.semantic.info,
   };
 
-  const getSizeStyles = (size: ComponentSize) => {
-    switch (size) {
-      case 'small':
-        return { height: '4px', fontSize: fontSize.xs };
-      case 'medium':
-        return { height: '8px', fontSize: fontSize.sm };
-      case 'large':
-        return { height: '12px', fontSize: fontSize.md };
-      default:
-        return { height: '8px', fontSize: fontSize.sm };
-    }
+  const sizeMap: Record<ComponentSize, { height: string; fontSize: string }> = {
+    small: { height: '4px', fontSize: fontSize.xs },
+    medium: { height: '8px', fontSize: fontSize.sm },
+    large: { height: '12px', fontSize: fontSize.md },
   };
 
-  const sizeStyles = getSizeStyles(size);
-  const variantColor = getVariantColor(variant);
+  const sizeStyles = sizeMap[size] ?? sizeMap.medium;
+  const variantColor = variantColors[variant] ?? colors.semantic.primary;
 
-  const displayLabel = label || (showLabel ? `${Math.round(percentage)}%` : '');
+  const displayLabel = showLabel ? (label ?? `${Math.round(percentage)}%`) : '';
+
+  const cssVars: Record<string, string | number> = {
+    '--progress-height': sizeStyles.height,
+    '--progress-font-size': sizeStyles.fontSize,
+    '--progress-color': variantColor,
+    '--progress-track-color': colors.background.gray,
+    '--progress-label-color': colors.semantic.text,
+    '--progress-muted-color': colors.semantic.muted,
+    '--progress-percentage': `${percentage}%`,
+  };
 
   return (
     <div
-      className={className}
+      className={[styles.container, className].filter(Boolean).join(' ')}
       style={{
+        ...(cssVars as React.CSSProperties),
         width: '100%',
         ...style,
       }}
       data-testid={testId}
     >
       {displayLabel && (
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: '4px',
-            fontSize: sizeStyles.fontSize,
-            color: colors.semantic.text,
-            fontFamily: 'inherit',
-          }}
-        >
+        <div className={styles.labelRow}>
           <span>{displayLabel}</span>
           {showLabel && !label && (
-            <span style={{ color: colors.semantic.muted }}>
+            <span className={styles.labelSecondary}>
               {Math.round(value)} / {Math.round(max)}
             </span>
           )}
         </div>
       )}
       <div
-        style={{
-          width: '100%',
-          height: sizeStyles.height,
-          backgroundColor: colors.background.gray,
-          borderRadius: sizeStyles.height,
-          overflow: 'hidden',
-          position: 'relative',
-        }}
+        className={styles.track}
         role="progressbar"
         aria-valuenow={value}
         aria-valuemin={0}
@@ -109,49 +87,14 @@ export const Progress: React.FC<ProgressProps> = ({
         aria-label={label || `진행률 ${Math.round(percentage)}%`}
       >
         <div
-          style={{
-            height: '100%',
-            width: `${percentage}%`,
-            backgroundColor: variantColor,
-            borderRadius: sizeStyles.height,
-            transition: 'width 0.3s ease-in-out',
-            position: 'relative',
-            overflow: 'hidden',
-          }}
+          className={styles.fill}
         >
           {/* 진행 중 애니메이션 효과 */}
           {percentage < 100 && percentage > 0 && (
-            <div
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                background: `linear-gradient(
-                  90deg,
-                  transparent,
-                  rgba(255, 255, 255, 0.2),
-                  transparent
-                )`,
-                animation: 'progress-shimmer 2s infinite',
-              }}
-            />
+            <div className={styles.shimmer} />
           )}
         </div>
       </div>
-      <style>
-        {`
-          @keyframes progress-shimmer {
-            0% {
-              transform: translateX(-100%);
-            }
-            100% {
-              transform: translateX(100%);
-            }
-          }
-        `}
-      </style>
     </div>
   );
 };

@@ -1,0 +1,55 @@
+.container {
+  width: 100%;
+}
+
+.labelRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+  font-family: inherit;
+  font-size: var(--progress-font-size);
+  color: var(--progress-label-color);
+}
+
+.labelSecondary {
+  color: var(--progress-muted-color);
+}
+
+.track {
+  width: 100%;
+  height: var(--progress-height);
+  background-color: var(--progress-track-color);
+  border-radius: var(--progress-height);
+  overflow: hidden;
+  position: relative;
+}
+
+.fill {
+  height: 100%;
+  width: var(--progress-percentage);
+  background-color: var(--progress-color);
+  border-radius: var(--progress-height);
+  transition: width 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: progress-shimmer 2s infinite;
+}
+
+@keyframes progress-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
