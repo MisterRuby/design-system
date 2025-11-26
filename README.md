@@ -2,6 +2,8 @@
 
 여러 제품에서 공유하는 React 기반 디자인 시스템입니다. 일관된 UI, 접근성, 반복 가능한 개발 경험을 제공하기 위해 Storybook 중심으로 구축했습니다.
 
+라이브 문서(GitHub Pages): https://misterruby.github.io/design-system
+
 ## 목적
 - 제품 전반에서 재사용 가능한 토큰, 기본 컴포넌트(Atomic), 레이아웃, 복합 컴포넌트를 제공
 - Storybook 문서로 상태·상호작용을 명확히 기록하고 시각적으로 검증
