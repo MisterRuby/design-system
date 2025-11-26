@@ -12,6 +12,8 @@ export interface ButtonProps {
   iconPosition?: 'left' | 'right';
   type?: 'button' | 'submit' | 'reset';
   onClick?: () => void;
+  style?: React.CSSProperties;
+  className?: string;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -22,7 +24,9 @@ export const Button: React.FC<ButtonProps> = ({
   icon,
   iconPosition = 'left',
   type = 'button',
-  onClick
+  onClick,
+  style = {},
+  className = ''
 }) => {
   const getVariantStyles = (variant: string) => {
     switch (variant) {
@@ -66,6 +70,7 @@ export const Button: React.FC<ButtonProps> = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
+      className={className}
       style={{
         display: 'flex',
         alignItems: 'center',
@@ -82,6 +87,7 @@ export const Button: React.FC<ButtonProps> = ({
         opacity: disabled ? 0.6 : 1,
         fontFamily: 'inherit',
         transition: 'all 0.2s ease-in-out',
+        ...style,
       }}
       onMouseEnter={(e) => {
         if (!disabled) {

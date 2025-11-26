@@ -36,7 +36,14 @@ export type IconName =
   | 'info'
   | 'warning'
   | 'error'
-  | 'success';
+  | 'success'
+  | 'folder'
+  | 'check-square'
+  | 'message-circle'
+  | 'help-circle'
+  | 'chevron-right'
+  | 'briefcase'
+  | 'bar-chart';
 
 export interface IconProps {
   name: IconName;
@@ -84,6 +91,13 @@ const iconPaths: Record<IconName, string> = {
   warning: 'M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z M12 9v4 M12 17h.01',
   error: 'M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z M15 9l-6 6 M9 9l6 6',
   success: 'M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z M9 12l2 2 4-4',
+  folder: 'M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z',
+  'check-square': 'M9 11l3 3 8-8 M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v4',
+  'message-circle': 'M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z',
+  'help-circle': 'M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3 M12 17h.01',
+  'chevron-right': 'M9 18l6-6-6-6',
+  briefcase: 'M16 20V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v16 M8 7v13a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2H10a2 2 0 00-2 2z',
+  'bar-chart': 'M12 20V10 M18 20V4 M6 20v-4',
 };
 
 export const Icon: React.FC<IconProps> = ({
