@@ -167,7 +167,7 @@ export const SideBar: React.FC<SideBarProps> = ({
     flexDirection: 'column',
     height: '100vh',
     boxSizing: 'border-box',
-    transition: 'width 0.3s ease-in-out',
+    transition: 'width 0.4s cubic-bezier(0.4, 0, 0.2, 1), min-width 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
     ...widthStyles,
     ...variantStyles,
     ...style,
@@ -336,37 +336,47 @@ export const SideBar: React.FC<SideBarProps> = ({
               color={item.active ? colors.semantic.primary : colors.semantic.text}
             />
           )}
-          {!collapsed && (
-            <>
-              <Text
-                variant={getMenuTextSize() as any}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              flex: 1,
+              gap: spacing.xs,
+              opacity: collapsed ? 0 : 1,
+              transition: 'opacity 0.3s ease-in-out',
+              overflow: 'hidden',
+              pointerEvents: collapsed ? 'none' : 'auto',
+            }}
+          >
+            <Text
+              variant={getMenuTextSize() as any}
+              style={{
+                margin: 0,
+                color: 'inherit',
+                fontWeight: item.active ? fontWeight.semibold : fontWeight.normal,
+                flex: 1,
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {item.label}
+            </Text>
+            {item.badge && (
+              <div style={badgeStyles}>
+                {item.badge}
+              </div>
+            )}
+            {hasChildren && (
+              <Icon
+                name="chevron-right"
+                size={12}
+                color={colors.semantic.muted}
                 style={{
-                  margin: 0,
-                  color: 'inherit',
-                  fontWeight: item.active ? fontWeight.semibold : fontWeight.normal,
-                  flex: 1,
+                  transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
+                  transition: 'transform 0.2s ease-in-out',
                 }}
-              >
-                {item.label}
-              </Text>
-              {item.badge && (
-                <div style={badgeStyles}>
-                  {item.badge}
-                </div>
-              )}
-              {hasChildren && (
-                <Icon
-                  name="chevron-right"
-                  size={12}
-                  color={colors.semantic.muted}
-                  style={{
-                    transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
-                    transition: 'transform 0.2s ease-in-out',
-                  }}
-                />
-              )}
-            </>
-          )}
+              />
+            )}
+          </div>
         </div>
         {!collapsed && hasChildren && (
           <div
@@ -391,18 +401,28 @@ export const SideBar: React.FC<SideBarProps> = ({
         {/* Header Section */}
         {(title || logo || collapsible) && (
           <div style={headerStyles}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: spacing.sm }}>
-              {logo && <div>{logo}</div>}
-              {!collapsed && title && (
-                <Text variant={getTitleSize() as any} style={{ margin: 0 }}>
-                  {title}
-                </Text>
-              )}
-            </div>
+            {!collapsed && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: spacing.sm }}>
+                {logo && <div>{logo}</div>}
+                {title && (
+                  <Text
+                    variant={getTitleSize() as any}
+                    style={{
+                      margin: 0,
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {title}
+                  </Text>
+                )}
+              </div>
+            )}
             {collapsible && (
               <button
                 style={collapseButtonStyles}
                 onClick={handleCollapseToggle}
+                aria-label={collapsed ? "사이드바 펼치기" : "사이드바 접기"}
+                title={collapsed ? "사이드바 펼치기" : "사이드바 접기"}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = colors.background.gray;
                 }}
@@ -426,8 +446,16 @@ export const SideBar: React.FC<SideBarProps> = ({
         </nav>
 
         {/* Footer Section */}
-        {!collapsed && footer && (
-          <div style={footerStyles}>
+        {footer && (
+          <div
+            style={{
+              ...footerStyles,
+              opacity: collapsed ? 0 : 1,
+              transition: 'opacity 0.3s ease-in-out',
+              pointerEvents: collapsed ? 'none' : 'auto',
+              overflow: 'hidden',
+            }}
+          >
             {footer}
           </div>
         )}
