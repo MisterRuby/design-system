@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { action } from "../actions";
+import { userEvent, within } from "@storybook/testing-library";
 import { SideBar, SideBarProps } from "../../components/organisms/SideBar";
 import { Button } from "../../components/atomic/Button";
 import { Text } from "../../components/atomic/Text";
@@ -338,6 +339,22 @@ export const Collapsible = {
         />
       </DemoLayout>
     );
+  },
+  play: async ({ canvasElement, step }: { canvasElement: HTMLElement; step: any }) => {
+    const canvas = within(canvasElement);
+
+    await step("사이드바 접기 버튼 클릭", async () => {
+      const collapseButton = canvas.getByRole('button', { name: '사이드바 접기' });
+      await userEvent.click(collapseButton);
+      await new Promise(resolve => setTimeout(resolve, 1200)); // 접기 애니메이션 완료 대기
+    });
+
+    await step("접힌 상태에서 다시 펼치기", async () => {
+      await new Promise(resolve => setTimeout(resolve, 600)); // 단계 간 구분을 위한 추가 대기
+      const expandButton = canvas.getByRole('button', { name: '사이드바 펼치기' });
+      await userEvent.click(expandButton);
+      await new Promise(resolve => setTimeout(resolve, 1200)); // 펼치기 애니메이션 완료 대기
+    });
   },
   parameters: {
     docs: {
