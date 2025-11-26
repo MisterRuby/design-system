@@ -303,13 +303,13 @@ const DocumentationContent: React.FC = () => (
           step: 1,
           title: "패키지 설치",
           description: "npm 또는 yarn을 사용하여 패키지를 설치하세요.",
-          code: "npm install @company/ui-components"
+          code: "npm install @company/design-system"
         },
         {
           step: 2,
           title: "설정",
           description: "프로젝트에 필요한 기본 설정을 진행하세요.",
-          code: "import { ThemeProvider } from '@company/ui-components'"
+          code: "import { ThemeProvider } from '@company/design-system'"
         },
         {
           step: 3,

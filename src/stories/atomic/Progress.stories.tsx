@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Progress, Button } from "../../components";
-import { action } from "../actions";
-import { within, userEvent, waitFor } from "@storybook/testing-library";
+import { within, userEvent } from "@storybook/testing-library";
 
 export default {
   title: "Components/Atomic/Progress",
@@ -58,13 +57,14 @@ export const Default = {
   ],
   play: async ({ canvasElement, step }: { canvasElement: HTMLElement; step: any }) => {
     const canvas = within(canvasElement);
-    const progressBar = canvas.getByRole('progressbar');
 
     await step("프로그레스 바 렌더링 확인", async () => {
+      canvas.getByRole('progressbar');
       await new Promise(resolve => setTimeout(resolve, 500));
     });
 
     await step("aria 속성 확인", async () => {
+      canvas.getByRole('progressbar');
       await new Promise(resolve => setTimeout(resolve, 500));
     });
   },
@@ -91,15 +91,14 @@ export const WithLabel = {
   ],
   play: async ({ canvasElement, step }: { canvasElement: HTMLElement; step: any }) => {
     const canvas = within(canvasElement);
-    const progressBar = canvas.getByRole('progressbar');
 
     await step("라벨이 표시되는지 확인", async () => {
-      const labelText = canvas.getByText('75%');
+      canvas.getByText('75%');
       await new Promise(resolve => setTimeout(resolve, 500));
     });
 
     await step("진행률 값 확인", async () => {
-      const valueText = canvas.getByText('75 / 100');
+      canvas.getByText('75 / 100');
       await new Promise(resolve => setTimeout(resolve, 500));
     });
   },
@@ -129,7 +128,7 @@ export const CustomLabel = {
     const canvas = within(canvasElement);
 
     await step("커스텀 라벨 확인", async () => {
-      const customLabel = canvas.getByText('파일 업로드 중...');
+      canvas.getByText('파일 업로드 중...');
       await new Promise(resolve => setTimeout(resolve, 500));
     });
   },
@@ -158,10 +157,9 @@ export const Complete = {
   ],
   play: async ({ canvasElement, step }: { canvasElement: HTMLElement; step: any }) => {
     const canvas = within(canvasElement);
-    const progressBar = canvas.getByRole('progressbar');
 
     await step("완료 상태 확인", async () => {
-      const completeLabel = canvas.getByText('완료!');
+      canvas.getByText('완료!');
       await new Promise(resolve => setTimeout(resolve, 500));
     });
   },
@@ -192,7 +190,7 @@ export const Error = {
     const canvas = within(canvasElement);
 
     await step("에러 상태 라벨 확인", async () => {
-      const errorLabel = canvas.getByText('오류 발생');
+      canvas.getByText('오류 발생');
       await new Promise(resolve => setTimeout(resolve, 500));
     });
   },
@@ -234,9 +232,6 @@ export const Animated = {
     </div>
   ),
   play: async ({ canvasElement, step }: { canvasElement: HTMLElement; step: any }) => {
-    const canvas = within(canvasElement);
-    const progressBar = canvas.getByRole('progressbar');
-
     await step("애니메이션 진행 확인", async () => {
       await new Promise(resolve => setTimeout(resolve, 2000));
     });
@@ -296,18 +291,18 @@ export const Variants = {
     const canvas = within(canvasElement);
 
     await step("모든 variant 렌더링 확인", async () => {
-      const primaryProgress = canvas.getByText('Primary');
-      const secondaryProgress = canvas.getByText('Secondary');
-      const successProgress = canvas.getByText('Success');
-      const errorProgress = canvas.getByText('Error');
-      const warningProgress = canvas.getByText('Warning');
-      const infoProgress = canvas.getByText('Info');
+      canvas.getByText('Primary');
+      canvas.getByText('Secondary');
+      canvas.getByText('Success');
+      canvas.getByText('Error');
+      canvas.getByText('Warning');
+      canvas.getByText('Info');
 
       await new Promise(resolve => setTimeout(resolve, 500));
     });
 
     await step("각 variant별 진행률 확인", async () => {
-      const progressBars = canvas.getAllByRole('progressbar');
+      canvas.getAllByRole('progressbar');
       await new Promise(resolve => setTimeout(resolve, 500));
     });
   },
@@ -343,15 +338,15 @@ export const Sizes = {
     const canvas = within(canvasElement);
 
     await step("모든 크기의 프로그레스 바 확인", async () => {
-      const smallProgress = canvas.getByText('Small');
-      const mediumProgress = canvas.getByText('Medium');
-      const largeProgress = canvas.getByText('Large');
+      canvas.getByText('Small');
+      canvas.getByText('Medium');
+      canvas.getByText('Large');
 
       await new Promise(resolve => setTimeout(resolve, 500));
     });
 
     await step("각 크기별 진행률 확인", async () => {
-      const progressBars = canvas.getAllByRole('progressbar');
+      canvas.getAllByRole('progressbar');
       await new Promise(resolve => setTimeout(resolve, 500));
     });
   },
@@ -400,7 +395,6 @@ export const Interactive = {
     const increaseBtn = canvas.getByText('+10');
     const decreaseBtn = canvas.getByText('-10');
     const resetBtn = canvas.getByText('리셋');
-    const progressBar = canvas.getByRole('progressbar');
 
     await step("초기 상태 확인", async () => {
       await new Promise(resolve => setTimeout(resolve, 500));

@@ -2,7 +2,6 @@ import React from "react";
 import { within, userEvent } from "@storybook/testing-library";
 import { Spinner } from "../../components";
 import { colors, componentBorders, fontSize, fontWeight, borderRadius, semanticBorders } from "../../theme";
-import { action } from "../actions";
 
 export default {
   title: "Components/Atomic/Spinner",
@@ -335,7 +334,7 @@ export const LoadingStates = {
 
     await step("로딩 진행 중", async () => {
       // 라벨이 있는 스피너 확인
-      const spinner = canvas.getByRole("status", { name: "데이터를 불러오는 중입니다..." });
+      canvas.getByRole("status", { name: "데이터를 불러오는 중입니다..." });
       // 스피너가 DOM에 있는지 확인 (getByRole이 성공하면 존재함을 의미)
     });
   },
@@ -444,7 +443,7 @@ export const OverlayExample = {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     await step("오버레이 확인", async () => {
-      const spinner = canvas.getByRole("status", { name: "처리 중..." });
+      canvas.getByRole("status", { name: "처리 중..." });
       // 스피너가 DOM에 있는지 확인 (getByRole이 성공하면 존재함을 의미)
     });
   },

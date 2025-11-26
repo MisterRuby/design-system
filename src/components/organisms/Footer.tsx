@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from '../atomic/Text';
 import { Button } from '../atomic/Button';
 import { Icon, IconName } from '../atomic/Icon';
-import { colors, componentBorders, fontWeight, spacing, borderRadius } from '../../theme';
+import { colors, fontWeight, spacing, borderRadius } from '../../theme';
 
 /**
  * 푸터 링크 아이템 인터페이스

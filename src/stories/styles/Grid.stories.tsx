@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import {
   grid,
-  gridHelpers,
   gridTemplates,
   colors,
   semanticBorders,
@@ -53,7 +52,6 @@ export default {
 
 export const BasicGrid = {
   render: () => {
-    const twoColumns = Math.max(1, Math.floor(grid.columns / 6));
     return (
       <div
         style={{

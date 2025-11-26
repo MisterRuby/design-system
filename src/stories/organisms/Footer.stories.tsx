@@ -1,7 +1,6 @@
 import React from "react";
 import { action } from "../actions";
 import { Footer, FooterProps } from "../../components/organisms/Footer";
-import { Button } from "../../components/atomic/Button";
 import { Text } from "../../components/atomic/Text";
 import { colors, spacing, fontWeight } from "../../theme";
 

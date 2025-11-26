@@ -1,7 +1,6 @@
 import React from "react";
 import { Tooltip, Button, Icon } from "../../components";
-import { action } from "../actions";
-import { within, userEvent, waitFor } from "@storybook/testing-library";
+import { within, userEvent } from "@storybook/testing-library";
 
 export default {
   title: "Components/Molecules/Tooltip",
