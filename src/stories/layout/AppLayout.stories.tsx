@@ -1,16 +1,16 @@
 import React from "react";
 import { action } from "../actions";
 import {
-  HeaderContentLayout,
-  HeaderContentLayoutProps,
-} from "../../components/layout/HeaderContentLayout";
+  AppLayout,
+  AppLayoutProps,
+} from "../../components/layout/AppLayout";
 import { Button } from "../../components/atomic/Button";
 import { Text } from "../../components/atomic/Text";
 import { colors, spacing, fontWeight } from "../../theme";
 
 const meta = {
-  title: "Layout/HeaderContentLayout",
-  component: HeaderContentLayout,
+  title: "Layout/AppLayout",
+  component: AppLayout,
   parameters: {
     layout: "padded",
     docs: {
@@ -82,7 +82,7 @@ const SampleContent: React.FC = () => (
       Welcome to Our Website
     </Text>
     <Text variant="body1" style={{ marginBottom: spacing.md, lineHeight: 1.6 }}>
-      이것은 HeaderContentLayout을 사용한 예시 페이지입니다. 마케팅 사이트,
+      이것은 AppLayout을 사용한 예시 페이지입니다. 마케팅 사이트,
       블로그, 포트폴리오 등 다양한 웹사이트에 활용할 수 있습니다.
     </Text>
     <Text variant="body1" style={{ marginBottom: spacing.lg, lineHeight: 1.6 }}>
@@ -259,15 +259,15 @@ export const Default = {
     maxWidth: "1200px",
     contentPadding: "2rem",
   },
-  render: (args: HeaderContentLayoutProps) => (
-    <HeaderContentLayout {...args}>
+  render: (args: AppLayoutProps) => (
+    <AppLayout {...args}>
       <SampleContent />
-    </HeaderContentLayout>
+    </AppLayout>
   ),
   parameters: {
     docs: {
       source: {
-        code: `<HeaderContentLayout
+        code: `<AppLayout
   header={{
     title: "My Website",
     navigation: [
@@ -281,7 +281,7 @@ export const Default = {
 >
   <h1>Welcome to Our Website</h1>
   <p>Your content goes here...</p>
-</HeaderContentLayout>`,
+</AppLayout>`,
       },
     },
   },
@@ -311,15 +311,15 @@ export const WithLogo = {
       title: "Logo Brand",
     },
   },
-  render: (args: HeaderContentLayoutProps) => (
-    <HeaderContentLayout {...args}>
+  render: (args: AppLayoutProps) => (
+    <AppLayout {...args}>
       <SampleContent />
-    </HeaderContentLayout>
+    </AppLayout>
   ),
   parameters: {
     docs: {
       source: {
-        code: `<HeaderContentLayout
+        code: `<AppLayout
   header={{
     logo: <LogoComponent />,
     title: "Logo Brand",
@@ -328,7 +328,7 @@ export const WithLogo = {
   }}
 >
   <YourContent />
-</HeaderContentLayout>`,
+</AppLayout>`,
       },
     },
   },
@@ -340,21 +340,21 @@ export const FullWidth = {
     variant: "fullwidth",
     contentPadding: "2rem 1rem",
   },
-  render: (args: HeaderContentLayoutProps) => (
-    <HeaderContentLayout {...args}>
+  render: (args: AppLayoutProps) => (
+    <AppLayout {...args}>
       <SampleContent />
-    </HeaderContentLayout>
+    </AppLayout>
   ),
   parameters: {
     docs: {
       source: {
-        code: `<HeaderContentLayout
+        code: `<AppLayout
   variant="fullwidth"
   contentPadding="2rem 1rem"
   header={headerProps}
 >
   <YourContent />
-</HeaderContentLayout>`,
+</AppLayout>`,
       },
     },
   },
@@ -366,21 +366,21 @@ export const Centered = {
     variant: "centered",
     maxWidth: "800px",
   },
-  render: (args: HeaderContentLayoutProps) => (
-    <HeaderContentLayout {...args}>
+  render: (args: AppLayoutProps) => (
+    <AppLayout {...args}>
       <SampleContent />
-    </HeaderContentLayout>
+    </AppLayout>
   ),
   parameters: {
     docs: {
       source: {
-        code: `<HeaderContentLayout
+        code: `<AppLayout
   variant="centered"
   maxWidth="800px"
   header={headerProps}
 >
   <YourContent />
-</HeaderContentLayout>`,
+</AppLayout>`,
       },
     },
   },
@@ -409,15 +409,15 @@ export const BlogLayout = {
     variant: "default",
     maxWidth: "800px",
   },
-  render: (args: HeaderContentLayoutProps) => (
-    <HeaderContentLayout {...args}>
+  render: (args: AppLayoutProps) => (
+    <AppLayout {...args}>
       <BlogContent />
-    </HeaderContentLayout>
+    </AppLayout>
   ),
   parameters: {
     docs: {
       source: {
-        code: `<HeaderContentLayout
+        code: `<AppLayout
   header={{
     title: "Tech Blog",
     navigation: blogNavigation,
@@ -426,7 +426,7 @@ export const BlogLayout = {
   maxWidth="800px"
 >
   <BlogPost />
-</HeaderContentLayout>`,
+</AppLayout>`,
       },
     },
   },
@@ -447,15 +447,15 @@ export const PortfolioLayout = {
     variant: "default",
     maxWidth: "1000px",
   },
-  render: (args: HeaderContentLayoutProps) => (
-    <HeaderContentLayout {...args}>
+  render: (args: AppLayoutProps) => (
+    <AppLayout {...args}>
       <PortfolioContent />
-    </HeaderContentLayout>
+    </AppLayout>
   ),
   parameters: {
     docs: {
       source: {
-        code: `<HeaderContentLayout
+        code: `<AppLayout
   header={{
     title: "Portfolio",
     navigation: portfolioNavigation,
@@ -465,7 +465,7 @@ export const PortfolioLayout = {
   maxWidth="1000px"
 >
   <PortfolioContent />
-</HeaderContentLayout>`,
+</AppLayout>`,
       },
     },
   },
@@ -490,7 +490,7 @@ export const Variants = {
             overflow: "hidden",
             border: `1px solid ${colors.border.default}`,
           }}>
-          <HeaderContentLayout
+          <AppLayout
             header={{
               title: "Default Layout",
               navigation: [{ label: "Home", active: true }, { label: "About" }],
@@ -502,7 +502,7 @@ export const Variants = {
                 최대 너비 제한이 있는 중앙 정렬 콘텐츠
               </Text>
             </div>
-          </HeaderContentLayout>
+          </AppLayout>
         </div>
       </div>
 
@@ -522,7 +522,7 @@ export const Variants = {
             overflow: "hidden",
             border: `1px solid ${colors.border.default}`,
           }}>
-          <HeaderContentLayout
+          <AppLayout
             header={{
               title: "Full Width Layout",
               navigation: [{ label: "Home", active: true }, { label: "About" }],
@@ -532,7 +532,7 @@ export const Variants = {
               <Text variant="h4">전체 너비 레이아웃</Text>
               <Text variant="body2">화면 전체 너비를 사용하는 콘텐츠</Text>
             </div>
-          </HeaderContentLayout>
+          </AppLayout>
         </div>
       </div>
 
@@ -552,7 +552,7 @@ export const Variants = {
             overflow: "hidden",
             border: `1px solid ${colors.border.default}`,
           }}>
-          <HeaderContentLayout
+          <AppLayout
             header={{
               title: "Centered Layout",
               navigation: [{ label: "Home", active: true }, { label: "About" }],
@@ -564,7 +564,7 @@ export const Variants = {
                 텍스트와 콘텐츠가 중앙 정렬된 레이아웃
               </Text>
             </div>
-          </HeaderContentLayout>
+          </AppLayout>
         </div>
       </div>
     </div>
@@ -573,13 +573,13 @@ export const Variants = {
     docs: {
       source: {
         code: `// Default Variant
-<HeaderContentLayout variant="default" />
+<AppLayout variant="default" />
 
 // Full Width Variant
-<HeaderContentLayout variant="fullwidth" />
+<AppLayout variant="fullwidth" />
 
 // Centered Variant
-<HeaderContentLayout variant="centered" />`,
+<AppLayout variant="centered" />`,
       },
     },
   },

@@ -6,9 +6,9 @@ import { SideBar } from '../organisms/SideBar';
 import { colors, spacing } from '../../theme';
 
 /**
- * Header, SideBar, Content 레이아웃 Props
+ * 대시보드 레이아웃 Props
  */
-export interface HeaderSideBarContentLayoutProps {
+export interface DashboardLayoutProps {
   /** 헤더 컴포넌트 설정 */
   header: HeaderProps;
   /** 사이드바 컴포넌트 설정 */
@@ -30,7 +30,7 @@ export interface HeaderSideBarContentLayoutProps {
 }
 
 /**
- * Header, SideBar, Content로 구성된 완전한 레이아웃
+ * Header, SideBar, Content로 구성된 완전한 대시보드 레이아웃
  *
  * 관리자 대시보드, 애플리케이션 메인 화면 등에 적합한 전체 페이지 레이아웃을 제공합니다.
  * 상단 네비게이션, 사이드 메뉴, 메인 콘텐츠 영역을 모두 포함합니다.
@@ -54,16 +54,16 @@ export interface HeaderSideBarContentLayoutProps {
  *   ]
  * };
  *
- * <HeaderSideBarContentLayout
+ * <DashboardLayout
  *   header={headerProps}
  *   sideBar={sideBarProps}
  * >
  *   <h1>메인 콘텐츠</h1>
  *   <p>여기에 실제 페이지 내용이 들어갑니다.</p>
- * </HeaderSideBarContentLayout>
+ * </DashboardLayout>
  * ```
  */
-export const HeaderSideBarContentLayout: React.FC<HeaderSideBarContentLayoutProps> = ({
+export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   header,
   sideBar,
   children,

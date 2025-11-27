@@ -1,6 +1,6 @@
-export { HeaderContentLayout } from './HeaderContentLayout';
-export type { HeaderContentLayoutProps } from './HeaderContentLayout';
-export { SideBarContentLayout } from './SideBarContentLayout';
-export type { SideBarContentLayoutProps } from './SideBarContentLayout';
-export { HeaderSideBarContentLayout } from './HeaderSideBarContentLayout';
-export type { HeaderSideBarContentLayoutProps } from './HeaderSideBarContentLayout';
+export { AppLayout } from './AppLayout';
+export type { AppLayoutProps } from './AppLayout';
+export { SidebarLayout } from './SidebarLayout';
+export type { SidebarLayoutProps } from './SidebarLayout';
+export { DashboardLayout } from './DashboardLayout';
+export type { DashboardLayoutProps } from './DashboardLayout';

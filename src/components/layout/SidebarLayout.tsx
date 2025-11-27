@@ -3,9 +3,9 @@ import { SideBar, SideBarProps } from '../organisms/SideBar';
 import { colors, spacing } from '../../theme';
 
 /**
- * 사이드바 컨텐츠 레이아웃 Props
+ * 사이드바 레이아웃 Props
  */
-export interface SideBarContentLayoutProps {
+export interface SidebarLayoutProps {
   /** 사이드바 컴포넌트 설정 */
   sideBar: SideBarProps;
   /** 메인 콘텐츠 */
@@ -39,13 +39,13 @@ export interface SideBarContentLayoutProps {
  *   ]
  * };
  *
- * <SideBarContentLayout sideBar={sideBarProps}>
+ * <SidebarLayout sideBar={sideBarProps}>
  *   <h1>Dashboard Content</h1>
  *   <p>This is the main content area.</p>
- * </SideBarContentLayout>
+ * </SidebarLayout>
  * ```
  */
-export const SideBarContentLayout: React.FC<SideBarContentLayoutProps> = ({
+export const SidebarLayout: React.FC<SidebarLayoutProps> = ({
   sideBar,
   children,
   variant = 'default',

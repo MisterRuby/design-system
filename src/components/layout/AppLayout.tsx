@@ -3,9 +3,9 @@ import { Header, HeaderProps } from '../organisms/Header';
 import { colors } from '../../theme';
 
 /**
- * 헤더 컨텐츠 레이아웃 Props
+ * 앱 레이아웃 Props
  */
-export interface HeaderContentLayoutProps {
+export interface AppLayoutProps {
   /** 헤더 컴포넌트 설정 */
   header: HeaderProps;
   /** 메인 콘텐츠 */
@@ -41,13 +41,13 @@ export interface HeaderContentLayoutProps {
  *   actions: <Button>Login</Button>
  * };
  *
- * <HeaderContentLayout header={headerProps}>
+ * <AppLayout header={headerProps}>
  *   <h1>Welcome to our website</h1>
  *   <p>This is the main content area.</p>
- * </HeaderContentLayout>
+ * </AppLayout>
  * ```
  */
-export const HeaderContentLayout: React.FC<HeaderContentLayoutProps> = ({
+export const AppLayout: React.FC<AppLayoutProps> = ({
   header,
   children,
   variant = 'default',

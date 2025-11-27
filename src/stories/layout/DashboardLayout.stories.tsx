@@ -2,16 +2,16 @@ import React from "react";
 import { action } from "../actions";
 import { userEvent, within } from "@storybook/testing-library";
 import {
-  HeaderSideBarContentLayout,
-  HeaderSideBarContentLayoutProps,
-} from "../../components/layout/HeaderSideBarContentLayout";
+  DashboardLayout,
+  DashboardLayoutProps,
+} from "../../components/layout/DashboardLayout";
 import { Button } from "../../components/atomic/Button";
 import { Text } from "../../components/atomic/Text";
 import { colors, spacing, fontWeight } from "../../theme";
 
 const meta = {
-  title: "Layout/HeaderSideBarContentLayout",
-  component: HeaderSideBarContentLayout,
+  title: "Layout/DashboardLayout",
+  component: DashboardLayout,
   parameters: {
     layout: "padded",
     docs: {
@@ -472,15 +472,15 @@ export const Default = {
     sideBar: mockSideBarData,
     variant: "default",
   },
-  render: (args: HeaderSideBarContentLayoutProps) => (
-    <HeaderSideBarContentLayout {...args}>
+  render: (args: DashboardLayoutProps) => (
+    <DashboardLayout {...args}>
       <DashboardContent />
-    </HeaderSideBarContentLayout>
+    </DashboardLayout>
   ),
   parameters: {
     docs: {
       source: {
-        code: `<HeaderSideBarContentLayout
+        code: `<DashboardLayout
   header={{
     logo: <Logo />,
     navigation: navigationItems,
@@ -492,7 +492,7 @@ export const Default = {
     items: menuItems
   }}>
   <DashboardContent />
-</HeaderSideBarContentLayout>`,
+</DashboardLayout>`,
       },
     },
   },
@@ -530,7 +530,7 @@ export const Variants = {
             Default
           </Text>
           <div style={previewContainerStyle}>
-            <HeaderSideBarContentLayout
+            <DashboardLayout
               header={{
                 ...mockHeaderData,
                 logo: (
@@ -552,7 +552,7 @@ export const Variants = {
               contentPadding={spacing.lg}
               style={layoutStyle}>
               <DashboardContent />
-            </HeaderSideBarContentLayout>
+            </DashboardLayout>
           </div>
         </div>
 
@@ -567,7 +567,7 @@ export const Variants = {
             Fixed
           </Text>
           <div style={previewContainerStyle}>
-            <HeaderSideBarContentLayout
+            <DashboardLayout
               header={{
                 ...mockHeaderData,
                 logo: (
@@ -590,7 +590,7 @@ export const Variants = {
               contentPadding={spacing.md}
               style={layoutStyle}>
               <DashboardContent />
-            </HeaderSideBarContentLayout>
+            </DashboardLayout>
           </div>
         </div>
 
@@ -605,7 +605,7 @@ export const Variants = {
             Scrollable Content
           </Text>
           <div style={previewContainerStyle}>
-            <HeaderSideBarContentLayout
+            <DashboardLayout
               header={{
                 ...mockHeaderData,
                 logo: (
@@ -629,7 +629,7 @@ export const Variants = {
               headerGap={spacing.sm}
               style={layoutStyle}>
               <TeamManagementContent />
-            </HeaderSideBarContentLayout>
+            </DashboardLayout>
           </div>
         </div>
       </div>
@@ -639,21 +639,21 @@ export const Variants = {
     docs: {
       source: {
         code: `// Default Variant
-<HeaderSideBarContentLayout
+<DashboardLayout
   variant="default"
   header={headerConfig}
   sideBar={sideBarConfig}
 />
 
 // Fixed Variant (전체 뷰포트 고정)
-<HeaderSideBarContentLayout
+<DashboardLayout
   variant="fixed"
   header={headerConfig}
   sideBar={sideBarConfig}
 />
 
 // Scrollable Content Variant (헤더/사이드바 고정)
-<HeaderSideBarContentLayout
+<DashboardLayout
   variant="scrollable-content"
   header={headerConfig}
   sideBar={sideBarConfig}
@@ -672,11 +672,11 @@ export const CollapsibleSideBar = {
       collapsed: false,
     },
   },
-  render: (args: HeaderSideBarContentLayoutProps) => {
+  render: (args: DashboardLayoutProps) => {
     const [collapsed, setCollapsed] = React.useState(false);
 
     return (
-      <HeaderSideBarContentLayout
+      <DashboardLayout
         {...args}
         sideBar={{
           ...args.sideBar,
@@ -687,7 +687,7 @@ export const CollapsibleSideBar = {
           },
         }}>
         <DashboardContent />
-      </HeaderSideBarContentLayout>
+      </DashboardLayout>
     );
   },
   play: async ({
@@ -721,7 +721,7 @@ export const CollapsibleSideBar = {
       source: {
         code: `const [collapsed, setCollapsed] = React.useState(false);
 
-<HeaderSideBarContentLayout
+<DashboardLayout
   header={headerConfig}
   sideBar={{
     ...sideBarConfig,
@@ -730,7 +730,7 @@ export const CollapsibleSideBar = {
     onCollapseToggle: setCollapsed
   }}>
   <DashboardContent />
-</HeaderSideBarContentLayout>`,
+</DashboardLayout>`,
       },
     },
   },

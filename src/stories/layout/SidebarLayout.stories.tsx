@@ -2,16 +2,16 @@ import React from "react";
 import { action } from "../actions";
 import { userEvent, within } from "@storybook/testing-library";
 import {
-  SideBarContentLayout,
-  SideBarContentLayoutProps,
-} from "../../components/layout/SideBarContentLayout";
+  SidebarLayout,
+  SidebarLayoutProps,
+} from "../../components/layout/SidebarLayout";
 import { Button } from "../../components/atomic/Button";
 import { Text } from "../../components/atomic/Text";
 import { colors, spacing, fontWeight } from "../../theme";
 
 const meta = {
-  title: "Layout/SideBarContentLayout",
-  component: SideBarContentLayout,
+  title: "Layout/SidebarLayout",
+  component: SidebarLayout,
   parameters: {
     layout: "padded",
     docs: {
@@ -502,22 +502,22 @@ export const Default = {
     variant: "default",
     contentPadding: spacing.xl,
   },
-  render: (args: SideBarContentLayoutProps) => (
-    <SideBarContentLayout {...args}>
+  render: (args: SidebarLayoutProps) => (
+    <SidebarLayout {...args}>
       <DashboardContent />
-    </SideBarContentLayout>
+    </SidebarLayout>
   ),
   parameters: {
     docs: {
       source: {
-        code: `<SideBarContentLayout
+        code: `<SidebarLayout
   sideBar={{
     title: "Dashboard",
     items: dashboardItems
   }}
 >
   <DashboardContent />
-</SideBarContentLayout>`,
+</SidebarLayout>`,
       },
     },
   },
@@ -532,11 +532,11 @@ export const CollapsibleSideBar = {
       collapsed: false,
     },
   },
-  render: (args: SideBarContentLayoutProps) => {
+  render: (args: SidebarLayoutProps) => {
     const [collapsed, setCollapsed] = React.useState(false);
 
     return (
-      <SideBarContentLayout
+      <SidebarLayout
         {...args}
         sideBar={{
           ...args.sideBar,
@@ -548,7 +548,7 @@ export const CollapsibleSideBar = {
         }}
       >
         <DashboardContent />
-      </SideBarContentLayout>
+      </SidebarLayout>
     );
   },
   play: async ({ canvasElement, step }: { canvasElement: HTMLElement; step: any }) => {
@@ -572,7 +572,7 @@ export const CollapsibleSideBar = {
       source: {
         code: `const [collapsed, setCollapsed] = React.useState(false);
 
-<SideBarContentLayout
+<SidebarLayout
   sideBar={{
     title: "Dashboard",
     items: dashboardItems,
@@ -582,7 +582,7 @@ export const CollapsibleSideBar = {
   }}
 >
   <DashboardContent />
-</SideBarContentLayout>`,
+</SidebarLayout>`,
       },
     },
   },
@@ -594,15 +594,15 @@ export const DocumentationLayout = {
     variant: "default",
     contentPadding: `${spacing.xl} ${spacing.xl}`,
   },
-  render: (args: SideBarContentLayoutProps) => (
-    <SideBarContentLayout {...args}>
+  render: (args: SidebarLayoutProps) => (
+    <SidebarLayout {...args}>
       <DocumentationContent />
-    </SideBarContentLayout>
+    </SidebarLayout>
   ),
   parameters: {
     docs: {
       source: {
-        code: `<SideBarContentLayout
+        code: `<SidebarLayout
   sideBar={{
     title: "Documentation",
     items: docsItems
@@ -610,7 +610,7 @@ export const DocumentationLayout = {
   contentPadding="2rem"
 >
   <DocumentationContent />
-</SideBarContentLayout>`,
+</SidebarLayout>`,
       },
     },
   },
@@ -623,15 +623,15 @@ export const AdminPanelLayout = {
     contentPadding: spacing.lg,
     contentBackgroundColor: colors.background.gray,
   },
-  render: (args: SideBarContentLayoutProps) => (
-    <SideBarContentLayout {...args}>
+  render: (args: SidebarLayoutProps) => (
+    <SidebarLayout {...args}>
       <AdminPanelContent />
-    </SideBarContentLayout>
+    </SidebarLayout>
   ),
   parameters: {
     docs: {
       source: {
-        code: `<SideBarContentLayout
+        code: `<SidebarLayout
   sideBar={{
     title: "Admin Panel",
     items: adminItems
@@ -639,7 +639,7 @@ export const AdminPanelLayout = {
   contentBackgroundColor={colors.background.gray}
 >
   <AdminPanelContent />
-</SideBarContentLayout>`,
+</SidebarLayout>`,
       },
     },
   },
@@ -656,15 +656,15 @@ export const CompactSideBar = {
     variant: "default",
     contentPadding: spacing.lg,
   },
-  render: (args: SideBarContentLayoutProps) => (
-    <SideBarContentLayout {...args}>
+  render: (args: SidebarLayoutProps) => (
+    <SidebarLayout {...args}>
       <DashboardContent />
-    </SideBarContentLayout>
+    </SidebarLayout>
   ),
   parameters: {
     docs: {
       source: {
-        code: `<SideBarContentLayout
+        code: `<SidebarLayout
   sideBar={{
     title: "Dashboard",
     items: dashboardItems,
@@ -674,7 +674,7 @@ export const CompactSideBar = {
   }}
 >
   <DashboardContent />
-</SideBarContentLayout>`,
+</SidebarLayout>`,
       },
     },
   },
@@ -689,15 +689,15 @@ export const WithGap = {
       variant: "floating",
     },
   },
-  render: (args: SideBarContentLayoutProps) => (
-    <SideBarContentLayout {...args}>
+  render: (args: SidebarLayoutProps) => (
+    <SidebarLayout {...args}>
       <DashboardContent />
-    </SideBarContentLayout>
+    </SidebarLayout>
   ),
   parameters: {
     docs: {
       source: {
-        code: `<SideBarContentLayout
+        code: `<SidebarLayout
   sideBar={{
     title: "Dashboard",
     items: dashboardItems,
@@ -706,7 +706,7 @@ export const WithGap = {
   gap="1rem"
 >
   <DashboardContent />
-</SideBarContentLayout>`,
+</SidebarLayout>`,
       },
     },
   },
@@ -726,7 +726,7 @@ export const Variants = {
           Default
         </Text>
         <div style={{ height: "300px", overflow: "hidden", border: `1px solid ${colors.border.default}` }}>
-          <SideBarContentLayout
+          <SidebarLayout
             sideBar={{
               title: "Default",
               items: dashboardItems.slice(0, 3),
@@ -738,7 +738,7 @@ export const Variants = {
               <Text variant="h4">기본 레이아웃</Text>
               <Text variant="body2">사이드바와 콘텐츠가 나란히 배치</Text>
             </div>
-          </SideBarContentLayout>
+          </SidebarLayout>
         </div>
       </div>
 
@@ -753,7 +753,7 @@ export const Variants = {
           Compact
         </Text>
         <div style={{ height: "300px", overflow: "hidden", border: `1px solid ${colors.border.default}` }}>
-          <SideBarContentLayout
+          <SidebarLayout
             sideBar={{
               title: "Compact",
               items: dashboardItems.slice(0, 3),
@@ -767,7 +767,7 @@ export const Variants = {
               <Text variant="h4">컴팩트 레이아웃</Text>
               <Text variant="body2">더 조밀한 사이드바 스타일</Text>
             </div>
-          </SideBarContentLayout>
+          </SidebarLayout>
         </div>
       </div>
 
@@ -782,7 +782,7 @@ export const Variants = {
           Floating
         </Text>
         <div style={{ height: "300px", overflow: "hidden", border: `1px solid ${colors.border.default}` }}>
-          <SideBarContentLayout
+          <SidebarLayout
             sideBar={{
               title: "Floating",
               items: dashboardItems.slice(0, 3),
@@ -796,7 +796,7 @@ export const Variants = {
               <Text variant="h4">플로팅 레이아웃</Text>
               <Text variant="body2">떠있는 사이드바 스타일</Text>
             </div>
-          </SideBarContentLayout>
+          </SidebarLayout>
         </div>
       </div>
     </div>
@@ -805,15 +805,15 @@ export const Variants = {
     docs: {
       source: {
         code: `// Default Variant
-<SideBarContentLayout variant="default" />
+<SidebarLayout variant="default" />
 
 // Compact Variant
-<SideBarContentLayout
+<SidebarLayout
   sideBar={{ variant: "compact", itemSpacing: "compact" }}
 />
 
 // Floating Variant
-<SideBarContentLayout
+<SidebarLayout
   sideBar={{ variant: "floating" }}
   gap="0.5rem"
 />`,
