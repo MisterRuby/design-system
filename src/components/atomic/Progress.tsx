@@ -28,23 +28,25 @@ export const Progress: React.FC<ProgressProps> = ({
 }) => {
   const percentage = Math.min(Math.max((value / max) * 100, 0), 100);
 
-  const variantColors: Record<SemanticVariant, string> = {
-    primary: colors.semantic.primary,
-    secondary: colors.semantic.secondary,
-    success: colors.semantic.success,
-    error: colors.semantic.error,
-    warning: colors.semantic.warning,
-    info: colors.semantic.info,
-  };
+  // Progress 설정 상수
+  const PROGRESS_CONFIG = {
+    colors: {
+      primary: colors.semantic.primary,
+      secondary: colors.semantic.secondary,
+      success: colors.semantic.success,
+      error: colors.semantic.error,
+      warning: colors.semantic.warning,
+      info: colors.semantic.info,
+    },
+    sizes: {
+      small: { height: '4px', fontSize: fontSize.xs },
+      medium: { height: '8px', fontSize: fontSize.sm },
+      large: { height: '12px', fontSize: fontSize.md },
+    }
+  } as const;
 
-  const sizeMap: Record<ComponentSize, { height: string; fontSize: string }> = {
-    small: { height: '4px', fontSize: fontSize.xs },
-    medium: { height: '8px', fontSize: fontSize.sm },
-    large: { height: '12px', fontSize: fontSize.md },
-  };
-
-  const sizeStyles = sizeMap[size] ?? sizeMap.medium;
-  const variantColor = variantColors[variant] ?? colors.semantic.primary;
+  const sizeStyles = PROGRESS_CONFIG.sizes[size as keyof typeof PROGRESS_CONFIG.sizes] || PROGRESS_CONFIG.sizes.medium;
+  const variantColor = PROGRESS_CONFIG.colors[variant as keyof typeof PROGRESS_CONFIG.colors] || PROGRESS_CONFIG.colors.primary;
 
   const displayLabel = showLabel ? (label ?? `${Math.round(percentage)}%`) : '';
 

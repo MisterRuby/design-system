@@ -3,6 +3,37 @@ import { borderRadius, borderWidth, colors, fontSize, fontWeight, spacing } from
 import { CheckboxSize } from '../../types';
 import { Icon, IconName } from './Icon';
 
+// Badge 설정 상수
+const BADGE_CONFIG = {
+  sizes: {
+    sm: {
+      padding: `2px ${spacing.xxs}`,
+      fontSize: fontSize.xxs,
+      lineHeight: '12px',
+      iconSize: '12px',
+      gap: spacing.xxs
+    },
+    md: {
+      padding: `${spacing.xxs} ${spacing.xs}`,
+      fontSize: fontSize.xs,
+      lineHeight: '16px',
+      iconSize: '14px',
+      gap: spacing.xxs
+    },
+    lg: {
+      padding: `${spacing.xxs} ${spacing.sm}`,
+      fontSize: fontSize.sm,
+      lineHeight: '20px',
+      iconSize: '16px',
+      gap: '6px'
+    },
+  },
+  effects: {
+    transition: 'all 0.2s ease-in-out',
+    disabledOpacity: 0.5,
+  },
+} as const;
+
 export interface BadgeProps {
   children: React.ReactNode;
   variant?: 'solid' | 'outline' | 'soft';
@@ -27,40 +58,7 @@ export const Badge: React.FC<BadgeProps> = ({
   icon
 }) => {
   const getSizeStyles = (size: CheckboxSize) => {
-    switch (size) {
-      case 'sm':
-        return {
-          padding: `2px ${spacing.xxs}`,
-          fontSize: fontSize.xxs,
-          lineHeight: '12px',
-          iconSize: '12px',
-          gap: spacing.xxs
-        };
-      case 'md':
-        return {
-          padding: `${spacing.xxs} ${spacing.xs}`,
-          fontSize: fontSize.xs,
-          lineHeight: '16px',
-          iconSize: '14px',
-          gap: spacing.xxs
-        };
-      case 'lg':
-        return {
-          padding: `${spacing.xxs} ${spacing.sm}`,
-          fontSize: fontSize.sm,
-          lineHeight: '20px',
-          iconSize: '16px',
-          gap: '6px'
-        };
-      default:
-        return {
-          padding: `${spacing.xxs} ${spacing.xs}`,
-          fontSize: fontSize.xs,
-          lineHeight: '16px',
-          iconSize: '14px',
-          gap: spacing.xxs
-        };
-    }
+    return BADGE_CONFIG.sizes[size as keyof typeof BADGE_CONFIG.sizes] || BADGE_CONFIG.sizes.md;
   };
 
   const getColorStyles = (color: string, variant: string) => {
@@ -135,9 +133,9 @@ export const Badge: React.FC<BadgeProps> = ({
     border: `${borderWidth[1]} solid ${colorStyles.borderColor}`,
     borderRadius: rounded ? borderRadius.full : borderRadius.sm,
     whiteSpace: 'nowrap',
-    opacity: disabled ? 0.6 : 1,
+    opacity: disabled ? BADGE_CONFIG.effects.disabledOpacity : 1,
     cursor: disabled ? 'not-allowed' : 'default',
-    transition: 'all 0.2s ease',
+    transition: BADGE_CONFIG.effects.transition,
     maxWidth: 'fit-content'
   };
 

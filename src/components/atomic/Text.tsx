@@ -51,6 +51,20 @@ export const Text: React.FC<TextProps> = ({
     }
   };
 
+  // Text 설정 상수
+  const TEXT_CONFIG = {
+    colors: {
+      primary: colors.semantic.primary,
+      secondary: colors.semantic.secondary,
+      success: colors.semantic.success,
+      error: colors.semantic.error,
+      warning: colors.semantic.warning,
+      info: colors.semantic.info,
+      muted: colors.semantic.muted,
+      text: colors.semantic.text
+    }
+  } as const;
+
   const getSizeStyles = (size: TextSize) => {
     return { fontSize: fontSize[size] };
   };
@@ -60,26 +74,7 @@ export const Text: React.FC<TextProps> = ({
   };
 
   const getColorStyles = (color: TextColor) => {
-    switch (color) {
-      case "primary":
-        return { color: colors.semantic.primary };
-      case "secondary":
-        return { color: colors.semantic.secondary };
-      case "success":
-        return { color: colors.semantic.success };
-      case "error":
-        return { color: colors.semantic.error };
-      case "warning":
-        return { color: colors.semantic.warning };
-      case "info":
-        return { color: colors.semantic.info };
-      case "muted":
-        return { color: colors.semantic.muted };
-      case "text":
-        return { color: colors.semantic.text };
-      default:
-        return { color: colors.semantic.text };
-    }
+    return { color: TEXT_CONFIG.colors[color as keyof typeof TEXT_CONFIG.colors] || TEXT_CONFIG.colors.text };
   };
 
   // Typography variant 스타일 가져오기

@@ -3,6 +3,74 @@ import { Icon, IconName } from './Icon';
 import { borderRadius, borderWidth, colors, fontSize } from '../../theme';
 import { ButtonVariant, ComponentSize } from '../../types';
 
+// Button 설정 상수
+const BUTTON_CONFIG = {
+  sizes: {
+    small: {
+      padding: '4px 8px',
+      fontSize: fontSize.xs,
+      iconSize: 14,
+      gap: '4px'
+    },
+    medium: {
+      padding: '8px 16px',
+      fontSize: fontSize.sm,
+      iconSize: 16,
+      gap: '6px'
+    },
+    large: {
+      padding: '12px 24px',
+      fontSize: fontSize.md,
+      iconSize: 20,
+      gap: '8px'
+    },
+  },
+  variants: {
+    solid: {
+      primary: {
+        backgroundColor: colors.semantic.primary,
+        color: colors.background.white,
+        borderColor: colors.semantic.primary
+      },
+      secondary: {
+        backgroundColor: colors.semantic.secondary,
+        color: colors.background.white,
+        borderColor: colors.semantic.secondary
+      },
+      success: {
+        backgroundColor: colors.semantic.success,
+        color: colors.background.white,
+        borderColor: colors.semantic.success
+      },
+      error: {
+        backgroundColor: colors.semantic.error,
+        color: colors.background.white,
+        borderColor: colors.semantic.error
+      },
+      warning: {
+        backgroundColor: colors.semantic.warning,
+        color: colors.background.white,
+        borderColor: colors.semantic.warning
+      },
+      info: {
+        backgroundColor: colors.semantic.info,
+        color: colors.background.white,
+        borderColor: colors.semantic.info
+      },
+    },
+    outline: {
+      backgroundColor: 'transparent',
+      color: colors.semantic.primary,
+      borderColor: colors.semantic.primary
+    },
+  },
+  effects: {
+    transition: 'all 0.2s ease-in-out',
+    hoverOpacity: '0.9',
+    disabledOpacity: 0.6,
+  },
+} as const;
+
 export interface ButtonProps {
   children: React.ReactNode;
   variant?: ButtonVariant;
@@ -29,37 +97,16 @@ export const Button: React.FC<ButtonProps> = ({
   className = ''
 }) => {
   const getVariantStyles = (variant: string) => {
-    switch (variant) {
-      case 'primary':
-        return { backgroundColor: colors.semantic.primary, color: colors.background.white, borderColor: colors.semantic.primary };
-      case 'secondary':
-        return { backgroundColor: colors.semantic.secondary, color: colors.background.white, borderColor: colors.semantic.secondary };
-      case 'success':
-        return { backgroundColor: colors.semantic.success, color: colors.background.white, borderColor: colors.semantic.success };
-      case 'error':
-        return { backgroundColor: colors.semantic.error, color: colors.background.white, borderColor: colors.semantic.error };
-      case 'warning':
-        return { backgroundColor: colors.semantic.warning, color: colors.background.white, borderColor: colors.semantic.warning };
-      case 'info':
-        return { backgroundColor: colors.semantic.info, color: colors.background.white, borderColor: colors.semantic.info };
-      case 'outline':
-        return { backgroundColor: 'transparent', color: colors.semantic.primary, borderColor: colors.semantic.primary };
-      default:
-        return { backgroundColor: colors.semantic.primary, color: colors.background.white, borderColor: colors.semantic.primary };
+    if (variant === 'outline') {
+      return BUTTON_CONFIG.variants.outline;
     }
+    return BUTTON_CONFIG.variants.solid[variant as keyof typeof BUTTON_CONFIG.variants.solid] ||
+           BUTTON_CONFIG.variants.solid.primary;
   };
 
   const getSizeStyles = (size: string) => {
-    switch (size) {
-      case 'small':
-        return { padding: '4px 8px', fontSize: fontSize.xs, iconSize: 14, gap: '4px' };
-      case 'medium':
-        return { padding: '8px 16px', fontSize: fontSize.sm, iconSize: 16, gap: '6px' };
-      case 'large':
-        return { padding: '12px 24px', fontSize: fontSize.md, iconSize: 20, gap: '8px' };
-      default:
-        return { padding: '8px 16px', fontSize: fontSize.sm, iconSize: 16, gap: '6px' };
-    }
+    return BUTTON_CONFIG.sizes[size as keyof typeof BUTTON_CONFIG.sizes] ||
+           BUTTON_CONFIG.sizes.medium;
   };
 
   const sizeStyles = getSizeStyles(size);
@@ -84,14 +131,14 @@ export const Button: React.FC<ButtonProps> = ({
         border: variant === 'outline' ? `${borderWidth[1]} solid ${variantStyles.borderColor}` : 'none',
         borderRadius: borderRadius.sm,
         cursor: disabled ? 'not-allowed' : 'pointer',
-        opacity: disabled ? 0.6 : 1,
+        opacity: disabled ? BUTTON_CONFIG.effects.disabledOpacity : 1,
         fontFamily: 'inherit',
-        transition: 'all 0.2s ease-in-out',
+        transition: BUTTON_CONFIG.effects.transition,
         ...style,
       }}
       onMouseEnter={(e) => {
         if (!disabled) {
-          e.currentTarget.style.opacity = '0.9';
+          e.currentTarget.style.opacity = BUTTON_CONFIG.effects.hoverOpacity;
         }
       }}
       onMouseLeave={(e) => {
