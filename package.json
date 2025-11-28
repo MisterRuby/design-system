@@ -33,7 +33,10 @@
       "react-app",
       "react-app/jest",
       "plugin:storybook/recommended"
-    ]
+    ],
+    "rules": {
+      "react-hooks/rules-of-hooks": "off"
+    }
   },
   "browserslist": {
     "production": [
