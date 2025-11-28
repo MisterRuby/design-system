@@ -6,6 +6,8 @@ export { SelectField } from "./SelectField";
 export type { SelectFieldProps, SelectFieldOption } from "./SelectField";
 export { RadioGroup } from "./RadioGroup";
 export type { RadioGroupProps, RadioGroupOption } from "./RadioGroup";
+export { default as MarkdownEditor } from "./Editor";
+export type { MarkdownEditorProps } from "./Editor";
 
 // Legacy exports for backward compatibility
 export { InputField as Input } from "./InputField";

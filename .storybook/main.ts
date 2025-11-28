@@ -18,7 +18,7 @@ const config: StorybookConfig = {
     "../public"
   ],
   "docs": {
-    "defaultName": "Ruby's Design System"
+    "defaultName": "Docs"
   },
   "typescript": {
     "reactDocgen": "react-docgen-typescript",
