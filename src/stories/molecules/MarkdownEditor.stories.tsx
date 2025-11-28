@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import MarkdownEditor from '../../components/molecules/Editor';
+import MarkdownEditor from '../../components/molecules/MarkdownEditor';
 import { action } from '../actions';
+import { within, userEvent } from '@storybook/testing-library';
 
 export default {
   title: 'Components/Molecules/MarkdownEditor',
@@ -168,6 +169,14 @@ export const Default = {
     disabled: false,
   },
   render: (args: any) => <ControlledEditor {...args} />,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    const canvas = within(canvasElement);
+
+    // 마크다운 텍스트 입력 테스트
+    const textarea = canvas.getByRole('textbox');
+    await userEvent.clear(textarea);
+    await userEvent.type(textarea, '## 새로운 제목\n\n**굵은 텍스트**를 작성했습니다.');
+  },
   parameters: {
     docs: {
       description: {
@@ -193,6 +202,12 @@ export const EditOnly = {
     height: 300,
   },
   render: (args: any) => <ControlledEditor {...args} />,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    const canvas = within(canvasElement);
+    const textarea = canvas.getByRole('textbox');
+    await userEvent.clear(textarea);
+    await userEvent.type(textarea, '# 편집 전용 모드\n\n이것은 편집만 가능한 모드입니다.');
+  },
   parameters: {
     docs: {
       description: {
@@ -242,6 +257,12 @@ export const WithoutToolbar = {
     height: 250,
   },
   render: (args: any) => <ControlledEditor {...args} />,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    const canvas = within(canvasElement);
+    const textarea = canvas.getByRole('textbox');
+    await userEvent.clear(textarea);
+    await userEvent.type(textarea, '### 미니멀 에디터\n\n툴바 없이 간단하게 작성하기');
+  },
   parameters: {
     docs: {
       description: {
@@ -267,6 +288,12 @@ export const CompactSize = {
     value: '# 간단한 메모\n\n여기에 내용을 작성하세요.',
   },
   render: (args: any) => <ControlledEditor {...args} />,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    const canvas = within(canvasElement);
+    const textarea = canvas.getByRole('textbox');
+    await userEvent.clear(textarea);
+    await userEvent.type(textarea, '> 빠른 메모\n\n- 할 일 1\n- 할 일 2');
+  },
   parameters: {
     docs: {
       description: {
@@ -291,6 +318,15 @@ export const Disabled = {
     value: '# 읽기 전용 에디터\n\n이 에디터는 편집할 수 없습니다.',
   },
   render: (args: any) => <ControlledEditor {...args} />,
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    // 비활성화된 상태에서는 인터랙션 테스트를 하지 않음
+    const canvas = within(canvasElement);
+    const textarea = canvas.getByRole('textbox');
+    // 단순히 요소가 존재하는지만 확인
+    if (textarea) {
+      console.log('Disabled editor found');
+    }
+  },
   parameters: {
     docs: {
       description: {
