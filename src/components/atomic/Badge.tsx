@@ -1,38 +1,8 @@
 import React from 'react';
-import { borderRadius, borderWidth, colors, fontSize, fontWeight, spacing } from '../../theme';
+import { borderRadius, borderWidth, colors, fontSize, fontWeight, spacing, transitions, opacity, shadowOpacity } from '../../theme';
 import { CheckboxSize } from '../../types';
 import { Icon, IconName } from './Icon';
 
-// Badge 설정 상수
-const BADGE_CONFIG = {
-  sizes: {
-    sm: {
-      padding: `2px ${spacing.xxs}`,
-      fontSize: fontSize.xxs,
-      lineHeight: '12px',
-      iconSize: '12px',
-      gap: spacing.xxs
-    },
-    md: {
-      padding: `${spacing.xxs} ${spacing.xs}`,
-      fontSize: fontSize.xs,
-      lineHeight: '16px',
-      iconSize: '14px',
-      gap: spacing.xxs
-    },
-    lg: {
-      padding: `${spacing.xxs} ${spacing.sm}`,
-      fontSize: fontSize.sm,
-      lineHeight: '20px',
-      iconSize: '16px',
-      gap: '6px'
-    },
-  },
-  effects: {
-    transition: 'all 0.2s ease-in-out',
-    disabledOpacity: 0.5,
-  },
-} as const;
 
 export interface BadgeProps {
   children: React.ReactNode;
@@ -58,7 +28,40 @@ export const Badge: React.FC<BadgeProps> = ({
   icon
 }) => {
   const getSizeStyles = (size: CheckboxSize) => {
-    return BADGE_CONFIG.sizes[size as keyof typeof BADGE_CONFIG.sizes] || BADGE_CONFIG.sizes.md;
+    switch (size) {
+      case 'sm':
+        return {
+          padding: `${spacing.xxs} ${spacing.xxs}`,
+          fontSize: fontSize.xxs,
+          lineHeight: '12px',
+          iconSize: '12px',
+          gap: spacing.xxs
+        };
+      case 'md':
+        return {
+          padding: `${spacing.xxs} ${spacing.xs}`,
+          fontSize: fontSize.xs,
+          lineHeight: '16px',
+          iconSize: '14px',
+          gap: spacing.xxs
+        };
+      case 'lg':
+        return {
+          padding: `${spacing.xxs} ${spacing.sm}`,
+          fontSize: fontSize.sm,
+          lineHeight: '20px',
+          iconSize: '16px',
+          gap: spacing.xs
+        };
+      default:
+        return {
+          padding: `${spacing.xxs} ${spacing.xs}`,
+          fontSize: fontSize.xs,
+          lineHeight: '16px',
+          iconSize: '14px',
+          gap: spacing.xxs
+        };
+    }
   };
 
   const getColorStyles = (color: string, variant: string) => {
@@ -133,9 +136,9 @@ export const Badge: React.FC<BadgeProps> = ({
     border: `${borderWidth[1]} solid ${colorStyles.borderColor}`,
     borderRadius: rounded ? borderRadius.full : borderRadius.sm,
     whiteSpace: 'nowrap',
-    opacity: disabled ? BADGE_CONFIG.effects.disabledOpacity : 1,
+    opacity: disabled ? opacity.disabled : opacity.visible,
     cursor: disabled ? 'not-allowed' : 'default',
-    transition: BADGE_CONFIG.effects.transition,
+    transition: transitions.normal,
     maxWidth: 'fit-content'
   };
 
@@ -146,13 +149,13 @@ export const Badge: React.FC<BadgeProps> = ({
     width: sizeStyles.iconSize,
     height: sizeStyles.iconSize,
     borderRadius: '50%',
-    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    backgroundColor: `rgba(0, 0, 0, ${shadowOpacity.light})`,
     border: 'none',
     cursor: disabled ? 'not-allowed' : 'pointer',
     fontSize: fontSize.xxs,
     color: 'currentColor',
-    transition: 'background-color 0.2s ease',
-    marginLeft: '2px'
+    transition: transitions.normal,
+    marginLeft: spacing.xxs
   };
 
 
@@ -173,11 +176,11 @@ export const Badge: React.FC<BadgeProps> = ({
           style={removeButtonStyles}
           onMouseEnter={(e) => {
             if (!disabled) {
-              e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+              e.currentTarget.style.backgroundColor = `rgba(0, 0, 0, ${shadowOpacity.heavy})`;
             }
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
+            e.currentTarget.style.backgroundColor = `rgba(0, 0, 0, ${shadowOpacity.light})`;
           }}
           aria-label="제거"
         >

@@ -6,6 +6,11 @@ export default {
   component: Text,
   parameters: {
     layout: "centered",
+    docs: {
+      description: {
+        component: "다양한 텍스트 스타일과 의미론적 변형을 제공하는 텍스트 컴포넌트입니다.",
+      },
+    },
   },
   tags: ["autodocs"],
   argTypes: {

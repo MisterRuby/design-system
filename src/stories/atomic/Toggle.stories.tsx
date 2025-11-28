@@ -11,8 +11,7 @@ export default {
     layout: "centered",
     docs: {
       description: {
-        component:
-          "사용자가 옵션을 켜고 끌 수 있는 토글 스위치 컴포넌트입니다.",
+        component: "사용자가 옵션을 켜고 끌 수 있는 토글 스위치 컴포넌트입니다.",
       },
       story: {
         inline: true,

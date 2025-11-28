@@ -1,5 +1,5 @@
 import React from 'react';
-import { colors, fontSize, fontWeight } from '../../theme';
+import { colors, fontSize, fontWeight, spacing, transitions, opacity, shadowOpacity } from '../../theme';
 import { CheckboxSize } from '../../types';
 
 export interface ToggleProps {
@@ -43,85 +43,79 @@ export const Toggle: React.FC<ToggleProps> = ({
       onChange?.(event);
     }
   };
-  // Toggle 설정 상수
-  const TOGGLE_CONFIG = {
-    sizes: {
-      sm: {
-        width: '32px',
-        height: '18px',
-        thumbSize: '14px',
-        thumbOffset: '2px',
-        fontSize: fontSize.xs,
-        gap: '6px'
-      },
-      md: {
-        width: '44px',
-        height: '24px',
-        thumbSize: '20px',
-        thumbOffset: '2px',
-        fontSize: fontSize.sm,
-        gap: '8px'
-      },
-      lg: {
-        width: '56px',
-        height: '30px',
-        thumbSize: '26px',
-        thumbOffset: '2px',
-        fontSize: fontSize.md,
-        gap: '10px'
-      }
-    },
-    colors: {
-      background: {
-        disabled: colors.gray[200],
-        unchecked: colors.gray[300],
-        primary: colors.semantic.primary,
-        secondary: colors.semantic.secondary,
-        success: colors.semantic.success,
-        error: colors.semantic.error,
-        warning: colors.semantic.warning,
-        info: colors.semantic.info,
-      },
-      thumb: colors.background.white,
-      text: {
-        default: colors.semantic.text,
-        error: colors.semantic.error,
-        muted: colors.semantic.muted,
-      }
-    },
-    effects: {
-      transition: 'background 0.2s ease, border-color 0.2s ease',
-      disabledOpacity: 0.6,
-      shadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-    }
-  } as const;
 
   const getSizeStyles = (size: CheckboxSize) => {
-    return TOGGLE_CONFIG.sizes[size as keyof typeof TOGGLE_CONFIG.sizes] || TOGGLE_CONFIG.sizes.md;
+    switch (size) {
+      case 'sm':
+        return {
+          width: '32px',
+          height: '18px',
+          thumbSize: '14px',
+          thumbOffset: spacing.xxs,
+          fontSize: fontSize.xs,
+          gap: spacing.xs
+        };
+      case 'md':
+        return {
+          width: '44px',
+          height: '24px',
+          thumbSize: '20px',
+          thumbOffset: '2px',
+          fontSize: fontSize.sm,
+          gap: '8px'
+        };
+      case 'lg':
+        return {
+          width: '56px',
+          height: '30px',
+          thumbSize: '26px',
+          thumbOffset: spacing.xxs,
+          fontSize: fontSize.md,
+          gap: spacing.sm
+        };
+      default:
+        return {
+          width: '44px',
+          height: '24px',
+          thumbSize: '20px',
+          thumbOffset: '2px',
+          fontSize: fontSize.sm,
+          gap: '8px'
+        };
+    }
   };
 
   const getColorStyles = (color: string, isChecked: boolean) => {
     if (disabled) {
       return {
-        background: TOGGLE_CONFIG.colors.background.disabled,
-        thumbColor: TOGGLE_CONFIG.colors.thumb
+        background: colors.gray[200],
+        thumbColor: colors.background.white
       };
     }
 
     if (!isChecked) {
       return {
-        background: TOGGLE_CONFIG.colors.background.unchecked,
-        thumbColor: TOGGLE_CONFIG.colors.thumb
+        background: colors.gray[300],
+        thumbColor: colors.background.white
       };
     }
 
-    const backgroundColors = TOGGLE_CONFIG.colors.background;
-    const background = backgroundColors[color as keyof typeof backgroundColors] || backgroundColors.primary;
-
-    return {
-      background,
-      thumbColor: TOGGLE_CONFIG.colors.thumb
-    };
+    switch (color) {
+      case 'primary':
+        return { background: colors.semantic.primary, thumbColor: colors.background.white };
+      case 'secondary':
+        return { background: colors.semantic.secondary, thumbColor: colors.background.white };
+      case 'success':
+        return { background: colors.semantic.success, thumbColor: colors.background.white };
+      case 'error':
+        return { background: colors.semantic.error, thumbColor: colors.background.white };
+      case 'warning':
+        return { background: colors.semantic.warning, thumbColor: colors.background.white };
+      case 'info':
+        return { background: colors.semantic.info, thumbColor: colors.background.white };
+      default:
+        return { background: colors.semantic.primary, thumbColor: colors.background.white };
+    }
   };
 
   const sizeStyles = getSizeStyles(size);
@@ -132,7 +126,7 @@ export const Toggle: React.FC<ToggleProps> = ({
     display: 'flex',
     flexDirection: 'column',
     gap: sizeStyles.gap,
-    opacity: disabled ? TOGGLE_CONFIG.effects.disabledOpacity : 1,
+    opacity: disabled ? opacity.disabled : opacity.visible,
   };
 
   const labelContainerStyles: React.CSSProperties = {
@@ -150,7 +144,7 @@ export const Toggle: React.FC<ToggleProps> = ({
     borderRadius: sizeStyles.height,
     border: hasError ? `2px solid ${colors.semantic.error}` : 'none',
     cursor: disabled ? 'not-allowed' : 'pointer',
-    transition: TOGGLE_CONFIG.effects.transition,
+    transition: transitions.normal,
     display: 'inline-block',
     flexShrink: 0,
   };
@@ -166,24 +160,24 @@ export const Toggle: React.FC<ToggleProps> = ({
     background: colorStyles.thumbColor,
     borderRadius: '50%',
     transition: 'left 0.2s ease',
-    boxShadow: TOGGLE_CONFIG.effects.shadow,
+    boxShadow: `0 1px 3px rgba(0, 0, 0, ${shadowOpacity.light})`,
   };
 
   const labelTextStyles: React.CSSProperties = {
     fontSize: sizeStyles.fontSize,
-    color: hasError ? TOGGLE_CONFIG.colors.text.error : TOGGLE_CONFIG.colors.text.default,
+    color: hasError ? colors.semantic.error : colors.semantic.text,
     fontWeight: fontWeight.medium,
   };
 
   const helperTextStyles: React.CSSProperties = {
     fontSize: fontSize.xs,
-    color: TOGGLE_CONFIG.colors.text.muted,
+    color: colors.semantic.muted,
     marginTop: '2px',
   };
 
   const errorTextStyles: React.CSSProperties = {
     fontSize: fontSize.xs,
-    color: TOGGLE_CONFIG.colors.text.error,
+    color: colors.semantic.error,
     marginTop: '2px',
   };
 

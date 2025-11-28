@@ -3,6 +3,7 @@ import { Button } from '../../components';
 import { action } from "../actions";
 import { within, userEvent } from '@storybook/testing-library';
 import { Step } from '../types';
+import { spacing } from '../../theme';
 
 export default {
   title: "Components/Atomic/Button",
@@ -74,7 +75,7 @@ export const Default = {
 
 export const Variants = {
   render: () => (
-    <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+    <div style={{ display: "flex", gap: spacing.sm, flexWrap: "wrap" }}>
       <Button variant="primary">Primary</Button>
       <Button variant="secondary">Secondary</Button>
       <Button variant="success">Success</Button>

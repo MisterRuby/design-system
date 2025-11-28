@@ -1,7 +1,7 @@
 import React from "react";
 import { within, userEvent } from "@storybook/testing-library";
 import { Badge } from "../../components";
-import { colors, componentBorders, fontSize, fontWeight } from "../../theme";
+import { colors, componentBorders, fontSize, fontWeight, spacing } from "../../theme";
 import { action } from "../actions";
 
 export default {
@@ -11,8 +11,7 @@ export default {
     layout: "centered",
     docs: {
       description: {
-        component:
-          "상태, 라벨, 카테고리 등을 표시하는 작은 배지 컴포넌트입니다.",
+        component: "상태, 라벨, 카테고리 등을 표시하는 작은 배지 컴포넌트입니다.",
       },
       story: {
         inline: true,
@@ -180,7 +179,7 @@ export const Variants = {
         <Badge variant="outline">Outline</Badge>
         <Badge variant="soft">Soft</Badge>
       </div>
-      <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+      <div style={{ display: "flex", gap: spacing.sm, alignItems: "center" }}>
         <Badge variant="solid" color="success">
           Success
         </Badge>
@@ -383,9 +382,9 @@ export const TagExample = {
             setTags(["React", "TypeScript", "JavaScript", "CSS", "HTML"])
           }
           style={{
-            padding: "8px 16px",
+            padding: `${spacing.sm} ${spacing.lg}`,
             border: componentBorders.button.outline,
-            borderRadius: "4px",
+            borderRadius: spacing.xxs,
             backgroundColor: colors.background.white,
             cursor: "pointer",
             fontSize: "12px",

@@ -40,3 +40,5 @@ export type {
   BorderStyleKey,
   ComponentBorderKey,
 } from "./borders";
+export { transitions, animations } from "./transitions";
+export { opacity, shadowOpacity } from "./opacity";

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { colors, fontSize } from '../../theme';
+import { colors, fontSize, spacing, shadowOpacity } from '../../theme';
 import { ComponentSize } from '../../types';
 
 export interface TooltipProps {
@@ -29,7 +29,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
       case 'small':
         return {
           fontSize: fontSize.xs,
-          padding: '4px 8px',
+          padding: `${spacing.xxs} ${spacing.sm}`,
           maxWidth: '250px'
         };
       case 'medium':
@@ -41,7 +41,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
       case 'large':
         return {
           fontSize: fontSize.md,
-          padding: '8px 16px',
+          padding: `${spacing.sm} ${spacing.lg}`,
           maxWidth: '500px'
         };
       default:
@@ -67,21 +67,21 @@ export const Tooltip: React.FC<TooltipProps> = ({
           top: '100%',
           left: '50%',
           transform: 'translateX(-50%)',
-          marginTop: '8px'
+          marginTop: spacing.sm
         };
       case 'left':
         return {
           right: '100%',
           top: '50%',
           transform: 'translateY(-50%)',
-          marginRight: '8px'
+          marginRight: spacing.sm
         };
       case 'right':
         return {
           left: '100%',
           top: '50%',
           transform: 'translateY(-50%)',
-          marginLeft: '8px'
+          marginLeft: spacing.sm
         };
       default:
         return {
