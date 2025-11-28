@@ -9,7 +9,7 @@ export type { RadioGroupProps, RadioGroupOption } from "./RadioGroup";
 export { default as MarkdownEditor } from "./MarkdownEditor";
 export type { MarkdownEditorProps } from "./MarkdownEditor";
 export { Popup } from "./Popup";
-export type { PopupProps } from "./Popup";
+export type { PopupProps, PopupAction } from "./Popup";
 
 // Legacy exports for backward compatibility
 export { InputField as Input } from "./InputField";

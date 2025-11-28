@@ -4,6 +4,33 @@ import { Icon } from '../atomic/Icon';
 import { borderRadius, colors, fontSize, spacing } from '../../theme';
 import { ButtonVariant, ComponentSize } from '../../types';
 
+// Popup 설정 상수
+const POPUP_CONFIG = {
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1000,
+  },
+  shadow: '0 10px 25px rgba(0, 0, 0, 0.15)',
+  sizes: {
+    small: { width: '400px', maxWidth: '90vw' },
+    medium: { width: '600px', maxWidth: '90vw' },
+    large: { width: '800px', maxWidth: '95vw' },
+  },
+  dimensions: {
+    maxHeight: '90vh',
+    titleMinHeight: '36px',
+    closeButtonSize: 20,
+  },
+  transitions: 'all 0.2s ease-in-out',
+} as const;
+
+// Popup 액션 타입 정의
+export interface PopupAction {
+  label: string;
+  variant?: ButtonVariant;
+  onClick: () => void;
+}
+
 export interface PopupProps {
   isOpen: boolean;
   onClose: () => void;
@@ -12,11 +39,7 @@ export interface PopupProps {
   size?: ComponentSize;
   showCloseButton?: boolean;
   closeOnOverlayClick?: boolean;
-  actions?: {
-    label: string;
-    variant?: ButtonVariant;
-    onClick: () => void;
-  }[];
+  actions?: PopupAction[];
   className?: string;
 }
 
@@ -34,16 +57,7 @@ export const Popup: React.FC<PopupProps> = ({
   const popupRef = useRef<HTMLDivElement>(null);
 
   const getSizeStyles = (size: string) => {
-    switch (size) {
-      case 'small':
-        return { width: '400px', maxWidth: '90vw' };
-      case 'medium':
-        return { width: '600px', maxWidth: '90vw' };
-      case 'large':
-        return { width: '800px', maxWidth: '95vw' };
-      default:
-        return { width: '600px', maxWidth: '90vw' };
-    }
+    return POPUP_CONFIG.sizes[size as keyof typeof POPUP_CONFIG.sizes] || POPUP_CONFIG.sizes.medium;
   };
 
   useEffect(() => {
@@ -86,11 +100,11 @@ export const Popup: React.FC<PopupProps> = ({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        backgroundColor: POPUP_CONFIG.overlay.backgroundColor,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        zIndex: 1000,
+        zIndex: POPUP_CONFIG.overlay.zIndex,
         padding: spacing.md,
       }}
       className={className}
@@ -100,10 +114,10 @@ export const Popup: React.FC<PopupProps> = ({
         style={{
           backgroundColor: colors.background.white,
           borderRadius: borderRadius.lg,
-          boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15)',
+          boxShadow: POPUP_CONFIG.shadow,
           width: sizeStyles.width,
           maxWidth: sizeStyles.maxWidth,
-          maxHeight: '90vh',
+          maxHeight: POPUP_CONFIG.dimensions.maxHeight,
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden',
@@ -117,7 +131,7 @@ export const Popup: React.FC<PopupProps> = ({
               justifyContent: 'space-between',
               padding: `${spacing.sm} ${spacing.md}`,
               borderBottom: `1px solid ${colors.border.default}`,
-              minHeight: '36px',
+              minHeight: POPUP_CONFIG.dimensions.titleMinHeight,
             }}
           >
             {title && (
@@ -145,7 +159,7 @@ export const Popup: React.FC<PopupProps> = ({
                   alignItems: 'center',
                   justifyContent: 'center',
                   color: colors.semantic.muted,
-                  transition: 'all 0.2s ease-in-out',
+                  transition: POPUP_CONFIG.transitions,
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = colors.background.gray;
@@ -154,7 +168,7 @@ export const Popup: React.FC<PopupProps> = ({
                   e.currentTarget.style.backgroundColor = 'transparent';
                 }}
               >
-                <Icon name="close" size={20} color="currentColor" />
+                <Icon name="close" size={POPUP_CONFIG.dimensions.closeButtonSize} color="currentColor" />
               </button>
             )}
           </div>
