@@ -93,7 +93,23 @@ export const colors = {
     text: '#374151', // gray-700 - 기본 텍스트 (가독성)
   },
 
+
+  background: {
+    white: '#ffffff',
+    gray50: '#f9fafb', // gray-50
+    gray100: '#f3f4f6', // gray-100
+    gray: '#f3f4f6', // gray-100
+    disabled: '#f3f4f6', // gray-100
+  },
+
+  text: {
+    primary: '#374151', // gray-700 - 기본 텍스트
+    secondary: '#6b7280', // gray-500 - 보조 텍스트
+    muted: '#9ca3af', // gray-400 - 비활성 텍스트
+  },
+
   border: {
+    light: '#d1d5db', // gray-300
     default: '#d1d5db', // gray-300
     primary: '#2563eb', // blue-600 - primary와 동일
     secondary: '#6b7280', // gray-500 - secondary와 동일
@@ -109,12 +125,6 @@ export const colors = {
       warning: '#d97706', // amber-600 - warning과 동일
       info: '#0891b2', // cyan-600 - info와 동일
     }
-  },
-
-  background: {
-    white: '#ffffff',
-    gray: '#f3f4f6', // gray-100
-    disabled: '#f3f4f6', // gray-100
   },
 
   // Focus ring colors with opacity

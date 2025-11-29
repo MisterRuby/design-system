@@ -28,3 +28,5 @@ export { ErrorMessage } from './ErrorMessage';
 export type { ErrorMessageProps } from './ErrorMessage';
 export { HelperText } from './HelperText';
 export type { HelperTextProps } from './HelperText';
+export { Tab } from './Tab';
+export type { TabProps, TabItem } from './Tab';
