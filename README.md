@@ -4,6 +4,58 @@
 
 라이브 문서(GitHub Pages): https://misterruby.github.io/design-system
 
+## 🚀 라이브러리로 사용하기
+
+### 설치
+
+```bash
+# Git 의존성으로 설치
+npm install git+https://github.com/MisterRuby/design-system.git
+
+# 또는 특정 버전/브랜치
+npm install git+https://github.com/MisterRuby/design-system.git#v1.0.0
+```
+
+### 사용법
+
+```tsx
+import React from 'react';
+import { Button, Tab, Icon } from 'ruby-design-system';
+
+function App() {
+  const tabs = [
+    { id: 'home', label: '홈', icon: 'home' },
+    { id: 'settings', label: '설정', icon: 'settings' }
+  ];
+
+  return (
+    <div>
+      <Button variant="primary">클릭</Button>
+      <Tab items={tabs} variant="underline" />
+      <Icon name="search" size={24} />
+    </div>
+  );
+}
+```
+
+### 피어 의존성
+
+이 라이브러리를 사용하려면 다음 패키지가 필요합니다:
+
+```bash
+npm install react react-dom
+```
+
+### 업데이트
+
+```bash
+# 최신 버전으로 업데이트
+npm update ruby-design-system
+
+# 강제 재설치
+npm install git+https://github.com/MisterRuby/design-system.git --force
+```
+
 ## 목적
 - 제품 전반에서 재사용 가능한 토큰, 기본 컴포넌트(Atomic), 레이아웃, 복합 컴포넌트를 제공
 - Storybook 문서로 상태·상호작용을 명확히 기록하고 시각적으로 검증

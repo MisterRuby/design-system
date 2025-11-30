@@ -1,8 +1,21 @@
 {
   "name": "ruby-design-system",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "private": false,
+  "main": "src/components/index.ts",
+  "types": "src/components/index.ts",
+  "files": [
+    "src"
+  ],
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
+  },
   "dependencies": {
+    "@uiw/react-md-editor": "^4.0.8",
+    "styled-components": "^6.1.19"
+  },
+  "devDependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
@@ -12,13 +25,21 @@
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@types/styled-components": "^5.1.36",
-    "@uiw/react-md-editor": "^4.0.8",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-scripts": "5.0.1",
-    "styled-components": "^6.1.19",
     "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "@storybook/addon-actions": "^9.0.8",
+    "@storybook/addon-docs": "^10.0.7",
+    "@storybook/addon-onboarding": "^10.0.7",
+    "@storybook/preset-create-react-app": "^10.0.7",
+    "@storybook/react-webpack5": "^10.0.7",
+    "@storybook/testing-library": "^0.2.1",
+    "eslint-plugin-storybook": "^10.0.7",
+    "prop-types": "^15.8.1",
+    "storybook": "^10.0.7",
+    "webpack": "^5.102.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -49,17 +70,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@storybook/addon-actions": "^9.0.8",
-    "@storybook/addon-docs": "^10.0.7",
-    "@storybook/addon-onboarding": "^10.0.7",
-    "@storybook/preset-create-react-app": "^10.0.7",
-    "@storybook/react-webpack5": "^10.0.7",
-    "@storybook/testing-library": "^0.2.1",
-    "eslint-plugin-storybook": "^10.0.7",
-    "prop-types": "^15.8.1",
-    "storybook": "^10.0.7",
-    "webpack": "^5.102.1"
   }
 }

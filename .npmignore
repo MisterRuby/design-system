@@ -1,0 +1,18 @@
+# Development files
+src/stories/
+storybook-static/
+.storybook/
+*.stories.tsx
+*.stories.ts
+
+# Build artifacts
+build/
+.env*
+
+# Development dependencies
+node_modules/
+.git/
+
+# Documentation
+README.md
+docs/
