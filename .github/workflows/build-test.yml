@@ -41,13 +41,18 @@ jobs:
 
       - name: Storybook 빌드
         run: npm run build-storybook
+        if: matrix.node-version >= 20
 
       - name: 빌드 결과물 검증
         run: |
           echo "📦 빌드된 파일들:"
           ls -la dist/
-          echo "📚 Storybook 파일들:"
-          ls -la storybook-static/
+          if [ "${{ matrix.node-version }}" -ge "20" ]; then
+            echo "📚 Storybook 파일들:"
+            ls -la storybook-static/
+          else
+            echo "📚 Storybook 빌드는 Node.js 20+ 환경에서만 실행됩니다"
+          fi
 
   # GitHub Packages에도 배포 (선택사항)
   deploy-github:
