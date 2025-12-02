@@ -62,8 +62,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "npm run build:lib",
-    "build:lib": "npm run clean && tsc -p tsconfig.lib.json && npm run build:esm",
+    "build:lib": "npm run clean && tsc -p tsconfig.lib.json && npm run build:esm && npm run copy:css",
     "build:esm": "tsc -p tsconfig.lib.json --module esnext --outDir dist/esm && node build-scripts/post-build.js",
+    "copy:css": "node build-scripts/copy-css.js",
     "build:dev": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
