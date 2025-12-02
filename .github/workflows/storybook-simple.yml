@@ -1,0 +1,39 @@
+name: Storybook 간단 배포
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 코드 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 의존성 설치
+        run: npm ci
+
+      - name: Storybook 빌드
+        run: npm run build-storybook
+
+      - name: GitHub Pages 배포
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./storybook-static
+          publish_branch: gh-pages
+
+      - name: 배포 완료 알림
+        run: |
+          echo "📚 Storybook이 성공적으로 배포되었습니다!"
+          echo "🔗 URL: https://misterruby.github.io/design-system"
