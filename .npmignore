@@ -1,18 +1,31 @@
-# Development files
+# Development files (취약점 관련 파일들 제외)
 src/stories/
 storybook-static/
 .storybook/
 *.stories.tsx
 *.stories.ts
+*.test.tsx
+*.test.ts
+coverage/
 
 # Build artifacts
 build/
 .env*
+.vscode/
+.idea/
 
-# Development dependencies
+# Development dependencies and configs
 node_modules/
 .git/
+.github/
+.gitignore
+.eslintrc*
+jest.config.*
+tsconfig.json
+tsconfig.lib.json
+build-scripts/
 
-# Documentation
-README.md
-docs/
+# Keep essential files for NPM
+# README.md (should be included)
+# package.json (automatically included)
+# dist/ (explicitly included in package.json files field)

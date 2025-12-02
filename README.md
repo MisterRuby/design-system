@@ -502,6 +502,27 @@ import { Button } from 'ruby-design-system';
 - [ ] package.json의 version이 올바른가?
 - [ ] 로컬에서 `npm run build`가 성공하는가?
 - [ ] 로컬에서 `npm test`가 통과하는가?
+- [ ] NPM 패키지에 개발 의존성이 포함되지 않았는가?
+
+### 보안 및 취약점 정보
+
+#### 배포된 라이브러리의 보안성
+- **✅ 안전**: 배포된 NPM 패키지에는 오직 `dist/` 빌드 결과물만 포함
+- **✅ 취약점 없음**: 개발 의존성이나 소스 코드는 배포 패키지에서 제외
+- **✅ 최소화**: README.md, package.json, 컴파일된 JavaScript/TypeScript만 포함
+
+#### 개발 환경 취약점 (사용자에게 영향 없음)
+일부 개발 의존성에서 보안 취약점이 발견될 수 있으나, 이는 다음 이유로 최종 사용자에게 영향을 주지 않습니다:
+
+- 🔒 **개발 전용**: `react-scripts`, `storybook` 등은 개발 환경에서만 사용
+- 🔒 **빌드 분리**: 배포 시 `npm pack`으로 프로덕션 코드만 포함
+- 🔒 **런타임 제외**: 취약점이 있는 개발 도구는 런타임에 실행되지 않음
+
+```bash
+# 배포된 패키지 내용 확인
+npm pack --dry-run
+# → dist/, README.md, package.json만 포함됨
+```
 
 ## 라이선스
 MIT License
