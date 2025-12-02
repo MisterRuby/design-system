@@ -8,10 +8,10 @@
 
 ```bash
 # NPM 레지스트리에서 설치
-npm install @ruby/design-system
+npm install ruby-design-system
 
 # 또는 Yarn
-yarn add @ruby/design-system
+yarn add ruby-design-system
 ```
 
 ### Git 저장소에서 직접 설치
@@ -41,7 +41,7 @@ npm install /path/to/ruby-design-system-1.0.0.tgz
 
 ```tsx
 import React from 'react';
-import { Button, Input, Icon, Badge } from '@ruby/design-system';
+import { Button, Input, Icon, Badge } from 'ruby-design-system';
 
 function App() {
   return (
@@ -70,7 +70,7 @@ export default App;
 
 ```tsx
 import React from 'react';
-import { ThemeProvider } from '@ruby/design-system';
+import { ThemeProvider } from 'ruby-design-system';
 
 function App() {
   return (
@@ -85,7 +85,7 @@ function App() {
 
 ```tsx
 import React from 'react';
-import { Button, ButtonProps } from '@ruby/design-system';
+import { Button, ButtonProps } from 'ruby-design-system';
 
 // 타입 안전성 확보
 const CustomButton: React.FC<ButtonProps> = (props) => {
@@ -111,13 +111,13 @@ npm install styled-components
 
 ```bash
 # 최신 버전으로 업데이트
-npm update @ruby/design-system
+npm update ruby-design-system
 
 # 특정 버전으로 업데이트
-npm install @ruby/design-system@^2.0.0
+npm install ruby-design-system@^2.0.0
 
 # 강제 재설치
-npm install @ruby/design-system --force
+npm install ruby-design-system --force
 ```
 
 ## 🔧 라이브러리 빌드 및 배포
@@ -310,8 +310,8 @@ main (또는 master)     # 프로덕션 배포
 # 1. NPM 로그인
 npm login
 
-# 2. 자동화용 토큰 생성 (granular 토큰 권장)
-npm access grant read-write your-username:developers @ruby/design-system
+# 2. 자동화용 토큰 생성
+npm token create --type=automation
 ```
 
 **GitHub에서 Secret 설정:**
@@ -470,10 +470,10 @@ npm run build-storybook
 ```bash
 # 토큰 권한 확인
 npm whoami
-npm access list packages @ruby
+npm access list packages
 
-# 스코프 패키지 권한 설정
-npm access grant read-write @ruby/design-system
+# 패키지 권한 확인
+npm owner ls ruby-design-system
 ```
 
 #### 2. GitHub Actions 실패
@@ -491,7 +491,7 @@ cd ../test-project
 npm install ../design-system/ruby-design-system-1.0.0.tgz
 
 # 임포트 테스트
-import { Button } from '@ruby/design-system';
+import { Button } from 'ruby-design-system';
 ```
 
 ### 배포 체크리스트

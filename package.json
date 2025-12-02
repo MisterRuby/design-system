@@ -1,5 +1,5 @@
 {
-  "name": "@ruby/design-system",
+  "name": "ruby-design-system",
   "version": "1.0.0",
   "description": "Ruby Design System - React component library with TypeScript support",
   "keywords": [
