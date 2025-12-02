@@ -526,3 +526,4 @@ npm pack --dry-run
 
 ## 라이선스
 MIT License
+# GitHub Actions 자동 배포 테스트
