@@ -18,10 +18,10 @@ yarn add ruby-design-system
 
 ```bash
 # Git 의존성으로 설치
-npm install git+https://github.com/your-username/ruby-design-system.git
+npm install git+https://github.com/MisterRuby/design-system.git
 
 # 특정 버전/브랜치 설치
-npm install git+https://github.com/your-username/ruby-design-system.git#v1.0.0
+npm install git+https://github.com/MisterRuby/design-system.git#v1.0.0
 ```
 
 ### 로컬 파일 시스템에서 설치
@@ -254,7 +254,7 @@ git push origin v1.0.1
 
 #### 3. Storybook 배포 (`/.github/workflows/storybook-deploy.yml`)
 - main 브랜치 push 시 GitHub Pages에 자동 배포
-- 문서 사이트: `https://your-username.github.io/design-system`
+- 문서 사이트: `https://misterruby.github.io/design-system`
 
 ### GitHub Secrets 설정
 
@@ -323,7 +323,7 @@ npm token create --type=automation
 
 1. GitHub 저장소 → Settings → Pages
 2. Source: "GitHub Actions" 선택
-3. 첫 배포 후 `https://your-username.github.io/design-system`에서 Storybook 확인
+3. 첫 배포 후 `https://misterruby.github.io/design-system`에서 Storybook 확인
 
 #### 3. 배포 테스트
 
@@ -333,7 +333,7 @@ git tag v1.0.0
 git push origin v1.0.0
 
 # GitHub Actions에서 배포 상황 확인
-# https://github.com/your-username/design-system/actions
+# https://github.com/MisterRuby/design-system/actions
 ```
 
 ### 고급 설정
