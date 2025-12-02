@@ -76,8 +76,7 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest",
-      "plugin:storybook/recommended"
+      "react-app/jest"
     ],
     "rules": {
       "react-hooks/rules-of-hooks": "off"
