@@ -26,7 +26,28 @@ const config: StorybookConfig = {
       "shouldExtractLiteralValuesFromEnum": true,
       "propFilter": (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
     },
-  }
+  },
+  webpackFinal: async (config) => {
+    if (config.resolve) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        '@vitest/mocker': false,
+        '@vitest/mocker/browser': false,
+      };
+    }
+
+    if (config.externals) {
+      if (Array.isArray(config.externals)) {
+        config.externals.push('@vitest/mocker', '@vitest/mocker/browser');
+      } else {
+        config.externals = [config.externals, '@vitest/mocker', '@vitest/mocker/browser'];
+      }
+    } else {
+      config.externals = ['@vitest/mocker', '@vitest/mocker/browser'];
+    }
+
+    return config;
+  },
 };
 
 export default config;

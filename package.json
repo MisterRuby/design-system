@@ -48,6 +48,7 @@
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@types/styled-components": "^5.1.36",
+    "@vitest/mocker": "^4.0.14",
     "eslint-plugin-storybook": "^10.0.7",
     "prop-types": "^15.8.1",
     "react": "^19.2.0",
@@ -81,7 +82,17 @@
     ],
     "rules": {
       "react-hooks/rules-of-hooks": "off"
-    }
+    },
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.@(js|jsx|ts|tsx)"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
+    ]
   },
   "browserslist": {
     "production": [
