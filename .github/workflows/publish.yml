@@ -42,11 +42,23 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "🏷️ 배포할 버전: $VERSION"
 
+      - name: NPM 버전 중복 체크
+        id: version_check
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          if npm view ruby-design-system@$VERSION version 2>/dev/null; then
+            echo "🔍 버전 $VERSION 이미 배포됨 - 건너뜀"
+            echo "should_publish=false" >> $GITHUB_OUTPUT
+          else
+            echo "✅ 버전 $VERSION 배포 가능"
+            echo "should_publish=true" >> $GITHUB_OUTPUT
+          fi
+
       - name: NPM 배포
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/')  # master 브랜치 또는 태그에서 배포
+        if: steps.version_check.outputs.should_publish == 'true' && (github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/'))
 
       - name: 배포 완료 알림
         if: success()
