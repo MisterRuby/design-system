@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { colors, fontSize, spacing, shadowOpacity } from '../../theme';
+import { colors, fontSize, spacing } from '../../theme';
 import { ComponentSize } from '../../types';
 
 export interface TooltipProps {

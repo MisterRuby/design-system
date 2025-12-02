@@ -70,7 +70,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "prepublishOnly": "npm run build",
-    "lint": "eslint src --ext .ts,.tsx",
+    "lint": "eslint src/**/*.{ts,tsx}",
     "clean": "rimraf dist"
   },
   "eslintConfig": {

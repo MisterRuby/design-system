@@ -28,7 +28,7 @@ jobs:
         run: npm ci
 
       - name: ESLint 검사
-        run: npm run lint --if-present
+        run: ESLINT_USE_FLAT_CONFIG=false npm run lint --if-present
 
       - name: 테스트 실행
         run: npm test -- --coverage --watchAll=false
