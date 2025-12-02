@@ -1,0 +1,77 @@
+name: 빌드 및 테스트
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16, 18, 20]
+
+    steps:
+      - name: 코드 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Node.js ${{ matrix.node-version }} 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: 의존성 설치
+        run: npm ci
+
+      - name: ESLint 검사
+        run: npm run lint --if-present
+
+      - name: 테스트 실행
+        run: npm test -- --coverage --watchAll=false
+
+      - name: TypeScript 타입 체크
+        run: npx tsc --noEmit
+
+      - name: 라이브러리 빌드
+        run: npm run build
+
+      - name: Storybook 빌드
+        run: npm run build-storybook
+
+      - name: 빌드 결과물 검증
+        run: |
+          echo "📦 빌드된 파일들:"
+          ls -la dist/
+          echo "📚 Storybook 파일들:"
+          ls -la storybook-static/
+
+  # GitHub Packages에도 배포 (선택사항)
+  deploy-github:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: 코드 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          registry-url: 'https://npm.pkg.github.com'
+
+      - name: 의존성 설치
+        run: npm ci
+
+      - name: 라이브러리 빌드
+        run: npm run build
+
+      - name: GitHub Packages 배포
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

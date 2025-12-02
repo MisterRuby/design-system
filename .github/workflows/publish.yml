@@ -1,0 +1,55 @@
+name: 자동 NPM 배포
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - 'v*.*.*'  # v1.0.0 형태의 태그에서 배포
+  workflow_dispatch:  # 수동 실행 가능
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 코드 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: 의존성 설치
+        run: npm ci
+
+      - name: 테스트 실행
+        run: npm test -- --coverage --watchAll=false
+
+      - name: TypeScript 타입 체크
+        run: npx tsc --noEmit
+
+      - name: 라이브러리 빌드
+        run: npm run build
+
+      - name: 패키지 버전 확인
+        id: version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "🏷️ 배포할 버전: $VERSION"
+
+      - name: NPM 배포
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        if: startsWith(github.ref, 'refs/tags/')  # 태그가 있을 때만 배포
+
+      - name: 배포 완료 알림
+        if: success()
+        run: |
+          echo "✅ @ruby/design-system@${{ steps.version.outputs.version }} 배포 완료!"
+          echo "📦 https://www.npmjs.com/package/@ruby/design-system"
