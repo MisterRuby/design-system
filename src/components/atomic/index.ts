@@ -30,3 +30,5 @@ export { HelperText } from './HelperText';
 export type { HelperTextProps } from './HelperText';
 export { Tab } from './Tab';
 export type { TabProps, TabItem } from './Tab';
+export { Card } from './Card';
+export type { CardProps } from './Card';
