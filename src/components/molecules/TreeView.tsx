@@ -1,7 +1,14 @@
-import React, { useState, useCallback } from 'react';
-import { Icon, IconName } from '../atomic/Icon';
-import { BaseCheckbox } from '../atomic/BaseCheckbox';
-import { borderRadius, colors, fontSize, spacing, transitions, fontWeight } from '../../theme';
+import React, { useState, useCallback } from "react";
+import { Icon, IconName } from "../atomic/Icon";
+import { BaseCheckbox } from "../atomic/BaseCheckbox";
+import { Text } from "../atomic/Text";
+import {
+  borderRadius,
+  colors,
+  spacing,
+  fontSize,
+  transitions,
+} from "../../theme";
 
 export interface TreeNode {
   id: string;
@@ -76,34 +83,30 @@ const TreeNodeItem: React.FC<TreeNodeItemProps> = ({
   };
 
   const nodeStyles: React.CSSProperties = {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
     padding: `${spacing.xs} ${spacing.sm}`,
-    cursor: node.disabled ? 'not-allowed' : 'pointer',
-    color: node.disabled ? colors.text.muted : isSelected ? colors.semantic.primary : colors.text.primary,
-    backgroundColor: isSelected ? colors.primary[50] : 'transparent',
+    cursor: node.disabled ? "not-allowed" : "pointer",
+    backgroundColor: isSelected ? colors.primary[50] : "transparent",
     borderRadius: borderRadius.sm,
-    fontSize: fontSize.sm,
-    fontWeight: isSelected ? fontWeight.medium : fontWeight.normal,
     transition: transitions.normal,
     opacity: node.disabled ? 0.6 : 1,
   };
 
-
   const expanderStyles: React.CSSProperties = {
-    width: '16px',
-    height: '16px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: "16px",
+    height: "16px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     marginRight: spacing.xs,
-    cursor: hasChildren ? 'pointer' : 'default',
-    visibility: hasChildren ? 'visible' : 'hidden',
+    cursor: hasChildren ? "pointer" : "default",
+    visibility: hasChildren ? "visible" : "hidden",
   };
 
   const checkboxStyles: React.CSSProperties = {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
     marginRight: spacing.xs,
   };
 
@@ -119,21 +122,17 @@ const TreeNodeItem: React.FC<TreeNodeItemProps> = ({
         }}
         onMouseLeave={(e) => {
           if (!node.disabled && !isSelected) {
-            e.currentTarget.style.backgroundColor = 'transparent';
+            e.currentTarget.style.backgroundColor = "transparent";
           }
-        }}
-      >
-
+        }}>
         {/* 들여쓰기 */}
-        {level > 0 && (
-          <div style={{ width: `${level * 24}px` }} />
-        )}
+        {level > 0 && <div style={{ width: `${level * 24}px` }} />}
 
         {/* 확장/축소 버튼 */}
         <div style={expanderStyles} onClick={handleExpandClick}>
           {hasChildren && (
             <Icon
-              name={isExpanded ? 'chevron-down' : 'chevron-right'}
+              name={isExpanded ? "chevron-down" : "chevron-right"}
               size={12}
               color={colors.text.muted}
             />
@@ -165,9 +164,18 @@ const TreeNodeItem: React.FC<TreeNodeItemProps> = ({
         )}
 
         {/* 라벨 */}
-        <span style={{ flex: 1, userSelect: 'none' }}>
+        <Text
+          variant="body2"
+          color={node.disabled ? "muted" : isSelected ? "primary" : "text"}
+          weight={isSelected ? "medium" : "normal"}
+          style={{
+            flex: 1,
+            userSelect: "none",
+            cursor: "inherit",
+            transition: transitions.normal,
+          }}>
           {node.label}
-        </span>
+        </Text>
       </div>
 
       {/* 자식 노드들은 TreeView 컴포넌트에서 관리 */}
@@ -185,81 +193,107 @@ export const TreeView: React.FC<TreeViewProps> = ({
   checkable = false,
   checkedNodes = [],
   onNodeCheck = () => {},
-  className = '',
-  style = {}
+  className = "",
+  style = {},
 }) => {
-  const [internalExpandedNodes, setInternalExpandedNodes] = useState<string[]>(expandedNodes);
+  const [internalExpandedNodes, setInternalExpandedNodes] =
+    useState<string[]>(expandedNodes);
 
-  const handleNodeExpand = useCallback((nodeId: string, expanded: boolean) => {
-    setInternalExpandedNodes(prev => {
-      if (expanded) {
-        return [...prev, nodeId];
-      } else {
-        return prev.filter(id => id !== nodeId);
-      }
-    });
-    onNodeExpand(nodeId, expanded);
-  }, [onNodeExpand]);
-
-  const isNodeExpanded = useCallback((nodeId: string) => {
-    return internalExpandedNodes.includes(nodeId);
-  }, [internalExpandedNodes]);
-
-  const isNodeSelected = useCallback((nodeId: string) => {
-    return selectedNode === nodeId;
-  }, [selectedNode]);
-
-  const isNodeChecked = useCallback((nodeId: string) => {
-    return checkedNodes.includes(nodeId);
-  }, [checkedNodes]);
-
-  const isNodeIndeterminate = useCallback((nodeId: string) => {
-    // 해당 노드를 찾기
-    const findNode = (nodes: TreeNode[], targetId: string): TreeNode | null => {
-      for (const node of nodes) {
-        if (node.id === targetId) return node;
-        if (node.children) {
-          const found = findNode(node.children, targetId);
-          if (found) return found;
+  const handleNodeExpand = useCallback(
+    (nodeId: string, expanded: boolean) => {
+      setInternalExpandedNodes((prev) => {
+        if (expanded) {
+          return [...prev, nodeId];
+        } else {
+          return prev.filter((id) => id !== nodeId);
         }
-      }
-      return null;
-    };
+      });
+      onNodeExpand(nodeId, expanded);
+    },
+    [onNodeExpand]
+  );
 
-    // 모든 하위 노드 ID를 찾기
-    const getAllChildIds = (node: TreeNode): string[] => {
-      if (!node.children) return [];
-      const ids: string[] = [];
-      const traverse = (nodeList: TreeNode[]) => {
-        nodeList.forEach(child => {
-          ids.push(child.id);
-          if (child.children) {
-            traverse(child.children);
+  const isNodeExpanded = useCallback(
+    (nodeId: string) => {
+      return internalExpandedNodes.includes(nodeId);
+    },
+    [internalExpandedNodes]
+  );
+
+  const isNodeSelected = useCallback(
+    (nodeId: string) => {
+      return selectedNode === nodeId;
+    },
+    [selectedNode]
+  );
+
+  const isNodeChecked = useCallback(
+    (nodeId: string) => {
+      return checkedNodes.includes(nodeId);
+    },
+    [checkedNodes]
+  );
+
+  const isNodeIndeterminate = useCallback(
+    (nodeId: string) => {
+      // 해당 노드를 찾기
+      const findNode = (
+        nodes: TreeNode[],
+        targetId: string
+      ): TreeNode | null => {
+        for (const node of nodes) {
+          if (node.id === targetId) return node;
+          if (node.children) {
+            const found = findNode(node.children, targetId);
+            if (found) return found;
           }
-        });
+        }
+        return null;
       };
-      traverse(node.children);
-      return ids;
-    };
 
-    const node = findNode(data, nodeId);
-    if (!node || !node.children || node.children.length === 0) {
-      return false;
-    }
+      // 모든 하위 노드 ID를 찾기
+      const getAllChildIds = (node: TreeNode): string[] => {
+        if (!node.children) return [];
+        const ids: string[] = [];
+        const traverse = (nodeList: TreeNode[]) => {
+          nodeList.forEach((child) => {
+            ids.push(child.id);
+            if (child.children) {
+              traverse(child.children);
+            }
+          });
+        };
+        traverse(node.children);
+        return ids;
+      };
 
-    const childIds = getAllChildIds(node);
-    if (childIds.length === 0) return false;
+      const node = findNode(data, nodeId);
+      if (!node || !node.children || node.children.length === 0) {
+        return false;
+      }
 
-    const checkedChildIds = childIds.filter(id => checkedNodes.includes(id));
+      const childIds = getAllChildIds(node);
+      if (childIds.length === 0) return false;
 
-    // 현재 노드가 체크된 상태면 indeterminate가 아님
-    if (checkedNodes.includes(nodeId)) return false;
+      const checkedChildIds = childIds.filter((id) =>
+        checkedNodes.includes(id)
+      );
 
-    // 일부 하위 노드만 체크된 경우 indeterminate
-    return checkedChildIds.length > 0 && checkedChildIds.length < childIds.length;
-  }, [checkedNodes, data]);
+      // 현재 노드가 체크된 상태면 indeterminate가 아님
+      if (checkedNodes.includes(nodeId)) return false;
 
-  const renderTree = (nodes: TreeNode[], level: number = 0): React.ReactNode => {
+      // 일부 하위 노드만 체크된 경우 indeterminate
+      return (
+        checkedChildIds.length > 0 && checkedChildIds.length < childIds.length
+      );
+    },
+    [checkedNodes, data]
+  );
+
+  const renderTree = (
+    nodes: TreeNode[],
+    level: number = 0
+  ): React.ReactNode => {
     return nodes.map((node, index) => {
       const hasChildren = node.children && node.children.length > 0;
       const isExpanded = isNodeExpanded(node.id);
@@ -280,12 +314,7 @@ export const TreeView: React.FC<TreeViewProps> = ({
             onNodeCheck={onNodeCheck}
           />
           {hasChildren && isExpanded && (
-            <div>
-              {renderTree(
-                node.children!,
-                level + 1
-              )}
-            </div>
+            <div>{renderTree(node.children!, level + 1)}</div>
           )}
         </React.Fragment>
       );
@@ -293,7 +322,7 @@ export const TreeView: React.FC<TreeViewProps> = ({
   };
 
   const containerStyles: React.CSSProperties = {
-    fontFamily: 'inherit',
+    fontFamily: "inherit",
     fontSize: fontSize.sm,
     color: colors.text.primary,
     ...style,
