@@ -1,7 +1,17 @@
 import React from 'react';
 import { Text } from '../atomic/Text';
 import { Icon, IconName } from '../atomic/Icon';
-import { colors, componentBorders, fontWeight, spacing, borderRadius } from '../../theme';
+import {
+  borderRadius,
+  colors,
+  componentBorders,
+  fontSize,
+  fontWeight,
+  layout,
+  semanticShadows,
+  spacing,
+  transitions,
+} from '../../theme';
 
 /**
  * 사이드바 메뉴 아이템 인터페이스
@@ -118,17 +128,23 @@ export const SideBar: React.FC<SideBarProps> = ({
   const [expandedItems, setExpandedItems] = React.useState<Set<string>>(new Set());
   const getWidthStyles = () => {
     if (collapsed) {
-      return { width: '64px', minWidth: '64px' };
+      return { width: spacing['5xl'], minWidth: spacing['5xl'] };
     }
 
     switch (width) {
       case 'narrow':
-        return { width: '200px', minWidth: '200px' };
+        return {
+          width: `calc(${spacing['10xl']} + ${spacing.xs})`,
+          minWidth: `calc(${spacing['10xl']} + ${spacing.xs})`,
+        };
       case 'wide':
-        return { width: '320px', minWidth: '320px' };
+        return {
+          width: `calc(${spacing['12xl']} + ${spacing['5xl']})`,
+          minWidth: `calc(${spacing['12xl']} + ${spacing['5xl']})`,
+        };
       case 'medium':
       default:
-        return { width: '240px', minWidth: '240px' };
+        return { width: layout.sidebarWidth, minWidth: layout.sidebarWidth };
     }
   };
 
@@ -146,7 +162,7 @@ export const SideBar: React.FC<SideBarProps> = ({
           border: componentBorders.card.default,
           borderRadius: borderRadius.lg,
           margin: spacing.md,
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+          boxShadow: semanticShadows.sidebar,
           padding: spacing.md,
         };
       case 'default':
@@ -196,19 +212,19 @@ export const SideBar: React.FC<SideBarProps> = ({
   };
 
   const collapseButtonStyles: React.CSSProperties = {
-    width: '28px',
-    height: '28px',
-    border: `1px solid ${colors.border.default}`,
-    borderRadius: '6px',
+    width: `calc(${spacing.lg} + ${spacing.xs})`,
+    height: `calc(${spacing.lg} + ${spacing.xs})`,
+    border: componentBorders.button.outline,
+    borderRadius: borderRadius.md,
     backgroundColor: colors.background.white,
     cursor: 'pointer',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: '12px',
+    fontSize: fontSize.xs,
     color: colors.semantic.text,
-    transition: 'all 0.2s ease-in-out',
-    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+    transition: transitions.normal,
+    boxShadow: semanticShadows.buttonResting,
   };
 
   const handleCollapseToggle = () => {
@@ -268,7 +284,7 @@ export const SideBar: React.FC<SideBarProps> = ({
     const itemStyles: React.CSSProperties = {
       display: 'flex',
       alignItems: 'center',
-      gap: collapsed ? '0' : spacing.sm,
+      gap: collapsed ? spacing.none : spacing.sm,
       padding: collapsed ? spacing.xs : spacingStyles.padding,
       marginBottom: spacingStyles.marginBottom,
       borderRadius: borderRadius.sm,
@@ -276,22 +292,27 @@ export const SideBar: React.FC<SideBarProps> = ({
       opacity: item.disabled ? 0.5 : 1,
       backgroundColor: item.active ? colors.semantic.primary + '10' : 'transparent',
       color: item.active ? colors.semantic.primary : colors.semantic.text,
-      transition: 'all 0.2s ease-in-out',
+      transition: `all ${transitions.normal}`,
       position: 'relative',
-      marginLeft: level > 0 ? spacing.lg : '0',
+      marginLeft: level > 0 ? spacing.lg : spacing.none,
       justifyContent: collapsed ? 'center' : 'flex-start',
-      minHeight: itemSpacing === 'comfortable' ? '44px' : itemSpacing === 'compact' ? '32px' : '36px',
+      minHeight:
+        itemSpacing === 'comfortable'
+          ? layout.minTouchTarget
+          : itemSpacing === 'compact'
+          ? spacing['2xl']
+          : `calc(${spacing['2xl']} + ${spacing.xxs})`,
     };
 
     const badgeStyles: React.CSSProperties = {
       backgroundColor: colors.semantic.error,
       color: colors.background.white,
-      fontSize: '10px',
+      fontSize: fontSize.xxs,
       fontWeight: fontWeight.semibold,
-      padding: '2px 6px',
-      borderRadius: '10px',
-      minWidth: '16px',
-      height: '16px',
+      padding: `calc(${spacing.xxs} / 2) calc(${spacing.sm} / 2)`,
+      borderRadius: `calc(${borderRadius.md} + ${spacing.xxs} / 2)`,
+      minWidth: spacing.md,
+      height: spacing.md,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -372,7 +393,7 @@ export const SideBar: React.FC<SideBarProps> = ({
                 color={colors.semantic.muted}
                 style={{
                   transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
-                  transition: 'transform 0.2s ease-in-out',
+                  transition: `transform ${transitions.normal}`,
                 }}
               />
             )}
@@ -383,7 +404,7 @@ export const SideBar: React.FC<SideBarProps> = ({
             style={{
               overflow: 'hidden',
               maxHeight: isExpanded ? '1000px' : '0px',
-              transition: 'max-height 0.3s ease-in-out',
+              transition: `max-height ${transitions.slow}`,
             }}
           >
             {item.children!.map(child =>
@@ -451,7 +472,7 @@ export const SideBar: React.FC<SideBarProps> = ({
             style={{
               ...footerStyles,
               opacity: collapsed ? 0 : 1,
-              transition: 'opacity 0.3s ease-in-out',
+              transition: `opacity ${transitions.slow}`,
               pointerEvents: collapsed ? 'none' : 'auto',
               overflow: 'hidden',
             }}

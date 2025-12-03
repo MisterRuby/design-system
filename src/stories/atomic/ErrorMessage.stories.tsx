@@ -1,6 +1,12 @@
 import React from "react";
 import { ErrorMessage, BaseInput, Label } from "../../components";
-import { colors } from "../../theme";
+import {
+  borderRadius,
+  colors,
+  componentBorders,
+  semanticSpacing,
+  spacing,
+} from "../../theme";
 
 export default {
   title: "Components/Atomic/ErrorMessage",
@@ -33,7 +39,7 @@ export const Default = {
   },
   decorators: [
     (Story: any) => (
-      <div style={{ padding: '20px' }}>
+      <div style={{ padding: spacing.lg }}>
         <Story />
       </div>
     ),
@@ -54,7 +60,7 @@ export const Hidden = {
   },
   decorators: [
     (Story: any) => (
-      <div style={{ padding: '20px' }}>
+      <div style={{ padding: spacing.lg }}>
         <Story />
       </div>
     ),
@@ -70,7 +76,13 @@ export const Hidden = {
 
 export const Various = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "flex-start" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: spacing.xs,
+        alignItems: "flex-start",
+      }}>
       <ErrorMessage>필수 필드입니다</ErrorMessage>
       <ErrorMessage>유효한 이메일 주소를 입력해주세요</ErrorMessage>
       <ErrorMessage>비밀번호는 8자 이상이어야 합니다</ErrorMessage>
@@ -114,7 +126,13 @@ export const WithFormControl = {
     };
 
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: "4px", width: "300px" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: spacing.xxs,
+          width: "300px",
+        }}>
         <Label htmlFor="email-input" required>
           이메일 주소
         </Label>
@@ -171,7 +189,13 @@ export const ConditionalDisplay = {
     const [showError, setShowError] = React.useState(false);
 
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: "12px", width: "300px" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: spacing.sm,
+          width: "300px",
+        }}>
         <div>
           <Label>사용자 입력 필드</Label>
           <BaseInput
@@ -186,9 +210,9 @@ export const ConditionalDisplay = {
         <button
           onClick={() => setShowError(!showError)}
           style={{
-            padding: "8px 16px",
-            border: `1px solid ${colors.border.default}`,
-            borderRadius: "4px",
+            padding: semanticSpacing.buttonPaddingMedium,
+            border: componentBorders.button.outline,
+            borderRadius: borderRadius.sm,
             backgroundColor: colors.background.white,
             cursor: "pointer",
           }}>
@@ -200,7 +224,12 @@ export const ConditionalDisplay = {
   parameters: {
     docs: {
       source: {
-        code: `import { colors } from "../../theme";
+        code: `import {
+  borderRadius,
+  colors,
+  componentBorders,
+  semanticSpacing,
+} from "../../theme";
 
 const [showError, setShowError] = useState(false);
 
@@ -218,9 +247,9 @@ const [showError, setShowError] = useState(false);
 <button
   onClick={() => setShowError(!showError)}
   style={{
-    padding: "8px 16px",
-    border: \`1px solid \${colors.border.default}\`,
-    borderRadius: "4px",
+    padding: semanticSpacing.buttonPaddingMedium,
+    border: componentBorders.button.outline,
+    borderRadius: borderRadius.sm,
     backgroundColor: colors.background.white,
     cursor: "pointer"
   }}

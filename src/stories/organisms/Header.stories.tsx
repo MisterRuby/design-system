@@ -2,7 +2,7 @@ import { within, userEvent } from "@storybook/testing-library";
 import { Button } from "../../components/atomic/Button";
 import { Text } from "../../components/atomic/Text";
 import { Header } from "../../components/organisms/Header";
-import { colors, fontWeight } from "../../theme";
+import { borderRadius, colors, fontWeight, spacing } from "../../theme";
 import { action } from "../actions";
 import { Step } from "../types";
 
@@ -103,7 +103,7 @@ export const WithActions = {
   args: {
     title: "Dashboard",
     actions: (
-      <div style={{ display: "flex", gap: "8px" }}>
+      <div style={{ display: "flex", gap: spacing.xs }}>
         <Button
           variant="outline"
           size="small"
@@ -149,10 +149,10 @@ export const CompleteHeader = {
     logo: (
       <div
         style={{
-          width: "32px",
-          height: "32px",
+          width: spacing["2xl"],
+          height: spacing["2xl"],
           backgroundColor: colors.semantic.primary,
-          borderRadius: "6px",
+          borderRadius: borderRadius.md,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -176,7 +176,7 @@ export const CompleteHeader = {
       { label: "리소스", disabled: true },
     ],
     actions: (
-      <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+      <div style={{ display: "flex", gap: spacing.sm, alignItems: "center" }}>
         <Text variant="body1" style={{ margin: 0 }}>
           사용자님
         </Text>
@@ -277,7 +277,7 @@ export const StickyHeader = {
 
 export const HeightVariations = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: spacing.md }}>
       <Header
         title="Small Header"
         height="small"
@@ -309,7 +309,7 @@ export const HeightVariations = {
 
 export const VariantComparison = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: spacing.md }}>
       <Header
         title="Default Header"
         variant="default"
