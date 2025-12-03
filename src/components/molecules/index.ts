@@ -10,6 +10,8 @@ export { default as MarkdownEditor } from "./MarkdownEditor";
 export type { MarkdownEditorProps } from "./MarkdownEditor";
 export { Popup } from "./Popup";
 export type { PopupProps, PopupAction } from "./Popup";
+export { TreeView } from "./TreeView";
+export type { TreeViewProps, TreeNode } from "./TreeView";
 
 // Legacy exports for backward compatibility
 export { InputField as Input } from "./InputField";

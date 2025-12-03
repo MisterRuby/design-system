@@ -42,6 +42,9 @@ export type IconName =
   | 'message-circle'
   | 'help-circle'
   | 'chevron-right'
+  | 'chevron-left'
+  | 'chevron-down'
+  | 'chevron-up'
   | 'briefcase'
   | 'bar-chart';
 
@@ -96,6 +99,9 @@ const iconPaths: Record<IconName, string> = {
   'message-circle': 'M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z',
   'help-circle': 'M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3 M12 17h.01',
   'chevron-right': 'M9 18l6-6-6-6',
+  'chevron-left': 'M15 18l-6-6 6-6',
+  'chevron-down': 'M6 9l6 6 6-6',
+  'chevron-up': 'M18 15l-6-6-6 6',
   briefcase: 'M16 20V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v16 M8 7v13a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2H10a2 2 0 00-2 2z',
   'bar-chart': 'M12 20V10 M18 20V4 M6 20v-4',
 };
