@@ -1,0 +1,105 @@
+.tableWrapper {
+  width: 100%;
+  color: var(--table-text-color);
+}
+
+.tableContainer {
+  width: 100%;
+  overflow: auto;
+  background-color: #ffffff;
+}
+
+.bordered {
+  border: 1px solid var(--table-border-color);
+  border-radius: var(--table-radius);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 520px;
+}
+
+.headerCell {
+  padding: 0;
+  background-color: var(--table-header-bg);
+  color: var(--table-text-color);
+  border-bottom: 1px solid var(--table-border-color);
+  font-weight: 600;
+}
+
+.headerLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--table-padding-y) var(--table-padding-x);
+}
+
+.sortButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: var(--table-padding-y) var(--table-padding-x);
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sortIcon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--table-muted-color);
+}
+
+.sortActive {
+  color: var(--table-text-color);
+}
+
+.row {
+  transition: background-color 0.12s ease;
+}
+
+.striped {
+  background-color: var(--table-striped-bg);
+}
+
+.hoverable:hover {
+  background-color: var(--table-hover-bg);
+}
+
+.selected {
+  background-color: var(--table-selected-bg);
+}
+
+.selected.striped {
+  background-color: var(--table-selected-bg);
+}
+
+.selected.hoverable:hover,
+.selected:hover {
+  background-color: var(--table-selected-bg);
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.cell {
+  padding: var(--table-padding-y) var(--table-padding-x);
+  border-bottom: 1px solid var(--table-border-color);
+  color: var(--table-text-color);
+}
+
+.row:last-child .cell {
+  border-bottom: none;
+}
+
+.emptyCell {
+  padding: calc(var(--table-padding-y) * 2) var(--table-padding-x);
+  text-align: center;
+  color: var(--table-muted-color);
+}

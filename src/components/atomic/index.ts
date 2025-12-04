@@ -36,3 +36,5 @@ export { Alert } from './Alert';
 export type { AlertProps } from './Alert';
 export { Skeleton } from './Skeleton';
 export type { SkeletonProps } from './Skeleton';
+export { Table } from './Table';
+export type { TableProps, TableColumn } from './Table';
