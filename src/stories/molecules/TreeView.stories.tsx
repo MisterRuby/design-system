@@ -79,6 +79,7 @@ export const Default = {
     data: basicTreeData,
     onNodeClick: action('node-click'),
     onNodeExpand: action('node-expand'),
+    expandedNodes: ['root'],
   },
   play: async ({ canvasElement, step }: { canvasElement: HTMLElement; step: Step }) => {
     const canvas = within(canvasElement);
@@ -88,9 +89,11 @@ export const Default = {
     });
 
     await step("폴더 확장 테스트", async () => {
-      const folderExpander = canvas.getAllByRole('button')[0]; // 첫 번째 확장 버튼
-      if (folderExpander) {
-        await userEvent.click(folderExpander);
+      const rootLabel = canvas.getByText('Root');
+      const container = rootLabel.closest('div');
+      const expander = container?.querySelector('button');
+      if (expander) {
+        await userEvent.click(expander);
         await new Promise(resolve => setTimeout(resolve, 800));
       }
     });

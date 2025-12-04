@@ -1,5 +1,5 @@
 import React from "react";
-import { colors, fontSize } from "../../tokens";
+import styled from "styled-components";
 
 export interface ErrorMessageProps {
   children: React.ReactNode;
@@ -8,6 +8,14 @@ export interface ErrorMessageProps {
   style?: React.CSSProperties;
   'data-testid'?: string;
 }
+
+const StyledErrorMessage = styled.span`
+  font-size: ${props => props.theme.fontSize.xs};
+  color: ${props => props.theme.colors.semantic.error};
+  margin-top: ${props => props.theme.spacing.xxs};
+  display: block;
+  font-family: inherit;
+`;
 
 export const ErrorMessage: React.FC<ErrorMessageProps> = ({
   children,
@@ -18,19 +26,12 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
 }) => {
   if (!show) return null;
   return (
-    <span
+    <StyledErrorMessage
       className={className}
       data-testid={testId}
-      style={{
-        fontSize: fontSize.xs,
-        color: colors.semantic.error,
-        marginTop: "2px",
-        display: "block",
-        fontFamily: "inherit",
-        ...style,
-      }}
+      style={style}
     >
       {children}
-    </span>
+    </StyledErrorMessage>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from '../atomic/Text';
-import { colors, componentBorders, fontWeight, spacing } from '../../tokens';
+import { useTheme } from 'styled-components';
 
 export interface HeaderProps {
   logo?: React.ReactNode;
@@ -33,6 +33,7 @@ export const Header: React.FC<HeaderProps> = ({
   className = '',
   style = {},
 }) => {
+  const theme = useTheme();
   const getVariantStyles = () => {
     switch (variant) {
       case 'transparent':
@@ -43,16 +44,16 @@ export const Header: React.FC<HeaderProps> = ({
         };
       case 'elevated':
         return {
-          backgroundColor: colors.background.white,
-          border: componentBorders.card.hover,
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+          backgroundColor: theme.colors.background.white,
+          border: theme.componentBorders.card.hover,
+          boxShadow: theme.shadows.md,
         };
       case 'default':
       default:
         return {
-          backgroundColor: colors.background.white,
-          border: componentBorders.card.default,
-          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+          backgroundColor: theme.colors.background.white,
+          border: theme.componentBorders.card.default,
+          boxShadow: theme.semanticShadows.header,
         };
     }
   };
@@ -61,19 +62,19 @@ export const Header: React.FC<HeaderProps> = ({
     switch (height) {
       case 'small':
         return {
-          padding: `${spacing.xs} ${spacing.md}`,
-          minHeight: '40px',
+          padding: `${theme.spacing.xs} ${theme.spacing.md}`,
+          minHeight: theme.component.heights.md,
         };
       case 'large':
         return {
-          padding: `${spacing.md} ${spacing.xl}`,
-          minHeight: '64px',
+          padding: `${theme.spacing.md} ${theme.spacing.xl}`,
+          minHeight: theme.layout.headerHeight,
         };
       case 'medium':
       default:
         return {
-          padding: `${spacing.sm} ${spacing.lg}`,
-          minHeight: '52px',
+          padding: `${theme.spacing.sm} ${theme.spacing.lg}`,
+          minHeight: `calc(${theme.component.heights.lg} + ${theme.spacing.xxs})`,
         };
     }
   };
@@ -89,7 +90,7 @@ export const Header: React.FC<HeaderProps> = ({
     boxSizing: 'border-box',
     position: sticky ? 'sticky' : 'static',
     top: sticky ? 0 : 'auto',
-    zIndex: sticky ? 1000 : 'auto',
+    zIndex: sticky ? theme.zIndex.sticky : 'auto',
     ...variantStyles,
     ...heightStyles,
     ...style,
@@ -98,14 +99,14 @@ export const Header: React.FC<HeaderProps> = ({
   const logoSectionStyles: React.CSSProperties = {
     display: 'flex',
     alignItems: 'center',
-    gap: spacing.md,
+    gap: theme.spacing.md,
     flex: '0 0 auto',
   };
 
   const navigationStyles: React.CSSProperties = {
     display: 'flex',
     alignItems: 'center',
-    gap: spacing.md,
+    gap: theme.spacing.md,
     flex: '1',
     justifyContent: 'center',
   };
@@ -113,19 +114,19 @@ export const Header: React.FC<HeaderProps> = ({
   const actionsStyles: React.CSSProperties = {
     display: 'flex',
     alignItems: 'center',
-    gap: spacing.sm,
+    gap: theme.spacing.sm,
     flex: '0 0 auto',
   };
 
   const navigationItemStyles = (item: NavigationItem): React.CSSProperties => ({
-    color: item.active ? colors.semantic.primary : colors.semantic.text,
+    color: item.active ? theme.colors.semantic.primary : theme.colors.semantic.text,
     textDecoration: 'none',
-    fontWeight: item.active ? fontWeight.semibold : fontWeight.normal,
+    fontWeight: item.active ? theme.fontWeight.semibold : theme.fontWeight.normal,
     cursor: item.disabled ? 'not-allowed' : 'pointer',
     opacity: item.disabled ? 0.5 : 1,
-    padding: `${spacing.xxs} ${spacing.xs}`,
-    borderRadius: spacing.xxs,
-    transition: 'all 0.2s ease-in-out',
+    padding: `${theme.spacing.xxs} ${theme.spacing.xs}`,
+    borderRadius: theme.borderRadius.sm,
+    transition: theme.transitions.normal,
   });
 
   const handleNavigationClick = (item: NavigationItem) => {
@@ -161,7 +162,7 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => handleNavigationClick(item)}
               onMouseEnter={(e) => {
                 if (!item.disabled) {
-                  e.currentTarget.style.backgroundColor = colors.background.gray;
+                  e.currentTarget.style.backgroundColor = theme.colors.background.gray;
                 }
               }}
               onMouseLeave={(e) => {

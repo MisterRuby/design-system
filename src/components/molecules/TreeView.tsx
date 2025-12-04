@@ -2,13 +2,7 @@ import React, { useState, useCallback } from "react";
 import { Icon, IconName } from "../atomic/Icon";
 import { BaseCheckbox } from "../atomic/BaseCheckbox";
 import { Text } from "../atomic/Text";
-import {
-  borderRadius,
-  colors,
-  spacing,
-  fontSize,
-  transitions,
-} from "../../tokens";
+import { useTheme } from "styled-components";
 
 export interface TreeNode {
   id: string;
@@ -60,6 +54,7 @@ const TreeNodeItem: React.FC<TreeNodeItemProps> = ({
   onNodeExpand,
   onNodeCheck,
 }) => {
+  const theme = useTheme();
   const hasChildren = node.children && node.children.length > 0;
 
   const handleExpandClick = (e: React.MouseEvent) => {
@@ -85,11 +80,11 @@ const TreeNodeItem: React.FC<TreeNodeItemProps> = ({
   const nodeStyles: React.CSSProperties = {
     display: "flex",
     alignItems: "center",
-    padding: `${spacing.xs} ${spacing.sm}`,
+    padding: `${theme.spacing.xs} ${theme.spacing.sm}`,
     cursor: node.disabled ? "not-allowed" : "pointer",
-    backgroundColor: isSelected ? colors.primary[50] : "transparent",
-    borderRadius: borderRadius.sm,
-    transition: transitions.normal,
+    backgroundColor: isSelected ? theme.colors.primary[50] : "transparent",
+    borderRadius: theme.borderRadius.sm,
+    transition: theme.transitions.normal,
     opacity: node.disabled ? 0.6 : 1,
   };
 
@@ -99,7 +94,7 @@ const TreeNodeItem: React.FC<TreeNodeItemProps> = ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    marginRight: spacing.xs,
+    marginRight: theme.spacing.xs,
     cursor: hasChildren ? "pointer" : "default",
     visibility: hasChildren ? "visible" : "hidden",
   };
@@ -107,7 +102,7 @@ const TreeNodeItem: React.FC<TreeNodeItemProps> = ({
   const checkboxStyles: React.CSSProperties = {
     display: "flex",
     alignItems: "center",
-    marginRight: spacing.xs,
+    marginRight: theme.spacing.xs,
   };
 
   return (
@@ -117,7 +112,7 @@ const TreeNodeItem: React.FC<TreeNodeItemProps> = ({
         onClick={handleNodeClick}
         onMouseEnter={(e) => {
           if (!node.disabled && !isSelected) {
-            e.currentTarget.style.backgroundColor = colors.gray[50];
+            e.currentTarget.style.backgroundColor = theme.colors.gray[50];
           }
         }}
         onMouseLeave={(e) => {
@@ -134,7 +129,7 @@ const TreeNodeItem: React.FC<TreeNodeItemProps> = ({
             <Icon
               name={isExpanded ? "chevron-down" : "chevron-right"}
               size={12}
-              color={colors.text.muted}
+              color={theme.colors.text.muted}
             />
           )}
         </div>
@@ -158,8 +153,8 @@ const TreeNodeItem: React.FC<TreeNodeItemProps> = ({
           <Icon
             name={node.icon}
             size={16}
-            color={isSelected ? colors.semantic.primary : colors.text.primary}
-            style={{ marginRight: spacing.xs }}
+            color={isSelected ? theme.colors.semantic.primary : theme.colors.text.primary}
+            style={{ marginRight: theme.spacing.xs }}
           />
         )}
 
@@ -172,7 +167,7 @@ const TreeNodeItem: React.FC<TreeNodeItemProps> = ({
             flex: 1,
             userSelect: "none",
             cursor: "inherit",
-            transition: transitions.normal,
+            transition: theme.transitions.normal,
           }}>
           {node.label}
         </Text>
@@ -196,6 +191,7 @@ export const TreeView: React.FC<TreeViewProps> = ({
   className = "",
   style = {},
 }) => {
+  const theme = useTheme();
   const [internalExpandedNodes, setInternalExpandedNodes] =
     useState<string[]>(expandedNodes);
 
@@ -323,8 +319,8 @@ export const TreeView: React.FC<TreeViewProps> = ({
 
   const containerStyles: React.CSSProperties = {
     fontFamily: "inherit",
-    fontSize: fontSize.sm,
-    color: colors.text.primary,
+    fontSize: theme.fontSize.sm,
+    color: theme.colors.text.primary,
     ...style,
   };
 

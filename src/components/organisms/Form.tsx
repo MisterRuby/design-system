@@ -4,7 +4,7 @@ import { InputField, InputFieldProps } from '../molecules/InputField';
 import { CheckboxField, CheckboxFieldProps } from '../molecules/CheckboxField';
 import { SelectField, SelectFieldProps } from '../molecules/SelectField';
 import { RadioGroup, RadioGroupProps } from '../molecules/RadioGroup';
-import { borderRadius, colors, componentBorders, fontSize, fontWeight, spacing, semanticSpacing } from '../../tokens';
+import { useTheme } from 'styled-components';
 
 export interface FormField {
   id: string;
@@ -54,19 +54,20 @@ export const Form: React.FC<FormProps> = ({
   fieldSpacing = 'medium',
   showRequiredIndicator = true,
 }) => {
+  const theme = useTheme();
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const getFieldSpacing = () => {
     switch (fieldSpacing) {
       case 'small':
-        return spacing.sm;
+        return theme.spacing.sm;
       case 'medium':
-        return spacing.md;
+        return theme.spacing.md;
       case 'large':
-        return spacing.xl;
+        return theme.spacing.xl;
       default:
-        return spacing.md;
+        return theme.spacing.md;
     }
   };
 
@@ -213,22 +214,22 @@ export const Form: React.FC<FormProps> = ({
         display: 'flex',
         flexDirection: 'column',
         gap: getFieldSpacing(),
-        padding: semanticSpacing.componentPaddingLarge,
-        backgroundColor: colors.background.white,
-        borderRadius: borderRadius.md,
-        border: componentBorders.card.default,
+        padding: theme.semanticSpacing.componentPaddingLarge,
+        backgroundColor: theme.colors.background.white,
+        borderRadius: theme.borderRadius.md,
+        border: theme.componentBorders.card.default,
         ...style,
       }}
     >
       {(title || description) && (
-        <div style={{ marginBottom: spacing.xs }}>
+        <div style={{ marginBottom: theme.spacing.xs }}>
           {title && (
             <h2
               style={{
-                margin: `0 0 ${spacing.xs} 0`,
-                fontSize: fontSize['2xl'],
-                fontWeight: fontWeight.semibold,
-                color: colors.semantic.text,
+                margin: `0 0 ${theme.spacing.xs} 0`,
+                fontSize: theme.fontSize['2xl'],
+                fontWeight: theme.fontWeight.semibold,
+                color: theme.colors.semantic.text,
               }}
             >
               {title}
@@ -238,8 +239,8 @@ export const Form: React.FC<FormProps> = ({
             <p
               style={{
                 margin: 0,
-                fontSize: fontSize.sm,
-                color: colors.semantic.secondary,
+                fontSize: theme.fontSize.sm,
+                color: theme.colors.semantic.secondary,
                 lineHeight: '1.5',
               }}
             >
@@ -252,12 +253,12 @@ export const Form: React.FC<FormProps> = ({
       {showRequiredIndicator && fields.some((field) => field.required) && (
         <p
           style={{
-            margin: `0 0 ${spacing.xs} 0`,
-            fontSize: fontSize.xs,
-            color: colors.semantic.secondary,
+            margin: `0 0 ${theme.spacing.xs} 0`,
+            fontSize: theme.fontSize.xs,
+            color: theme.colors.semantic.secondary,
           }}
         >
-          <span style={{ color: colors.semantic.error }}>*</span> 표시는 필수 항목입니다.
+          <span style={{ color: theme.colors.semantic.error }}>*</span> 표시는 필수 항목입니다.
         </p>
       )}
 
@@ -285,8 +286,8 @@ export const Form: React.FC<FormProps> = ({
       <div
         style={{
           display: 'flex',
-          gap: spacing.sm,
-          marginTop: spacing.xs,
+          gap: theme.spacing.sm,
+          marginTop: theme.spacing.xs,
           justifyContent: 'flex-end',
         }}
       >

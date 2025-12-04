@@ -1,5 +1,5 @@
-import { colors, componentBorders, semanticBorders, borderWidth } from "../../tokens";
 import { InputVariant } from "../../types";
+import { Theme } from "../../theme";
 
 type InputBorderStyles = {
   border: string;
@@ -7,49 +7,49 @@ type InputBorderStyles = {
   focusBoxShadow: string;
 };
 
-export const getInputBorderStyles = (variant: InputVariant): InputBorderStyles => {
+export const getInputBorderStyles = (variant: InputVariant, theme: Theme): InputBorderStyles => {
   const baseStyles: InputBorderStyles = {
-    border: componentBorders.input.default,
-    focusBorder: componentBorders.input.focus,
-    focusBoxShadow: colors.focusRing.primary,
+    border: theme.componentBorders.input.default,
+    focusBorder: theme.componentBorders.input.focus,
+    focusBoxShadow: theme.colors.focusRing.primary,
   };
 
   switch (variant) {
     case "primary":
       return {
-        border: `${borderWidth[2]} solid ${colors.border.primary}`,
-        focusBorder: componentBorders.input.focus,
-        focusBoxShadow: colors.focusRing.primary,
+        border: `${theme.borderWidth[2]} solid ${theme.colors.border.primary}`,
+        focusBorder: theme.componentBorders.input.focus,
+        focusBoxShadow: theme.colors.focusRing.primary,
       };
     case "secondary":
       return {
-        border: `${borderWidth[2]} solid ${colors.border.secondary}`,
-        focusBorder: `${borderWidth[2]} solid ${colors.border.focus.secondary}`,
-        focusBoxShadow: colors.focusRing.secondary,
+        border: `${theme.borderWidth[2]} solid ${theme.colors.border.secondary}`,
+        focusBorder: `${theme.borderWidth[2]} solid ${theme.colors.border.secondary}`,
+        focusBoxShadow: theme.colors.focusRing.secondary,
       };
     case "success":
       return {
-        border: semanticBorders.success,
-        focusBorder: `${borderWidth[2]} solid ${colors.border.focus.success}`,
-        focusBoxShadow: colors.focusRing.success,
+        border: theme.semanticBorders.success,
+        focusBorder: `${theme.borderWidth[2]} solid ${theme.colors.border.success}`,
+        focusBoxShadow: theme.colors.focusRing.success,
       };
     case "error":
       return {
-        border: componentBorders.input.error,
-        focusBorder: `${borderWidth[2]} solid ${colors.border.focus.error}`,
-        focusBoxShadow: colors.focusRing.error,
+        border: theme.componentBorders.input.error,
+        focusBorder: `${theme.borderWidth[2]} solid ${theme.colors.border.error}`,
+        focusBoxShadow: theme.colors.focusRing.error,
       };
     case "warning":
       return {
-        border: semanticBorders.warning,
-        focusBorder: `${borderWidth[2]} solid ${colors.border.focus.warning}`,
-        focusBoxShadow: colors.focusRing.warning,
+        border: theme.semanticBorders.warning,
+        focusBorder: `${theme.borderWidth[2]} solid ${theme.colors.border.warning}`,
+        focusBoxShadow: theme.colors.focusRing.warning,
       };
     case "info":
       return {
-        border: semanticBorders.info,
-        focusBorder: `${borderWidth[2]} solid ${colors.border.focus.info}`,
-        focusBoxShadow: colors.focusRing.info,
+        border: theme.semanticBorders.info,
+        focusBorder: `${theme.borderWidth[2]} solid ${theme.colors.border.info}`,
+        focusBoxShadow: theme.colors.focusRing.info,
       };
     default:
       return baseStyles;

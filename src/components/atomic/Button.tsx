@@ -1,8 +1,7 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Icon, IconName } from './Icon';
-import { borderRadius, borderWidth, colors, fontSize, transitions, opacity } from '../../tokens';
 import { ButtonVariant, ComponentSize } from '../../types';
-
 
 export interface ButtonProps {
   children: React.ReactNode;
@@ -17,6 +16,62 @@ export interface ButtonProps {
   className?: string;
 }
 
+interface StyledButtonProps {
+  $variant: ButtonVariant;
+  $size: ComponentSize;
+  $hasIcon: boolean;
+  $iconPosition: 'left' | 'right';
+}
+
+
+const getBackgroundColor = (variant: ButtonVariant, theme: any) => {
+  if (variant === 'outline') return 'transparent';
+  return theme.colors.semantic[variant] || theme.colors.semantic.primary;
+};
+
+const getTextColor = (variant: ButtonVariant, theme: any) => {
+  if (variant === 'outline') return theme.colors.semantic.primary;
+  return theme.colors.background.white;
+};
+
+const getBorderColor = (variant: ButtonVariant, theme: any) => {
+  if (variant === 'outline') return theme.colors.semantic.primary;
+  return getBackgroundColor(variant, theme);
+};
+
+const StyledButton = styled.button<StyledButtonProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: ${props => props.$hasIcon ? props.theme.component.button.size[props.$size].gap : '0'};
+  flex-direction: ${props => props.$iconPosition === 'right' ? 'row-reverse' : 'row'};
+  background-color: ${props => getBackgroundColor(props.$variant, props.theme)};
+  color: ${props => getTextColor(props.$variant, props.theme)};
+  padding: ${props => props.theme.component.button.size[props.$size].padding};
+  font-size: ${props => props.theme.component.button.size[props.$size].fontSize};
+  border: ${props => props.$variant === 'outline'
+    ? `${props.theme.borderWidth[1]} solid ${getBorderColor(props.$variant, props.theme)}`
+    : props.theme.borderWidth[0]};
+  border-radius: ${props => props.theme.borderRadius.sm};
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+  opacity: ${props => props.disabled ? props.theme.opacity.disabled : props.theme.opacity.visible};
+  font-family: inherit;
+  transition: ${props => props.theme.transitions.normal};
+
+  &:hover:not(:disabled) {
+    opacity: ${props => props.theme.opacity.hover};
+  }
+`;
+
+const getIconSize = (size: ComponentSize): string => {
+  const sizeMap: Record<ComponentSize, string> = {
+    small: '14px',
+    medium: '16px',
+    large: '20px',
+  };
+  return sizeMap[size];
+};
+
 export const Button: React.FC<ButtonProps> = ({
   children,
   variant = 'primary',
@@ -29,140 +84,26 @@ export const Button: React.FC<ButtonProps> = ({
   style = {},
   className = ''
 }) => {
-  const getVariantStyles = (variant: string) => {
-    if (variant === 'outline') {
-      return {
-        backgroundColor: 'transparent',
-        color: colors.semantic.primary,
-        borderColor: colors.semantic.primary
-      };
-    }
-
-    switch (variant) {
-      case 'primary':
-        return {
-          backgroundColor: colors.semantic.primary,
-          color: colors.background.white,
-          borderColor: colors.semantic.primary
-        };
-      case 'secondary':
-        return {
-          backgroundColor: colors.semantic.secondary,
-          color: colors.background.white,
-          borderColor: colors.semantic.secondary
-        };
-      case 'success':
-        return {
-          backgroundColor: colors.semantic.success,
-          color: colors.background.white,
-          borderColor: colors.semantic.success
-        };
-      case 'error':
-        return {
-          backgroundColor: colors.semantic.error,
-          color: colors.background.white,
-          borderColor: colors.semantic.error
-        };
-      case 'warning':
-        return {
-          backgroundColor: colors.semantic.warning,
-          color: colors.background.white,
-          borderColor: colors.semantic.warning
-        };
-      case 'info':
-        return {
-          backgroundColor: colors.semantic.info,
-          color: colors.background.white,
-          borderColor: colors.semantic.info
-        };
-      default:
-        return {
-          backgroundColor: colors.semantic.primary,
-          color: colors.background.white,
-          borderColor: colors.semantic.primary
-        };
-    }
-  };
-
-  const getSizeStyles = (size: string) => {
-    switch (size) {
-      case 'small':
-        return {
-          padding: '4px 8px',
-          fontSize: fontSize.xs,
-          iconSize: 14,
-          gap: '4px'
-        };
-      case 'medium':
-        return {
-          padding: '8px 16px',
-          fontSize: fontSize.sm,
-          iconSize: 16,
-          gap: '6px'
-        };
-      case 'large':
-        return {
-          padding: '12px 24px',
-          fontSize: fontSize.md,
-          iconSize: 20,
-          gap: '8px'
-        };
-      default:
-        return {
-          padding: '8px 16px',
-          fontSize: fontSize.sm,
-          iconSize: 16,
-          gap: '6px'
-        };
-    }
-  };
-
-  const sizeStyles = getSizeStyles(size);
-  const variantStyles = getVariantStyles(variant);
-
   return (
-    <button
+    <StyledButton
       type={type}
       onClick={onClick}
       disabled={disabled}
       className={className}
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: icon ? sizeStyles.gap : '0',
-        flexDirection: iconPosition === 'right' ? 'row-reverse' : 'row',
-        backgroundColor: variantStyles.backgroundColor,
-        color: variantStyles.color,
-        padding: sizeStyles.padding,
-        fontSize: sizeStyles.fontSize,
-        border: variant === 'outline' ? `${borderWidth[1]} solid ${variantStyles.borderColor}` : 'none',
-        borderRadius: borderRadius.sm,
-        cursor: disabled ? 'not-allowed' : 'pointer',
-        opacity: disabled ? opacity.disabled : opacity.visible,
-        fontFamily: 'inherit',
-        transition: transitions.normal,
-        ...style,
-      }}
-      onMouseEnter={(e) => {
-        if (!disabled) {
-          e.currentTarget.style.opacity = opacity.hover.toString();
-        }
-      }}
-      onMouseLeave={(e) => {
-        if (!disabled) {
-          e.currentTarget.style.opacity = opacity.visible.toString();
-        }
-      }}
+      style={style}
+      $variant={variant}
+      $size={size}
+      $hasIcon={!!icon}
+      $iconPosition={iconPosition}
     >
       {icon && (
         <Icon
           name={icon}
-          size={sizeStyles.iconSize}
+          size={getIconSize(size)}
           color="currentColor"
         />
       )}
       {children}
-    </button>
+    </StyledButton>
   );
 };

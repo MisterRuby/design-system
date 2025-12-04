@@ -680,7 +680,8 @@ export const Default = {
   play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
     const canvas = within(canvasElement);
 
-    const dashboardItem = canvas.getByText('대시보드');
+    const [headerNav] = canvas.getAllByRole('navigation');
+    const dashboardItem = within(headerNav).getByText('대시보드');
     if (dashboardItem) {
       await userEvent.hover(dashboardItem);
     }
@@ -709,7 +710,7 @@ export const FixedHeader = {
   play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
     const canvas = within(canvasElement);
 
-    const content = canvas.getByText('대시보드');
+    const content = canvas.getByRole('heading', { name: '대시보드', level: 1 });
     if (content) {
       content.scrollIntoView({ behavior: 'smooth' });
     }
@@ -742,7 +743,8 @@ export const FloatingSidebar = {
   play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
     const canvas = within(canvasElement);
 
-    const scheduleItem = canvas.getByText('일정 관리');
+    const [headerNav] = canvas.getAllByRole('navigation');
+    const scheduleItem = within(headerNav).getByText('일정 관리');
     if (scheduleItem) {
       await userEvent.click(scheduleItem);
     }

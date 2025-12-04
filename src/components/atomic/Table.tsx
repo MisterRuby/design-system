@@ -1,6 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-import { spacing, borderRadius, colors, fontWeight } from '../../tokens';
+import styled, { useTheme } from 'styled-components';
 import { Icon } from './Icon';
 
 type TableAlign = 'left' | 'center' | 'right';
@@ -73,21 +72,25 @@ export const Table = <T extends Record<string, unknown>>({
   style = {},
   'aria-label': ariaLabel,
 }: TableProps<T>) => {
+  const theme = useTheme();
   const [sortState, setSortState] = React.useState<{ key: string; order: SortOrder } | null>(null);
   const [internalSelectedKey, setInternalSelectedKey] = React.useState<React.Key | null>(null);
   const isControlledSelection = selectedRowKey !== undefined;
   const currentSelectedKey = isControlledSelection ? selectedRowKey : internalSelectedKey;
 
-  const paddingY = density === 'compact' ? spacing.xs : spacing.sm;
-  const paddingX = density === 'compact' ? spacing.sm : spacing.md;
+  const paddingY = density === 'compact' ? theme.spacing.xs : theme.spacing.sm;
+  const paddingX = density === 'compact' ? theme.spacing.sm : theme.spacing.md;
 
   const getRowKey = React.useCallback(
-    (record: T, index: number) => {
+    (record: T, index: number): React.Key => {
       if (typeof rowKey === 'function') {
         return rowKey(record);
       }
       if (rowKey) {
-        return (record as Record<string, unknown>)[rowKey as string] ?? index;
+        const value = (record as Record<string, React.Key | null | undefined>)[rowKey as string];
+        if (value !== undefined && value !== null) {
+          return value;
+        }
       }
       return index;
     },
@@ -196,7 +199,7 @@ export const Table = <T extends Record<string, unknown>>({
           </thead>
           <tbody>
             {sortedData.length === 0 ? (
-              <BodyRow>
+              <BodyRow $hoverable={false} $isStriped={false} $selected={false}>
                 <EmptyCell colSpan={columns.length || 1} $paddingY={paddingY} $paddingX={paddingX}>
                   {emptyMessage}
                 </EmptyCell>
@@ -226,9 +229,9 @@ export const Table = <T extends Record<string, unknown>>({
                       const value = column.dataIndex
                         ? (row as Record<string, unknown>)[column.dataIndex as string]
                         : undefined;
-                      const content = column.render
+                      const content: React.ReactNode = column.render
                         ? column.render(value, row, rowIndex)
-                        : value;
+                        : (value as React.ReactNode);
 
                       return (
                         <BodyCell
@@ -254,15 +257,15 @@ export const Table = <T extends Record<string, unknown>>({
 
 const TableWrapper = styled.div`
   width: 100%;
-  color: ${colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
 `;
 
 const TableContainer = styled.div<{ $bordered: boolean }>`
   width: 100%;
   overflow: auto;
-  background-color: ${colors.background.white};
-  border: ${({ $bordered }) => ($bordered ? `1px solid ${colors.border.default}` : 'none')};
-  border-radius: ${borderRadius.md};
+  background-color: ${({ theme }) => theme.colors.background.white};
+  border: ${({ $bordered, theme }) => ($bordered ? `${theme.borderWidth[1]} solid ${theme.colors.border.default}` : 'none')};
+  border-radius: ${({ theme }) => theme.borderRadius.md};
 `;
 
 const StyledTable = styled.table`
@@ -273,23 +276,23 @@ const StyledTable = styled.table`
 
 const HeaderCell = styled.th`
   padding: 0;
-  background-color: ${colors.background.gray};
-  color: ${colors.text.primary};
-  border-bottom: 1px solid ${colors.border.default};
-  font-weight: ${fontWeight.semibold};
+  background-color: ${({ theme }) => theme.colors.background.gray};
+  color: ${({ theme }) => theme.colors.text.primary};
+  border-bottom: ${({ theme }) => `${theme.borderWidth[1]} solid ${theme.colors.border.default}`};
+  font-weight: ${({ theme }) => theme.fontWeight.semibold};
 `;
 
 const HeaderLabel = styled.div<{ $paddingY: string; $paddingX: string }>`
   display: flex;
   align-items: center;
-  gap: ${spacing.xs};
+  gap: ${({ theme }) => theme.spacing.xs};
   padding: ${({ $paddingY, $paddingX }) => `${$paddingY} ${$paddingX}`};
 `;
 
 const SortButton = styled.button`
   display: flex;
   align-items: center;
-  gap: ${spacing.xs};
+  gap: ${({ theme }) => theme.spacing.xs};
   width: 100%;
   padding: 0;
   background: none;
@@ -303,18 +306,18 @@ const SortButton = styled.button`
 const SortIcon = styled.span<{ $active: boolean }>`
   display: inline-flex;
   align-items: center;
-  color: ${({ $active }) => ($active ? colors.text.primary : colors.text.secondary)};
+  color: ${({ $active, theme }) => ($active ? theme.colors.text.primary : theme.colors.text.secondary)};
 `;
 
 const BodyRow = styled.tr<{ $hoverable: boolean; $isStriped: boolean; $selected: boolean }>`
   transition: background-color 0.12s ease;
-  background-color: ${({ $selected, $isStriped }) =>
-    $selected ? colors.primary[50] : $isStriped ? colors.background.gray50 : 'transparent'};
+  background-color: ${({ $selected, $isStriped, theme }) =>
+    $selected ? theme.colors.primary[50] : $isStriped ? theme.colors.background.gray50 : 'transparent'};
   cursor: ${({ $hoverable }) => ($hoverable ? 'pointer' : 'default')};
 
   &:hover {
-    background-color: ${({ $hoverable, $selected }) =>
-      $hoverable ? ($selected ? colors.primary[50] : colors.background.gray100) : undefined};
+    background-color: ${({ $hoverable, $selected, theme }) =>
+      $hoverable ? ($selected ? theme.colors.primary[50] : theme.colors.background.gray100) : undefined};
   }
 
   &:last-child td {
@@ -324,12 +327,12 @@ const BodyRow = styled.tr<{ $hoverable: boolean; $isStriped: boolean; $selected:
 
 const BodyCell = styled.td<{ $paddingY: string; $paddingX: string }>`
   padding: ${({ $paddingY, $paddingX }) => `${$paddingY} ${$paddingX}`};
-  border-bottom: 1px solid ${colors.border.default};
-  color: ${colors.text.primary};
+  border-bottom: ${({ theme }) => `${theme.borderWidth[1]} solid ${theme.colors.border.default}`};
+  color: ${({ theme }) => theme.colors.text.primary};
 `;
 
 const EmptyCell = styled.td<{ $paddingY: string; $paddingX: string }>`
   padding: ${({ $paddingY, $paddingX }) => `calc(${$paddingY} * 2) ${$paddingX}`};
   text-align: center;
-  color: ${colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
 `;

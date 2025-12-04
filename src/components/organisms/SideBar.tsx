@@ -1,17 +1,7 @@
 import React from 'react';
 import { Text } from '../atomic/Text';
 import { Icon, IconName } from '../atomic/Icon';
-import {
-  borderRadius,
-  colors,
-  componentBorders,
-  fontSize,
-  fontWeight,
-  layout,
-  semanticShadows,
-  spacing,
-  transitions,
-} from '../../tokens';
+import { useTheme } from 'styled-components';
 
 /**
  * 사이드바 메뉴 아이템 인터페이스
@@ -125,26 +115,27 @@ export const SideBar: React.FC<SideBarProps> = ({
   className = '',
   style = {},
 }) => {
+  const theme = useTheme();
   const [expandedItems, setExpandedItems] = React.useState<Set<string>>(new Set());
   const getWidthStyles = () => {
     if (collapsed) {
-      return { width: spacing['5xl'], minWidth: spacing['5xl'] };
+      return { width: theme.layout.sidebarCollapsedWidth, minWidth: theme.layout.sidebarCollapsedWidth };
     }
 
     switch (width) {
       case 'narrow':
         return {
-          width: `calc(${spacing['10xl']} + ${spacing.xs})`,
-          minWidth: `calc(${spacing['10xl']} + ${spacing.xs})`,
+          width: theme.layout.sidebarNarrowWidth,
+          minWidth: theme.layout.sidebarNarrowWidth,
         };
       case 'wide':
         return {
-          width: `calc(${spacing['12xl']} + ${spacing['5xl']})`,
-          minWidth: `calc(${spacing['12xl']} + ${spacing['5xl']})`,
+          width: theme.layout.sidebarWideWidth,
+          minWidth: theme.layout.sidebarWideWidth,
         };
       case 'medium':
       default:
-        return { width: layout.sidebarWidth, minWidth: layout.sidebarWidth };
+        return { width: theme.layout.sidebarWidth, minWidth: theme.layout.sidebarWidth };
     }
   };
 
@@ -152,25 +143,25 @@ export const SideBar: React.FC<SideBarProps> = ({
     switch (variant) {
       case 'compact':
         return {
-          backgroundColor: colors.gray[50],
-          border: `1px solid ${colors.border.default}`,
-          padding: spacing.xs,
+          backgroundColor: theme.colors.gray[50],
+          border: `${theme.borderWidth[1]} solid ${theme.colors.border.default}`,
+          padding: theme.spacing.xs,
         };
       case 'floating':
         return {
-          backgroundColor: colors.background.white,
-          border: componentBorders.card.default,
-          borderRadius: borderRadius.lg,
-          margin: spacing.md,
-          boxShadow: semanticShadows.sidebar,
-          padding: spacing.md,
+          backgroundColor: theme.colors.background.white,
+          border: theme.componentBorders.card.default,
+          borderRadius: theme.borderRadius.lg,
+          margin: theme.spacing.md,
+          boxShadow: theme.semanticShadows.sidebar,
+          padding: theme.spacing.md,
         };
       case 'default':
       default:
         return {
-          backgroundColor: colors.background.white,
-          borderRight: `1px solid ${colors.border.default}`,
-          padding: spacing.md,
+          backgroundColor: theme.colors.background.white,
+          borderRight: `${theme.borderWidth[1]} solid ${theme.colors.border.default}`,
+          padding: theme.spacing.md,
         };
     }
   };
@@ -192,10 +183,10 @@ export const SideBar: React.FC<SideBarProps> = ({
   const headerStyles: React.CSSProperties = {
     display: 'flex',
     alignItems: 'center',
-    gap: spacing.sm,
-    marginBottom: spacing.lg,
-    padding: collapsed ? spacing.xs : spacing.sm,
-    borderRadius: borderRadius.sm,
+    gap: theme.spacing.sm,
+    marginBottom: theme.spacing.lg,
+    padding: collapsed ? theme.spacing.xs : theme.spacing.sm,
+    borderRadius: theme.borderRadius.sm,
     justifyContent: collapsed ? 'center' : 'space-between',
   };
 
@@ -207,24 +198,24 @@ export const SideBar: React.FC<SideBarProps> = ({
 
   const footerStyles: React.CSSProperties = {
     marginTop: 'auto',
-    paddingTop: spacing.md,
-    borderTop: `1px solid ${colors.border.default}`,
+    paddingTop: theme.spacing.md,
+    borderTop: `${theme.borderWidth[1]} solid ${theme.colors.border.default}`,
   };
 
   const collapseButtonStyles: React.CSSProperties = {
-    width: `calc(${spacing.lg} + ${spacing.xs})`,
-    height: `calc(${spacing.lg} + ${spacing.xs})`,
-    border: componentBorders.button.outline,
-    borderRadius: borderRadius.md,
-    backgroundColor: colors.background.white,
+    width: `calc(${theme.spacing.lg} + ${theme.spacing.xs})`,
+    height: `calc(${theme.spacing.lg} + ${theme.spacing.xs})`,
+    border: theme.componentBorders.button.outline,
+    borderRadius: theme.borderRadius.md,
+    backgroundColor: theme.colors.background.white,
     cursor: 'pointer',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: fontSize.xs,
-    color: colors.semantic.text,
-    transition: transitions.normal,
-    boxShadow: semanticShadows.buttonResting,
+    fontSize: theme.fontSize.xs,
+    color: theme.colors.semantic.text,
+    transition: theme.transitions.normal,
+    boxShadow: theme.semanticShadows.buttonResting,
   };
 
   const handleCollapseToggle = () => {
@@ -246,12 +237,12 @@ export const SideBar: React.FC<SideBarProps> = ({
   const getItemSpacingStyles = () => {
     switch (itemSpacing) {
       case 'compact':
-        return { marginBottom: spacing.xxs, padding: `${spacing.xxs} ${spacing.xs}` };
+        return { marginBottom: theme.spacing.xxs, padding: `${theme.spacing.xxs} ${theme.spacing.xs}` };
       case 'comfortable':
-        return { marginBottom: spacing.sm, padding: `${spacing.sm} ${spacing.md}` };
+        return { marginBottom: theme.spacing.sm, padding: `${theme.spacing.sm} ${theme.spacing.md}` };
       case 'normal':
       default:
-        return { marginBottom: spacing.xxs, padding: `${spacing.xs} ${spacing.sm}` };
+        return { marginBottom: theme.spacing.xxs, padding: `${theme.spacing.xs} ${theme.spacing.sm}` };
     }
   };
 
@@ -284,35 +275,35 @@ export const SideBar: React.FC<SideBarProps> = ({
     const itemStyles: React.CSSProperties = {
       display: 'flex',
       alignItems: 'center',
-      gap: collapsed ? spacing.none : spacing.sm,
-      padding: collapsed ? spacing.xs : spacingStyles.padding,
+      gap: collapsed ? theme.spacing.none : theme.spacing.sm,
+      padding: collapsed ? theme.spacing.xs : spacingStyles.padding,
       marginBottom: spacingStyles.marginBottom,
-      borderRadius: borderRadius.sm,
+      borderRadius: theme.borderRadius.sm,
       cursor: item.disabled ? 'not-allowed' : 'pointer',
       opacity: item.disabled ? 0.5 : 1,
-      backgroundColor: item.active ? colors.semantic.primary + '10' : 'transparent',
-      color: item.active ? colors.semantic.primary : colors.semantic.text,
-      transition: `all ${transitions.normal}`,
+      backgroundColor: item.active ? theme.colors.primary[50] : 'transparent',
+      color: item.active ? theme.colors.semantic.primary : theme.colors.semantic.text,
+      transition: theme.transitions.normal,
       position: 'relative',
-      marginLeft: level > 0 ? spacing.lg : spacing.none,
+      marginLeft: level > 0 ? theme.spacing.lg : theme.spacing.none,
       justifyContent: collapsed ? 'center' : 'flex-start',
       minHeight:
         itemSpacing === 'comfortable'
-          ? layout.minTouchTarget
+          ? theme.layout.minTouchTarget
           : itemSpacing === 'compact'
-          ? spacing['2xl']
-          : `calc(${spacing['2xl']} + ${spacing.xxs})`,
+          ? theme.spacing['2xl']
+          : `calc(${theme.spacing['2xl']} + ${theme.spacing.xxs})`,
     };
 
     const badgeStyles: React.CSSProperties = {
-      backgroundColor: colors.semantic.error,
-      color: colors.background.white,
-      fontSize: fontSize.xxs,
-      fontWeight: fontWeight.semibold,
-      padding: `calc(${spacing.xxs} / 2) calc(${spacing.sm} / 2)`,
-      borderRadius: `calc(${borderRadius.md} + ${spacing.xxs} / 2)`,
-      minWidth: spacing.md,
-      height: spacing.md,
+      backgroundColor: theme.colors.semantic.error,
+      color: theme.colors.background.white,
+      fontSize: theme.fontSize.xxs,
+      fontWeight: theme.fontWeight.semibold,
+      padding: `calc(${theme.spacing.xxs} / 2) calc(${theme.spacing.sm} / 2)`,
+      borderRadius: `calc(${theme.borderRadius.md} + ${theme.spacing.xxs} / 2)`,
+      minWidth: theme.spacing.md,
+      height: theme.spacing.md,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -341,7 +332,7 @@ export const SideBar: React.FC<SideBarProps> = ({
           onClick={handleItemClick}
           onMouseEnter={(e) => {
             if (!item.disabled && !item.active) {
-              e.currentTarget.style.backgroundColor = colors.background.gray;
+              e.currentTarget.style.backgroundColor = theme.colors.background.gray;
             }
           }}
           onMouseLeave={(e) => {
@@ -354,7 +345,7 @@ export const SideBar: React.FC<SideBarProps> = ({
             <Icon
               name={item.icon}
               size={16}
-              color={item.active ? colors.semantic.primary : colors.semantic.text}
+              color={item.active ? theme.colors.semantic.primary : theme.colors.semantic.text}
             />
           )}
           <div
@@ -362,7 +353,7 @@ export const SideBar: React.FC<SideBarProps> = ({
               display: 'flex',
               alignItems: 'center',
               flex: 1,
-              gap: spacing.xs,
+              gap: theme.spacing.xs,
               opacity: collapsed ? 0 : 1,
               transition: 'opacity 0.3s ease-in-out',
               overflow: 'hidden',
@@ -374,7 +365,7 @@ export const SideBar: React.FC<SideBarProps> = ({
               style={{
                 margin: 0,
                 color: 'inherit',
-                fontWeight: item.active ? fontWeight.semibold : fontWeight.normal,
+                fontWeight: item.active ? theme.fontWeight.semibold : theme.fontWeight.normal,
                 flex: 1,
                 whiteSpace: 'nowrap',
               }}
@@ -387,16 +378,16 @@ export const SideBar: React.FC<SideBarProps> = ({
               </div>
             )}
             {hasChildren && (
-              <Icon
-                name="chevron-right"
-                size={12}
-                color={colors.semantic.muted}
-                style={{
-                  transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
-                  transition: `transform ${transitions.normal}`,
-                }}
-              />
-            )}
+            <Icon
+              name="chevron-right"
+              size={12}
+              color={theme.colors.semantic.muted}
+              style={{
+                transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
+                transition: `transform ${theme.transitions.normal}`,
+              }}
+            />
+          )}
           </div>
         </div>
         {!collapsed && hasChildren && (
@@ -404,7 +395,7 @@ export const SideBar: React.FC<SideBarProps> = ({
             style={{
               overflow: 'hidden',
               maxHeight: isExpanded ? '1000px' : '0px',
-              transition: `max-height ${transitions.slow}`,
+              transition: `max-height ${theme.transitions.slow}`,
             }}
           >
             {item.children!.map(child =>
@@ -423,7 +414,7 @@ export const SideBar: React.FC<SideBarProps> = ({
         {(title || logo || collapsible) && (
           <div style={headerStyles}>
             {!collapsed && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: spacing.sm }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: theme.spacing.sm }}>
                 {logo && <div>{logo}</div>}
                 {title && (
                   <Text
@@ -445,16 +436,16 @@ export const SideBar: React.FC<SideBarProps> = ({
                 aria-label={collapsed ? "사이드바 펼치기" : "사이드바 접기"}
                 title={collapsed ? "사이드바 펼치기" : "사이드바 접기"}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = colors.background.gray;
+                  e.currentTarget.style.backgroundColor = theme.colors.background.gray;
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = colors.background.white;
+                  e.currentTarget.style.backgroundColor = theme.colors.background.white;
                 }}
               >
                 <Icon
                   name={collapsed ? "arrow-right" : "arrow-left"}
                   size={12}
-                  color={colors.semantic.text}
+                  color={theme.colors.semantic.text}
                 />
               </button>
             )}
@@ -472,7 +463,7 @@ export const SideBar: React.FC<SideBarProps> = ({
             style={{
               ...footerStyles,
               opacity: collapsed ? 0 : 1,
-              transition: `opacity ${transitions.slow}`,
+              transition: `opacity ${theme.transitions.slow}`,
               pointerEvents: collapsed ? 'none' : 'auto',
               overflow: 'hidden',
             }}

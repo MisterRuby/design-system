@@ -1,5 +1,5 @@
 import React from "react";
-import { borderRadius, colors, componentBorders, fontSize, fontWeight } from "../../tokens";
+import { useTheme } from "styled-components";
 import { InputVariant, ComponentSize } from "../../types";
 import { getInputBorderStyles } from "../shared/inputBorders";
 
@@ -50,69 +50,59 @@ export const SelectField: React.FC<SelectFieldProps> = ({
   onFocus,
   onBlur,
 }) => {
+  const theme = useTheme();
   const selectId = React.useId();
 
   const getSizeStyles = (size: string) => {
     switch (size) {
       case "small":
-        return {
-          padding: "6px 12px",
-          fontSize: fontSize.sm,
-          height: "32px",
-        };
+        return theme.component.input.size.small;
       case "large":
-        return {
-          padding: "12px 16px",
-          fontSize: fontSize.md,
-          height: "48px",
-        };
+        return theme.component.input.size.large;
       default: // medium
-        return {
-          padding: "8px 12px",
-          fontSize: fontSize.sm,
-          height: "40px",
-        };
+        return theme.component.input.size.medium;
     }
   };
 
-  const variantStyles = getInputBorderStyles(variant);
+  const variantStyles = getInputBorderStyles(variant, theme);
   const sizeStyles = getSizeStyles(size);
   const showError = variant === "error" && errorMessage;
-  const baseBorder = disabled ? componentBorders.input.disabled : variantStyles.border;
+  const baseBorder = disabled ? theme.componentBorders.input.disabled : variantStyles.border;
 
+  const chevronColor = encodeURIComponent(theme.colors.text.secondary);
   const selectStyles: React.CSSProperties = {
     width: "100%",
     border: baseBorder,
-    borderRadius: borderRadius.sm,
-    backgroundColor: disabled ? colors.background.disabled : colors.background.white,
-    color: disabled ? colors.semantic.muted : colors.semantic.text,
+    borderRadius: theme.borderRadius.sm,
+    backgroundColor: disabled ? theme.colors.background.disabled : theme.colors.background.white,
+    color: disabled ? theme.colors.semantic.muted : theme.colors.semantic.text,
     fontSize: sizeStyles.fontSize,
     padding: sizeStyles.padding,
     height: sizeStyles.height,
     cursor: disabled ? "not-allowed" : "pointer",
     outline: "none",
-    transition: "border-color 0.2s ease, box-shadow 0.2s ease",
+    transition: theme.transitions.normal,
     appearance: "none",
-    backgroundImage: `url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E")`,
-    backgroundPosition: "right 8px center",
+    backgroundImage: `url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='${chevronColor}' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E")`,
+    backgroundPosition: `right ${theme.spacing.xs} center`,
     backgroundRepeat: "no-repeat",
-    backgroundSize: "16px",
-    paddingRight: "32px",
+    backgroundSize: theme.component.iconSizes.md,
+    paddingRight: `calc(${theme.spacing.md} * 2)`,
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: theme.spacing.xxs }}>
       {label && (
         <label
           htmlFor={selectId}
           style={{
-            fontSize: fontSize.sm,
-            fontWeight: fontWeight.medium,
-            color: colors.semantic.text,
-            marginBottom: "4px",
+            fontSize: theme.fontSize.sm,
+            fontWeight: theme.fontWeight.medium,
+            color: theme.colors.semantic.text,
+            marginBottom: theme.spacing.xxs,
           }}>
           {label}
-          {required && <span style={{ color: colors.semantic.error, marginLeft: "2px" }}>*</span>}
+          {required && <span style={{ color: theme.colors.semantic.error, marginLeft: `calc(${theme.spacing.xxs} / 2)` }}>*</span>}
         </label>
       )}
       <select
@@ -155,9 +145,9 @@ export const SelectField: React.FC<SelectFieldProps> = ({
       {showError && errorMessage && (
         <span
           style={{
-            fontSize: fontSize.xs,
-            color: colors.semantic.error,
-            marginTop: "4px",
+            fontSize: theme.fontSize.xs,
+            color: theme.colors.semantic.error,
+            marginTop: theme.spacing.xxs,
           }}>
           {errorMessage}
         </span>
@@ -165,9 +155,9 @@ export const SelectField: React.FC<SelectFieldProps> = ({
       {!showError && helperText && (
         <span
           style={{
-            fontSize: fontSize.xs,
-            color: colors.semantic.secondary,
-            marginTop: "4px",
+            fontSize: theme.fontSize.xs,
+            color: theme.colors.semantic.secondary,
+            marginTop: theme.spacing.xxs,
           }}>
           {helperText}
         </span>

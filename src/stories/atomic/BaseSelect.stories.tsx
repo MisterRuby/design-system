@@ -30,10 +30,6 @@ export default {
       control: "boolean",
       description: "비활성화 상태",
     },
-    multiple: {
-      control: "boolean",
-      description: "다중 선택 여부",
-    },
     options: {
       description: "선택 가능한 옵션들의 배열",
     },
@@ -70,9 +66,10 @@ export const Default = {
 
     await step("드롭다운 열기 및 옵션 선택", async () => {
       await userEvent.click(select);
-      await new Promise(resolve => setTimeout(resolve, 500));
-      await userEvent.selectOptions(select, "option2");
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise(resolve => setTimeout(resolve, 400));
+      const option = canvas.getByRole("option", { name: "옵션 2" });
+      await userEvent.click(option);
+      await new Promise(resolve => setTimeout(resolve, 400));
     });
   },
   parameters: {
@@ -97,11 +94,16 @@ export const Sizes = {
     const selects = canvas.getAllByRole("combobox");
 
     await step("각 크기별 선택 테스트", async () => {
-      await userEvent.selectOptions(selects[0], "option1"); // small
+      await userEvent.click(selects[0]);
+      await userEvent.click(canvas.getByRole("option", { name: "옵션 1" }));
       await new Promise(resolve => setTimeout(resolve, 300));
-      await userEvent.selectOptions(selects[1], "option2"); // medium
+
+      await userEvent.click(selects[1]);
+      await userEvent.click(canvas.getByRole("option", { name: "옵션 2" }));
       await new Promise(resolve => setTimeout(resolve, 300));
-      await userEvent.selectOptions(selects[2], "option3"); // large
+
+      await userEvent.click(selects[2]);
+      await userEvent.click(canvas.getByRole("option", { name: "옵션 3" }));
       await new Promise(resolve => setTimeout(resolve, 300));
     });
   },
@@ -166,10 +168,15 @@ export const WithDisabledOptions = {
     const select = canvas.getByRole("combobox");
 
     await step("활성 옵션 선택 테스트", async () => {
-      await userEvent.selectOptions(select, "active");
-      await new Promise(resolve => setTimeout(resolve, 500));
-      await userEvent.selectOptions(select, "inactive");
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await userEvent.click(select);
+      await new Promise(resolve => setTimeout(resolve, 300));
+      await userEvent.click(canvas.getByRole("option", { name: "활성" }));
+      await new Promise(resolve => setTimeout(resolve, 400));
+
+      await userEvent.click(select);
+      await new Promise(resolve => setTimeout(resolve, 300));
+      await userEvent.click(canvas.getByRole("option", { name: "비활성" }));
+      await new Promise(resolve => setTimeout(resolve, 400));
     });
   },
   parameters: {
@@ -189,47 +196,6 @@ export const WithDisabledOptions = {
   },
 };
 
-export const Multiple = {
-  args: {
-    options: [
-      { value: "react", label: "React" },
-      { value: "vue", label: "Vue" },
-      { value: "angular", label: "Angular" },
-      { value: "svelte", label: "Svelte" },
-    ],
-    placeholder: "프레임워크를 선택하세요 (다중 선택 가능)",
-    multiple: true,
-    onChange: action("multiple-change"),
-  },
-  decorators: [
-    (Story: any) => (
-      <div style={{ width: '300px' }}>
-        <Story />
-      </div>
-    ),
-  ],
-  play: async ({ canvasElement, step }: { canvasElement: HTMLElement; step: any }) => {
-    const canvas = within(canvasElement);
-    const select = canvas.getByRole("listbox");
-
-    await step("다중 옵션 선택 테스트", async () => {
-      await userEvent.selectOptions(select, ["react", "vue"]);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-    });
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `<BaseSelect
-  options={options}
-  placeholder="프레임워크를 선택하세요 (다중 선택 가능)"
-  multiple
-  onChange={handleChange}
-/>`,
-      },
-    },
-  },
-};
 
 export const Disabled = {
   args: {

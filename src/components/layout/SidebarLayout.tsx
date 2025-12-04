@@ -1,6 +1,6 @@
 import React from 'react';
 import { SideBar, SideBarProps } from '../organisms/SideBar';
-import { colors, spacing } from '../../tokens';
+import { useTheme } from 'styled-components';
 
 /**
  * 사이드바 레이아웃 Props
@@ -49,12 +49,16 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({
   sideBar,
   children,
   variant = 'default',
-  contentPadding = spacing.xl,
-  contentBackgroundColor = colors.background.white,
+  contentPadding,
+  contentBackgroundColor,
   gap = '0',
   className = '',
   style = {},
 }) => {
+  const theme = useTheme();
+  const resolvedContentPadding = contentPadding || theme.spacing.xl;
+  const resolvedContentBackground = contentBackgroundColor || theme.colors.background.white;
+
   const getVariantStyles = () => {
     switch (variant) {
       case 'fixed':
@@ -70,8 +74,8 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({
           content: {
             flex: 1,
             overflow: 'auto',
-            padding: contentPadding,
-            backgroundColor: contentBackgroundColor,
+            padding: resolvedContentPadding,
+            backgroundColor: resolvedContentBackground,
           },
         };
       case 'overlay':
@@ -83,10 +87,10 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({
           content: {
             flex: 1,
             overflow: 'auto',
-            padding: contentPadding,
-            backgroundColor: contentBackgroundColor,
+            padding: resolvedContentPadding,
+            backgroundColor: resolvedContentBackground,
             marginLeft: sideBar.collapsed ? '64px' : '0',
-            transition: 'margin-left 0.3s ease-in-out',
+            transition: `margin-left ${theme.transitions.slow}`,
           },
         };
       case 'default':
@@ -100,8 +104,8 @@ export const SidebarLayout: React.FC<SidebarLayoutProps> = ({
           content: {
             flex: 1,
             overflow: 'auto',
-            padding: contentPadding,
-            backgroundColor: contentBackgroundColor,
+            padding: resolvedContentPadding,
+            backgroundColor: resolvedContentBackground,
             marginLeft: gap,
           },
         };

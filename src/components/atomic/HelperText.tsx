@@ -1,5 +1,5 @@
 import React from "react";
-import { colors, fontSize } from "../../tokens";
+import styled from "styled-components";
 
 export interface HelperTextProps {
   children: React.ReactNode;
@@ -8,6 +8,14 @@ export interface HelperTextProps {
   style?: React.CSSProperties;
   'data-testid'?: string;
 }
+
+const StyledHelperText = styled.span`
+  font-size: ${props => props.theme.fontSize.xs};
+  color: ${props => props.theme.colors.text.secondary};
+  margin-top: ${props => props.theme.spacing.xxs};
+  display: block;
+  font-family: inherit;
+`;
 
 export const HelperText: React.FC<HelperTextProps> = ({
   children,
@@ -18,19 +26,12 @@ export const HelperText: React.FC<HelperTextProps> = ({
 }) => {
   if (!show) return null;
   return (
-    <span
+    <StyledHelperText
       className={className}
       data-testid={testId}
-      style={{
-        fontSize: fontSize.xs,
-        color: colors.semantic.secondary,
-        marginTop: "2px",
-        display: "block",
-        fontFamily: "inherit",
-        ...style,
-      }}
+      style={style}
     >
       {children}
-    </span>
+    </StyledHelperText>
   );
 };

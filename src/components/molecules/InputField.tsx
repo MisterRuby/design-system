@@ -1,6 +1,6 @@
 import React from "react";
 import { Icon, IconName } from "../atomic/Icon";
-import { borderRadius, colors, componentBorders, fontSize, fontWeight } from "../../tokens";
+import { useTheme } from "styled-components";
 import { InputVariant, ComponentSize } from "../../types";
 import { getInputBorderStyles } from "../shared/inputBorders";
 
@@ -49,64 +49,65 @@ export const InputField: React.FC<InputFieldProps> = ({
   onBlur,
   onKeyPress,
 }) => {
+  const theme = useTheme();
   // 고유한 ID 생성
   const inputId = React.useId();
   const getSizeStyles = (size: string) => {
     switch (size) {
       case "small":
         return {
-          padding: "6px 12px",
-          fontSize: fontSize.sm,
-          height: "32px",
-          iconSize: 16,
-          iconPadding: "8px",
+          padding: theme.component.input.size.small.padding,
+          fontSize: theme.component.input.size.small.fontSize,
+          height: theme.component.input.size.small.height,
+          iconSize: parseInt(theme.component.iconSizes.md, 10),
+          iconPadding: theme.spacing.xs,
         };
       case "medium":
         return {
-          padding: "8px 16px",
-          fontSize: fontSize.md,
-          height: "40px",
-          iconSize: 18,
-          iconPadding: "12px",
+          padding: theme.component.input.size.medium.padding,
+          fontSize: theme.component.input.size.medium.fontSize,
+          height: theme.component.input.size.medium.height,
+          iconSize: parseInt(theme.component.iconSizes.lg, 10),
+          iconPadding: theme.spacing.sm,
         };
       case "large":
         return {
-          padding: "12px 20px",
-          fontSize: fontSize.lg,
-          height: "48px",
-          iconSize: 20,
-          iconPadding: "16px",
+          padding: theme.component.input.size.large.padding,
+          fontSize: theme.component.input.size.large.fontSize,
+          height: theme.component.input.size.large.height,
+          iconSize: parseInt(theme.component.iconSizes.xl, 10),
+          iconPadding: theme.spacing.md,
         };
       default:
         return {
-          padding: "8px 16px",
-          fontSize: fontSize.md,
-          height: "40px",
-          iconSize: 18,
-          iconPadding: "12px",
+          padding: theme.component.input.size.medium.padding,
+          fontSize: theme.component.input.size.medium.fontSize,
+          height: theme.component.input.size.medium.height,
+          iconSize: parseInt(theme.component.iconSizes.lg, 10),
+          iconPadding: theme.spacing.sm,
         };
     }
   };
 
-  const variantStyles = getInputBorderStyles(variant);
+  const variantStyles = getInputBorderStyles(variant, theme);
   const sizeStyles = getSizeStyles(size);
   const showError = variant === "error" && errorMessage;
-  const baseBorder = disabled ? componentBorders.input.disabled : variantStyles.border;
+  const baseBorder = disabled ? theme.componentBorders.input.disabled : variantStyles.border;
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: theme.spacing.xxs }}>
       {label && (
         <label
           htmlFor={inputId}
           style={{
-            fontSize: fontSize.sm,
-            fontWeight: fontWeight.medium,
-            color: colors.semantic.text,
-            marginBottom: "4px",
+            fontSize: theme.fontSize.sm,
+            fontWeight: theme.fontWeight.medium,
+            color: theme.colors.semantic.text,
+            marginBottom: theme.spacing.xxs,
           }}>
           {label}
           {required && (
-            <span style={{ color: colors.semantic.error, marginLeft: "4px" }}>*</span>
+            <span style={{ color: theme.colors.semantic.error, marginLeft: theme.spacing.xxs }}>*</span>
           )}
         </label>
       )}
@@ -126,7 +127,7 @@ export const InputField: React.FC<InputFieldProps> = ({
             <Icon
               name={icon}
               size={sizeStyles.iconSize}
-              color={disabled ? colors.semantic.muted : colors.semantic.secondary}
+              color={disabled ? theme.colors.semantic.muted : theme.colors.semantic.secondary}
             />
           </div>
         )}
@@ -149,19 +150,19 @@ export const InputField: React.FC<InputFieldProps> = ({
             ...sizeStyles,
             paddingLeft:
               icon && iconPosition === "left"
-                ? `calc(${sizeStyles.iconPadding} + ${sizeStyles.iconSize}px + 8px)`
+                ? `calc(${sizeStyles.iconPadding} + ${sizeStyles.iconSize}px + ${theme.spacing.xs})`
                 : sizeStyles.padding.split(" ")[1],
             paddingRight:
               icon && iconPosition === "right"
-                ? `calc(${sizeStyles.iconPadding} + ${sizeStyles.iconSize}px + 8px)`
+                ? `calc(${sizeStyles.iconPadding} + ${sizeStyles.iconSize}px + ${theme.spacing.xs})`
                 : sizeStyles.padding.split(" ")[1],
             border: baseBorder,
-            borderRadius: borderRadius.md,
+            borderRadius: theme.borderRadius.md,
             fontFamily: "inherit",
-            backgroundColor: disabled ? colors.background.disabled : colors.background.white,
-            color: disabled ? colors.semantic.muted : colors.semantic.text,
+            backgroundColor: disabled ? theme.colors.background.disabled : theme.colors.background.white,
+            color: disabled ? theme.colors.semantic.muted : theme.colors.semantic.text,
             cursor: disabled ? "not-allowed" : "text",
-            transition: "all 0.2s ease-in-out",
+            transition: theme.transitions.normal,
             outline: "none",
             width: "100%",
             boxSizing: "border-box",
@@ -192,7 +193,7 @@ export const InputField: React.FC<InputFieldProps> = ({
             <Icon
               name={icon}
               size={sizeStyles.iconSize}
-              color={disabled ? colors.semantic.muted : colors.semantic.secondary}
+              color={disabled ? theme.colors.semantic.muted : theme.colors.semantic.secondary}
             />
           </div>
         )}
@@ -201,9 +202,9 @@ export const InputField: React.FC<InputFieldProps> = ({
       {showError && (
         <span
           style={{
-            fontSize: fontSize.xs,
-            color: colors.semantic.error,
-            marginTop: "2px",
+            fontSize: theme.fontSize.xs,
+            color: theme.colors.semantic.error,
+            marginTop: `calc(${theme.spacing.xxs} / 2)`,
           }}>
           {errorMessage}
         </span>
@@ -212,9 +213,9 @@ export const InputField: React.FC<InputFieldProps> = ({
       {helperText && !showError && (
         <span
           style={{
-            fontSize: fontSize.xs,
-            color: colors.semantic.secondary,
-            marginTop: "2px",
+            fontSize: theme.fontSize.xs,
+            color: theme.colors.semantic.secondary,
+            marginTop: `calc(${theme.spacing.xxs} / 2)`,
           }}>
           {helperText}
         </span>

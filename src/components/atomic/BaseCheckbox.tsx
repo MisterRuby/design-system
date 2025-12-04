@@ -1,5 +1,5 @@
 import React from "react";
-import { borderRadius, colors, componentBorders } from "../../tokens";
+import styled from "styled-components";
 
 export interface BaseCheckboxProps {
   id?: string;
@@ -18,6 +18,25 @@ export interface BaseCheckboxProps {
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   'data-testid'?: string;
 }
+
+const getSizeValue = (size: "sm" | "md" | "lg") => {
+  const sizeMap = {
+    sm: "16px",
+    md: "20px",
+    lg: "24px",
+  };
+  return sizeMap[size];
+};
+
+const StyledCheckbox = styled.input<{ $size: "sm" | "md" | "lg"; $color: string }>`
+  width: ${props => getSizeValue(props.$size)};
+  height: ${props => getSizeValue(props.$size)};
+  accent-color: ${props => props.theme.colors.semantic[props.$color as keyof typeof props.theme.colors.semantic] || props.theme.colors.semantic.primary};
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+  opacity: ${props => props.disabled ? props.theme.opacity.disabled : props.theme.opacity.visible};
+  border-radius: ${props => props.theme.borderRadius.sm};
+  border: ${props => props.theme.borderWidth[1]} solid ${props => props.theme.colors.border.default};
+`;
 
 export const BaseCheckbox: React.FC<BaseCheckboxProps> = ({
   id,
@@ -44,69 +63,8 @@ export const BaseCheckbox: React.FC<BaseCheckboxProps> = ({
     }
   }, [indeterminate]);
 
-  const getSizeStyles = () => {
-    switch (size) {
-      case "sm":
-        return { width: "16px", height: "16px" };
-      case "md":
-        return { width: "20px", height: "20px" };
-      case "lg":
-        return { width: "24px", height: "24px" };
-      default:
-        return { width: "20px", height: "20px" };
-    }
-  };
-
-  const getColorStyles = () => {
-    switch (color) {
-      case "primary":
-        return {
-          accentColor: colors.semantic.primary,
-          focusColor: colors.focusRing.primary,
-        };
-      case "secondary":
-        return {
-          accentColor: colors.semantic.secondary,
-          focusColor: colors.focusRing.secondary,
-        };
-      case "success":
-        return {
-          accentColor: colors.semantic.success,
-          focusColor: colors.focusRing.success,
-        };
-      case "error":
-        return {
-          accentColor: colors.semantic.error,
-          focusColor: colors.focusRing.error,
-        };
-      case "warning":
-        return {
-          accentColor: colors.semantic.warning,
-          focusColor: colors.focusRing.warning,
-        };
-      case "info":
-        return {
-          accentColor: colors.semantic.info,
-          focusColor: colors.focusRing.info,
-        };
-      default:
-        return {
-          accentColor: colors.semantic.primary,
-          focusColor: colors.focusRing.primary,
-        };
-    }
-  };
-
-  const sizeStyles = getSizeStyles();
-  const colorStyles = getColorStyles();
-  const borderStyle = disabled
-    ? componentBorders.input.disabled
-    : color === "error"
-      ? componentBorders.input.error
-      : componentBorders.input.default;
-
   return (
-    <input
+    <StyledCheckbox
       ref={checkboxRef}
       type="checkbox"
       id={id}
@@ -120,15 +78,9 @@ export const BaseCheckbox: React.FC<BaseCheckboxProps> = ({
       onBlur={onBlur}
       className={className}
       data-testid={testId}
-      style={{
-        ...sizeStyles,
-        accentColor: colorStyles.accentColor,
-        cursor: disabled ? "not-allowed" : "pointer",
-        opacity: disabled ? 0.6 : 1,
-        borderRadius: borderRadius.sm,
-        border: borderStyle,
-        ...style,
-      }}
+      style={style}
+      $size={size}
+      $color={color}
     />
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { colors, fontSize, spacing } from '../../tokens';
+import { useTheme } from 'styled-components';
 import { ComponentSize } from '../../types';
 
 export interface TooltipProps {
@@ -21,6 +21,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
   disabled = false,
   maxWidth
 }) => {
+  const theme = useTheme();
   const [isVisible, setIsVisible] = useState(false);
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
 
@@ -28,27 +29,27 @@ export const Tooltip: React.FC<TooltipProps> = ({
     switch (size) {
       case 'small':
         return {
-          fontSize: fontSize.xs,
-          padding: `${spacing.xxs} ${spacing.sm}`,
-          maxWidth: '250px'
+          fontSize: theme.fontSize.xs,
+          padding: `${theme.spacing.xxs} ${theme.spacing.sm}`,
+          maxWidth: theme.component.tooltip.maxWidth.sm
         };
       case 'medium':
         return {
-          fontSize: fontSize.sm,
-          padding: '6px 12px',
-          maxWidth: '320px'
+          fontSize: theme.fontSize.sm,
+          padding: `${theme.spacing.xxs} ${theme.spacing.sm}`,
+          maxWidth: theme.component.tooltip.maxWidth.md
         };
       case 'large':
         return {
-          fontSize: fontSize.md,
-          padding: `${spacing.sm} ${spacing.lg}`,
-          maxWidth: '500px'
+          fontSize: theme.fontSize.md,
+          padding: `${theme.spacing.sm} ${theme.spacing.lg}`,
+          maxWidth: theme.component.tooltip.maxWidth.lg
         };
       default:
         return {
-          fontSize: fontSize.sm,
-          padding: '6px 12px',
-          maxWidth: '320px'
+          fontSize: theme.fontSize.sm,
+          padding: `${theme.spacing.xxs} ${theme.spacing.sm}`,
+          maxWidth: theme.component.tooltip.maxWidth.md
         };
     }
   };
@@ -60,41 +61,41 @@ export const Tooltip: React.FC<TooltipProps> = ({
           bottom: '100%',
           left: '50%',
           transform: 'translateX(-50%)',
-          marginBottom: '8px'
+          marginBottom: theme.spacing.xs
         };
       case 'bottom':
         return {
           top: '100%',
           left: '50%',
           transform: 'translateX(-50%)',
-          marginTop: spacing.sm
+          marginTop: theme.spacing.sm
         };
       case 'left':
         return {
           right: '100%',
           top: '50%',
           transform: 'translateY(-50%)',
-          marginRight: spacing.sm
+          marginRight: theme.spacing.sm
         };
       case 'right':
         return {
           left: '100%',
           top: '50%',
           transform: 'translateY(-50%)',
-          marginLeft: spacing.sm
+          marginLeft: theme.spacing.sm
         };
       default:
         return {
           bottom: '100%',
           left: '50%',
           transform: 'translateX(-50%)',
-          marginBottom: '8px'
+          marginBottom: theme.spacing.xs
         };
     }
   };
 
   const getArrowStyles = (position: string) => {
-    const arrowSize = '5px';
+    const tooltipArrowSize = theme.component.tooltip.arrowSize;
     const baseStyles = {
       content: '""',
       position: 'absolute' as const,
@@ -108,8 +109,8 @@ export const Tooltip: React.FC<TooltipProps> = ({
           top: '100%',
           left: '50%',
           transform: 'translateX(-50%)',
-          borderWidth: `${arrowSize} ${arrowSize} 0 ${arrowSize}`,
-          borderColor: `${colors.semantic.text} transparent transparent transparent`
+          borderWidth: `${tooltipArrowSize} ${tooltipArrowSize} 0 ${tooltipArrowSize}`,
+          borderColor: `${theme.colors.semantic.text} transparent transparent transparent`
         };
       case 'bottom':
         return {
@@ -117,8 +118,8 @@ export const Tooltip: React.FC<TooltipProps> = ({
           bottom: '100%',
           left: '50%',
           transform: 'translateX(-50%)',
-          borderWidth: `0 ${arrowSize} ${arrowSize} ${arrowSize}`,
-          borderColor: `transparent transparent ${colors.semantic.text} transparent`
+          borderWidth: `0 ${tooltipArrowSize} ${tooltipArrowSize} ${tooltipArrowSize}`,
+          borderColor: `transparent transparent ${theme.colors.semantic.text} transparent`
         };
       case 'left':
         return {
@@ -126,8 +127,8 @@ export const Tooltip: React.FC<TooltipProps> = ({
           left: '100%',
           top: '50%',
           transform: 'translateY(-50%)',
-          borderWidth: `${arrowSize} 0 ${arrowSize} ${arrowSize}`,
-          borderColor: `transparent transparent transparent ${colors.semantic.text}`
+          borderWidth: `${tooltipArrowSize} 0 ${tooltipArrowSize} ${tooltipArrowSize}`,
+          borderColor: `transparent transparent transparent ${theme.colors.semantic.text}`
         };
       case 'right':
         return {
@@ -135,8 +136,8 @@ export const Tooltip: React.FC<TooltipProps> = ({
           right: '100%',
           top: '50%',
           transform: 'translateY(-50%)',
-          borderWidth: `${arrowSize} ${arrowSize} ${arrowSize} 0`,
-          borderColor: `transparent ${colors.semantic.text} transparent transparent`
+          borderWidth: `${tooltipArrowSize} ${tooltipArrowSize} ${tooltipArrowSize} 0`,
+          borderColor: `transparent ${theme.colors.semantic.text} transparent transparent`
         };
       default:
         return baseStyles;
@@ -178,15 +179,15 @@ export const Tooltip: React.FC<TooltipProps> = ({
         <div
           style={{
             position: 'absolute',
-            backgroundColor: colors.semantic.text,
-            color: colors.background.white,
-            borderRadius: '4px',
+            backgroundColor: theme.colors.semantic.text,
+            color: theme.colors.background.white,
+            borderRadius: theme.borderRadius.sm,
             fontSize: sizeStyles.fontSize,
             padding: sizeStyles.padding,
             maxWidth: maxWidth || sizeStyles.maxWidth,
             width: 'max-content',
-            zIndex: 1000,
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+            zIndex: theme.zIndex.tooltip,
+            boxShadow: theme.shadows.md,
             ...positionStyles
           }}
         >
@@ -195,7 +196,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
               display: 'inline-block',
               whiteSpace: 'normal',
               wordWrap: 'break-word',
-              lineHeight: '1.4',
+              lineHeight: theme.lineHeight.normal,
               textAlign: 'left',
               width: '100%',
             }}

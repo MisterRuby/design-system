@@ -1,5 +1,5 @@
 import React from "react";
-import { colors, fontSize } from "../../tokens";
+import { useTheme } from "styled-components";
 
 export interface CheckboxFieldProps {
   id?: string;
@@ -40,6 +40,7 @@ export const CheckboxField: React.FC<CheckboxFieldProps> = ({
   onFocus,
   onBlur,
 }) => {
+  const theme = useTheme();
   const checkboxRef = React.useRef<HTMLInputElement>(null);
   const generatedId = React.useId();
   const checkboxId = id || generatedId;
@@ -54,33 +55,33 @@ export const CheckboxField: React.FC<CheckboxFieldProps> = ({
     switch (size) {
       case "sm":
         return {
-          checkbox: "16px",
-          text: fontSize.sm,
-          gap: "8px",
+          checkbox: theme.component.iconSizes.md,
+          text: theme.fontSize.sm,
+          gap: theme.spacing.xs,
         };
       case "lg":
         return {
-          checkbox: "24px",
-          text: fontSize.lg,
-          gap: "12px",
+          checkbox: theme.component.iconSizes['2xl'],
+          text: theme.fontSize.lg,
+          gap: theme.spacing.sm,
         };
       default: // md
         return {
-          checkbox: "20px",
-          text: fontSize.md,
-          gap: "10px",
+          checkbox: theme.component.iconSizes.xl,
+          text: theme.fontSize.md,
+          gap: `calc(${theme.spacing.sm} - ${theme.spacing.xxs} / 2)`,
         };
     }
   };
 
   const getColorStyles = () => {
     const colorMap = {
-      primary: colors.semantic.primary,
-      secondary: colors.semantic.secondary,
-      success: colors.semantic.success,
-      error: colors.semantic.error,
-      warning: colors.semantic.warning,
-      info: colors.semantic.info,
+      primary: theme.colors.semantic.primary,
+      secondary: theme.colors.semantic.secondary,
+      success: theme.colors.semantic.success,
+      error: theme.colors.semantic.error,
+      warning: theme.colors.semantic.warning,
+      info: theme.colors.semantic.info,
     };
     return colorMap[color];
   };
@@ -92,14 +93,14 @@ export const CheckboxField: React.FC<CheckboxFieldProps> = ({
     width: sizeStyles.checkbox,
     height: sizeStyles.checkbox,
     cursor: disabled ? "not-allowed" : "pointer",
-    accentColor: disabled ? colors.semantic.muted : accentColor,
+    accentColor: disabled ? theme.colors.semantic.muted : accentColor,
     marginTop: description ? "0.125em" : "0", // description이 있을 때만 marginTop 적용
     flexShrink: 0, // 체크박스 크기 고정
   };
 
   const labelStyles: React.CSSProperties = {
     fontSize: sizeStyles.text,
-    color: disabled ? colors.semantic.muted : colors.semantic.text,
+    color: disabled ? theme.colors.semantic.muted : theme.colors.semantic.text,
     cursor: disabled ? "not-allowed" : "pointer",
     userSelect: "none",
     lineHeight: "1.2", // 라인 높이를 명시적으로 설정
@@ -113,9 +114,9 @@ export const CheckboxField: React.FC<CheckboxFieldProps> = ({
   };
 
   const descriptionStyles: React.CSSProperties = {
-    fontSize: size === "sm" ? fontSize.xs : size === "lg" ? fontSize.md : fontSize.sm,
-    color: disabled ? colors.semantic.muted : colors.semantic.secondary,
-    marginTop: "4px",
+    fontSize: size === "sm" ? theme.fontSize.xs : size === "lg" ? theme.fontSize.md : theme.fontSize.sm,
+    color: disabled ? theme.colors.semantic.muted : theme.colors.semantic.secondary,
+    marginTop: theme.spacing.xxs,
   };
 
   if (!label) {
@@ -157,14 +158,14 @@ export const CheckboxField: React.FC<CheckboxFieldProps> = ({
       <div>
         <label htmlFor={checkboxId} style={labelStyles}>
           {label}
-          {required && <span style={{ color: colors.semantic.error, marginLeft: "2px" }}>*</span>}
+          {required && <span style={{ color: theme.colors.semantic.error, marginLeft: `calc(${theme.spacing.xxs} / 2)` }}>*</span>}
         </label>
         {description && <div style={descriptionStyles}>{description}</div>}
         {errorMessage && (
           <div style={{
-            fontSize: fontSize.xs,
-            color: colors.semantic.error,
-            marginTop: "4px",
+            fontSize: theme.fontSize.xs,
+            color: theme.colors.semantic.error,
+            marginTop: theme.spacing.xxs,
           }}>
             {errorMessage}
           </div>

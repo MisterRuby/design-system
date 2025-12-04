@@ -1,6 +1,7 @@
 import React from 'react';
-import { colors, fontSize, fontWeight, spacing, transitions, opacity, shadowOpacity } from '../../tokens';
+import styled, { useTheme } from 'styled-components';
 import { CheckboxSize } from '../../types';
+import { Theme } from '../../theme/theme';
 
 export interface ToggleProps {
   id?: string;
@@ -17,6 +18,81 @@ export interface ToggleProps {
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
+
+const Container = styled.div<{ $disabled: boolean; $size: CheckboxSize }>`
+  display: flex;
+  flex-direction: column;
+  gap: ${props => props.theme.spacing.xs};
+  opacity: ${props => props.$disabled ? props.theme.opacity.disabled : props.theme.opacity.visible};
+`;
+
+const LabelContainer = styled.label<{ $disabled: boolean; $size: CheckboxSize }>`
+  display: flex;
+  align-items: center;
+  gap: ${props => props.theme.spacing.xs};
+  cursor: ${props => props.$disabled ? 'not-allowed' : 'pointer'};
+`;
+
+const ToggleTrack = styled.div<{
+  $size: CheckboxSize;
+  $background: string;
+  $hasError: boolean;
+  $disabled: boolean;
+}>`
+  position: relative;
+  width: ${props => props.theme.component.toggle.width[props.$size]};
+  height: ${props => props.theme.component.toggle.height[props.$size]};
+  background: ${props => props.$background};
+  border-radius: ${props => props.theme.component.toggle.height[props.$size]};
+  border: ${props => props.$hasError ? `${props.theme.borderWidth[2]} solid ${props.theme.colors.semantic.error}` : 'none'};
+  cursor: ${props => props.$disabled ? 'not-allowed' : 'pointer'};
+  transition: ${props => props.theme.transitions.normal};
+  display: inline-block;
+  flex-shrink: 0;
+`;
+
+const ToggleThumb = styled.div<{
+  $size: CheckboxSize;
+  $isChecked: boolean;
+}>`
+  position: absolute;
+  top: ${props => props.theme.component.toggle.offset};
+  left: ${props => props.$isChecked
+    ? `calc(100% - ${props.theme.component.toggle.thumb[props.$size]} - ${props.theme.component.toggle.offset})`
+    : props.theme.component.toggle.offset};
+  width: ${props => props.theme.component.toggle.thumb[props.$size]};
+  height: ${props => props.theme.component.toggle.thumb[props.$size]};
+  background: ${props => props.theme.colors.background.white};
+  border-radius: ${props => props.theme.borderRadius.full};
+  transition: left ${props => props.theme.transitions.normal};
+  box-shadow: ${props => props.theme.shadows.sm};
+`;
+
+const HiddenInput = styled.input`
+  position: absolute;
+  opacity: ${props => props.theme.opacity.hidden};
+  width: 0;
+  height: 0;
+`;
+
+const LabelText = styled.span<{ $size: CheckboxSize; $hasError: boolean }>`
+  font-size: ${props => props.$size === 'sm' ? props.theme.fontSize.xs : props.$size === 'md' ? props.theme.fontSize.sm : props.theme.fontSize.md};
+  color: ${props => props.$hasError ? props.theme.colors.semantic.error : props.theme.colors.text.primary};
+  font-weight: ${props => props.theme.fontWeight.medium};
+`;
+
+const HelperText = styled.div`
+  font-size: ${props => props.theme.fontSize.xs};
+  color: ${props => props.theme.colors.text.muted};
+  margin-top: ${props => props.theme.spacing.xxs};
+`;
+
+const ErrorText = styled.div`
+  font-size: ${props => props.theme.fontSize.xs};
+  color: ${props => props.theme.colors.semantic.error};
+  margin-top: ${props => props.theme.spacing.xxs};
+`;
+
 export const Toggle: React.FC<ToggleProps> = ({
   id,
   checked,
@@ -31,6 +107,7 @@ export const Toggle: React.FC<ToggleProps> = ({
   onFocus,
   onBlur
 }) => {
+  const theme = useTheme() as Theme;
   const [internalChecked, setInternalChecked] = React.useState(defaultChecked || false);
   const isControlled = checked !== undefined;
   const isChecked = isControlled ? checked : internalChecked;
@@ -44,155 +121,20 @@ export const Toggle: React.FC<ToggleProps> = ({
     }
   };
 
-  const getSizeStyles = (size: CheckboxSize) => {
-    switch (size) {
-      case 'sm':
-        return {
-          width: '32px',
-          height: '18px',
-          thumbSize: '14px',
-          thumbOffset: spacing.xxs,
-          fontSize: fontSize.xs,
-          gap: spacing.xs
-        };
-      case 'md':
-        return {
-          width: '44px',
-          height: '24px',
-          thumbSize: '20px',
-          thumbOffset: '2px',
-          fontSize: fontSize.sm,
-          gap: '8px'
-        };
-      case 'lg':
-        return {
-          width: '56px',
-          height: '30px',
-          thumbSize: '26px',
-          thumbOffset: spacing.xxs,
-          fontSize: fontSize.md,
-          gap: spacing.sm
-        };
-      default:
-        return {
-          width: '44px',
-          height: '24px',
-          thumbSize: '20px',
-          thumbOffset: '2px',
-          fontSize: fontSize.sm,
-          gap: '8px'
-        };
-    }
+  const getBackground = () => {
+    if (disabled) return theme.colors.border.light;
+    if (!isChecked) return theme.colors.border.default;
+    return theme.colors.semantic[color as keyof typeof theme.colors.semantic] || theme.colors.semantic.primary;
   };
 
-  const getColorStyles = (color: string, isChecked: boolean) => {
-    if (disabled) {
-      return {
-        background: colors.gray[200],
-        thumbColor: colors.background.white
-      };
-    }
-
-    if (!isChecked) {
-      return {
-        background: colors.gray[300],
-        thumbColor: colors.background.white
-      };
-    }
-
-    switch (color) {
-      case 'primary':
-        return { background: colors.semantic.primary, thumbColor: colors.background.white };
-      case 'secondary':
-        return { background: colors.semantic.secondary, thumbColor: colors.background.white };
-      case 'success':
-        return { background: colors.semantic.success, thumbColor: colors.background.white };
-      case 'error':
-        return { background: colors.semantic.error, thumbColor: colors.background.white };
-      case 'warning':
-        return { background: colors.semantic.warning, thumbColor: colors.background.white };
-      case 'info':
-        return { background: colors.semantic.info, thumbColor: colors.background.white };
-      default:
-        return { background: colors.semantic.primary, thumbColor: colors.background.white };
-    }
-  };
-
-  const sizeStyles = getSizeStyles(size);
-  const colorStyles = getColorStyles(color, isChecked);
+  const background = getBackground();
   const hasError = !!errorMessage;
 
-  const containerStyles: React.CSSProperties = {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: sizeStyles.gap,
-    opacity: disabled ? opacity.disabled : opacity.visible,
-  };
-
-  const labelContainerStyles: React.CSSProperties = {
-    display: 'flex',
-    alignItems: 'center',
-    gap: sizeStyles.gap,
-    cursor: disabled ? 'not-allowed' : 'pointer',
-  };
-
-  const toggleStyles: React.CSSProperties = {
-    position: 'relative',
-    width: sizeStyles.width,
-    height: sizeStyles.height,
-    background: colorStyles.background,
-    borderRadius: sizeStyles.height,
-    border: hasError ? `2px solid ${colors.semantic.error}` : 'none',
-    cursor: disabled ? 'not-allowed' : 'pointer',
-    transition: transitions.normal,
-    display: 'inline-block',
-    flexShrink: 0,
-  };
-
-  const thumbStyles: React.CSSProperties = {
-    position: 'absolute',
-    top: sizeStyles.thumbOffset,
-    left: isChecked
-      ? `calc(100% - ${sizeStyles.thumbSize} - ${sizeStyles.thumbOffset})`
-      : sizeStyles.thumbOffset,
-    width: sizeStyles.thumbSize,
-    height: sizeStyles.thumbSize,
-    background: colorStyles.thumbColor,
-    borderRadius: '50%',
-    transition: 'left 0.2s ease',
-    boxShadow: `0 1px 3px rgba(0, 0, 0, ${shadowOpacity.light})`,
-  };
-
-  const labelTextStyles: React.CSSProperties = {
-    fontSize: sizeStyles.fontSize,
-    color: hasError ? colors.semantic.error : colors.semantic.text,
-    fontWeight: fontWeight.medium,
-  };
-
-  const helperTextStyles: React.CSSProperties = {
-    fontSize: fontSize.xs,
-    color: colors.semantic.muted,
-    marginTop: '2px',
-  };
-
-  const errorTextStyles: React.CSSProperties = {
-    fontSize: fontSize.xs,
-    color: colors.semantic.error,
-    marginTop: '2px',
-  };
-
-  const hiddenInputStyles: React.CSSProperties = {
-    position: 'absolute',
-    opacity: 0,
-    width: 0,
-    height: 0,
-  };
-
   return (
-    <div style={containerStyles}>
-      <label htmlFor={id} style={labelContainerStyles}>
+    <Container $disabled={disabled} $size={size}>
+      <LabelContainer htmlFor={id} $disabled={disabled} $size={size}>
         <div style={{ position: 'relative' }}>
-          <input
+          <HiddenInput
             id={id}
             type="checkbox"
             checked={isControlled ? checked : undefined}
@@ -201,18 +143,27 @@ export const Toggle: React.FC<ToggleProps> = ({
             onChange={handleChange}
             onFocus={onFocus}
             onBlur={onBlur}
-            style={hiddenInputStyles}
           />
-          <div style={toggleStyles}>
-            <div style={thumbStyles} />
-          </div>
+          <ToggleTrack
+            $size={size}
+            $background={background}
+            $hasError={hasError}
+            $disabled={disabled}
+          >
+            <ToggleThumb
+              $size={size}
+              $isChecked={isChecked}
+            />
+          </ToggleTrack>
         </div>
-        {label && <span style={labelTextStyles}>{label}</span>}
-      </label>
-      {helperText && !hasError && (
-        <div style={helperTextStyles}>{helperText}</div>
-      )}
-      {hasError && <div style={errorTextStyles}>{errorMessage}</div>}
-    </div>
+        {label && (
+          <LabelText $size={size} $hasError={hasError}>
+            {label}
+          </LabelText>
+        )}
+      </LabelContainer>
+      {helperText && !hasError && <HelperText>{helperText}</HelperText>}
+      {hasError && <ErrorText>{errorMessage}</ErrorText>}
+    </Container>
   );
 };

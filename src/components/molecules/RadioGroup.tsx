@@ -1,5 +1,5 @@
 import React from "react";
-import { colors, fontSize, fontWeight } from "../../tokens";
+import { useTheme } from "styled-components";
 import { CheckboxSize } from "../../types";
 
 export interface RadioGroupOption {
@@ -48,42 +48,43 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
   onFocus,
   onBlur,
 }) => {
+  const theme = useTheme();
   const radioGroupId = React.useId();
 
   const getSizeStyles = () => {
     switch (size) {
       case "sm":
         return {
-          radio: "16px",
-          text: fontSize.sm,
-          gap: "8px",
-          itemGap: "8px",
+          radio: theme.component.iconSizes.md,
+          text: theme.fontSize.sm,
+          gap: theme.spacing.xs,
+          itemGap: theme.spacing.xs,
         };
       case "lg":
         return {
-          radio: "24px",
-          text: fontSize.lg,
-          gap: "12px",
-          itemGap: "16px",
+          radio: theme.component.iconSizes['2xl'],
+          text: theme.fontSize.lg,
+          gap: theme.spacing.sm,
+          itemGap: theme.spacing.md,
         };
       default: // md
         return {
-          radio: "20px",
-          text: fontSize.md,
-          gap: "10px",
-          itemGap: "12px",
+          radio: theme.component.iconSizes.xl,
+          text: theme.fontSize.md,
+          gap: `calc(${theme.spacing.sm} - ${theme.spacing.xxs} / 2)`,
+          itemGap: theme.spacing.sm,
         };
     }
   };
 
   const getColorStyles = () => {
     const colorMap = {
-      primary: colors.semantic.primary,
-      secondary: colors.semantic.secondary,
-      success: colors.semantic.success,
-      error: colors.semantic.error,
-      warning: colors.semantic.warning,
-      info: colors.semantic.info,
+      primary: theme.colors.semantic.primary,
+      secondary: theme.colors.semantic.secondary,
+      success: theme.colors.semantic.success,
+      error: theme.colors.semantic.error,
+      warning: theme.colors.semantic.warning,
+      info: theme.colors.semantic.info,
     };
     return colorMap[color];
   };
@@ -95,7 +96,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
     width: sizeStyles.radio,
     height: sizeStyles.radio,
     cursor: disabled ? "not-allowed" : "pointer",
-    accentColor: disabled ? colors.semantic.muted : accentColor,
+    accentColor: disabled ? theme.colors.semantic.muted : accentColor,
     flexShrink: 0,
     margin: 0,
     display: "inline-flex",
@@ -105,7 +106,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
 
   const labelStyles: React.CSSProperties = {
     fontSize: sizeStyles.text,
-    color: disabled ? colors.semantic.muted : colors.semantic.text,
+    color: disabled ? theme.colors.semantic.muted : theme.colors.semantic.text,
     cursor: disabled ? "not-allowed" : "pointer",
     userSelect: "none",
     lineHeight: "1.4",
@@ -128,15 +129,15 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
   };
 
   const descriptionStyles: React.CSSProperties = {
-    fontSize: size === "sm" ? fontSize.xs : size === "lg" ? fontSize.md : fontSize.sm,
-    color: disabled ? colors.semantic.muted : colors.semantic.secondary,
-    marginTop: "2px",
+    fontSize: size === "sm" ? theme.fontSize.xs : size === "lg" ? theme.fontSize.md : theme.fontSize.sm,
+    color: disabled ? theme.colors.semantic.muted : theme.colors.semantic.secondary,
+    marginTop: `calc(${theme.spacing.xxs} / 2)`,
   };
 
   const containerStyles: React.CSSProperties = {
     display: "flex",
     flexDirection: "column",
-    gap: "8px",
+    gap: theme.spacing.xs,
     ...style,
   };
 
@@ -147,15 +148,15 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
       {label && (
         <legend
           style={{
-            fontSize: fontSize.sm,
-            fontWeight: fontWeight.medium,
-            color: colors.semantic.text,
-            marginBottom: "4px",
+            fontSize: theme.fontSize.sm,
+            fontWeight: theme.fontWeight.medium,
+            color: theme.colors.semantic.text,
+            marginBottom: theme.spacing.xxs,
             padding: 0,
             border: "none",
           }}>
           {label}
-          {required && <span style={{ color: colors.semantic.error, marginLeft: "2px" }}>*</span>}
+          {required && <span style={{ color: theme.colors.semantic.error, marginLeft: `calc(${theme.spacing.xxs} / 2)` }}>*</span>}
         </legend>
       )}
 
@@ -170,18 +171,6 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
               ? defaultValue === option.value
               : index === 0
             : undefined;
-
-          // 디버깅용 로그
-          if (index === 0) {
-            console.log('Radio debug:', {
-              option: option.value,
-              isControlled,
-              hasDefaultValue,
-              defaultValue,
-              defaultCheckedValue,
-              index
-            });
-          }
 
           return (
             <div key={option.value} style={optionContainerStyles}>
@@ -204,7 +193,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
                   htmlFor={optionId}
                   style={{
                     ...labelStyles,
-                    color: isDisabled ? colors.semantic.muted : colors.semantic.text,
+                    color: isDisabled ? theme.colors.semantic.muted : theme.colors.semantic.text,
                     cursor: isDisabled ? "not-allowed" : "pointer",
                   }}>
                   {option.label}
@@ -213,7 +202,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
                   <div
                     style={{
                       ...descriptionStyles,
-                      color: isDisabled ? colors.semantic.muted : colors.semantic.secondary,
+                      color: isDisabled ? theme.colors.semantic.muted : theme.colors.semantic.secondary,
                     }}>
                     {option.description}
                   </div>
@@ -227,9 +216,9 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
       {showError && (
         <span
           style={{
-            fontSize: fontSize.xs,
-            color: colors.semantic.error,
-            marginTop: "4px",
+            fontSize: theme.fontSize.xs,
+            color: theme.colors.semantic.error,
+            marginTop: theme.spacing.xxs,
           }}>
           {errorMessage}
         </span>
@@ -237,9 +226,9 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
       {!showError && helperText && (
         <span
           style={{
-            fontSize: fontSize.xs,
-            color: colors.semantic.secondary,
-            marginTop: "4px",
+            fontSize: theme.fontSize.xs,
+            color: theme.colors.semantic.secondary,
+            marginTop: theme.spacing.xxs,
           }}>
           {helperText}
         </span>

@@ -1,5 +1,5 @@
 import React from "react";
-import { colors, fontSize, fontWeight } from "../../tokens";
+import styled from "styled-components";
 
 export interface LabelProps {
   htmlFor?: string;
@@ -10,6 +10,20 @@ export interface LabelProps {
   'data-testid'?: string;
 }
 
+const StyledLabel = styled.label`
+  font-size: ${props => props.theme.fontSize.sm};
+  font-weight: ${props => props.theme.fontWeight.medium};
+  color: ${props => props.theme.colors.text.primary};
+  margin-bottom: ${props => props.theme.spacing.xxs};
+  display: block;
+  font-family: inherit;
+`;
+
+const RequiredMark = styled.span`
+  color: ${props => props.theme.colors.semantic.error};
+  margin-left: ${props => props.theme.spacing.xxs};
+`;
+
 export const Label: React.FC<LabelProps> = ({
   htmlFor,
   required = false,
@@ -19,26 +33,14 @@ export const Label: React.FC<LabelProps> = ({
   'data-testid': testId,
 }) => {
   return (
-    <label
+    <StyledLabel
       htmlFor={htmlFor}
       className={className}
       data-testid={testId}
-      style={{
-        fontSize: fontSize.sm,
-        fontWeight: fontWeight.medium,
-        color: colors.semantic.text,
-        marginBottom: "4px",
-        display: "block",
-        fontFamily: "inherit",
-        ...style,
-      }}
+      style={style}
     >
       {children}
-      {required && (
-        <span style={{ color: colors.semantic.error, marginLeft: "4px" }}>
-          *
-        </span>
-      )}
-    </label>
+      {required && <RequiredMark>*</RequiredMark>}
+    </StyledLabel>
   );
 };

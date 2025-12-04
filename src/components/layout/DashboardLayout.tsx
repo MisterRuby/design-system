@@ -3,7 +3,7 @@ import { HeaderProps } from '../organisms/Header';
 import { Header } from '../organisms/Header';
 import { SideBarProps } from '../organisms/SideBar';
 import { SideBar } from '../organisms/SideBar';
-import { colors, spacing } from '../../tokens';
+import { useTheme } from 'styled-components';
 
 /**
  * 대시보드 레이아웃 Props
@@ -68,12 +68,16 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   sideBar,
   children,
   variant = 'default',
-  contentPadding = spacing.xl,
-  contentBackgroundColor = colors.background.white,
+  contentPadding,
+  contentBackgroundColor,
   headerGap = '0',
   className = '',
   style = {},
 }) => {
+  const theme = useTheme();
+  const resolvedPadding = contentPadding || theme.spacing.xl;
+  const resolvedBackground = contentBackgroundColor || theme.colors.background.white;
+
   const getVariantStyles = () => {
     switch (variant) {
       case 'fixed':
@@ -102,8 +106,8 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
           content: {
             flex: 1,
             overflow: 'auto',
-            padding: contentPadding,
-            backgroundColor: contentBackgroundColor,
+            padding: resolvedPadding,
+            backgroundColor: resolvedBackground,
             marginTop: headerGap,
           },
         };
@@ -122,10 +126,10 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
           header: {
             position: 'sticky' as const,
             top: 0,
-            zIndex: 10,
+            zIndex: theme.zIndex.sticky,
             flexShrink: 0,
-            backgroundColor: colors.background.white,
-            borderBottom: `1px solid ${colors.border.default}`,
+            backgroundColor: theme.colors.background.white,
+            borderBottom: `${theme.borderWidth[1]} solid ${theme.colors.border.default}`,
           },
           body: {
             display: 'flex',
@@ -142,8 +146,8 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
           content: {
             flex: 1,
             overflow: 'auto',
-            padding: contentPadding,
-            backgroundColor: contentBackgroundColor,
+            padding: resolvedPadding,
+            backgroundColor: resolvedBackground,
             marginTop: headerGap,
           },
         };
@@ -170,8 +174,8 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
           content: {
             flex: 1,
             overflow: 'auto',
-            padding: contentPadding,
-            backgroundColor: contentBackgroundColor,
+            padding: resolvedPadding,
+            backgroundColor: resolvedBackground,
             marginTop: headerGap,
           },
         };

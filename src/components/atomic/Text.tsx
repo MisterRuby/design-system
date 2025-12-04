@@ -1,5 +1,5 @@
 import React from "react";
-import { colors, typography, fontSize, fontWeight } from "../../tokens";
+import { useTheme } from "styled-components";
 import type {
   TextVariant,
   TextSize,
@@ -35,6 +35,8 @@ export const Text: React.FC<TextProps> = ({
   className = "",
   style = {},
 }) => {
+  const theme = useTheme();
+
   const getElementForVariant = (variant: TextVariant): React.ElementType => {
     switch (variant) {
       case "h1": return "h1";
@@ -53,38 +55,38 @@ export const Text: React.FC<TextProps> = ({
 
 
   const getSizeStyles = (size: TextSize) => {
-    return { fontSize: fontSize[size] };
+    return { fontSize: theme.fontSize[size] };
   };
 
   const getWeightStyles = (weight: TextWeight) => {
-    return { fontWeight: fontWeight[weight] };
+    return { fontWeight: theme.fontWeight[weight] };
   };
 
   const getColorStyles = (color: TextColor) => {
     switch (color) {
       case "primary":
-        return { color: colors.semantic.primary };
+        return { color: theme.colors.semantic.primary };
       case "secondary":
-        return { color: colors.semantic.secondary };
+        return { color: theme.colors.semantic.secondary };
       case "success":
-        return { color: colors.semantic.success };
+        return { color: theme.colors.semantic.success };
       case "error":
-        return { color: colors.semantic.error };
+        return { color: theme.colors.semantic.error };
       case "warning":
-        return { color: colors.semantic.warning };
+        return { color: theme.colors.semantic.warning };
       case "info":
-        return { color: colors.semantic.info };
+        return { color: theme.colors.semantic.info };
       case "muted":
-        return { color: colors.semantic.muted };
+        return { color: theme.colors.semantic.muted };
       case "text":
-        return { color: colors.semantic.text };
+        return { color: theme.colors.semantic.text };
       default:
-        return { color: colors.semantic.text };
+        return { color: theme.colors.semantic.text };
     }
   };
 
   // Typography variant 스타일 가져오기
-  const variantStyles = typography[variant];
+  const variantStyles = theme.typography[variant];
   const sizeStyles = size ? getSizeStyles(size) : {};
   const weightStyles = weight ? getWeightStyles(weight) : {};
   const colorStyles = getColorStyles(color);

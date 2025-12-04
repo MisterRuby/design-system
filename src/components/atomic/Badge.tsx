@@ -1,8 +1,7 @@
 import React from 'react';
-import { borderRadius, borderWidth, colors, fontSize, fontWeight, spacing, transitions, opacity, shadowOpacity } from '../../tokens';
+import styled from 'styled-components';
 import { CheckboxSize } from '../../types';
 import { Icon, IconName } from './Icon';
-
 
 export interface BadgeProps {
   children: React.ReactNode;
@@ -16,6 +15,84 @@ export interface BadgeProps {
   icon?: IconName;
 }
 
+interface BadgeContainerProps {
+  $variant: 'solid' | 'outline' | 'soft';
+  $color: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info';
+  $size: CheckboxSize;
+  $rounded: boolean;
+  $disabled: boolean;
+}
+
+
+const getBackgroundColor = (color: string, variant: string, disabled: boolean, theme: any) => {
+  if (disabled) return theme.colors.background.disabled;
+
+  if (variant === 'solid') return theme.colors.semantic[color];
+  if (variant === 'outline') return 'transparent';
+  return theme.component.badge.soft[color];
+};
+
+const getTextColor = (color: string, variant: string, disabled: boolean, theme: any) => {
+  if (disabled) return theme.colors.text.muted;
+  if (variant === 'solid') return theme.colors.background.white;
+  return theme.colors.semantic[color];
+};
+
+const getBorderColor = (color: string, variant: string, disabled: boolean, theme: any) => {
+  if (disabled) return theme.colors.border.light;
+  if (variant === 'outline') return theme.colors.semantic[color];
+  if (variant === 'solid') return theme.colors.semantic[color];
+  return 'transparent';
+};
+
+const BadgeContainer = styled.span<BadgeContainerProps>`
+  display: inline-flex;
+  align-items: center;
+  gap: ${props => props.theme.component.badge.size[props.$size].gap};
+  padding: ${props => props.theme.component.badge.size[props.$size].padding};
+  font-size: ${props => props.theme.component.badge.size[props.$size].fontSize};
+  line-height: ${props => props.theme.component.badge.size[props.$size].lineHeight};
+  font-weight: ${props => props.theme.fontWeight.medium};
+  background-color: ${props => getBackgroundColor(props.$color, props.$variant, props.$disabled, props.theme)};
+  color: ${props => getTextColor(props.$color, props.$variant, props.$disabled, props.theme)};
+  border: ${props => props.theme.borderWidth[1]} solid ${props => getBorderColor(props.$color, props.$variant, props.$disabled, props.theme)};
+  border-radius: ${props => props.$rounded ? props.theme.borderRadius.full : props.theme.borderRadius.sm};
+  white-space: nowrap;
+  opacity: ${props => props.$disabled ? props.theme.opacity.disabled : props.theme.opacity.visible};
+  cursor: ${props => props.$disabled ? 'not-allowed' : 'default'};
+  transition: ${props => props.theme.transitions.normal};
+  max-width: fit-content;
+`;
+
+const RemoveButton = styled.button<{ $iconSize: string; $disabled: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: ${props => props.$iconSize};
+  height: ${props => props.$iconSize};
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: none;
+  cursor: ${props => props.$disabled ? 'not-allowed' : 'pointer'};
+  font-size: ${props => props.theme.fontSize.xxs};
+  color: currentColor;
+  transition: ${props => props.theme.transitions.normal};
+  margin-left: ${props => props.theme.spacing.xxs};
+
+  &:hover:not(:disabled) {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+`;
+
+const getIconSize = (size: CheckboxSize): string => {
+  const sizeMap: Record<CheckboxSize, string> = {
+    sm: '12px',
+    md: '14px',
+    lg: '16px',
+  };
+  return sizeMap[size];
+};
+
 export const Badge: React.FC<BadgeProps> = ({
   children,
   variant = 'solid',
@@ -27,166 +104,33 @@ export const Badge: React.FC<BadgeProps> = ({
   disabled = false,
   icon
 }) => {
-  const getSizeStyles = (size: CheckboxSize) => {
-    switch (size) {
-      case 'sm':
-        return {
-          padding: `${spacing.xxs} ${spacing.xxs}`,
-          fontSize: fontSize.xxs,
-          lineHeight: '12px',
-          iconSize: '12px',
-          gap: spacing.xxs
-        };
-      case 'md':
-        return {
-          padding: `${spacing.xxs} ${spacing.xs}`,
-          fontSize: fontSize.xs,
-          lineHeight: '16px',
-          iconSize: '14px',
-          gap: spacing.xxs
-        };
-      case 'lg':
-        return {
-          padding: `${spacing.xxs} ${spacing.sm}`,
-          fontSize: fontSize.sm,
-          lineHeight: '20px',
-          iconSize: '16px',
-          gap: spacing.xs
-        };
-      default:
-        return {
-          padding: `${spacing.xxs} ${spacing.xs}`,
-          fontSize: fontSize.xs,
-          lineHeight: '16px',
-          iconSize: '14px',
-          gap: spacing.xxs
-        };
-    }
-  };
-
-  const getColorStyles = (color: string, variant: string) => {
-    if (disabled) {
-      return {
-        backgroundColor: colors.background.disabled,
-        color: colors.semantic.muted,
-        borderColor: colors.gray[200]
-      };
-    }
-
-    const colorMap = {
-      primary: colors.semantic.primary,
-      secondary: colors.semantic.secondary,
-      success: colors.semantic.success,
-      error: colors.semantic.error,
-      warning: colors.semantic.warning,
-      info: colors.semantic.info
-    };
-
-    const mainColor = colorMap[color as keyof typeof colorMap];
-
-    switch (variant) {
-      case 'solid':
-        return {
-          backgroundColor: mainColor,
-          color: colors.background.white,
-          borderColor: mainColor
-        };
-      case 'outline':
-        return {
-          backgroundColor: 'transparent',
-          color: mainColor,
-          borderColor: mainColor
-        };
-      case 'soft':
-        const softColorMap = {
-          primary: colors.primary[100],
-          secondary: colors.gray[100],
-          success: colors.success[100],
-          error: colors.error[100],
-          warning: colors.warning[100],
-          info: colors.info[100]
-        };
-        return {
-          backgroundColor: softColorMap[color as keyof typeof softColorMap],
-          color: mainColor,
-          borderColor: 'transparent'
-        };
-      default:
-        return {
-          backgroundColor: mainColor,
-          color: colors.background.white,
-          borderColor: mainColor
-        };
-    }
-  };
-
-  const sizeStyles = getSizeStyles(size);
-  const colorStyles = getColorStyles(color, variant);
-
-  const badgeStyles: React.CSSProperties = {
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: sizeStyles.gap,
-    padding: sizeStyles.padding,
-    fontSize: sizeStyles.fontSize,
-    lineHeight: sizeStyles.lineHeight,
-    fontWeight: fontWeight.medium,
-    backgroundColor: colorStyles.backgroundColor,
-    color: colorStyles.color,
-    border: `${borderWidth[1]} solid ${colorStyles.borderColor}`,
-    borderRadius: rounded ? borderRadius.full : borderRadius.sm,
-    whiteSpace: 'nowrap',
-    opacity: disabled ? opacity.disabled : opacity.visible,
-    cursor: disabled ? 'not-allowed' : 'default',
-    transition: transitions.normal,
-    maxWidth: 'fit-content'
-  };
-
-  const removeButtonStyles: React.CSSProperties = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: sizeStyles.iconSize,
-    height: sizeStyles.iconSize,
-    borderRadius: '50%',
-    backgroundColor: `rgba(0, 0, 0, ${shadowOpacity.light})`,
-    border: 'none',
-    cursor: disabled ? 'not-allowed' : 'pointer',
-    fontSize: fontSize.xxs,
-    color: 'currentColor',
-    transition: transitions.normal,
-    marginLeft: spacing.xxs
-  };
-
-
   return (
-    <span style={badgeStyles}>
+    <BadgeContainer
+      $variant={variant}
+      $color={color}
+      $size={size}
+      $rounded={rounded}
+      $disabled={disabled}
+    >
       {icon && (
         <Icon
           name={icon}
-          size={sizeStyles.iconSize}
+          size={getIconSize(size)}
           color="currentColor"
         />
       )}
       {children}
       {removable && (
-        <button
+        <RemoveButton
           type="button"
           onClick={!disabled ? onRemove : undefined}
-          style={removeButtonStyles}
-          onMouseEnter={(e) => {
-            if (!disabled) {
-              e.currentTarget.style.backgroundColor = `rgba(0, 0, 0, ${shadowOpacity.heavy})`;
-            }
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = `rgba(0, 0, 0, ${shadowOpacity.light})`;
-          }}
+          $iconSize={getIconSize(size)}
+          $disabled={disabled}
           aria-label="제거"
         >
           ×
-        </button>
+        </RemoveButton>
       )}
-    </span>
+    </BadgeContainer>
   );
 };

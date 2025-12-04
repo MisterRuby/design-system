@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Alert } from '../../components';
 import { action } from "../actions";
-import { within, userEvent } from '@storybook/testing-library';
+import { within, userEvent, waitFor } from '@storybook/testing-library';
 import { Step } from '../types';
-import { spacing } from '../../tokens';
+import { colors, spacing } from '../../tokens';
 
 export default {
   title: "Components/Atomic/Alert",
@@ -130,7 +130,30 @@ export const WithTitle = {
   },
 };
 
+const ClosableAlertStory: React.FC<React.ComponentProps<typeof Alert>> = (props) => {
+  const [visible, setVisible] = useState(true);
+
+  if (!visible) {
+    return (
+      <div style={{ padding: spacing.md, color: colors.text.secondary, textAlign: "center" }}>
+        알림이 닫혔습니다.
+      </div>
+    );
+  }
+
+  return (
+    <Alert
+      {...props}
+      onClose={() => {
+        props.onClose?.();
+        setVisible(false);
+      }}
+    />
+  );
+};
+
 export const Closable = {
+  render: (args: React.ComponentProps<typeof Alert>) => <ClosableAlertStory {...args} />,
   args: {
     variant: "info",
     title: "새로운 기능 안내",
@@ -140,20 +163,28 @@ export const Closable = {
   },
   play: async ({ canvasElement, step }: { canvasElement: HTMLElement; step: Step }) => {
     const canvas = within(canvasElement);
+    const user = userEvent.setup({ delay: 400 });
     const closeButton = canvas.getByLabelText('알림 닫기');
 
     await step("알림 내용 읽기 대기", async () => {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout(resolve, 800));
     });
 
     await step("닫기 버튼 호버 효과 테스트", async () => {
-      await userEvent.hover(closeButton);
-      await new Promise(resolve => setTimeout(resolve, 600));
+      await user.hover(closeButton);
+      await new Promise(resolve => setTimeout(resolve, 500));
     });
 
     await step("닫기 버튼 클릭 테스트", async () => {
-      await userEvent.click(closeButton);
-      await new Promise(resolve => setTimeout(resolve, 400));
+      await user.click(closeButton);
+      await waitFor(() => {
+        const remaining = canvas.queryByLabelText('알림 닫기');
+        if (remaining) {
+          throw new Error('알림이 아직 닫히지 않았습니다');
+        }
+        return true;
+      });
+      await canvas.findByText('알림이 닫혔습니다.');
     });
   },
   parameters: {
@@ -195,13 +226,12 @@ export const IconOptions = {
 
 const ClosableAlertExample = () => {
   const [alerts, setAlerts] = useState([
-    { id: 1, variant: "success", title: "작업 완료", message: "데이터 내보내기가 완료되었습니다." },
-    { id: 2, variant: "warning", title: "주의사항", message: "시스템 점검이 예정되어 있습니다." },
-    { id: 3, variant: "info", title: "안내", message: "새로운 업데이트가 있습니다." }
+    { id: 1, variant: "warning", title: "주의사항", message: "시스템 점검이 예정되어 있습니다." },
+    { id: 2, variant: "info", title: "안내", message: "새로운 업데이트가 있습니다." },
   ]);
 
   const closeAlert = (id: number) => {
-    setAlerts(alerts.filter(alert => alert.id !== id));
+    setAlerts((prev) => prev.filter((alert) => alert.id !== id));
   };
 
   return (
@@ -218,7 +248,7 @@ const ClosableAlertExample = () => {
         </Alert>
       ))}
       {alerts.length === 0 && (
-        <div style={{ textAlign: "center", padding: spacing.lg, color: "#666" }}>
+        <div style={{ textAlign: "center", padding: spacing.lg, color: colors.text.secondary }}>
           모든 알림이 닫혔습니다.
         </div>
       )}
@@ -230,27 +260,37 @@ export const InteractiveExample = {
   render: ClosableAlertExample,
   play: async ({ canvasElement, step }: { canvasElement: HTMLElement; step: Step }) => {
     const canvas = within(canvasElement);
+    const user = userEvent.setup({ delay: 400 });
+
+    const expectCloseButtonCount = async (expected: number, label: string) => {
+      await waitFor(() => {
+        const buttons = canvas.queryAllByLabelText('알림 닫기');
+        if (buttons.length !== expected) {
+          throw new Error(`${label}: 닫기 버튼 개수 ${buttons.length} (기대값 ${expected})`);
+        }
+        return true;
+      });
+    };
 
     await step("모든 알림 표시 확인", async () => {
-      await new Promise(resolve => setTimeout(resolve, 800));
+      await expectCloseButtonCount(2, '초기 상태');
     });
 
     await step("첫 번째 알림 닫기", async () => {
       const firstCloseButton = canvas.getAllByLabelText('알림 닫기')[0];
-      await userEvent.click(firstCloseButton);
-      await new Promise(resolve => setTimeout(resolve, 600));
+      await user.click(firstCloseButton);
+      await expectCloseButtonCount(1, '첫 번째 닫기 후');
     });
 
     await step("두 번째 알림 닫기", async () => {
       const secondCloseButton = canvas.getAllByLabelText('알림 닫기')[0];
-      await userEvent.click(secondCloseButton);
-      await new Promise(resolve => setTimeout(resolve, 600));
+      await user.click(secondCloseButton);
+      await expectCloseButtonCount(0, '두 번째 닫기 후');
+      await canvas.findByText('모든 알림이 닫혔습니다.');
     });
 
     await step("마지막 알림 닫기", async () => {
-      const lastCloseButton = canvas.getByLabelText('알림 닫기');
-      await userEvent.click(lastCloseButton);
-      await new Promise(resolve => setTimeout(resolve, 800));
+      await canvas.findByText('모든 알림이 닫혔습니다.');
     });
   },
   parameters: {

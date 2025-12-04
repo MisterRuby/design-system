@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header, HeaderProps } from '../organisms/Header';
-import { colors } from '../../tokens';
+import { useTheme } from 'styled-components';
 
 /**
  * 앱 레이아웃 Props
@@ -51,27 +51,32 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
   header,
   children,
   variant = 'default',
-  maxWidth = '1200px',
-  contentPadding = '2rem',
-  backgroundColor = colors.background.white,
+  maxWidth,
+  contentPadding,
+  backgroundColor,
   className = '',
   style = {},
 }) => {
+  const theme = useTheme();
+  const resolvedBackground = backgroundColor || theme.colors.background.white;
+  const resolvedMaxWidth = maxWidth || theme.layout.containerMaxWidth;
+  const resolvedContentPadding = contentPadding || theme.semanticSpacing.containerPaddingDesktop;
+
   const getVariantStyles = () => {
     switch (variant) {
       case 'fullwidth':
         return {
           content: {
             maxWidth: '100%',
-            padding: contentPadding,
+            padding: resolvedContentPadding,
           },
         };
       case 'centered':
         return {
           content: {
-            maxWidth: maxWidth,
+            maxWidth: resolvedMaxWidth,
             margin: '0 auto',
-            padding: contentPadding,
+            padding: resolvedContentPadding,
             textAlign: 'center' as const,
           },
         };
@@ -79,9 +84,9 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
       default:
         return {
           content: {
-            maxWidth: maxWidth,
+            maxWidth: resolvedMaxWidth,
             margin: '0 auto',
-            padding: contentPadding,
+            padding: resolvedContentPadding,
           },
         };
     }
@@ -93,7 +98,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
-    backgroundColor: backgroundColor,
+    backgroundColor: resolvedBackground,
     ...style,
   };
 

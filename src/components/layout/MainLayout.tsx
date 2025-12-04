@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header, HeaderProps } from '../organisms/Header';
 import { SideBar, SideBarProps } from '../organisms/SideBar';
-import { colors, spacing } from '../../tokens';
+import { useTheme } from 'styled-components';
 
 /**
  * 메인 레이아웃 Props
@@ -63,12 +63,16 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
   sideBar,
   children,
   variant = 'default',
-  contentPadding = spacing.xl,
-  contentBackgroundColor = colors.background.white,
+  contentPadding,
+  contentBackgroundColor,
   headerOverlap = 'none',
   className = '',
   style = {},
 }) => {
+  const theme = useTheme();
+  const resolvedPadding = contentPadding || theme.spacing.xl;
+  const resolvedBackground = contentBackgroundColor || theme.colors.background.white;
+
   const getVariantStyles = () => {
     switch (variant) {
       case 'fixed-header':
@@ -84,20 +88,20 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
             top: 0,
             left: 0,
             right: 0,
-            zIndex: 1001,
+            zIndex: theme.zIndex.sticky,
           },
           body: {
             display: 'flex',
             flex: 1,
-            marginTop: '52px', // header height
+            marginTop: theme.layout.headerHeight,
             overflow: 'hidden',
           },
           sidebar: {},
           content: {
             flex: 1,
             overflow: 'auto',
-            padding: contentPadding,
-            backgroundColor: contentBackgroundColor,
+            padding: resolvedPadding,
+            backgroundColor: resolvedBackground,
           },
         };
       case 'floating-sidebar':
@@ -120,19 +124,19 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
             top: 0,
             left: 0,
             height: '100%',
-            zIndex: 1000,
+            zIndex: theme.zIndex.dropdown,
           },
           content: {
             flex: 1,
             overflow: 'auto',
-            padding: contentPadding,
-            backgroundColor: contentBackgroundColor,
+            padding: resolvedPadding,
+            backgroundColor: resolvedBackground,
             marginLeft: 0,
-            paddingLeft: sideBar.collapsed ? `calc(64px + ${spacing.xl})` :
-                        sideBar.width === 'narrow' ? `calc(200px + ${spacing.xl})` :
-                        sideBar.width === 'wide' ? `calc(320px + ${spacing.xl})` :
-                        `calc(240px + ${spacing.xl})`,
-            transition: 'padding-left 0.3s ease-in-out',
+            paddingLeft: sideBar.collapsed ? `calc(${theme.layout.sidebarCollapsedWidth} + ${resolvedPadding})` :
+                        sideBar.width === 'narrow' ? `calc(${theme.layout.sidebarNarrowWidth} + ${resolvedPadding})` :
+                        sideBar.width === 'wide' ? `calc(${theme.layout.sidebarWideWidth} + ${resolvedPadding})` :
+                        `calc(${theme.layout.sidebarWidth} + ${resolvedPadding})`,
+            transition: `padding-left ${theme.transitions.slow}`,
           },
         };
       case 'default':
@@ -154,8 +158,8 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
           content: {
             flex: 1,
             overflow: 'auto',
-            padding: contentPadding,
-            backgroundColor: contentBackgroundColor,
+            padding: resolvedPadding,
+            backgroundColor: resolvedBackground,
           },
         };
     }
@@ -166,10 +170,10 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
       case 'sidebar':
         return {
           header: {
-            zIndex: 1001,
+            zIndex: theme.zIndex.sticky,
           },
           sidebar: {
-            paddingTop: '52px',
+            paddingTop: theme.layout.headerHeight,
           },
         };
       case 'content':
@@ -177,13 +181,19 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
           header: {
             position: 'absolute' as const,
             top: 0,
-            left: sideBar.collapsed ? '64px' : sideBar.width === 'narrow' ? '200px' : sideBar.width === 'wide' ? '320px' : '240px',
+            left: sideBar.collapsed
+              ? theme.layout.sidebarCollapsedWidth
+              : sideBar.width === 'narrow'
+              ? theme.layout.sidebarNarrowWidth
+              : sideBar.width === 'wide'
+              ? theme.layout.sidebarWideWidth
+              : theme.layout.sidebarWidth,
             right: 0,
-            zIndex: 1001,
-            transition: 'left 0.3s ease-in-out',
+            zIndex: theme.zIndex.sticky,
+            transition: `left ${theme.transitions.slow}`,
           },
           content: {
-            paddingTop: `calc(52px + ${contentPadding})`,
+            paddingTop: `calc(${theme.layout.headerHeight} + ${resolvedPadding})`,
           },
         };
       case 'none':

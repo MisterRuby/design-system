@@ -1,5 +1,5 @@
 import React from 'react';
-import { borderRadius, borderWidth, colors, fontSize, fontWeight, spacing, transitions } from '../../tokens';
+import styled from 'styled-components';
 import { SemanticVariant } from '../../types';
 import { Icon, IconName } from './Icon';
 
@@ -14,6 +14,73 @@ export interface AlertProps {
   className?: string;
 }
 
+interface AlertContainerProps {
+  $variant: SemanticVariant;
+}
+
+const getVariantDefaultIcon = (variant: SemanticVariant): IconName => {
+  const iconMap: Record<SemanticVariant, IconName> = {
+    primary: 'info',
+    secondary: 'info',
+    success: 'check',
+    error: 'close',
+    warning: 'warning',
+    info: 'info',
+  };
+  return iconMap[variant];
+};
+
+const AlertContainer = styled.div<AlertContainerProps>`
+  display: flex;
+  gap: ${props => props.theme.spacing.sm};
+  padding: ${props => props.theme.spacing.md};
+  background-color: ${props => props.theme.component.alert[props.$variant].background};
+  border: ${props => props.theme.borderWidth[1]} solid ${props => props.theme.component.alert[props.$variant].border};
+  border-radius: ${props => props.theme.borderRadius.md};
+  font-size: ${props => props.theme.fontSize.sm};
+  line-height: ${props => props.theme.lineHeight.relaxed};
+  color: ${props => props.theme.component.alert[props.$variant].text};
+  position: relative;
+`;
+
+const IconWrapper = styled.div<{ $variant: SemanticVariant }>`
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: ${props => props.theme.component.alert[props.$variant].icon};
+`;
+
+const Content = styled.div`
+  flex: 1;
+  min-width: 0;
+`;
+
+const Title = styled.div<{ $variant: SemanticVariant }>`
+  font-size: ${props => props.theme.fontSize.sm};
+  font-weight: ${props => props.theme.fontWeight.semibold};
+  color: ${props => props.theme.component.alert[props.$variant].title};
+  margin: 0 0 ${props => props.theme.spacing.xxs} 0;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: ${props => props.theme.spacing.sm};
+  right: ${props => props.theme.spacing.sm};
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: ${props => props.theme.borderRadius.sm};
+  color: currentColor;
+  transition: ${props => props.theme.transitions.normal};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+`;
+
 export const Alert: React.FC<AlertProps> = ({
   children,
   variant = 'info',
@@ -24,141 +91,40 @@ export const Alert: React.FC<AlertProps> = ({
   style = {},
   className = ''
 }) => {
-  const getVariantStyles = (variant: SemanticVariant) => {
-    const variantConfig = {
-      primary: {
-        backgroundColor: colors.primary[50],
-        borderColor: colors.primary[200],
-        iconColor: colors.semantic.primary,
-        titleColor: colors.primary[900],
-        textColor: colors.primary[800],
-        defaultIcon: 'info' as IconName
-      },
-      secondary: {
-        backgroundColor: colors.gray[50],
-        borderColor: colors.gray[200],
-        iconColor: colors.semantic.secondary,
-        titleColor: colors.gray[900],
-        textColor: colors.gray[800],
-        defaultIcon: 'info' as IconName
-      },
-      success: {
-        backgroundColor: colors.success[50],
-        borderColor: colors.success[200],
-        iconColor: colors.semantic.success,
-        titleColor: colors.success[900],
-        textColor: colors.success[800],
-        defaultIcon: 'check' as IconName
-      },
-      error: {
-        backgroundColor: colors.error[50],
-        borderColor: colors.error[200],
-        iconColor: colors.semantic.error,
-        titleColor: colors.error[900],
-        textColor: colors.error[800],
-        defaultIcon: 'close' as IconName
-      },
-      warning: {
-        backgroundColor: colors.warning[50],
-        borderColor: colors.warning[200],
-        iconColor: colors.semantic.warning,
-        titleColor: colors.warning[900],
-        textColor: colors.warning[800],
-        defaultIcon: 'warning' as IconName
-      },
-      info: {
-        backgroundColor: colors.info[50],
-        borderColor: colors.info[200],
-        iconColor: colors.semantic.info,
-        titleColor: colors.info[900],
-        textColor: colors.info[800],
-        defaultIcon: 'info' as IconName
-      }
-    };
-
-    return variantConfig[variant];
-  };
-
-  const variantStyles = getVariantStyles(variant);
-
   const getIconName = (): IconName | null => {
     if (icon === false) return null;
     if (typeof icon === 'string') return icon;
-    return variantStyles.defaultIcon;
+    return getVariantDefaultIcon(variant);
   };
 
   const iconName = getIconName();
 
-  const alertStyles: React.CSSProperties = {
-    display: 'flex',
-    gap: spacing.sm,
-    padding: spacing.md,
-    backgroundColor: variantStyles.backgroundColor,
-    border: `${borderWidth[1]} solid ${variantStyles.borderColor}`,
-    borderRadius: borderRadius.md,
-    fontSize: fontSize.sm,
-    lineHeight: '1.5',
-    color: variantStyles.textColor,
-    position: 'relative',
-    ...style,
-  };
-
-  const contentStyles: React.CSSProperties = {
-    flex: 1,
-    minWidth: 0,
-  };
-
-  const titleStyles: React.CSSProperties = {
-    fontSize: fontSize.sm,
-    fontWeight: fontWeight.semibold,
-    color: variantStyles.titleColor,
-    margin: '0 0 4px 0',
-  };
-
-  const closeButtonStyles: React.CSSProperties = {
-    position: 'absolute',
-    top: spacing.sm,
-    right: spacing.sm,
-    background: 'none',
-    border: 'none',
-    cursor: 'pointer',
-    padding: '2px',
-    borderRadius: borderRadius.sm,
-    color: variantStyles.textColor,
-    transition: transitions.normal,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  };
-
   return (
-    <div className={className} style={alertStyles} role="alert">
+    <AlertContainer
+      $variant={variant}
+      className={className}
+      style={style}
+      role="alert"
+    >
       {iconName && (
-        <div style={{ flexShrink: 0, marginTop: '2px' }}>
+        <IconWrapper $variant={variant}>
           <Icon
             name={iconName}
             size={16}
-            color={variantStyles.iconColor}
+            color="currentColor"
           />
-        </div>
+        </IconWrapper>
       )}
 
-      <div style={contentStyles}>
-        {title && <div style={titleStyles}>{title}</div>}
+      <Content>
+        {title && <Title $variant={variant}>{title}</Title>}
         <div>{children}</div>
-      </div>
+      </Content>
 
       {closable && (
-        <button
+        <CloseButton
           type="button"
           onClick={onClose}
-          style={closeButtonStyles}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.05)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'transparent';
-          }}
           aria-label="알림 닫기"
         >
           <Icon
@@ -166,8 +132,8 @@ export const Alert: React.FC<AlertProps> = ({
             size={14}
             color="currentColor"
           />
-        </button>
+        </CloseButton>
       )}
-    </div>
+    </AlertContainer>
   );
 };

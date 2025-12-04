@@ -1,5 +1,5 @@
 import React from 'react';
-import { borderRadius, colors, semanticShadows, transitions } from '../../tokens';
+import styled from 'styled-components';
 
 export interface CardProps {
   children: React.ReactNode;
@@ -11,6 +11,48 @@ export interface CardProps {
   className?: string;
 }
 
+interface CardContainerProps {
+  $variant: 'default' | 'outlined' | 'elevated';
+  $padding: 'none' | 'sm' | 'md' | 'lg';
+  $hoverable: boolean;
+  $clickable: boolean;
+}
+
+const getBackgroundColor = (variant: string, theme: any) => {
+  return theme.colors.background.white;
+};
+
+const getBorder = (variant: string, theme: any) => {
+  if (variant === 'elevated') return 'none';
+  return `${theme.borderWidth[1]} solid ${theme.colors.border.default}`;
+};
+
+const getBoxShadow = (variant: string, theme: any) => {
+  const shadowMap = {
+    outlined: theme.shadows.none,
+    elevated: theme.shadows['2xl'],
+    default: theme.shadows.sm,
+  };
+  return shadowMap[variant as keyof typeof shadowMap] || shadowMap.default;
+};
+
+const CardContainer = styled.div<CardContainerProps>`
+  border-radius: ${props => props.theme.borderRadius.md};
+  padding: ${props => props.theme.component.card.padding[props.$padding]};
+  transition: ${props => props.theme.transitions.normal};
+  cursor: ${props => (props.$hoverable || props.$clickable) ? 'pointer' : 'default'};
+  background-color: ${props => getBackgroundColor(props.$variant, props.theme)};
+  border: ${props => getBorder(props.$variant, props.theme)};
+  box-shadow: ${props => getBoxShadow(props.$variant, props.theme)};
+
+  ${props => (props.$hoverable || props.$clickable) && `
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: ${props.theme.shadows.md};
+    }
+  `}
+`;
+
 export const Card: React.FC<CardProps> = ({
   children,
   variant = 'default',
@@ -20,79 +62,17 @@ export const Card: React.FC<CardProps> = ({
   style = {},
   className = ''
 }) => {
-  const getVariantStyles = (variant: string) => {
-    switch (variant) {
-      case 'outlined':
-        return {
-          backgroundColor: colors.background.white,
-          border: `1px solid ${colors.border.default}`,
-          boxShadow: 'none'
-        };
-      case 'elevated':
-        return {
-          backgroundColor: colors.background.white,
-          border: 'none',
-          boxShadow: semanticShadows.modalContent
-        };
-      case 'default':
-      default:
-        return {
-          backgroundColor: colors.background.white,
-          border: `1px solid ${colors.border.light}`,
-          boxShadow: semanticShadows.cardResting
-        };
-    }
-  };
-
-  const getPaddingStyles = (padding: string) => {
-    switch (padding) {
-      case 'none':
-        return '0';
-      case 'sm':
-        return '12px';
-      case 'md':
-        return '16px';
-      case 'lg':
-        return '24px';
-      default:
-        return '16px';
-    }
-  };
-
-  const variantStyles = getVariantStyles(variant);
-  const paddingValue = getPaddingStyles(padding);
-
-  const cardStyles: React.CSSProperties = {
-    borderRadius: borderRadius.md,
-    padding: paddingValue,
-    transition: transitions.normal,
-    cursor: hoverable || onClick ? 'pointer' : 'default',
-    ...variantStyles,
-    ...style,
-  };
-
-  const hoverStyles: React.CSSProperties = hoverable || onClick ? {
-    transform: 'translateY(-2px)',
-    boxShadow: semanticShadows.cardHover,
-  } : {};
-
   return (
-    <div
+    <CardContainer
       className={className}
       onClick={onClick}
-      style={cardStyles}
-      onMouseEnter={(e) => {
-        if (hoverable || onClick) {
-          Object.assign(e.currentTarget.style, hoverStyles);
-        }
-      }}
-      onMouseLeave={(e) => {
-        if (hoverable || onClick) {
-          Object.assign(e.currentTarget.style, cardStyles);
-        }
-      }}
+      style={style}
+      $variant={variant}
+      $padding={padding}
+      $hoverable={hoverable}
+      $clickable={!!onClick}
     >
       {children}
-    </div>
+    </CardContainer>
   );
 };

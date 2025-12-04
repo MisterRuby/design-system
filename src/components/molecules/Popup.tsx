@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Button } from '../atomic/Button';
 import { Icon } from '../atomic/Icon';
-import { borderRadius, colors, fontSize, spacing } from '../../tokens';
+import { useTheme } from 'styled-components';
 import { ButtonVariant, ComponentSize } from '../../types';
 
 // Popup 설정 상수
@@ -54,6 +54,7 @@ export const Popup: React.FC<PopupProps> = ({
   actions = [],
   className = ''
 }) => {
+  const theme = useTheme();
   const popupRef = useRef<HTMLDivElement>(null);
 
   const getSizeStyles = (size: string) => {
@@ -104,17 +105,17 @@ export const Popup: React.FC<PopupProps> = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        zIndex: POPUP_CONFIG.overlay.zIndex,
-        padding: spacing.md,
+        zIndex: theme.zIndex.modalBackdrop,
+        padding: theme.spacing.md,
       }}
       className={className}
     >
       <div
         ref={popupRef}
         style={{
-          backgroundColor: colors.background.white,
-          borderRadius: borderRadius.lg,
-          boxShadow: POPUP_CONFIG.shadow,
+          backgroundColor: theme.colors.background.white,
+          borderRadius: theme.borderRadius.lg,
+          boxShadow: theme.semanticShadows.modalContent,
           width: sizeStyles.width,
           maxWidth: sizeStyles.maxWidth,
           maxHeight: POPUP_CONFIG.dimensions.maxHeight,
@@ -129,8 +130,8 @@ export const Popup: React.FC<PopupProps> = ({
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              padding: `${spacing.sm} ${spacing.md}`,
-              borderBottom: `1px solid ${colors.border.default}`,
+              padding: `${theme.spacing.sm} ${theme.spacing.md}`,
+              borderBottom: `${theme.borderWidth[1]} solid ${theme.colors.border.default}`,
               minHeight: POPUP_CONFIG.dimensions.titleMinHeight,
             }}
           >
@@ -138,9 +139,9 @@ export const Popup: React.FC<PopupProps> = ({
               <h2
                 style={{
                   margin: 0,
-                  fontSize: fontSize.lg,
-                  fontWeight: 600,
-                  color: colors.semantic.text,
+                  fontSize: theme.fontSize.lg,
+                  fontWeight: theme.fontWeight.semibold,
+                  color: theme.colors.semantic.text,
                 }}
               >
                 {title}
@@ -153,16 +154,16 @@ export const Popup: React.FC<PopupProps> = ({
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
-                  padding: spacing.xs,
-                  borderRadius: borderRadius.sm,
+                  padding: theme.spacing.xs,
+                  borderRadius: theme.borderRadius.sm,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: colors.semantic.muted,
-                  transition: POPUP_CONFIG.transitions,
+                  color: theme.colors.semantic.muted,
+                  transition: theme.transitions.normal,
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = colors.background.gray;
+                  e.currentTarget.style.backgroundColor = theme.colors.background.gray;
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = 'transparent';
@@ -176,12 +177,12 @@ export const Popup: React.FC<PopupProps> = ({
 
         <div
           style={{
-            padding: spacing.md,
+            padding: theme.spacing.md,
             flex: 1,
             overflowY: 'auto',
-            fontSize: fontSize.sm,
+            fontSize: theme.fontSize.sm,
             lineHeight: 1.5,
-            color: colors.semantic.text,
+            color: theme.colors.semantic.text,
           }}
         >
           {children}
@@ -191,9 +192,9 @@ export const Popup: React.FC<PopupProps> = ({
           <div
             style={{
               display: 'flex',
-              gap: spacing.sm,
-              padding: spacing.md,
-              borderTop: `1px solid ${colors.border.default}`,
+              gap: theme.spacing.sm,
+              padding: theme.spacing.md,
+              borderTop: `${theme.borderWidth[1]} solid ${theme.colors.border.default}`,
               justifyContent: 'flex-end',
             }}
           >

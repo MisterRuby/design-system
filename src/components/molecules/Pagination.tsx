@@ -1,14 +1,7 @@
 import React from "react";
 import { Button } from "../atomic/Button";
 import { Icon } from "../atomic/Icon";
-import {
-  colors,
-  spacing,
-  fontSize,
-  fontWeight,
-  borderRadius,
-  transitions,
-} from "../../tokens";
+import { useTheme } from "styled-components";
 
 export interface PaginationProps {
   currentPage: number;
@@ -33,25 +26,26 @@ export const Pagination: React.FC<PaginationProps> = ({
   className = "",
   style = {},
 }) => {
+  const theme = useTheme();
   const getSizeStyles = () => {
     switch (size) {
       case "sm":
         return {
-          buttonSize: "32px",
-          fontSize: fontSize.xs,
-          padding: spacing.xs,
+          buttonSize: theme.component.heights.sm,
+          fontSize: theme.fontSize.xs,
+          padding: theme.spacing.xs,
         };
       case "md":
         return {
-          buttonSize: "40px",
-          fontSize: fontSize.sm,
-          padding: spacing.sm,
+          buttonSize: theme.component.heights.md,
+          fontSize: theme.fontSize.sm,
+          padding: theme.spacing.sm,
         };
       case "lg":
         return {
-          buttonSize: "48px",
-          fontSize: fontSize.md,
-          padding: spacing.md,
+          buttonSize: theme.component.heights.lg,
+          fontSize: theme.fontSize.md,
+          padding: theme.spacing.md,
         };
     }
   };
@@ -112,13 +106,13 @@ export const Pagination: React.FC<PaginationProps> = ({
     height: sizeStyles.buttonSize,
     padding: `0 ${sizeStyles.padding}`,
     fontSize: sizeStyles.fontSize,
-    fontWeight: isActive ? fontWeight.semibold : fontWeight.normal,
-    color: isActive ? colors.semantic.primary : colors.text.primary,
+    fontWeight: isActive ? theme.fontWeight.semibold : theme.fontWeight.normal,
+    color: isActive ? theme.colors.semantic.primary : theme.colors.text.primary,
     backgroundColor: "transparent",
     border: "none",
-    borderRadius: borderRadius.sm,
+    borderRadius: theme.borderRadius.sm,
     cursor: disabled ? "not-allowed" : "pointer",
-    transition: transitions.normal,
+    transition: theme.transitions.normal,
     opacity: disabled ? 0.6 : 1,
     display: "flex",
     alignItems: "center",
@@ -130,12 +124,12 @@ export const Pagination: React.FC<PaginationProps> = ({
     height: sizeStyles.buttonSize,
     padding: `0 ${sizeStyles.padding}`,
     fontSize: sizeStyles.fontSize,
-    color: colors.text.primary,
+    color: theme.colors.text.primary,
     backgroundColor: "transparent",
     border: "none",
-    borderRadius: borderRadius.sm,
+    borderRadius: theme.borderRadius.sm,
     cursor: disabled ? "not-allowed" : "pointer",
-    transition: transitions.normal,
+    transition: theme.transitions.normal,
     opacity: disabled ? 0.6 : 1,
     display: "flex",
     alignItems: "center",
@@ -149,7 +143,7 @@ export const Pagination: React.FC<PaginationProps> = ({
     alignItems: "center",
     justifyContent: "center",
     fontSize: sizeStyles.fontSize,
-    color: colors.text.muted,
+    color: theme.colors.text.muted,
     cursor: "default",
     userSelect: "none",
   };
@@ -157,7 +151,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   const containerStyles: React.CSSProperties = {
     display: "flex",
     alignItems: "center",
-    gap: spacing.xxs,
+    gap: theme.spacing.xxs,
     listStyle: "none",
     padding: 0,
     margin: 0,

@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from '../atomic/Text';
 import { Button } from '../atomic/Button';
 import { Icon, IconName } from '../atomic/Icon';
-import { colors, fontWeight, spacing, borderRadius } from '../../tokens';
+import { useTheme } from 'styled-components';
 
 /**
  * 푸터 링크 아이템 인터페이스
@@ -125,28 +125,29 @@ export const Footer: React.FC<FooterProps> = ({
   className = '',
   style = {},
 }) => {
+  const theme = useTheme();
   const [newsletterEmail, setNewsletterEmail] = React.useState('');
 
   const getVariantStyles = () => {
     switch (variant) {
       case 'minimal':
         return {
-          backgroundColor: colors.background.white,
-          borderTop: `1px solid ${colors.border.default}`,
-          color: colors.semantic.text,
+          backgroundColor: theme.colors.background.white,
+          borderTop: `${theme.borderWidth[1]} solid ${theme.colors.border.default}`,
+          color: theme.colors.semantic.text,
         };
       case 'dark':
         return {
-          backgroundColor: colors.gray[900],
-          borderTop: `1px solid ${colors.gray[800]}`,
-          color: colors.background.white,
+          backgroundColor: theme.colors.gray[900],
+          borderTop: `${theme.borderWidth[1]} solid ${theme.colors.gray[800]}`,
+          color: theme.colors.background.white,
         };
       case 'default':
       default:
         return {
-          backgroundColor: colors.gray[50],
-          borderTop: `1px solid ${colors.border.default}`,
-          color: colors.semantic.text,
+          backgroundColor: theme.colors.gray[50],
+          borderTop: `${theme.borderWidth[1]} solid ${theme.colors.border.default}`,
+          color: theme.colors.semantic.text,
         };
     }
   };
@@ -160,9 +161,9 @@ export const Footer: React.FC<FooterProps> = ({
   };
 
   const mainContentStyles: React.CSSProperties = {
-    maxWidth: '1200px',
+    maxWidth: theme.layout.containerMaxWidth,
     margin: '0 auto',
-    padding: `${spacing.lg} ${spacing.lg}`,
+    padding: `${theme.spacing.lg} ${theme.spacing.lg}`,
   };
 
   const topSectionStyles: React.CSSProperties = {
@@ -170,26 +171,26 @@ export const Footer: React.FC<FooterProps> = ({
     gridTemplateColumns: showNewsletter
       ? 'repeat(auto-fit, minmax(250px, 1fr))'
       : 'repeat(auto-fit, minmax(200px, 1fr))',
-    gap: spacing.lg,
-    marginBottom: spacing.lg,
+    gap: theme.spacing.lg,
+    marginBottom: theme.spacing.lg,
   };
 
   const brandSectionStyles: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
-    gap: spacing.sm,
+    gap: theme.spacing.sm,
   };
 
   const logoContainerStyles: React.CSSProperties = {
     display: 'flex',
     alignItems: 'center',
-    gap: spacing.sm,
+    gap: theme.spacing.sm,
   };
 
   const sectionStyles: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
-    gap: spacing.xs,
+    gap: theme.spacing.xs,
   };
 
   const linkStyles: React.CSSProperties = {
@@ -197,13 +198,13 @@ export const Footer: React.FC<FooterProps> = ({
     textDecoration: 'none',
     transition: 'color 0.2s ease-in-out',
     cursor: 'pointer',
-    padding: `${spacing.xxs} 0`,
+    padding: `${theme.spacing.xxs} 0`,
   };
 
   const socialLinksStyles: React.CSSProperties = {
     display: 'flex',
-    gap: spacing.sm,
-    marginTop: spacing.sm,
+    gap: theme.spacing.sm,
+    marginTop: theme.spacing.sm,
   };
 
   const socialLinkStyles: React.CSSProperties = {
@@ -212,12 +213,11 @@ export const Footer: React.FC<FooterProps> = ({
     justifyContent: 'center',
     width: '40px',
     height: '40px',
-    borderRadius: borderRadius.sm,
-    backgroundColor: variant === 'dark' ? colors.gray[800] : colors.background.white,
-    border: `1px solid ${variant === 'dark' ? colors.gray[700] : colors.border.default}`,
+    borderRadius: theme.borderRadius.sm,
+    backgroundColor: variant === 'dark' ? theme.colors.gray[800] : theme.colors.background.white,
+    border: `${theme.borderWidth[1]} solid ${variant === 'dark' ? theme.colors.gray[700] : theme.colors.border.default}`,
     color: 'inherit',
     textDecoration: 'none',
-    transition: 'all 0.2s ease-in-out',
     cursor: 'pointer',
   };
 
@@ -225,37 +225,37 @@ export const Footer: React.FC<FooterProps> = ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingTop: spacing.md,
-    borderTop: `1px solid ${variant === 'dark' ? colors.gray[800] : colors.border.default}`,
+    paddingTop: theme.spacing.md,
+    borderTop: `${theme.borderWidth[1]} solid ${variant === 'dark' ? theme.colors.gray[800] : theme.colors.border.default}`,
     flexWrap: 'wrap',
-    gap: spacing.sm,
+    gap: theme.spacing.sm,
   };
 
   const bottomLinksStyles: React.CSSProperties = {
     display: 'flex',
-    gap: spacing.md,
+    gap: theme.spacing.md,
     flexWrap: 'wrap',
   };
 
   const newsletterStyles: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
-    gap: spacing.sm,
+    gap: theme.spacing.sm,
   };
 
   const newsletterInputStyles: React.CSSProperties = {
     display: 'flex',
-    gap: spacing.sm,
+    gap: theme.spacing.sm,
   };
 
   const inputStyles: React.CSSProperties = {
     flex: 1,
-    padding: `${spacing.xs} ${spacing.sm}`,
-    border: `1px solid ${variant === 'dark' ? colors.gray[700] : colors.border.default}`,
-    borderRadius: borderRadius.sm,
-    backgroundColor: variant === 'dark' ? colors.gray[800] : colors.background.white,
+    padding: `${theme.spacing.xs} ${theme.spacing.sm}`,
+    border: `${theme.borderWidth[1]} solid ${variant === 'dark' ? theme.colors.gray[700] : theme.colors.border.default}`,
+    borderRadius: theme.borderRadius.sm,
+    backgroundColor: variant === 'dark' ? theme.colors.gray[800] : theme.colors.background.white,
     color: 'inherit',
-    fontSize: '14px',
+    fontSize: theme.fontSize.sm,
   };
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
@@ -294,7 +294,7 @@ export const Footer: React.FC<FooterProps> = ({
                   style={{
                     margin: 0,
                     color: 'inherit',
-                    fontWeight: fontWeight.bold
+                    fontWeight: theme.fontWeight.bold
                   }}
                 >
                   {brandName}
@@ -306,7 +306,7 @@ export const Footer: React.FC<FooterProps> = ({
                 variant="body2"
                 style={{
                   margin: 0,
-                  color: variant === 'dark' ? colors.gray[300] : colors.semantic.muted,
+                  color: variant === 'dark' ? theme.colors.gray[300] : theme.colors.semantic.muted,
                   lineHeight: 1.6
                 }}
               >
@@ -326,13 +326,13 @@ export const Footer: React.FC<FooterProps> = ({
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.backgroundColor = variant === 'dark'
-                        ? colors.gray[700]
-                        : colors.background.gray;
+                        ? theme.colors.gray[700]
+                        : theme.colors.background.gray;
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.backgroundColor = variant === 'dark'
-                        ? colors.gray[800]
-                        : colors.background.white;
+                        ? theme.colors.gray[800]
+                        : theme.colors.background.white;
                     }}
                     aria-label={social.name}
                   >
@@ -350,10 +350,10 @@ export const Footer: React.FC<FooterProps> = ({
                 variant="body1"
                 style={{
                   margin: 0,
-                  marginBottom: spacing.xs,
+                  marginBottom: theme.spacing.xs,
                   color: 'inherit',
-                  fontWeight: fontWeight.semibold,
-                  fontSize: '14px'
+                  fontWeight: theme.fontWeight.semibold,
+                  fontSize: theme.fontSize.sm
                 }}
               >
                 {section.title}
@@ -373,7 +373,7 @@ export const Footer: React.FC<FooterProps> = ({
                   }}
                   onMouseEnter={(e) => {
                     if (!link.disabled) {
-                      e.currentTarget.style.color = colors.semantic.primary;
+                      e.currentTarget.style.color = theme.colors.semantic.primary;
                     }
                   }}
                   onMouseLeave={(e) => {
@@ -385,7 +385,7 @@ export const Footer: React.FC<FooterProps> = ({
                     style={{
                       margin: 0,
                       color: 'inherit',
-                      fontSize: '13px'
+                      fontSize: theme.fontSize.xs
                     }}
                   >
                     {link.label}
@@ -394,7 +394,7 @@ export const Footer: React.FC<FooterProps> = ({
                         name="arrow-up"
                         size={12}
                         style={{
-                          marginLeft: spacing.xxs,
+                          marginLeft: theme.spacing.xxs,
                           transform: 'rotate(45deg)'
                         }}
                       />
@@ -412,10 +412,10 @@ export const Footer: React.FC<FooterProps> = ({
                 variant="body1"
                 style={{
                   margin: 0,
-                  marginBottom: spacing.xs,
+                  marginBottom: theme.spacing.xs,
                   color: 'inherit',
-                  fontWeight: fontWeight.semibold,
-                  fontSize: '14px'
+                  fontWeight: theme.fontWeight.semibold,
+                  fontSize: theme.fontSize.sm
                 }}
               >
                 뉴스레터 구독
@@ -424,7 +424,7 @@ export const Footer: React.FC<FooterProps> = ({
                 variant="body2"
                 style={{
                   margin: 0,
-                  color: variant === 'dark' ? colors.gray[300] : colors.semantic.muted
+                  color: variant === 'dark' ? theme.colors.gray[300] : theme.colors.semantic.muted
                 }}
               >
                 최신 소식과 업데이트를 받아보세요.
@@ -459,7 +459,7 @@ export const Footer: React.FC<FooterProps> = ({
                 variant="caption"
                 style={{
                   margin: 0,
-                  color: variant === 'dark' ? colors.gray[400] : colors.semantic.muted
+                  color: variant === 'dark' ? theme.colors.gray[400] : theme.colors.semantic.muted
                 }}
               >
                 {copyrightText}
@@ -477,15 +477,15 @@ export const Footer: React.FC<FooterProps> = ({
                     fontSize: '12px',
                     opacity: link.disabled ? 0.5 : 1,
                   }}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleLinkClick(link);
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!link.disabled) {
-                      e.currentTarget.style.color = colors.semantic.primary;
-                    }
-                  }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleLinkClick(link);
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!link.disabled) {
+                        e.currentTarget.style.color = theme.colors.semantic.primary;
+                      }
+                    }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.color = 'inherit';
                   }}

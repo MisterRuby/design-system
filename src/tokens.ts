@@ -397,3 +397,82 @@ export const gridTemplates = {
 export const gridHelpers = {
   span: (count: number) => `span ${count}`,
 };
+
+export const componentHeights = {
+  sm: 'var(--component-height-sm)',
+  md: 'var(--component-height-md)',
+  lg: 'var(--component-height-lg)',
+} as const;
+
+export const toggleSizes = {
+  width: {
+    sm: 'var(--toggle-width-sm)',
+    md: 'var(--toggle-width-md)',
+    lg: 'var(--toggle-width-lg)',
+  },
+  height: {
+    sm: 'var(--toggle-height-sm)',
+    md: 'var(--toggle-height-md)',
+    lg: 'var(--toggle-height-lg)',
+  },
+  thumb: {
+    sm: 'var(--toggle-thumb-sm)',
+    md: 'var(--toggle-thumb-md)',
+    lg: 'var(--toggle-thumb-lg)',
+  },
+  thumbOffset: 'var(--toggle-thumb-offset)',
+} as const;
+
+export const iconSizes = {
+  xs: 'var(--icon-size-xs)',
+  sm: 'var(--icon-size-sm)',
+  md: 'var(--icon-size-md)',
+  lg: 'var(--icon-size-lg)',
+  xl: 'var(--icon-size-xl)',
+  '2xl': 'var(--icon-size-2xl)',
+  '3xl': 'var(--icon-size-3xl)',
+} as const;
+
+export const gaps = {
+  xs: 'var(--gap-xs)',
+  sm: 'var(--gap-sm)',
+  md: 'var(--gap-md)',
+} as const;
+
+export const pixelLineHeights = {
+  12: 'var(--line-height-12)',
+  16: 'var(--line-height-16)',
+  20: 'var(--line-height-20)',
+} as const;
+
+export const zIndex = {
+  base: 'var(--z-index-base)',
+  dropdown: 'var(--z-index-dropdown)',
+  sticky: 'var(--z-index-sticky)',
+  fixed: 'var(--z-index-fixed)',
+  modalBackdrop: 'var(--z-index-modal-backdrop)',
+  modal: 'var(--z-index-modal)',
+  popover: 'var(--z-index-popover)',
+  tooltip: 'var(--z-index-tooltip)',
+} as const;
+
+export const arrowSize = 'var(--arrow-size)';
+
+export const transforms = {
+  hoverLift: 'var(--transform-hover-lift)',
+} as const;
+
+export const tooltipMaxWidths = {
+  sm: 'var(--tooltip-max-width-sm)',
+  md: 'var(--tooltip-max-width-md)',
+  lg: 'var(--tooltip-max-width-lg)',
+} as const;
+
+export const tabContainerWidth = 'var(--tab-container-width)';
+
+export const cardPadding = {
+  none: 'var(--card-padding-none)',
+  sm: 'var(--card-padding-sm)',
+  md: 'var(--card-padding-md)',
+  lg: 'var(--card-padding-lg)',
+} as const;
