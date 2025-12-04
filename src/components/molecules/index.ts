@@ -12,6 +12,8 @@ export { Popup } from "./Popup";
 export type { PopupProps, PopupAction } from "./Popup";
 export { TreeView } from "./TreeView";
 export type { TreeViewProps, TreeNode } from "./TreeView";
+export { Pagination } from "./Pagination";
+export type { PaginationProps } from "./Pagination";
 
 // Legacy exports for backward compatibility
 export { InputField as Input } from "./InputField";

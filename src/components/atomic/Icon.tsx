@@ -45,6 +45,8 @@ export type IconName =
   | 'chevron-left'
   | 'chevron-down'
   | 'chevron-up'
+  | 'chevrons-right'
+  | 'chevrons-left'
   | 'briefcase'
   | 'bar-chart';
 
@@ -102,6 +104,8 @@ const iconPaths: Record<IconName, string> = {
   'chevron-left': 'M15 18l-6-6 6-6',
   'chevron-down': 'M6 9l6 6 6-6',
   'chevron-up': 'M18 15l-6-6-6 6',
+  'chevrons-right': 'M13 17l5-5-5-5 M6 17l5-5-5-5',
+  'chevrons-left': 'M11 17l-5-5 5-5 M18 17l-5-5 5-5',
   briefcase: 'M16 20V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v16 M8 7v13a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2H10a2 2 0 00-2 2z',
   'bar-chart': 'M12 20V10 M18 20V4 M6 20v-4',
 };
