@@ -10,7 +10,7 @@ import {
   borderRadius,
   fontSize,
   fontWeight,
-} from "../../theme";
+} from "../../tokens";
 
 export default {
   title: "Styles/Spacing",
@@ -201,7 +201,7 @@ export const BasicSpacing = {
   parameters: {
     docs: {
       source: {
-        code: `import { spacing } from "../../theme";
+        code: `import { spacing } from "../../tokens";
 
 // 1. 기본 레이아웃 패턴
 const cardLayoutStyle = {
@@ -633,7 +633,7 @@ export const SemanticSpacing = {
   parameters: {
     docs: {
       source: {
-        code: `import { semanticSpacing } from "../../theme";
+        code: `import { semanticSpacing } from "../../tokens";
 
 // 1. 카드 컴포넌트
 const Card = ({ title, children, size = "medium" }) => (
@@ -996,7 +996,7 @@ export const SpacingInAction = {
   parameters: {
     docs: {
       source: {
-        code: `import { spacing, semanticSpacing } from "../../theme";
+        code: `import { spacing, semanticSpacing } from "../../tokens";
 
 // Card 컴포넌트 예시
 <div style={{

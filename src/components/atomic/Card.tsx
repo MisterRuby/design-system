@@ -1,5 +1,5 @@
 import React from 'react';
-import { borderRadius, colors, semanticShadows, transitions } from '../../theme';
+import { borderRadius, colors, semanticShadows, transitions } from '../../tokens';
 
 export interface CardProps {
   children: React.ReactNode;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { borderRadius, borderWidth, colors, fontSize, fontWeight, spacing, transitions } from '../../theme';
+import { borderRadius, borderWidth, colors, fontSize, fontWeight, spacing, transitions } from '../../tokens';
 import { SemanticVariant } from '../../types';
 import { Icon, IconName } from './Icon';
 

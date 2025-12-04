@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './Progress.module.css';
-import { colors, fontSize, spacing } from '../../theme';
+import styled, { keyframes } from 'styled-components';
+import { colors, fontSize, spacing } from '../../tokens';
 import { SemanticVariant, ComponentSize } from '../../types/common';
 
 export interface ProgressProps {
@@ -15,6 +15,11 @@ export interface ProgressProps {
   'data-testid'?: string;
 }
 
+const shimmer = keyframes`
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+`;
+
 export const Progress: React.FC<ProgressProps> = ({
   value,
   max = 100,
@@ -27,7 +32,6 @@ export const Progress: React.FC<ProgressProps> = ({
   'data-testid': testId,
 }) => {
   const percentage = Math.min(Math.max((value / max) * 100, 0), 100);
-
 
   const variantColors: Record<SemanticVariant, string> = {
     primary: colors.semantic.primary,
@@ -49,53 +53,79 @@ export const Progress: React.FC<ProgressProps> = ({
 
   const displayLabel = showLabel ? (label ?? `${Math.round(percentage)}%`) : '';
 
-  const cssVars: Record<string, string | number> = {
-    '--progress-height': sizeStyles.height,
-    '--progress-font-size': sizeStyles.fontSize,
-    '--progress-color': variantColor,
-    '--progress-track-color': colors.background.gray,
-    '--progress-label-color': colors.semantic.text,
-    '--progress-muted-color': colors.semantic.muted,
-    '--progress-percentage': `${percentage}%`,
-  };
-
   return (
-    <div
-      className={[styles.container, className].filter(Boolean).join(' ')}
-      style={{
-        ...(cssVars as React.CSSProperties),
-        width: '100%',
-        ...style,
-      }}
-      data-testid={testId}
-    >
+    <Container className={className} style={{ width: '100%', ...style }} data-testid={testId}>
       {displayLabel && (
-        <div className={styles.labelRow}>
+        <LabelRow $fontSize={sizeStyles.fontSize}>
           <span>{displayLabel}</span>
           {showLabel && !label && (
-            <span className={styles.labelSecondary}>
+            <LabelSecondary>
               {Math.round(value)} / {Math.round(max)}
-            </span>
+            </LabelSecondary>
           )}
-        </div>
+        </LabelRow>
       )}
-      <div
-        className={styles.track}
+      <Track
         role="progressbar"
         aria-valuenow={value}
         aria-valuemin={0}
         aria-valuemax={max}
         aria-label={label || `진행률 ${Math.round(percentage)}%`}
+        $height={sizeStyles.height}
       >
-        <div
-          className={styles.fill}
-        >
-          {/* 진행 중 애니메이션 효과 */}
+        <Fill $height={sizeStyles.height} $color={variantColor} $width={`${percentage}%`}>
           {percentage < 100 && percentage > 0 && (
-            <div className={styles.shimmer} />
+            <Shimmer data-testid={testId ? `${testId}-shimmer` : undefined} />
           )}
-        </div>
-      </div>
-    </div>
+        </Fill>
+      </Track>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  width: 100%;
+`;
+
+const LabelRow = styled.div<{ $fontSize: string }>`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: ${spacing.xxs};
+  font-family: inherit;
+  font-size: ${({ $fontSize }) => $fontSize};
+  color: ${colors.semantic.text};
+`;
+
+const LabelSecondary = styled.span`
+  color: ${colors.semantic.muted};
+`;
+
+const Track = styled.div<{ $height: string }>`
+  width: 100%;
+  height: ${({ $height }) => $height};
+  background-color: ${colors.background.gray};
+  border-radius: ${({ $height }) => $height};
+  overflow: hidden;
+  position: relative;
+`;
+
+const Fill = styled.div<{ $height: string; $color: string; $width: string }>`
+  height: 100%;
+  width: ${({ $width }) => $width};
+  background-color: ${({ $color }) => $color};
+  border-radius: ${({ $height }) => $height};
+  transition: width 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+`;
+
+const Shimmer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: ${shimmer} 2s infinite;
+`;

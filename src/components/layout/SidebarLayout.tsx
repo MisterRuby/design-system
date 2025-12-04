@@ -1,6 +1,6 @@
 import React from 'react';
 import { SideBar, SideBarProps } from '../organisms/SideBar';
-import { colors, spacing } from '../../theme';
+import { colors, spacing } from '../../tokens';
 
 /**
  * 사이드바 레이아웃 Props

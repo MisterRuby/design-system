@@ -11,7 +11,7 @@ import {
   semanticShadows,
   spacing,
   transitions,
-} from '../../theme';
+} from '../../tokens';
 
 /**
  * 사이드바 메뉴 아이템 인터페이스

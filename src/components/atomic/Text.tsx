@@ -1,5 +1,5 @@
 import React from "react";
-import { colors, typography, fontSize, fontWeight } from "../../theme";
+import { colors, typography, fontSize, fontWeight } from "../../tokens";
 import type {
   TextVariant,
   TextSize,

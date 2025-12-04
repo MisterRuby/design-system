@@ -1,5 +1,5 @@
 import React from 'react';
-import { borderRadius, borderWidth, colors, fontSize, fontWeight, spacing, transitions, opacity, shadowOpacity } from '../../theme';
+import { borderRadius, borderWidth, colors, fontSize, fontWeight, spacing, transitions, opacity, shadowOpacity } from '../../tokens';
 import { CheckboxSize } from '../../types';
 import { Icon, IconName } from './Icon';
 

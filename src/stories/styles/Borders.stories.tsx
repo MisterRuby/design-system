@@ -8,7 +8,7 @@ import {
   colors,
   fontSize,
   fontWeight,
-} from "../../theme";
+} from "../../tokens";
 
 export default {
   title: "Styles/Borders",
@@ -94,7 +94,7 @@ export const BorderRadius = {
   parameters: {
     docs: {
       source: {
-        code: `import { borderRadius } from '../../theme';
+        code: `import { borderRadius } from '../../tokens';
 
 // 사용 예시
 <div style={{ borderRadius: borderRadius.md }}>
@@ -121,7 +121,7 @@ export const BorderWidth = {
   parameters: {
     docs: {
       source: {
-        code: `import { borderWidth } from '../../theme';
+        code: `import { borderWidth } from '../../tokens';
 
 // 사용 예시
 <div style={{
@@ -147,7 +147,7 @@ export const SemanticBorders = {
   parameters: {
     docs: {
       source: {
-        code: `import { semanticBorders } from '../../theme';
+        code: `import { semanticBorders } from '../../tokens';
 
 // 사용 예시
 <input style={{ border: semanticBorders.default }} />
@@ -225,7 +225,7 @@ export const BorderStyles = {
   parameters: {
     docs: {
       source: {
-        code: `import { borderStyles } from '../../theme';
+        code: `import { borderStyles } from '../../tokens';
 
 // 사용 예시
 <div style={{
@@ -327,7 +327,7 @@ export const ComponentBorders = {
   parameters: {
     docs: {
       source: {
-        code: `import { componentBorders } from '../../theme';
+        code: `import { componentBorders } from '../../tokens';
 
 // 컴포넌트별 테두리 사용 예시
 

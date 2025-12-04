@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './Table.module.css';
-import { colors, spacing, borderRadius } from '../../theme';
+import styled from 'styled-components';
+import { spacing, borderRadius, colors, fontWeight } from '../../tokens';
 import { Icon } from './Icon';
 
 type TableAlign = 'left' | 'center' | 'right';
@@ -81,19 +81,6 @@ export const Table = <T extends Record<string, unknown>>({
   const paddingY = density === 'compact' ? spacing.xs : spacing.sm;
   const paddingX = density === 'compact' ? spacing.sm : spacing.md;
 
-  const cssVars: React.CSSProperties = {
-    '--table-border-color': colors.border.default,
-    '--table-header-bg': colors.background.gray,
-    '--table-hover-bg': colors.background.gray100,
-    '--table-striped-bg': colors.background.gray50,
-    '--table-padding-y': paddingY,
-    '--table-padding-x': paddingX,
-    '--table-radius': borderRadius.md,
-    '--table-text-color': colors.text.primary,
-    '--table-muted-color': colors.text.secondary,
-    '--table-selected-bg': colors.primary[50],
-  };
-
   const getRowKey = React.useCallback(
     (record: T, index: number) => {
       if (typeof rowKey === 'function') {
@@ -150,16 +137,12 @@ export const Table = <T extends Record<string, unknown>>({
     return cloned;
   }, [columns, data, sortState]);
 
-  const tableClasses = [styles.tableWrapper, className].filter(Boolean).join(' ');
-  const containerClasses = [
-    styles.tableContainer,
-    bordered ? styles.bordered : ''
-  ].filter(Boolean).join(' ');
+  const tableClasses = [className].filter(Boolean).join(' ');
 
   return (
-    <div className={tableClasses} style={{ ...cssVars, ...style }}>
-      <div className={containerClasses}>
-        <table className={styles.table} aria-label={ariaLabel}>
+    <TableWrapper className={tableClasses} style={style}>
+      <TableContainer $bordered={bordered}>
+        <StyledTable aria-label={ariaLabel} data-density={density}>
           <thead>
             <tr>
               {columns.map((column) => {
@@ -168,9 +151,8 @@ export const Table = <T extends Record<string, unknown>>({
                 const sortOrder = isActiveSort ? sortState?.order : undefined;
 
                 const headerContent = isSortable ? (
-                  <button
+                  <SortButton
                     type="button"
-                    className={styles.sortButton}
                     onClick={() => handleSort(column)}
                     aria-label={
                       typeof column.title === 'string'
@@ -178,29 +160,24 @@ export const Table = <T extends Record<string, unknown>>({
                         : '정렬'
                     }
                   >
-                    <span className={styles.headerLabel}>{column.title}</span>
-                    <span
-                      className={[
-                        styles.sortIcon,
-                        isActiveSort ? styles.sortActive : '',
-                      ].filter(Boolean).join(' ')}
-                      aria-hidden
-                    >
+                    <HeaderLabel $paddingY={paddingY} $paddingX={paddingX}>
+                      {column.title}
+                    </HeaderLabel>
+                    <SortIcon $active={isActiveSort} aria-hidden>
                       <Icon
                         name={sortOrder === 'desc' ? 'chevron-down' : 'chevron-up'}
                         size={16}
                         color="currentColor"
                       />
-                    </span>
-                  </button>
+                    </SortIcon>
+                  </SortButton>
                 ) : (
-                  <div className={styles.headerLabel}>{column.title}</div>
+                  <HeaderLabel $paddingY={paddingY} $paddingX={paddingX}>{column.title}</HeaderLabel>
                 );
 
                 return (
-                  <th
+                  <HeaderCell
                     key={column.key}
-                    className={styles.headerCell}
                     style={{ textAlign: column.align ?? 'left', width: column.width }}
                     aria-sort={
                       isActiveSort
@@ -212,38 +189,29 @@ export const Table = <T extends Record<string, unknown>>({
                     scope="col"
                   >
                     {headerContent}
-                  </th>
+                  </HeaderCell>
                 );
               })}
             </tr>
           </thead>
           <tbody>
             {sortedData.length === 0 ? (
-              <tr>
-                <td
-                  className={styles.emptyCell}
-                  colSpan={columns.length || 1}
-                >
+              <BodyRow>
+                <EmptyCell colSpan={columns.length || 1} $paddingY={paddingY} $paddingX={paddingX}>
                   {emptyMessage}
-                </td>
-              </tr>
+                </EmptyCell>
+              </BodyRow>
             ) : (
               sortedData.map((row, rowIndex) => {
                 const key = getRowKey(row, rowIndex);
                 const isSelected = selectable && currentSelectedKey === key;
 
-                const rowClassName = [
-                  styles.row,
-                  striped && rowIndex % 2 === 1 ? styles.striped : '',
-                  hoverable ? styles.hoverable : '',
-                  onRowClick ? styles.clickable : '',
-                  isSelected ? styles.selected : '',
-                ].filter(Boolean).join(' ');
-
                 return (
-                  <tr
+                  <BodyRow
                     key={key}
-                    className={rowClassName}
+                    $isStriped={striped && rowIndex % 2 === 1}
+                    $hoverable={hoverable || Boolean(onRowClick)}
+                    $selected={isSelected}
                     onClick={() => {
                       if (selectable) {
                         if (!isControlledSelection) {
@@ -263,22 +231,105 @@ export const Table = <T extends Record<string, unknown>>({
                         : value;
 
                       return (
-                        <td
+                        <BodyCell
                           key={column.key}
-                          className={styles.cell}
                           style={{ textAlign: column.align ?? 'left', width: column.width }}
+                          $paddingY={paddingY}
+                          $paddingX={paddingX}
                         >
                           {content}
-                        </td>
+                        </BodyCell>
                       );
                     })}
-                  </tr>
+                  </BodyRow>
                 );
               })
             )}
           </tbody>
-        </table>
-      </div>
-    </div>
+        </StyledTable>
+      </TableContainer>
+    </TableWrapper>
   );
 };
+
+const TableWrapper = styled.div`
+  width: 100%;
+  color: ${colors.text.primary};
+`;
+
+const TableContainer = styled.div<{ $bordered: boolean }>`
+  width: 100%;
+  overflow: auto;
+  background-color: ${colors.background.white};
+  border: ${({ $bordered }) => ($bordered ? `1px solid ${colors.border.default}` : 'none')};
+  border-radius: ${borderRadius.md};
+`;
+
+const StyledTable = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 520px;
+`;
+
+const HeaderCell = styled.th`
+  padding: 0;
+  background-color: ${colors.background.gray};
+  color: ${colors.text.primary};
+  border-bottom: 1px solid ${colors.border.default};
+  font-weight: ${fontWeight.semibold};
+`;
+
+const HeaderLabel = styled.div<{ $paddingY: string; $paddingX: string }>`
+  display: flex;
+  align-items: center;
+  gap: ${spacing.xs};
+  padding: ${({ $paddingY, $paddingX }) => `${$paddingY} ${$paddingX}`};
+`;
+
+const SortButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: ${spacing.xs};
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+`;
+
+const SortIcon = styled.span<{ $active: boolean }>`
+  display: inline-flex;
+  align-items: center;
+  color: ${({ $active }) => ($active ? colors.text.primary : colors.text.secondary)};
+`;
+
+const BodyRow = styled.tr<{ $hoverable: boolean; $isStriped: boolean; $selected: boolean }>`
+  transition: background-color 0.12s ease;
+  background-color: ${({ $selected, $isStriped }) =>
+    $selected ? colors.primary[50] : $isStriped ? colors.background.gray50 : 'transparent'};
+  cursor: ${({ $hoverable }) => ($hoverable ? 'pointer' : 'default')};
+
+  &:hover {
+    background-color: ${({ $hoverable, $selected }) =>
+      $hoverable ? ($selected ? colors.primary[50] : colors.background.gray100) : undefined};
+  }
+
+  &:last-child td {
+    border-bottom: none;
+  }
+`;
+
+const BodyCell = styled.td<{ $paddingY: string; $paddingX: string }>`
+  padding: ${({ $paddingY, $paddingX }) => `${$paddingY} ${$paddingX}`};
+  border-bottom: 1px solid ${colors.border.default};
+  color: ${colors.text.primary};
+`;
+
+const EmptyCell = styled.td<{ $paddingY: string; $paddingX: string }>`
+  padding: ${({ $paddingY, $paddingX }) => `calc(${$paddingY} * 2) ${$paddingX}`};
+  text-align: center;
+  color: ${colors.text.secondary};
+`;

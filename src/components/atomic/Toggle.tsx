@@ -1,5 +1,5 @@
 import React from 'react';
-import { colors, fontSize, fontWeight, spacing, transitions, opacity, shadowOpacity } from '../../theme';
+import { colors, fontSize, fontWeight, spacing, transitions, opacity, shadowOpacity } from '../../tokens';
 import { CheckboxSize } from '../../types';
 
 export interface ToggleProps {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header, HeaderProps } from '../organisms/Header';
 import { SideBar, SideBarProps } from '../organisms/SideBar';
-import { colors, spacing } from '../../theme';
+import { colors, spacing } from '../../tokens';
 
 /**
  * 메인 레이아웃 Props

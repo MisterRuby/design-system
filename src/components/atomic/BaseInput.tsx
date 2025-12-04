@@ -1,5 +1,5 @@
 import React from "react";
-import { colors, fontSize, borderRadius, componentBorders } from "../../theme";
+import { colors, fontSize, borderRadius, componentBorders } from "../../tokens";
 import { InputVariant, ComponentSize } from "../../types";
 import { getInputBorderStyles } from "../shared/inputBorders";
 

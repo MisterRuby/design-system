@@ -4,7 +4,7 @@ import { InputField, InputFieldProps } from '../molecules/InputField';
 import { CheckboxField, CheckboxFieldProps } from '../molecules/CheckboxField';
 import { SelectField, SelectFieldProps } from '../molecules/SelectField';
 import { RadioGroup, RadioGroupProps } from '../molecules/RadioGroup';
-import { borderRadius, colors, componentBorders, fontSize, fontWeight, spacing, semanticSpacing } from '../../theme';
+import { borderRadius, colors, componentBorders, fontSize, fontWeight, spacing, semanticSpacing } from '../../tokens';
 
 export interface FormField {
   id: string;

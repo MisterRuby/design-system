@@ -1,5 +1,5 @@
 import React from "react";
-import { borderRadius, colors, componentBorders } from "../../theme";
+import { borderRadius, colors, componentBorders } from "../../tokens";
 
 export interface BaseCheckboxProps {
   id?: string;

@@ -8,7 +8,7 @@ import {
   fontWeight,
   borderRadius,
   transitions,
-} from "../../theme";
+} from "../../tokens";
 
 export interface PaginationProps {
   currentPage: number;

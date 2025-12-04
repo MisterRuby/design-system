@@ -3,6 +3,7 @@ const path = require('path');
 
 const sourceRoot = path.join(__dirname, '../src');
 const componentsRoot = path.join(sourceRoot, 'components');
+const themeRoot = path.join(sourceRoot, 'theme');
 const targets = [
   path.join(__dirname, '../dist'),
   path.join(__dirname, '../dist/esm'),
@@ -28,7 +29,7 @@ const copyToTargets = (filePath) => {
   });
 };
 
-const cssFiles = collectCssFiles(componentsRoot);
+const cssFiles = [...collectCssFiles(componentsRoot), ...collectCssFiles(themeRoot)];
 cssFiles.forEach(copyToTargets);
 
 console.log(`Copied ${cssFiles.length} CSS file(s) to dist outputs`);

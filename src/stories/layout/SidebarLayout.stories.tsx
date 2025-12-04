@@ -7,7 +7,7 @@ import {
 } from "../../components/layout/SidebarLayout";
 import { Button } from "../../components/atomic/Button";
 import { Text } from "../../components/atomic/Text";
-import { colors, spacing, fontWeight } from "../../theme";
+import { colors, spacing, fontWeight } from "../../tokens";
 
 const meta = {
   title: "Layout/SidebarLayout",

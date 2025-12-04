@@ -1,4 +1,4 @@
-import { colors, componentBorders, semanticBorders, borderWidth } from "../../theme";
+import { colors, componentBorders, semanticBorders, borderWidth } from "../../tokens";
 import { InputVariant } from "../../types";
 
 type InputBorderStyles = {

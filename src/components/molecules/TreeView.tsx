@@ -8,7 +8,7 @@ import {
   spacing,
   fontSize,
   transitions,
-} from "../../theme";
+} from "../../tokens";
 
 export interface TreeNode {
   id: string;

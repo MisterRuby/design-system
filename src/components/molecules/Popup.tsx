@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Button } from '../atomic/Button';
 import { Icon } from '../atomic/Icon';
-import { borderRadius, colors, fontSize, spacing } from '../../theme';
+import { borderRadius, colors, fontSize, spacing } from '../../tokens';
 import { ButtonVariant, ComponentSize } from '../../types';
 
 // Popup 설정 상수

@@ -6,7 +6,7 @@ import {
   componentBorders,
   semanticSpacing,
   spacing,
-} from "../../theme";
+} from "../../tokens";
 
 export default {
   title: "Components/Atomic/ErrorMessage",
@@ -229,7 +229,7 @@ export const ConditionalDisplay = {
   colors,
   componentBorders,
   semanticSpacing,
-} from "../../theme";
+} from "../../tokens";
 
 const [showError, setShowError] = useState(false);
 

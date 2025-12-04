@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { borderRadius, colors, fontSize, transitions, borderWidth } from '../../theme';
+import { borderRadius, colors, fontSize, transitions, borderWidth } from '../../tokens';
 import { ComponentSize } from '../../types';
 import { Icon, IconName } from './Icon';
 

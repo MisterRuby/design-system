@@ -2,7 +2,7 @@ import { within, userEvent } from "@storybook/testing-library";
 import { Button } from "../../components/atomic/Button";
 import { Text } from "../../components/atomic/Text";
 import { Header } from "../../components/organisms/Header";
-import { borderRadius, colors, fontWeight, spacing } from "../../theme";
+import { borderRadius, colors, fontWeight, spacing } from "../../tokens";
 import { action } from "../actions";
 import { Step } from "../types";
 

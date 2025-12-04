@@ -3,7 +3,7 @@ import { TreeView, TreeNode } from '../../components';
 import { action } from "../actions";
 import { within, userEvent } from '@storybook/testing-library';
 import { Step } from '../types';
-import { spacing, colors, borderRadius, fontSize } from '../../theme';
+import { spacing, colors, borderRadius, fontSize } from '../../tokens';
 
 export default {
   title: "Components/Molecules/TreeView",
@@ -500,4 +500,3 @@ const handleNodeCheck = (nodeId, checked) => {
     },
   },
 };
-

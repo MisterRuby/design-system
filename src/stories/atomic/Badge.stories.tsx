@@ -1,7 +1,7 @@
 import React from "react";
 import { within, userEvent } from "@storybook/testing-library";
 import { Badge } from "../../components";
-import { colors, componentBorders, fontSize, fontWeight, spacing } from "../../theme";
+import { colors, componentBorders, fontSize, fontWeight, spacing } from "../../tokens";
 import { action } from "../actions";
 
 export default {

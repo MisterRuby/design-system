@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header, HeaderProps } from '../organisms/Header';
-import { colors } from '../../theme';
+import { colors } from '../../tokens';
 
 /**
  * 앱 레이아웃 Props

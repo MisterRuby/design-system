@@ -1,6 +1,6 @@
 import React from "react";
 import { Icon, IconName } from "../atomic/Icon";
-import { borderRadius, colors, componentBorders, fontSize, fontWeight } from "../../theme";
+import { borderRadius, colors, componentBorders, fontSize, fontWeight } from "../../tokens";
 import { InputVariant, ComponentSize } from "../../types";
 import { getInputBorderStyles } from "../shared/inputBorders";
 

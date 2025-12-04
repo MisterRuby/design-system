@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from '../atomic/Text';
-import { colors, componentBorders, fontWeight, spacing } from '../../theme';
+import { colors, componentBorders, fontWeight, spacing } from '../../tokens';
 
 export interface HeaderProps {
   logo?: React.ReactNode;

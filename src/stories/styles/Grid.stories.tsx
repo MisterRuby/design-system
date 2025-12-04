@@ -7,7 +7,7 @@ import {
   semanticBorders,
   borderRadius,
   fontWeight,
-} from "../../theme";
+} from "../../tokens";
 
 const DemoBox = styled.div<{ $height?: string; $color?: string }>`
   background-color: ${({ $color }) => $color || colors.info[50]};
@@ -69,7 +69,7 @@ export const BasicGrid = {
   parameters: {
     docs: {
       source: {
-        code: `import { grid } from "../../theme";
+        code: `import { grid } from "../../tokens";
 
 const twoColumns = Math.max(1, Math.floor(grid.columns / 6));
 
@@ -102,7 +102,7 @@ export const ResponsiveGrid = {
   parameters: {
     docs: {
       source: {
-        code: `import { grid, gridHelpers } from "../../theme";
+        code: `import { grid, gridHelpers } from "../../tokens";
 
 <div style={{
   display: 'grid',
@@ -139,7 +139,7 @@ export const GridAlignment = {
   parameters: {
     docs: {
       source: {
-        code: `import { grid } from "../../theme";
+        code: `import { grid } from "../../tokens";
 
 <div style={{
   display: 'grid',
@@ -207,7 +207,7 @@ export const MixedSpans = {
   parameters: {
     docs: {
       source: {
-        code: `import { grid } from "../../theme";
+        code: `import { grid } from "../../tokens";
 
 const totalColumns = grid.columns;
 const headerSpan = totalColumns;

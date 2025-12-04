@@ -4,7 +4,7 @@ import { userEvent, within } from "@storybook/testing-library";
 import { SideBar, SideBarProps } from "../../components/organisms/SideBar";
 import { Button } from "../../components/atomic/Button";
 import { Text } from "../../components/atomic/Text";
-import { colors, spacing } from "../../theme";
+import { colors, spacing } from "../../tokens";
 
 const meta = {
   title: "Components/Organisms/SideBar",

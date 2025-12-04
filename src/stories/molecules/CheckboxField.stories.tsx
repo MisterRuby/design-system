@@ -1,7 +1,7 @@
 import React from "react";
 import { within, userEvent } from "@storybook/testing-library";
 import { CheckboxField } from "../../components";
-import { colors, componentBorders, fontSize } from "../../theme";
+import { colors, componentBorders, fontSize } from "../../tokens";
 import { action } from "../actions";
 
 export default {
@@ -338,7 +338,7 @@ export const ControlledExample = {
   parameters: {
     docs: {
       source: {
-        code: `import { colors } from "../../theme";
+        code: `import { colors } from "../../tokens";
 
 const [checked, setChecked] = useState(false);
 

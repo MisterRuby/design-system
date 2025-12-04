@@ -1,5 +1,5 @@
 import React from 'react';
-import { colors, fontSize, fontWeight } from '../../theme';
+import { colors, fontSize, fontWeight } from '../../tokens';
 import { CheckboxSize } from '../../types';
 
 export interface SpinnerProps {

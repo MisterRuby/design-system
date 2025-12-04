@@ -6,7 +6,7 @@ import {
   fontWeight,
   semanticBorders,
   borderRadius,
-} from "../../theme";
+} from "../../tokens";
 
 const subtleBorder = semanticBorders.default;
 
@@ -120,7 +120,7 @@ export const SemanticColors = {
   parameters: {
     docs: {
       source: {
-        code: `import { colors } from "../../theme";
+        code: `import { colors } from "../../tokens";
 
 // 1. 기본 버튼 스타일링
 const primaryButton = {
@@ -222,7 +222,7 @@ export const GrayScale = {
   parameters: {
     docs: {
       source: {
-        code: `import { colors, semanticBorders } from "../../theme";
+        code: `import { colors, semanticBorders } from "../../tokens";
 
 // 그레이 스케일 사용 예시
 const cardStyle = {
@@ -467,7 +467,7 @@ export const StatusColors = {
   parameters: {
     docs: {
       source: {
-        code: `import { colors } from "../../theme";
+        code: `import { colors } from "../../tokens";
 
 // 사용 예시
 backgroundColor: colors.success[50]  // 연한 배경
@@ -746,7 +746,7 @@ export const BorderColors = {
   parameters: {
     docs: {
       source: {
-        code: `import { colors } from "../../theme";
+        code: `import { colors } from "../../tokens";
 
 // 사용 예시
 border: \`1px solid \${colors.border.default}\`
@@ -771,7 +771,7 @@ export const BackgroundColors = {
   parameters: {
     docs: {
       source: {
-        code: `import { colors } from "../../theme";
+        code: `import { colors } from "../../tokens";
 
 // 사용 예시
 backgroundColor: colors.background.white
@@ -841,7 +841,7 @@ export const FocusRingColors = {
   parameters: {
     docs: {
       source: {
-        code: `import { colors } from "../../theme";
+        code: `import { colors } from "../../tokens";
 
 // 사용 예시
 &:focus {

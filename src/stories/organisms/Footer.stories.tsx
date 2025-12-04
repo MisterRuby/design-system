@@ -2,7 +2,7 @@ import React from "react";
 import { action } from "../actions";
 import { Footer, FooterProps } from "../../components/organisms/Footer";
 import { Text } from "../../components/atomic/Text";
-import { colors, spacing, fontWeight } from "../../theme";
+import { colors, spacing, fontWeight } from "../../tokens";
 
 const meta = {
   title: "Components/Organisms/Footer",

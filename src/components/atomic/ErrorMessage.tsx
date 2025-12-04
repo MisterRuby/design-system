@@ -1,5 +1,5 @@
 import React from "react";
-import { colors, fontSize } from "../../theme";
+import { colors, fontSize } from "../../tokens";
 
 export interface ErrorMessageProps {
   children: React.ReactNode;

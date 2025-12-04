@@ -1,7 +1,7 @@
 import React from "react";
 import { within, userEvent } from "@storybook/testing-library";
 import { Toggle } from "../../components";
-import { colors, componentBorders, fontSize } from "../../theme";
+import { colors, componentBorders, fontSize } from "../../tokens";
 import { action } from "../actions";
 
 export default {
@@ -377,7 +377,7 @@ export const ControlledExample = {
   parameters: {
     docs: {
       source: {
-        code: `import { colors, componentBorders } from "../../theme";
+        code: `import { colors, componentBorders } from "../../tokens";
 
 const [isEnabled, setIsEnabled] = useState(false);
 

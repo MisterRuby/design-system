@@ -3,7 +3,7 @@ import { Alert } from '../../components';
 import { action } from "../actions";
 import { within, userEvent } from '@storybook/testing-library';
 import { Step } from '../types';
-import { spacing } from '../../theme';
+import { spacing } from '../../tokens';
 
 export default {
   title: "Components/Atomic/Alert",

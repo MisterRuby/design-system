@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon, IconName } from './Icon';
-import { borderRadius, borderWidth, colors, fontSize, transitions, opacity } from '../../theme';
+import { borderRadius, borderWidth, colors, fontSize, transitions, opacity } from '../../tokens';
 import { ButtonVariant, ComponentSize } from '../../types';
 
 

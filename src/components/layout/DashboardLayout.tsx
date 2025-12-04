@@ -3,7 +3,7 @@ import { HeaderProps } from '../organisms/Header';
 import { Header } from '../organisms/Header';
 import { SideBarProps } from '../organisms/SideBar';
 import { SideBar } from '../organisms/SideBar';
-import { colors, spacing } from '../../theme';
+import { colors, spacing } from '../../tokens';
 
 /**
  * 대시보드 레이아웃 Props

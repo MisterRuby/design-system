@@ -1,5 +1,5 @@
 import React from 'react';
-import { borderRadius, colors, spacing, animations } from '../../theme';
+import { borderRadius, colors, spacing, animations } from '../../tokens';
 
 export interface SkeletonProps {
   width?: string | number;
